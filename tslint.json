@@ -1,0 +1,35 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "semicolon": [
+            true,
+            "never"
+        ],
+        "trailing-comma": [
+            true,
+            "never"
+        ],
+        "ordered-imports": false,
+        "member-ordering": false,
+        "member-access": false,
+        "quotemark": [
+            true,
+            "single"
+        ],
+        "arrow-parens": false,
+        "object-literal-sort-keys": false,
+        "no-console": false,
+        "no-string-literal": false
+    },
+    "rulesDirectory": [],
+    "linterOptions": {
+        "exclude": [
+            "src/react-app-env.d.ts",
+            "src/serviceWorker.ts"
+        ]
+    }
+}
