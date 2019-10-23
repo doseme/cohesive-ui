@@ -1,0 +1,10 @@
+@import '../../../style/colors';
+
+.dropdown-item, .dropdown-toggle, svg {
+  color: $darkgrey;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+  background-color: $teal;
+  color: white;
+}
