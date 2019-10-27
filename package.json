@@ -1,6 +1,7 @@
 {
   "name": "cohesive-ui",
   "version": "1.0.0",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -27,9 +28,12 @@
     "@babel/core": "^7.6.4",
     "@storybook/react": "^5.2.5",
     "awesome-typescript-loader": "^5.2.1",
-    "babel-loader": "^8.0.6"
+    "babel-loader": "^8.0.6",
+    "webpack-cli": "^3.3.9"
   },
   "scripts": {
-    "storybook": "start-storybook"
+    "storybook": "start-storybook",
+    "lint": "./node_modules/.bin/tslint \"{src,test}/**/*.ts{,x}\"",
+    "build": "yarn webpack --mode=production"
   }
 }

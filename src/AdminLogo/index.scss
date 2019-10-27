@@ -1,0 +1,16 @@
+@import '../style/colors.scss';
+
+.logopanel {
+  .text-teal {
+    color: $teal;
+  }
+
+  h1 {
+    font-size: 30px;
+    font-family: 'LatoBold', 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, sans-serif;
+    letter-spacing: -1.5px;
+    color: #1d2939;
+    line-height: 30px;
+    margin: 0;
+  }
+}

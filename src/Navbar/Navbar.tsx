@@ -9,21 +9,38 @@ interface IProps {
   logo: JSX.Element | null
 }
 
-const NavbarC: React.FC<IProps> = ({ logo }) => {
-  return (
-    <>
-      <Navbar expand='lg'>
-        <Navbar.Brand>
-          {logo}
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Collapse>
-          <Nav className='mr-auto' />
-        </Collapse>
-      </Navbar>
-    </>
-  )
+class NavbarC extends React.PureComponent<IProps> {
+  render(): JSX.Element {
+    return (
+      <>
+        <Navbar expand='lg'>
+          <Navbar.Brand>
+            {this.props.logo}
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Collapse>
+            <Nav className='mr-auto' />
+          </Collapse>
+        </Navbar>
+      </>
+    )
+  }
 }
+// const NavbarC: React.FC<IProps> = ({ logo }): JSX.Element => {
+//   return (
+//     <>
+//       <Navbar expand='lg'>
+//         <Navbar.Brand>
+//           {logo}
+//         </Navbar.Brand>
+//         <Navbar.Toggle aria-controls='basic-navbar-nav' />
+//         <Collapse>
+//           <Nav className='mr-auto' />
+//         </Collapse>
+//       </Navbar>
+//     </>
+//   )
+// }
 
 export {
   NavbarC as Navbar
