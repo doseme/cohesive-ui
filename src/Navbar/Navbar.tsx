@@ -1,7 +1,5 @@
 import React from 'react'
-import Navbar from 'react-bootstrap/Navbar'
-import Collapse from 'react-bootstrap/NavbarCollapse'
-import Nav from 'react-bootstrap/Nav'
+import * as BS from 'react-bootstrap'
 
 import './index.scss'
 
@@ -12,15 +10,15 @@ interface IProps {
 const NavbarC: React.FC<IProps> = ({ logo }): JSX.Element => {
   return (
     <>
-      <Navbar expand='lg'>
-        <Navbar.Brand>
+      <BS.Navbar expand='lg'>
+        <BS.Navbar.Brand>
           {logo}
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Collapse>
-          <Nav className='mr-auto' />
-        </Collapse>
-      </Navbar>
+        </BS.Navbar.Brand>
+        <BS.Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <BS.Collapse>
+          <BS.Nav className='mr-auto' />
+        </BS.Collapse>
+      </BS.Navbar>
     </>
   )
 }

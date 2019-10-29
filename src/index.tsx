@@ -1,6 +1,10 @@
 import React from 'react'
 import './index.scss'
 import * as BS from 'react-bootstrap'
+import { AdminLogo } from './AdminLogo'
+import { SideNav } from './SideNav'
+import { Navbar } from './Navbar'
+
 
 interface IProps {
   logo: JSX.Element | null
@@ -13,5 +17,8 @@ const Greet: React.FC<IProps> = ({ logo }): JSX.Element => {
 }
 
 export {
-  Greet
+  AdminLogo,
+  Greet,
+  Navbar,
+  SideNav,
 }
