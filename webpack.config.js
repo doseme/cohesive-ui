@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
@@ -29,6 +29,12 @@ module.exports = {
   },
 
   output: {
-    libraryTarget: 'commonjs'
+    libraryTarget: 'commonjs',
+    filename: 'index.js'
+  },
+
+  externals: {
+    'react': 'react',
+    'react-bootstrap': 'react-bootstrap'
   }
 }
