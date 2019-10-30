@@ -18,7 +18,6 @@ const SideNavLink: React.FC<IProps> = ({
   route,
   faIcon
 }) => {
-
   const getClassName = (): string => {
     const base = 'm-1 w-100 text-muted d-flex align-items-center'
 

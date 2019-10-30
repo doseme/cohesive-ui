@@ -2,14 +2,14 @@
 
 #footer {
   padding: 0 0 0 200px;
-  color: #dadada;
-  background: #202020;
+  color: $lightgrey;
+  background: $footerblack;
 
   a {
-    color: #02a9dc;
+    color: $footerlink;
 
     &:hover {
-      color: #3498db;
+      color: $footerhover;
     }
   }
 }

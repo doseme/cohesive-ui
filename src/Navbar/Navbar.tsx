@@ -15,17 +15,15 @@ interface INavLink {
 
 const NavbarC: React.FC<IProps> = ({ logo }): JSX.Element => {
   return (
-    <>
-      <BS.Navbar expand='lg'>
-        <BS.Navbar.Brand>
-          {logo}
-        </BS.Navbar.Brand>
-        <BS.Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <BS.Collapse>
-          <BS.Nav className='mr-auto' />
-        </BS.Collapse>
-      </BS.Navbar>
-    </>
+    <BS.Navbar expand='lg'>
+      <BS.Navbar.Brand>
+        {logo}
+      </BS.Navbar.Brand>
+      <BS.Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <BS.Collapse>
+        <BS.Nav className='mr-auto' />
+      </BS.Collapse>
+    </BS.Navbar>
   )
 }
 
