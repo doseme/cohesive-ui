@@ -7,6 +7,12 @@ interface IProps {
   logo: JSX.Element | null
 }
 
+interface INavLink {
+  icon: any
+  label: string
+  route: string
+}
+
 const NavbarC: React.FC<IProps> = ({ logo }): JSX.Element => {
   return (
     <>
@@ -24,5 +30,6 @@ const NavbarC: React.FC<IProps> = ({ logo }): JSX.Element => {
 }
 
 export {
-  NavbarC as Navbar
+  NavbarC as Navbar,
+  INavLink
 }

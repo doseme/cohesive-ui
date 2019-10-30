@@ -1,5 +1,6 @@
-import { Navbar } from './Navbar'
+import { Navbar, INavLink } from './Navbar'
 
 export {
-  Navbar
+  Navbar,
+  INavLink
 }

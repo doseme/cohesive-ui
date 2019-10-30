@@ -24,7 +24,8 @@
     "webpack-cli": "^3.3.9"
   },
   "scripts": {
-    "build": "yarn webpack --mode=production"
+    "build": "yarn webpack --mode=production",
+    "prepare": "yarn build"
   },
   "peerDependencies": {
     "@types/react-bootstrap": "^0.32.20",
