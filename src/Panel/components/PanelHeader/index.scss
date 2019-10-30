@@ -1,0 +1,21 @@
+@import '../../index.scss';
+@import '../../../style/colors';
+
+.panel-header {
+  @include panel-padding;
+
+  background: $panelblue;
+  color: white;
+  margin-bottom: 0.25rem;
+  border-radius: 4px;
+  font-weight: 600;
+  box-shadow: 2px 2px 2px $shadow;
+
+  .info-icon {
+    margin-left: 15px;
+
+    svg {
+      color: white;
+    }
+  }
+}
