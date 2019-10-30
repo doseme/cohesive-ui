@@ -7,6 +7,8 @@
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/react-fontawesome": "^0.1.7",
     "@types/react": "^16.9.9",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
