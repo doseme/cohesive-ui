@@ -1,0 +1,21 @@
+@import '../../../style/colors';
+
+.navbar-nav {
+  opacity: 0.6;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background: $lightgrey;
+    transition: 0.25s;
+  }
+}
+
+.navbar-selected {
+  opacity: 1;
+
+  svg, .link-label {
+    color: $teal;
+  }
+}
