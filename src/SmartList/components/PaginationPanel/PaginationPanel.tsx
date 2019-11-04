@@ -187,14 +187,12 @@ class PaginationPanel extends React.PureComponent<IProps, IState> {
       <>
         {this.props.children}
 
-        <div className='d-flex justify-content-space-between w-100'>
-          <div className='d-flex justify-content-start w-100 pagination pt-1'>
-            {this.firstButton}
-            {this.prevButton}
-            {this.pageNumbers}
-            {this.nextButton}
-            {this.lastButton}
-          </div>
+        <div className='d-flex justify-content-start w-100 pagination pt-1'>
+          {this.firstButton}
+          {this.prevButton}
+          {this.pageNumbers}
+          {this.nextButton}
+          {this.lastButton}
         </div>
       </>
     )

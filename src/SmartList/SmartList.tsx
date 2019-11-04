@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { PaginationPanel } from './components/PaginationPanel'
+import { Header } from './components/Header'
 
 interface IItem {
   [id: string]: any
@@ -75,6 +76,18 @@ class SmartList extends React.PureComponent<IProps, IState> {
     return 'No data to display'
   }
 
+  get header(): JSX.Element | null {
+    if (!this.props.listItem) {
+      return (
+        <Header
+          shape={this.props.shape}
+        />
+      )
+    }
+
+    return null
+  }
+
   render(): JSX.Element {
     return (
       <div>
@@ -82,6 +95,8 @@ class SmartList extends React.PureComponent<IProps, IState> {
           handleUpdate={this.updatePageIds}
           itemIds={Object.keys(this.props.data)}
         >
+          {this.header}
+
           <div>
             {this.listItems}
           </div>
