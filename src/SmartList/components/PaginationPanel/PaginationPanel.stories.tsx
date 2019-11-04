@@ -3,13 +3,11 @@ import { storiesOf } from '@storybook/react'
 
 import { PaginationPanel } from './PaginationPanel'
 
-storiesOf('Components', module)
-  .add('PaginationPanel', () => {
+storiesOf('Components.SmartList.PaginationPanel', module)
+  .add('Generic', () => {
     return (
       <PaginationPanel
-        listName='Test'
-        perPage={2}
-        allItems={[
+        itemIds={[
           '1-1',
           '2-1',
           '3-1',
@@ -32,8 +30,6 @@ storiesOf('Components', module)
           '20-1'
         ]}
         handleUpdate={() => { console.log('updated') }}
-        neighboursToShow={1}
-        edgesToShow={1}
       />
     )
   })

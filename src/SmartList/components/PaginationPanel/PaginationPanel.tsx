@@ -6,12 +6,11 @@ import { faAngleLeft, faAngleDoubleLeft, faAngleRight, faAngleDoubleRight } from
 import { isNeighbour, isInStartEdge, isInEndEdge, bordersStartEdge, bordersEndEdge } from './utils'
 
 interface IProps {
-  allItems: string[]
+  itemIds: string[]
   perPage: number
   handleUpdate: (ids: string[]) => void
   edgesToShow: number
   neighboursToShow: number
-  listName: string
 }
 
 interface IState {
@@ -41,20 +40,20 @@ class PaginationPanel extends React.PureComponent<IProps, IState> {
 
   private get currentIds(): string[] {
     const {
-      allItems,
+      itemIds,
       perPage
     } = this.props
 
     const { currentPage } = this.state
 
-    return allItems.slice(
+    return itemIds.slice(
       (currentPage - 1) * perPage,
       currentPage * perPage
     )
   }
 
   private get totalPages(): number {
-    return Math.ceil(this.props.allItems.length / this.props.perPage)
+    return Math.ceil(this.props.itemIds.length / this.props.perPage)
   }
 
   private get firstButton(): JSX.Element {

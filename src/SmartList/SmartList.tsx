@@ -1,4 +1,6 @@
 import React from 'react'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import { PaginationPanel } from './components/PaginationPanel'
 
@@ -6,10 +8,17 @@ interface IItem {
   [id: string]: any
 }
 
+interface IShapeItem {
+  [columnName: string]: {
+    attr: string
+    size: number
+  }
+}
+
 interface IProps {
   data: IItem
-  listItem: any
-  listName: string
+  shape: IShapeItem
+  listItem?: any
 }
 
 interface IState {
@@ -23,14 +32,31 @@ class SmartList extends React.PureComponent<IProps, IState> {
 
   formatListItem = (id: string): JSX.Element => {
     const itemData = this.props.data[id]
-    const ListItem = this.props.listItem
+
+    if (this.props.listItem) {
+      const ListItem = this.props.listItem
+
+      return (
+        <div key={`list-item-${id}`}>
+          <ListItem
+            {...itemData}
+          />
+        </div>
+      )
+    }
 
     return (
-      <div key={`list-item-${id}`}>
-        <ListItem
-          {...itemData}
-        />
-      </div>
+      <Row key={`row-${id}`}>
+        {Object.keys(this.props.shape).map((columnName: string) => {
+          const item = this.props.shape[columnName]
+
+          return (
+            <Col key={`column-${item.attr}`} sm={item.size}>
+              {itemData[item.attr]}
+            </Col>
+          )
+        })}
+      </Row>
     )
   }
 
@@ -54,8 +80,7 @@ class SmartList extends React.PureComponent<IProps, IState> {
       <div>
         <PaginationPanel
           handleUpdate={this.updatePageIds}
-          allItems={Object.keys(this.props.data)}
-          listName={this.props.listName}
+          itemIds={Object.keys(this.props.data)}
         >
           <div>
             {this.listItems}
