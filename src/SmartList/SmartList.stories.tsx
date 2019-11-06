@@ -7,27 +7,25 @@ import { SmartList } from './SmartList'
 
 const stories = storiesOf('Components.SmartList', module)
 
-class ListItem extends React.PureComponent<{ name: string, description: string }> {
-  render(): JSX.Element {
-    const {
-      name,
-      description
-    } = this.props
+interface IListItemProps {
+  name: string
+  description: string
+}
 
-    return (
-      <Row>
-        <Col sm={2}>
-          {name}
-        </Col>
-        <Col sm={2}>
-          This is a static row
-        </Col>
-        <Col sm={2}>
-          {description}
-        </Col>
-      </Row>
-    )
-  }
+const ListItem: React.FC<IListItemProps> = ({ name, description }) => {
+  return (
+    <Row>
+      <Col sm={2}>
+        {name}
+      </Col>
+      <Col sm={2}>
+        This is a static row
+      </Col>
+      <Col sm={2}>
+        {description}
+      </Col>
+    </Row>
+  )
 }
 
 const data = {
