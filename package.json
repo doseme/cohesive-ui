@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "yarn webpack --mode=production --types",
-    "prepare": "echo 'Install Cohesive-UI dependencies'&& yarn install && echo 'Building Cohesive-UI' && yarn build",
+    "prepare": "node prepare.js",
     "storybook": "start-storybook -p 6006"
   },
   "peerDependencies": {
