@@ -1,7 +1,8 @@
 {
   "name": "cohesive-ui",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.6.4",
@@ -29,7 +30,7 @@
   },
   "scripts": {
     "build": "yarn webpack --mode=production --types",
-    "prepare": "yarn install && yarn build",
+    "prepare": "echo 'Install Cohesive-UI dependencies'&& yarn install && echo 'Building Cohesive-UI' && yarn build",
     "storybook": "start-storybook -p 6006"
   },
   "peerDependencies": {
