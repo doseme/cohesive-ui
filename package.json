@@ -29,7 +29,7 @@
   },
   "scripts": {
     "build": "yarn webpack --mode=production --types",
-    "prepare": "yarn build",
+    "prepare": "yarn install && yarn build",
     "storybook": "start-storybook -p 6006"
   },
   "peerDependencies": {
