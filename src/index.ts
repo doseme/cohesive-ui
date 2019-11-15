@@ -11,5 +11,6 @@ export {
   Navbar,
   Panel,
   SideNav,
-  INavLink
+  INavLink,
+  SmartList,
 }
