@@ -90,18 +90,16 @@ class SmartList extends React.PureComponent<IProps, IState> {
 
   render(): JSX.Element {
     return (
-      <div>
-        <PaginationPanel
-          handleUpdate={this.updatePageIds}
-          itemIds={Object.keys(this.props.data)}
-        >
-          {this.header}
+      <PaginationPanel
+        handleUpdate={this.updatePageIds}
+        itemIds={Object.keys(this.props.data)}
+      >
+        {this.header}
 
-          <div>
-            {this.listItems}
-          </div>
-        </PaginationPanel>
-      </div>
+        <div>
+          {this.listItems}
+        </div>
+      </PaginationPanel>
     )
   }
 }
