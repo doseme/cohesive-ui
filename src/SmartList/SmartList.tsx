@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
@@ -22,20 +22,14 @@ interface IProps {
   listItem?: any
 }
 
-interface IState {
-  currentPageIds: string[]
-}
+const SmartList: React.FC<IProps> = ({ data, shape, listItem }) => {
+  const [currentPageIds, setCurrentPageIds] = useState<string[]>([])
 
-class SmartList extends React.PureComponent<IProps, IState> {
-  state: IState = {
-    currentPageIds: []
-  }
+  const formatListItem = (id: string): JSX.Element => {
+    const itemData = data[id]
 
-  formatListItem = (id: string): JSX.Element => {
-    const itemData = this.props.data[id]
-
-    if (this.props.listItem) {
-      const ListItem = this.props.listItem
+    if (listItem) {
+      const ListItem = listItem
 
       return (
         <div key={`list-item-${id}`}>
@@ -48,8 +42,8 @@ class SmartList extends React.PureComponent<IProps, IState> {
 
     return (
       <Row key={`row-${id}`}>
-        {Object.keys(this.props.shape).map((columnName: string) => {
-          const item = this.props.shape[columnName]
+        {Object.keys(shape).map((columnName: string) => {
+          const item = shape[columnName]
 
           return (
             <Col key={`column-${item.attr}`} sm={item.size}>
@@ -61,26 +55,19 @@ class SmartList extends React.PureComponent<IProps, IState> {
     )
   }
 
-  updatePageIds = (ids: string[]): void => {
-    this.setState({
-      ...this.state,
-      currentPageIds: ids
-    })
-  }
-
-  get listItems(): JSX.Element[] | string {
-    if (this.state.currentPageIds.length) {
-      return this.state.currentPageIds.map(this.formatListItem)
+  const getListItems = (): JSX.Element[] | string => {
+    if (currentPageIds.length) {
+      return currentPageIds.map(formatListItem)
     }
 
     return 'No data to display'
   }
 
-  get header(): JSX.Element | null {
-    if (!this.props.listItem) {
+  const getHeader = (): JSX.Element | null => {
+    if (!listItem) {
       return (
         <Header
-          shape={this.props.shape}
+          shape={shape}
         />
       )
     }
@@ -88,20 +75,20 @@ class SmartList extends React.PureComponent<IProps, IState> {
     return null
   }
 
-  render(): JSX.Element {
-    return (
-      <PaginationPanel
-        handleUpdate={this.updatePageIds}
-        itemIds={Object.keys(this.props.data)}
-      >
-        {this.header}
+  return (
+    <PaginationPanel
+      handleUpdate={setCurrentPageIds}
+      itemIds={Object.keys(data)}
+    >
+      {getHeader()}
 
-        <div>
-          {this.listItems}
-        </div>
-      </PaginationPanel>
-    )
-  }
+      <div>
+        {getListItems()}
+      </div>
+    </PaginationPanel>
+  )
+
+
 }
 
 export {
