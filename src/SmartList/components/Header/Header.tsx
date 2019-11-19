@@ -6,14 +6,14 @@ import { IProps } from './types'
 
 import './index.scss'
 
-const Header: React.FC<IProps> = ({ shape }) => {
+const Header: React.FC<IProps> = ({ cols }) => {
   return (
     <Row
       id='smart-list-header'
       className='pt-2 pb-2 d-flex align-items-center'
     >
-      {Object.keys(shape).map((columnName: string) =>
-        <Col key={`header-column-${columnName}`} sm={shape[columnName].size}>
+      {cols.map((columnName: string) =>
+        <Col key={`header-column-${columnName}`}>
           {columnName}
         </Col>
       )}

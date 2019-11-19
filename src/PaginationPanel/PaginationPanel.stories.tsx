@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 
 import { PaginationPanel } from './PaginationPanel'
 
-storiesOf('Components.SmartList.PaginationPanel', module)
+storiesOf('Components.PaginationPanel', module)
   .add('Generic', () => {
     return (
       <PaginationPanel

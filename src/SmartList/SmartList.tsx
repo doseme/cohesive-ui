@@ -2,93 +2,80 @@ import React, { useState } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-import { PaginationPanel } from './components/PaginationPanel'
 import { Header } from './components/Header'
+import { PaginationPanel } from '..'
 
-interface IItem {
-  [id: string]: any
+interface IListHashmap {
+  [key: string]: {
+    [col: string]: any
+  }
 }
 
-interface IShapeItem {
-  [columnName: string]: {
-    attr: string
-    size: number
-  }
+interface IJSXHashmap {
+  [key: string]: JSX.Element
 }
 
 interface IProps {
-  data: IItem
-  shape: IShapeItem
-  listItem?: any
+  header?: JSX.Element
+  data: IJSXHashmap | IListHashmap
 }
 
-const SmartList: React.FC<IProps> = ({ data, shape, listItem }) => {
+const SmartList: React.FC<IProps> = ({ data, header }) => {
   const [currentPageIds, setCurrentPageIds] = useState<string[]>([])
 
-  const formatListItem = (id: string): JSX.Element => {
-    const itemData = data[id]
-
-    if (listItem) {
-      const ListItem = listItem
-
+  const getHeader = (): JSX.Element | null => {
+    if (data && data[currentPageIds[0]]  && !('$$typeof' in data[currentPageIds[0]])) {
       return (
-        <div key={`list-item-${id}`}>
-          <ListItem
-            {...itemData}
-          />
-        </div>
+        <Header
+          cols={Object.keys(data[currentPageIds[0]])}
+        />
       )
     }
 
-    return (
-      <Row key={`row-${id}`}>
-        {Object.keys(shape).map((columnName: string) => {
-          const item = shape[columnName]
+    if (header) { return (header) }
 
-          return (
-            <Col key={`column-${item.attr}`} sm={item.size}>
-              {itemData[item.attr]}
-            </Col>
-          )
-        })}
-      </Row>
-    )
+    return null
   }
 
-  const getListItems = (): JSX.Element[] | string => {
+  const getListContent = (): JSX.Element[] | string => {
     if (currentPageIds.length) {
-      return currentPageIds.map(formatListItem)
+      // If data is a JSX hashmap, return as is
+      if (data && data[currentPageIds[0]]  && '$$typeof' in data[currentPageIds[0]]) {
+        const jsxHashmap: IJSXHashmap = data as IJSXHashmap
+        return currentPageIds.map(id => jsxHashmap[id])
+      }
+
+      // Otherwise, we can infer it is of type IListHashmap.
+      const listHashmap = data as IListHashmap
+      return currentPageIds.map(x => {
+        return (
+          <Row key={x}>
+            {Object.keys(listHashmap[x]).map(y => {
+              return (
+                <Col key={`${x}-${y}`}>
+                  {listHashmap[x][y] && listHashmap[x][y].toString()}
+                </Col>
+              )
+            })}
+          </Row>
+        )
+      })
     }
 
     return 'No data to display'
   }
 
-  const getHeader = (): JSX.Element | null => {
-    if (!listItem) {
-      return (
-        <Header
-          shape={shape}
-        />
-      )
-    }
-
-    return null
-  }
-
   return (
     <PaginationPanel
-      handleUpdate={setCurrentPageIds}
       itemIds={Object.keys(data)}
+      handleUpdate={setCurrentPageIds}
     >
       {getHeader()}
-
       <div>
-        {getListItems()}
+        {getListContent()}
       </div>
     </PaginationPanel>
   )
-
-
 }
 
 export {

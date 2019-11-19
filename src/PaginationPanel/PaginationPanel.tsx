@@ -24,10 +24,11 @@ const PaginationPanel: React.FC<IProps> = ({
   const [currentPage, setCurrentPage] = useState<number>(1)
 
   const getCurrentIds = (): string[] => {
-    return itemIds.slice(
+    const x = itemIds.slice(
       (currentPage - 1) * perPage,
       currentPage * perPage
     )
+    return x
   }
 
   const getTotalPages = (): number => {
