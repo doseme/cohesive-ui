@@ -23,92 +23,78 @@ const PaginationPanel: React.FC<IProps> = ({
 }) => {
   const [currentPage, setCurrentPage] = useState<number>(1)
 
-  const getCurrentIds = (): string[] => {
-    const x = itemIds.slice(
-      (currentPage - 1) * perPage,
-      currentPage * perPage
-    )
-    return x
-  }
+  const currentIds = itemIds.slice(
+    (currentPage - 1) * perPage,
+    currentPage * perPage
+  )
 
-  const getTotalPages = (): number => {
-    return Math.ceil(itemIds.length / perPage)
-  }
+  const totalPages = Math.ceil(itemIds.length / perPage)
 
-  const getFirstButton = (): JSX.Element => {
-    return (
-      <Button
-        variant='light'
-        size='sm'
-        onClick={() => {
-          goToPage(1)
-        }}
-        disabled={currentPage <= 1}
-      >
-        <FontAwesomeIcon
-          icon={faAngleDoubleLeft}
-        />
-      </Button>
-    )
-  }
+  const firstButton: JSX.Element = ( 
+    <Button
+      variant='light'
+      size='sm'
+      onClick={() => {
+        goToPage(1)
+      }}
+      disabled={currentPage <= 1}
+    >
+      <FontAwesomeIcon
+        icon={faAngleDoubleLeft}
+      />
+    </Button>
+  )
 
-  const getPrevButton = (): JSX.Element => {
-    return (
-      <Button
-        variant='light'
-        size='sm'
-        className='ml-1'
-        onClick={() => {
-          goToPage(currentPage - 1)
-        }}
-        disabled={currentPage <= 1}
-      >
-        <FontAwesomeIcon
-          icon={faAngleLeft}
-        />
-      </Button>
-    )
-  }
+  const prevButton: JSX.Element = (
+    <Button
+      variant='light'
+      size='sm'
+      className='ml-1'
+      onClick={() => {
+        goToPage(currentPage - 1)
+      }}
+      disabled={currentPage <= 1}
+    >
+      <FontAwesomeIcon
+        icon={faAngleLeft}
+      />
+    </Button>
+  )
 
-  const getNextButton = (): JSX.Element => {
-    return (
-      <Button
-        variant='light'
-        size='sm'
-        className='ml-1'
-        onClick={() => {
-          goToPage(currentPage + 1)
-        }}
-        disabled={currentPage >= getTotalPages()}
-      >
-        <FontAwesomeIcon
-          icon={faAngleRight}
-        />
-      </Button>
-    )
-  }
+  const nextButton: JSX.Element = (
+    <Button
+      variant='light'
+      size='sm'
+      className='ml-1'
+      onClick={() => {
+        goToPage(currentPage + 1)
+      }}
+      disabled={currentPage >= totalPages}
+    >
+      <FontAwesomeIcon
+        icon={faAngleRight}
+      />
+    </Button>
+  )
 
-  const getLastButton = (): JSX.Element => {
-    const totalPages = getTotalPages()
-    return (
-      <Button
-        variant='light'
-        size='sm'
-        className='ml-1'
-        onClick={() => {
-          goToPage(totalPages)
-        }}
-        disabled={currentPage >= totalPages}
-      >
-        <FontAwesomeIcon
-          icon={faAngleDoubleRight}
-        />
-      </Button>
-    )
-  }
+  const lastButton: JSX.Element = (
+    <Button
+      variant='light'
+      size='sm'
+      className='ml-1'
+      onClick={() => {
+        goToPage(totalPages)
+      }}
+      disabled={currentPage >= totalPages}
+    >
+      <FontAwesomeIcon
+        icon={faAngleDoubleRight}
+      />
+    </Button>
+  )
 
   const goToPage = (pageNumber: number) => {
-    if (pageNumber < 1 || pageNumber > getTotalPages()) {
+    if (pageNumber < 1 || pageNumber > totalPages) {
       return
     }
 
@@ -116,8 +102,6 @@ const PaginationPanel: React.FC<IProps> = ({
   }
 
   const pageNumberButton = (pageNumber: number): JSX.Element | null => {
-    const totalPages = getTotalPages()
-
     if (
       isNeighbour(pageNumber, currentPage, neighboursToShow)
         || isInStartEdge(pageNumber, 1, edgesToShow)
@@ -149,37 +133,24 @@ const PaginationPanel: React.FC<IProps> = ({
     return null
   }
 
-  const getPageNumbers = () => {
-    const totalPages = getTotalPages()
-    const pageNumbers: number[] = Array.from(Array(totalPages + 1).keys()).slice(1)
+  const pageNumbers = totalPages > 0
+    ? Array.from(Array(totalPages + 1).keys()).slice(1).map(pageNumberButton)
+    : pageNumberButton(1)
 
-    if (totalPages > 0) {
-      return pageNumbers.map(pageNumberButton)
-    }
-
-    return pageNumberButton(1)
-  }
-
-  // componentDidMount
   useEffect(() => {
-    handleUpdate(getCurrentIds())
+    handleUpdate(currentIds)
   }, [])
-
-  // componentDidUpdate
-  useEffect(() => {
-    handleUpdate(getCurrentIds())
-  }, [ currentPage ])
 
   return (
     <>
       {children}
 
       <div className='d-flex justify-content-start w-100 pagination pt-1'>
-        {getFirstButton()}
-        {getPrevButton()}
-        {getPageNumbers()}
-        {getNextButton()}
-        {getLastButton()}
+        {firstButton}
+        {prevButton}
+        {pageNumbers}
+        {nextButton}
+        {lastButton}
       </div>
     </>
   )

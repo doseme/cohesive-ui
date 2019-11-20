@@ -1,80 +1,69 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { Header } from './components/Header'
-import { PaginationPanel } from '..'
+import { IProps, IJSXHashmap, IListHashmap, IColumnName } from './types'
 
-interface IListHashmap {
-  [key: string]: {
-    [col: string]: any
-  }
-}
-
-interface IJSXHashmap {
-  [key: string]: JSX.Element
-}
-
-interface IProps {
-  header?: JSX.Element
-  data: IJSXHashmap | IListHashmap
-}
-
-const SmartList: React.FC<IProps> = ({ data, header }) => {
-  const [currentPageIds, setCurrentPageIds] = useState<string[]>([])
+const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
 
   const getHeader = (): JSX.Element | null => {
-    if (data && data[currentPageIds[0]]  && !('$$typeof' in data[currentPageIds[0]])) {
+    const objectKeys = Object.keys(data)
+    if (data && objectKeys.length  && !('$$typeof' in data[objectKeys[0]])) {
       return (
         <Header
-          cols={Object.keys(data[currentPageIds[0]])}
+          cols={columnDisplay ? columnDisplay.map(x => x.displayName) : Object.keys(data[objectKeys[0]])}
         />
       )
     }
 
-    if (header) { return (header) }
+    if (customHeader) { return (customHeader) }
 
     return null
   }
 
   const getListContent = (): JSX.Element[] | string => {
-    if (currentPageIds.length) {
-      // If data is a JSX hashmap, return as is
-      if (data && data[currentPageIds[0]]  && '$$typeof' in data[currentPageIds[0]]) {
-        const jsxHashmap: IJSXHashmap = data as IJSXHashmap
-        return currentPageIds.map(id => jsxHashmap[id])
-      }
+    const objectKeys = data && Object.keys(data)
 
-      // Otherwise, we can infer it is of type IListHashmap.
-      const listHashmap = data as IListHashmap
-      return currentPageIds.map(x => {
-        return (
-          <Row key={x}>
-            {Object.keys(listHashmap[x]).map(y => {
-              return (
-                <Col key={`${x}-${y}`}>
-                  {listHashmap[x][y] && listHashmap[x][y].toString()}
-                </Col>
-              )
-            })}
-          </Row>
-        )
-      })
+    if (!objectKeys || !objectKeys.length) {
+      return 'No data to display'
     }
 
-    return 'No data to display'
+    // If data is a JSX hashmap, return as is
+    if (data && objectKeys.length  && '$$typeof' in data[objectKeys[0]]) {
+      const jsxHashmap: IJSXHashmap = data as IJSXHashmap
+      return objectKeys.map(id => jsxHashmap[id])
+    }
+
+    // Otherwise, we can infer it is of type IListHashmap.
+    const listHashmap = data as IListHashmap
+    const validColumns = columnDisplay && columnDisplay.map(x => x.keyName)
+    return objectKeys.map(rowKey => {
+      return (
+        <Row key={rowKey}>
+          {Object.keys(listHashmap[rowKey]).reduce((acc: JSX.Element[], curr: string): JSX.Element[] => {
+            if (validColumns && !validColumns.includes(curr)) {
+              return acc
+            }
+            
+            return acc.concat([(
+              <Col key={`${rowKey}-${curr}`}>
+                {listHashmap[rowKey][curr] && listHashmap[rowKey][curr].toString()}
+              </Col>
+            )])
+          }, [])}
+        </Row>
+      )
+    })
   }
 
   return (
-    <PaginationPanel
-      itemIds={Object.keys(data)}
-      handleUpdate={setCurrentPageIds}
-    >
+    <div>
       {getHeader()}
       <div>
         {getListContent()}
       </div>
-    </PaginationPanel>
+    </div>
   )
 }
 
