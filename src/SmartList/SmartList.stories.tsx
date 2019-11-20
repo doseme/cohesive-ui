@@ -61,7 +61,7 @@ const columnDisplay: IColumnName[] = [
     displayName: 'Description'
   }
 ]
-    
+
 const dataJSX = {
   1: <div key="1"><b>Item 1</b></div>,
   2: <div key="2"><i>Item 2</i></div>,
@@ -74,7 +74,7 @@ const dataJSX = {
   9: <div key="9">Item 9</div>,
   10: <div key="10">Item 10</div>
 }
-    
+
 stories.add(
   'JSX',
   () =>

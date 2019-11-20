@@ -25,7 +25,6 @@ const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
 
   const getListContent = (): JSX.Element[] | string => {
     const objectKeys = data && Object.keys(data)
-
     if (!objectKeys || !objectKeys.length) {
       return 'No data to display'
     }
@@ -46,7 +45,7 @@ const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
             if (validColumns && !validColumns.includes(thisCol)) {
               return allCols
             }
-            
+
             return allCols.concat([(
               <Col key={`${rowKey}-${thisCol}`}>
                 {listHashmap[rowKey][thisCol] && listHashmap[rowKey][thisCol].toString()}

@@ -30,7 +30,7 @@ const PaginationPanel: React.FC<IProps> = ({
 
   const totalPages = Math.ceil(itemIds.length / perPage)
 
-  const firstButton: JSX.Element = ( 
+  const firstButton: JSX.Element = (
     <Button
       variant='light'
       size='sm'
