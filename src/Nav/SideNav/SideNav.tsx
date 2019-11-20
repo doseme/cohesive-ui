@@ -2,9 +2,14 @@ import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 
 import { SideNavLink } from './components/SideNavLink'
-import { INavLink } from '..'
 
 import './index.scss'
+
+export interface INavLink {
+  icon: JSX.Element
+  label: string
+  route: string
+}
 
 interface IProps {
   navLinks: INavLink[]

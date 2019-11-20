@@ -12,10 +12,10 @@ const NavLayout: React.FC<IProps> = ({ topNav, sideNav, footer, children }): JSX
   return (
     <div className='layout'>
       {topNav}
-      <div className='d-flex'>
+      <div className='d-flex main-content'>
         {sideNav}
 
-        <div className='p-3'>
+        <div className='p-3 content'>
           {children}
         </div>
       </div>

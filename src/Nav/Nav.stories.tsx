@@ -4,10 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 import { TopNav } from './TopNav'
-import { SideNav } from '../SideNav'
+import { SideNav, INavLink } from './SideNav'
 import { NavLayout } from './NavLayout'
 import { Footer } from '../Footer'
-import { INavLink } from '../Navbar'
 
 const stories = storiesOf('Components.Nav', module)
 
