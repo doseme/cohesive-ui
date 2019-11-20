@@ -1,7 +1,5 @@
 import React from 'react'
 import * as BS from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 import './index.scss'
 
@@ -9,33 +7,26 @@ interface IProps {
   handleNavigateTo: () => void
   label: string
   route: string
-  faIcon: IconProp
+  icon: JSX.Element
 }
 
 const SideNavLink: React.FC<IProps> = ({
   handleNavigateTo,
   label,
   route,
-  faIcon
-}) => {
-  const getClassName = (): string => {
-    const base = 'm-1 w-100 text-muted d-flex align-items-center'
-
-    if (location.pathname.includes(route)) {
-      return `navbar-selected ${base}`
-    }
-    return base
-  }
+  icon,
+}): JSX.Element => {
+  const base = 'm-1 w-100 text-muted d-flex align-items-center'
+  const className = location.pathname.includes(route)
+    ? `navbar-selected ${base}`
+    : base
 
   return (
     <BS.Nav
       onClick={handleNavigateTo}
-      className={getClassName()}
+      className={className}
     >
-      <FontAwesomeIcon
-        className='m-2'
-        icon={faIcon}
-      />
+      {icon}
       <span className='ml-2 link-label'>{label}</span>
     </BS.Nav>
   )

@@ -8,7 +8,7 @@ interface IProps {
 }
 
 interface INavLink {
-  icon: any
+  icon: JSX.Element
   label: string
   route: string
 }
