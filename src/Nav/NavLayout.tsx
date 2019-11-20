@@ -1,13 +1,16 @@
 import React from 'react'
 
+import './index.scss'
+
 interface IProps {
   topNav: JSX.Element
   sideNav: JSX.Element
+  footer: JSX.Element
 }
 
-const NavLayout: React.FC<IProps> = ({ topNav, sideNav, children }): JSX.Element => {
+const NavLayout: React.FC<IProps> = ({ topNav, sideNav, footer, children }): JSX.Element => {
   return (
-    <div style={{ background: 'silver' }}>
+    <div className='layout'>
       {topNav}
       <div className='d-flex'>
         {sideNav}
@@ -16,6 +19,7 @@ const NavLayout: React.FC<IProps> = ({ topNav, sideNav, children }): JSX.Element
           {children}
         </div>
       </div>
+      {footer}
     </div>
   )
 }
