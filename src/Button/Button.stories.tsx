@@ -1,16 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Button } from './Button'
-
-type TVariant = 'primary'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'info'
-  | 'dark'
-  | 'light'
+import { Button, TVariant } from './Button'
 
 const colors: TVariant[] = [
   'primary',
