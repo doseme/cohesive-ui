@@ -9,6 +9,7 @@ const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
 
   const getHeader = (): JSX.Element | null => {
     const objectKeys = Object.keys(data)
+    // If list is using the data table display, provide generic header based on columnDisplay prop if exists, else data struct key names.
     if (data && objectKeys.length  && !('$$typeof' in data[objectKeys[0]])) {
       return (
         <Header
@@ -35,7 +36,7 @@ const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
       return objectKeys.map(id => jsxHashmap[id])
     }
 
-    // Otherwise, we can infer it is of type IListHashmap.
+    // Otherwise, we can infer it is a data table.
     const listHashmap = data as IListHashmap
     const validColumns = columnDisplay && columnDisplay.map(x => x.keyName)
     return objectKeys.map(rowKey => {
