@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { Header } from './components/Header'
-import { IProps, IJSXHashmap, IListHashmap, IColumnName } from './types'
+import { IProps, IJSXHashmap, IListHashmap } from './types'
 
 const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
 
@@ -29,9 +29,9 @@ const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
       return 'No data to display'
     }
 
-    // If data is a JSX hashmap, return as is
+    // If data is a hash containing JSX elements, return as is
     if (data && objectKeys.length  && '$$typeof' in data[objectKeys[0]]) {
-      const jsxHashmap: IJSXHashmap = data as IJSXHashmap
+      const jsxHashmap = data as IJSXHashmap
       return objectKeys.map(id => jsxHashmap[id])
     }
 
@@ -41,14 +41,14 @@ const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
     return objectKeys.map(rowKey => {
       return (
         <Row key={rowKey}>
-          {Object.keys(listHashmap[rowKey]).reduce((acc: JSX.Element[], curr: string): JSX.Element[] => {
-            if (validColumns && !validColumns.includes(curr)) {
-              return acc
+          {Object.keys(listHashmap[rowKey]).reduce((allCols: JSX.Element[], thisCol: string): JSX.Element[] => {
+            if (validColumns && !validColumns.includes(thisCol)) {
+              return allCols
             }
             
-            return acc.concat([(
-              <Col key={`${rowKey}-${curr}`}>
-                {listHashmap[rowKey][curr] && listHashmap[rowKey][curr].toString()}
+            return allCols.concat([(
+              <Col key={`${rowKey}-${thisCol}`}>
+                {listHashmap[rowKey][thisCol] && listHashmap[rowKey][thisCol].toString()}
               </Col>
             )])
           }, [])}
