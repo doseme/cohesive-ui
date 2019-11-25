@@ -2,106 +2,69 @@ import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-import { PaginationPanel } from './components/PaginationPanel'
 import { Header } from './components/Header'
+import { IProps, IJSXHashmap, IListHashmap } from './types'
 
-interface IItem {
-  [id: string]: any
-}
+const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
 
-interface IShapeItem {
-  [columnName: string]: {
-    attr: string
-    size: number
-  }
-}
-
-interface IProps {
-  data: IItem
-  shape: IShapeItem
-  listItem?: any
-}
-
-interface IState {
-  currentPageIds: string[]
-}
-
-class SmartList extends React.PureComponent<IProps, IState> {
-  state: IState = {
-    currentPageIds: []
-  }
-
-  formatListItem = (id: string): JSX.Element => {
-    const itemData = this.props.data[id]
-
-    if (this.props.listItem) {
-      const ListItem = this.props.listItem
-
-      return (
-        <div key={`list-item-${id}`}>
-          <ListItem
-            {...itemData}
-          />
-        </div>
-      )
-    }
-
-    return (
-      <Row key={`row-${id}`}>
-        {Object.keys(this.props.shape).map((columnName: string) => {
-          const item = this.props.shape[columnName]
-
-          return (
-            <Col key={`column-${item.attr}`} sm={item.size}>
-              {itemData[item.attr]}
-            </Col>
-          )
-        })}
-      </Row>
-    )
-  }
-
-  updatePageIds = (ids: string[]): void => {
-    this.setState({
-      ...this.state,
-      currentPageIds: ids
-    })
-  }
-
-  get listItems(): JSX.Element[] | string {
-    if (this.state.currentPageIds.length) {
-      return this.state.currentPageIds.map(this.formatListItem)
-    }
-
-    return 'No data to display'
-  }
-
-  get header(): JSX.Element | null {
-    if (!this.props.listItem) {
+  const getHeader = (): JSX.Element | null => {
+    const objectKeys = Object.keys(data)
+    // If list is using the data table display, provide generic header based on columnDisplay prop if exists, else data struct key names.
+    if (data && objectKeys.length  && !('$$typeof' in data[objectKeys[0]])) {
       return (
         <Header
-          shape={this.props.shape}
+          cols={columnDisplay ? columnDisplay.map(x => x.displayName) : Object.keys(data[objectKeys[0]])}
         />
       )
     }
 
+    if (customHeader) { return (customHeader) }
+
     return null
   }
 
-  render(): JSX.Element {
-    return (
-      <PaginationPanel
-        handleUpdate={this.updatePageIds}
-        itemIds={Object.keys(this.props.data)}
-      >
-        {this.header}
+  const getListContent = (): JSX.Element[] | string => {
+    const objectKeys = data && Object.keys(data)
+    if (!objectKeys || !objectKeys.length) {
+      return 'No data to display'
+    }
 
-        <div>
-          {this.listItems}
-        </div>
-      </PaginationPanel>
-    )
+    // If data is a hash containing JSX elements, return as is
+    if (data && objectKeys.length  && '$$typeof' in data[objectKeys[0]]) {
+      const jsxHashmap = data as IJSXHashmap
+      return objectKeys.map(id => jsxHashmap[id])
+    }
+
+    // Otherwise, we can infer it is a data table.
+    const listHashmap = data as IListHashmap
+    const validColumns = columnDisplay && columnDisplay.map(x => x.keyName)
+    return objectKeys.map(rowKey => {
+      return (
+        <Row key={rowKey}>
+          {Object.keys(listHashmap[rowKey]).reduce((allCols: JSX.Element[], thisCol: string): JSX.Element[] => {
+            if (validColumns && !validColumns.includes(thisCol)) {
+              return allCols
+            }
+
+            return allCols.concat([(
+              <Col key={`${rowKey}-${thisCol}`}>
+                {listHashmap[rowKey][thisCol] && listHashmap[rowKey][thisCol].toString()}
+              </Col>
+            )])
+          }, [])}
+        </Row>
+      )
+    })
   }
+
+  return (
+    <div>
+      {getHeader()}
+      <div>
+        {getListContent()}
+      </div>
+    </div>
+  )
 }
 
 export {

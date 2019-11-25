@@ -4,107 +4,94 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { SmartList } from './SmartList'
+import { IColumnName } from './types'
 
 const stories = storiesOf('Components.SmartList', module)
 
-interface IListItemProps {
-  name: string
-  description: string
-}
-
-const ListItem: React.FC<IListItemProps> = ({ name, description }) => {
-  return (
-    <Row>
-      <Col sm={2}>
-        {name}
-      </Col>
-      <Col sm={2}>
-        This is a static row
-      </Col>
-      <Col sm={2}>
-        {description}
-      </Col>
-    </Row>
-  )
-}
-
-const data = {
-  '1': {
-    name: 'Test 1',
+const dataObjects = {
+  1: {
+    name: 'Name 1',
     description: 'Description 1'
   },
-  '2': {
-    name: 'Test 2',
+  2: {
+    name: 'Name 2',
     description: 'Description 2'
   },
-  '3': {
-    name: 'Test 3',
+  3: {
+    name: 'Name 3',
     description: 'Description 3'
   },
-  '4': {
-    name: 'Test 4',
+  4: {
+    name: 'Name 4',
     description: 'Description 4'
   },
-  '5': {
-    name: 'Test 5',
+  5: {
+    name: 'Name 5',
     description: 'Description 5'
   },
-  '6': {
-    name: 'Test 6',
+  6: {
+    name: 'Name 6',
     description: 'Description 6'
   },
-  '7': {
-    name: 'Test 7',
+  7: {
+    name: 'Name 7',
     description: 'Description 7'
   },
-  '8': {
-    name: 'Test 8',
+  8: {
+    name: 'Name 8',
     description: 'Description 8'
   },
-  '9': {
-    name: 'Test 9',
+  9: {
+    name: 'Name 9',
     description: 'Description 9'
   },
-  '10': {
-    name: 'Test 10',
+  10: {
+    name: 'Name 10',
     description: 'Description 10'
+  },
+}
+
+const columnDisplay: IColumnName[] = [
+  {
+    keyName: 'name',
+    displayName: 'Name'
+  },
+  {
+    keyName: 'description',
+    displayName: 'Description'
   }
+]
+
+const dataJSX = {
+  1: <div key="1"><b>Item 1</b></div>,
+  2: <div key="2"><i>Item 2</i></div>,
+  3: <div key="3"><u>Item 3</u></div>,
+  4: <div key="4">Item 4</div>,
+  5: <div key="5">Item 5 wants to tell you that in <i>actual</i> use individual list items probably won't be different, but that you can provide your own fully styled component(s) to this version of the list.</div>,
+  6: <div key="6">Item 6</div>,
+  7: <div key="7">Item 7 with some extra info</div>,
+  8: <div key="8">Item 8</div>,
+  9: <div key="9">Item 9</div>,
+  10: <div key="10">Item 10</div>
 }
 
 stories.add(
-  'Generic',
+  'JSX',
   () =>
     <SmartList
-      data={data}
-      shape={{
-        'Name': {
-          attr: 'name',
-          size: 3
-        },
-        'Description': {
-          attr: 'description',
-          size: 3
-        }
-      }}
+      data={dataJSX}
+      customHeader={(
+        <div><h1>This is a custom list header!!!</h1></div>
+      )}
     />
 )
 
 stories.add(
-  'Custom list item',
+  'Data',
   () =>
     <SmartList
-      data={data}
-      shape={{
-        'Name': {
-          attr: 'name',
-          size: 3
-        },
-        'Description': {
-          attr: 'description',
-          size: 3
-        }
-      }}
-      listItem={ListItem}
+      data={dataObjects}
+      columnDisplay={columnDisplay}
     />
 )
 
@@ -112,16 +99,6 @@ stories.add(
   'Empty',
   () =>
     <SmartList
-      data={[]}
-      shape={{
-        'Name': {
-          attr: 'name',
-          size: 3
-        },
-        'Description': {
-          attr: 'description',
-          size: 3
-        }
-      }}
+      data={{}}
     />
 )
