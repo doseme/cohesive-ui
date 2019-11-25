@@ -1,0 +1,15 @@
+@import '../style/colors';
+
+#footer {
+  padding: 0 0 0 200px;
+  color: $lightgrey;
+  background: $footerblack;
+
+  a {
+    color: $footerlink;
+
+    &:hover {
+      color: $footerhover;
+    }
+  }
+}

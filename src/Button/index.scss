@@ -1,0 +1,64 @@
+@import '../style/colors.scss';
+
+@mixin button($color) {
+  background: white;
+  border: 1px solid;
+  height: 32px;
+  display: flex;
+  align-items: center;
+
+  border-color: $color;
+  color: $color;
+
+  &:hover {
+    background: $color;
+    color: white;
+    border-color: $color;
+  }
+
+  &:active {
+    color: white !important;
+    background: $color !important;
+    border-color: $color;
+  }
+}
+
+.btn-primary {
+  @include button($darkgrey);
+}
+
+.btn-secondary {
+  @include button($darkblue);
+}
+
+.btn-success {
+  @include button($darkteal);
+}
+
+.btn-danger {
+  @include button($see);
+}
+
+.btn-warning {
+  @include button($warning);
+}
+
+.btn-info {
+  @include button($panelblue);
+}
+
+.btn-dark {
+  @include button($footerblack);
+}
+
+.btn-light {
+  @include button($lightgrey);
+}
+
+.circle {
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 12px;
+  width: 50px;
+  height: 50px;
+}
