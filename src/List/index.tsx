@@ -2,22 +2,16 @@ import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export interface IColumnName {
-  keyName: string
-  displayName: string
-}
-
-export interface IRowData extends Object {
+interface IRowData extends Object {
   id: number | string
   [k: string]: any
 }
 
 export interface IProps {
   data: IRowData[]
-  columnDisplay?: IColumnName[]
 }
 
-const List: React.FC<IProps> = ({ data, columnDisplay }) => {
+const List: React.FC<IProps> = ({ data }) => {
 
   const headers = Object.keys(data[0])
 
@@ -69,5 +63,6 @@ const List: React.FC<IProps> = ({ data, columnDisplay }) => {
 
 
 export {
-  List
+  List,
+  IRowData,
 }

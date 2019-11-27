@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Header } from './components/Header'
-import { IProps } from './types'
+import { IProps, IRowElement, IHeaderItem, IColumnElement } from './types'
 import { ListItem } from './components/ListItem'
 
 const SmartList: React.FC<IProps> = ({ data, cols }) => {
@@ -31,4 +31,7 @@ const SmartList: React.FC<IProps> = ({ data, cols }) => {
 
 export {
   SmartList,
+  IRowElement,
+  IColumnElement,
+  IHeaderItem,
 }
