@@ -51,7 +51,4 @@ const SmartList: React.FC<IProps> = ({ data, cols }) => {
 
 export {
   SmartList,
-  IRowElement,
-  IColumnElement,
-  IHeaderItem,
 }
