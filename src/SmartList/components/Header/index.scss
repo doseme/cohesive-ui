@@ -1,5 +1,10 @@
+@import '../../../style/colors.scss';
+
 #smart-list-header {
-  background: #eeecf4;
+  background: $panelblue;
+  color: white;
+  height: 60px;
+  font-weight: bold;
 
   .fa-w-10 {
     font-size: 15px;
