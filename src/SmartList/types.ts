@@ -1,20 +1,21 @@
-export interface IListHashmap {
-  [key: string]: {
-    [col: string]: any
-  }
-}
-
-export interface IJSXHashmap {
-  [key: string]: JSX.Element
-}
-
-export interface IColumnName {
-  keyName: string
-  displayName: string
-}
-
 export interface IProps {
-  data: IJSXHashmap | IListHashmap
-  customHeader?: JSX.Element
-  columnDisplay?: IColumnName[]
+  data: IRowElement[]
+  cols: IHeaderItem[]
 }
+
+export interface IHeaderItem {
+  name: string
+  className?: string
+  handleSort?: (column: string) => void
+}
+
+export interface IColumnElement {
+  name: string
+  element: JSX.Element
+}
+
+export interface IRowElement {
+  id: number | string
+  columns: IColumnElement[]
+}
+

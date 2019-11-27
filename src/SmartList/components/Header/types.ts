@@ -1,3 +1,5 @@
+import { IHeaderItem } from '../../types'
+
 export interface IProps {
-  cols: string[]
+  cols: IHeaderItem[]
 }
