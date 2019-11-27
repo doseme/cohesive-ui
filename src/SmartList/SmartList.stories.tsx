@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { SmartList } from './SmartList'
-import { IRowElement, IHeaderItem } from './types'
+import { IRowElement, IHeaderItem } from './SmartList'
 import { Button } from '../Button'
 
 const stories = storiesOf('Components.SmartList', module)
