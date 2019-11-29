@@ -6,19 +6,22 @@ import { TFormControlEvent } from '../types'
 import '../index.scss'
 
 interface IProps {
-  maxInputLength: number,
+  label?: string
+  maxInputLength: number
   isRequired: boolean
   handleChange: (value: string, isValid: boolean) => void
 }
 
 const TextInput: React.FC<IProps> = (props) => {
   const {
+    label,
     maxInputLength,
     isRequired,
     handleChange
   } = props
 
   const [error, setError] = useState<string>('')
+  const [isValid, setValid] = useState<boolean>(true)
 
   const validate = (str: string): boolean => {
     if (maxInputLength && str.length > maxInputLength) {
@@ -35,18 +38,26 @@ const TextInput: React.FC<IProps> = (props) => {
     return true
   }
 
+  const getFieldClass = (isValid: boolean): string => {
+    return isValid ? '' : 'form-field-invalid'
+  }
+
   const update = (e: TFormControlEvent): void => {
-    const isValid = validate(e.currentTarget.value)
+    setValid(validate(e.currentTarget.value))
     handleChange(e.currentTarget.value, isValid)
   }
 
   return (
     <div>
+      <div className='d-flex'>
+        <div className='form-field-label'>{label}</div>
+        <small className='validation-error-text ml-auto pr-2'>{error}</small>
+      </div>
       <Form.Control
+        className={getFieldClass(isValid)}
         type='text'
         onBlur={update}
       />
-      <small className='pl-2 form-field-invalid'>{error}</small>
     </div>
   )
 }
