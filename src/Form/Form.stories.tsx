@@ -7,8 +7,6 @@ import { Form } from './Form'
 storiesOf('Components.Form', module)
   .add('Empty form', () => {
     return (
-      <Form>
-
-      </Form>
+      <Form></Form>
     )
   })
