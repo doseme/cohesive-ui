@@ -29,7 +29,7 @@ const TextInput: React.FC<IProps> = (props) => {
       return false
     }
 
-    if (isRequired && str.length < 1) {
+    if (isRequired && !str.length) {
       setError('This field is required')
       return false
     }
