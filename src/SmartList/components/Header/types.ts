@@ -1,4 +1,4 @@
-import { IHeaderItem } from '../../types'
+import { IHeaderItem } from '../../SmartList'
 
 export interface IProps {
   cols: IHeaderItem[]
