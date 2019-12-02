@@ -1,67 +1,49 @@
 import React from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import { Header } from './components/Header'
-import { IProps, IJSXHashmap, IListHashmap } from './types'
+import { ListItem } from './components/ListItem'
 
-const SmartList: React.FC<IProps> = ({ data, customHeader, columnDisplay }) => {
+export interface IProps {
+  data: IRowElement[]
+  cols: IHeaderItem[]
+}
 
-  const getHeader = (): JSX.Element | null => {
-    const objectKeys = Object.keys(data)
-    // If list is using the data table display, provide generic header based on columnDisplay prop if exists, else data struct key names.
-    if (data && objectKeys.length  && !('$$typeof' in data[objectKeys[0]])) {
-      return (
-        <Header
-          cols={columnDisplay ? columnDisplay.map(x => x.displayName) : Object.keys(data[objectKeys[0]])}
-        />
-      )
-    }
+export interface IHeaderItem {
+  name: string
+  className?: string
+  handleSort?: (column: string) => void
+}
 
-    if (customHeader) { return (customHeader) }
+export interface IColumnElement {
+  name: string
+  element: JSX.Element
+}
 
-    return null
-  }
+export interface IRowElement {
+  id: number | string
+  columns: IColumnElement[]
+}
 
-  const getListContent = (): JSX.Element[] | string => {
-    const objectKeys = data && Object.keys(data)
-    if (!objectKeys || !objectKeys.length) {
-      return 'No data to display'
-    }
+const SmartList: React.FC<IProps> = ({ data, cols }) => {
 
-    // If data is a hash containing JSX elements, return as is
-    if (data && objectKeys.length  && '$$typeof' in data[objectKeys[0]]) {
-      const jsxHashmap = data as IJSXHashmap
-      return objectKeys.map(id => jsxHashmap[id])
-    }
+  const header = (
+    <Header
+      cols={cols}
+    />
+  )
 
-    // Otherwise, we can infer it is a data table.
-    const listHashmap = data as IListHashmap
-    const validColumns = columnDisplay && columnDisplay.map(x => x.keyName)
-    return objectKeys.map(rowKey => {
-      return (
-        <Row key={rowKey}>
-          {Object.keys(listHashmap[rowKey]).reduce((allCols: JSX.Element[], thisCol: string): JSX.Element[] => {
-            if (validColumns && !validColumns.includes(thisCol)) {
-              return allCols
-            }
-
-            return allCols.concat([(
-              <Col key={`${rowKey}-${thisCol}`}>
-                {listHashmap[rowKey][thisCol] && listHashmap[rowKey][thisCol].toString()}
-              </Col>
-            )])
-          }, [])}
-        </Row>
-      )
-    })
-  }
+  const listContent = data.map(row =>
+    <ListItem
+      key={row.id}
+      columns={row.columns}
+    />
+  )
 
   return (
     <div>
-      {getHeader()}
+      {header}
       <div>
-        {getListContent()}
+        {listContent} 
       </div>
     </div>
   )

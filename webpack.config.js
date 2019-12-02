@@ -1,3 +1,4 @@
+const nodeExternals = require('webpack-node-externals')
 const path = require('path')
 
 module.exports = {
@@ -33,8 +34,5 @@ module.exports = {
     filename: 'index.js'
   },
 
-  externals: {
-    'react': 'react',
-    'react-bootstrap': 'react-bootstrap'
-  }
+  externals: [nodeExternals()]
 }

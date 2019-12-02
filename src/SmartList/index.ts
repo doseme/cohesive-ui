@@ -1,4 +1,14 @@
-import { SmartList } from './SmartList'
+import {
+  SmartList,
+  IRowElement,
+  IColumnElement,
+  IHeaderItem,
+} from './SmartList'
 
-export { SmartList }
+export { 
+  SmartList,
+  IRowElement,
+  IColumnElement,
+  IHeaderItem,
+}
 

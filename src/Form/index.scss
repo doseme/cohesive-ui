@@ -1,0 +1,9 @@
+@import '../style/colors.scss';
+
+.form-field-invalid {
+  border-color: $invalidRed;
+} 
+
+.validation-error-text {
+  color: $invalidRed;
+}

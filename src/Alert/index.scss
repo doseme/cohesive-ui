@@ -1,0 +1,40 @@
+@import '../style/colors.scss';
+
+@mixin button($color) {
+  border-color: darken($color, 5%);
+  background-color: $color;
+  color: white;
+}
+
+.alert-primary {
+  @include button($teal);
+}
+
+.alert-secondary {
+  @include button($panelblue);
+}
+
+.alert-success {
+  @include button($footerhover);
+}
+
+.alert-info {
+  @include button($darkteal);
+}
+
+.alert-danger {
+  @include button($see);
+}
+
+.alert-warning {
+  @include button($warning);
+}
+
+.alert-dark {
+  @include button($footerblack);
+}
+
+.alert-light {
+  color: black !important;
+  @include button($lightgrey);
+}
