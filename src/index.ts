@@ -1,5 +1,6 @@
 import { AdminLogo } from './AdminLogo'
 import { Alert } from './Alert'
+import { Dropdown } from './Dropdown'
 import { Footer } from './Footer'
 import { PaginationPanel } from './PaginationPanel'
 import { Panel } from './Panel'
@@ -20,6 +21,7 @@ export {
   // Components
   AdminLogo,
   Alert,
+  Dropdown,
   Footer,
   PaginationPanel,
   Button,
