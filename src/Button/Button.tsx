@@ -15,14 +15,15 @@ export type TVariant = 'primary'
 interface IProps extends ButtonProps {
   onClick: () => void
   variant: TVariant
+  className?: string
   shape?: 'circle' | 'rect'
 }
 
-const Button: React.FC<IProps> = ({ onClick, children, shape, ...rest }): JSX.Element => {
+const Button: React.FC<IProps> = ({ onClick, children, shape, className, ...rest }): JSX.Element => {
   return (
     <BsButton
       onClick={onClick}
-      className={shape}
+      className={`${shape} ${className}`}
       {...rest}
     >
       {children}
