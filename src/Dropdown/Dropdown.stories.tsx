@@ -33,7 +33,7 @@ stories.add('Components.Dropdown', () => {
       <h3 className='m-5'>With List of Items + No Search</h3>
       <div className='m-5'>
         <Dropdown 
-          title='Select Hospital'
+          placeholder='Select Hospital'
           data={['Hospital A', 'Hospital B', 'Hospital C']}
           onSelect={noop}
           searchIcon={searchIcon}
@@ -47,7 +47,7 @@ stories.add('Components.Dropdown', () => {
       <h3 className='m-5'>With List of Items + Search</h3>
       <div className='m-5'>
         <Dropdown 
-          title='Select Hospital'
+          placeholder='Select Hospital'
           data={[
             'Hospital A', 
             'Hospital B', 
@@ -73,7 +73,7 @@ stories.add('Components.Dropdown', () => {
       <h3 className='m-'>Custom Content Dropdown</h3>
       <div className='m-5'>
         <Dropdown 
-          title='Custom Content Dropdown'
+          placeholder='Custom Content Dropdown'
           onSelect={noop}
         >
           {content}
