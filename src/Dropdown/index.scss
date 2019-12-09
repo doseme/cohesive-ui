@@ -36,14 +36,14 @@ ul {
 
 .dropdown-closed {
   padding: 5px $side 5px $side + 2;
-  background: $lightgrey;
+  background: $lightest-grey;
   border: 1px solid $darkgrey;
   border-radius: 5px;
 }
 
 .dropdown {
   width: $width;
-  background: $lightgrey;
+  background: $lightest-grey;
   position: absolute;
   padding-bottom: 10px;
   top: 0px;

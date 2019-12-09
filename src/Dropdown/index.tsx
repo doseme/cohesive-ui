@@ -72,7 +72,7 @@ const Dropdown: React.FC<IProps> = ({ children, data, placeholder, searchIcon, o
 
   const listItems = (items: string[], callback: (item: string) => void) => (
     <>
-      <div className='dropdown-title'>{placeholder}</div>
+      <div className='dropdown-placeholder'>{selectedItem || placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 
@@ -124,7 +124,7 @@ const Dropdown: React.FC<IProps> = ({ children, data, placeholder, searchIcon, o
         className='dropdown-closed'
         onClick={() => setShowContent(!showContent)}
       >
-        {selectedItem || title}
+        {selectedItem || placeholder}
       </div>
       {content}
     </div>
