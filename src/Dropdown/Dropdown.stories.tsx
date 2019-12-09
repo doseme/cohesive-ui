@@ -1,4 +1,5 @@
 import React from 'react'
+import noop from 'lodash/noop'
 import { storiesOf } from '@storybook/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -25,8 +26,6 @@ const searchIcon = (
     icon={faSearch}
   />
 )
-
-const noop = () => {/***/}
 
 stories.add('Components.Dropdown', () => {
   return (
@@ -71,7 +70,7 @@ stories.add('Components.Dropdown', () => {
 
       <hr />
 
-      <h3 className='m-5'>Custom Content Dropdown</h3>
+      <h3 className='m-'>Custom Content Dropdown</h3>
       <div className='m-5'>
         <Dropdown 
           title='Custom Content Dropdown'
