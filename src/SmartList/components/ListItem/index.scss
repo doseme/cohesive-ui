@@ -4,9 +4,10 @@
 .list-row {
   height: 60px;
   background: white;
+  border-bottom: 2px solid $lightgrey;
 
   &:hover {
-    background: silver;
+    background: lighten($lightgrey, 10%);
     cursor: pointer;
   }
 
