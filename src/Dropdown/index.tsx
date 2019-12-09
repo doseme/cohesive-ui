@@ -1,31 +1,31 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { InputGroup, FormControl, FormControlProps, } from 'react-bootstrap'
+import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
 
 import { Button } from '../Button'
 import './index.scss'
-import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
 
 interface IProps {
   data?: string[]
-  title: string
+  placeholder: string
   onSelect?: (item: string) => void
   searchIcon?: JSX.Element
   showSearchThreshold?: number
 }
 
-const Dropdown: React.FC<IProps> = ({ children, data, title, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<IProps> = ({ children, data, placeholder, searchIcon, onSelect, showSearchThreshold = 10 }) => {
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState('')
   const node = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    document.addEventListener("mousedown", (e: MouseEvent) => {
+    document.addEventListener('mousedown', (e: MouseEvent) => {
       handleClickAway(e)
     })
 
     return () => {
-      document.removeEventListener("mousedown", handleClickAway)
+      document.removeEventListener('mousedown', handleClickAway)
     }
   }, [])
 
@@ -72,7 +72,7 @@ const Dropdown: React.FC<IProps> = ({ children, data, title, searchIcon, onSelec
 
   const listItems = (items: string[], callback: (item: string) => void) => (
     <>
-      <div className='dropdown-title'>{title}</div>
+      <div className='dropdown-title'>{placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 

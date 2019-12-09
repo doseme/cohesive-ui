@@ -6,7 +6,7 @@ $padding-horizontal: 0 $side * 2;
 $padding-vertical: 5px 0;
 $padding-all: 5px 10px;
 
-.dropdown-title {
+.dropdown-placeholder {
   padding: $padding-all;
 }
 
@@ -36,14 +36,14 @@ ul {
 
 .dropdown-closed {
   padding: 5px $side 5px $side + 2;
-  background: #fcfcfc;
+  background: $lightgrey;
   border: 1px solid $darkgrey;
   border-radius: 5px;
 }
 
 .dropdown {
   width: $width;
-  background: #fcfcfc;
+  background: $lightgrey;
   position: absolute;
   padding-bottom: 10px;
   top: 0px;
