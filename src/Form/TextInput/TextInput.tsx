@@ -7,9 +7,10 @@ import '../index.scss'
 
 interface IProps {
   label?: string
-  maxInputLength: number
-  isRequired: boolean
+  maxInputLength?: number
+  isRequired?: boolean
   handleChange: (value: string, isValid: boolean) => void
+  type?: 'text' | 'password'
 }
 
 const TextInput: React.FC<IProps> = (props) => {
@@ -55,7 +56,7 @@ const TextInput: React.FC<IProps> = (props) => {
       </div>
       <Form.Control
         className={getFieldClass(isValid)}
-        type='text'
+        type={props.type || 'text'}
         onBlur={update}
       />
     </div>
