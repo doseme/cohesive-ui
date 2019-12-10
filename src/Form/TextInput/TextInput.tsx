@@ -47,9 +47,7 @@ const TextInput: React.FC<IProps> = (props) => {
     return true
   }
 
-  const getFieldClass = (isValid: boolean): string => {
-    return isValid ? '' : 'form-field-invalid'
-  }
+  const fieldClass = isValid ? 'ui-form' : 'ui-form form-field-invalid'
 
   const update = (e: TFormControlEvent): void => {
     setValid(validate(e.currentTarget.value))
@@ -59,11 +57,11 @@ const TextInput: React.FC<IProps> = (props) => {
   return (
     <div>
       <div className='d-flex'>
-        <div className='form-field-label'>{label}</div>
+        <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
         <small className='validation-error-text ml-auto pr-2'>{error}</small>
       </div>
       <Form.Control
-        className={getFieldClass(isValid)}
+        className={fieldClass}
         defaultValue={defaultValue}
         type={type || 'text'}
         placeholder={placeholder || ''}
