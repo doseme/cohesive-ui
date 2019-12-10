@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
-import { Form } from 'react-bootstrap'
+import React, { useState, } from 'react'
+import { Form, } from 'react-bootstrap'
 
 import { TFormControlEvent } from '../types'
 
 import '../index.scss'
 
+
 interface IProps {
   label?: string
   maxInputLength?: number
   isRequired?: boolean
-  handleChange: (value: string, isValid: boolean) => void
+  placeholder?: string
+  name?: string
+  defaultValue?: string
   type?: 'text' | 'password'
+  handleChange: (value: string, isValid: boolean) => void
 }
 
 const TextInput: React.FC<IProps> = (props) => {
@@ -18,7 +22,11 @@ const TextInput: React.FC<IProps> = (props) => {
     label,
     maxInputLength,
     isRequired,
-    handleChange
+    handleChange,
+    placeholder,
+    name,
+    type,
+    defaultValue,
   } = props
 
   const [error, setError] = useState<string>('')
@@ -56,7 +64,10 @@ const TextInput: React.FC<IProps> = (props) => {
       </div>
       <Form.Control
         className={getFieldClass(isValid)}
-        type={props.type || 'text'}
+        defaultValue={defaultValue}
+        type={type || 'text'}
+        placeholder={placeholder || ''}
+        name={name}
         onBlur={update}
       />
     </div>
