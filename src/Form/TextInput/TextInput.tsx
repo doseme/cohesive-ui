@@ -3,7 +3,7 @@ import { Form, } from 'react-bootstrap'
 
 import { TFormControlEvent } from '../types'
 
-import '../index.scss'
+import './index.scss'
 
 
 interface IProps {
