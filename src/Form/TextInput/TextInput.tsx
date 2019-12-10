@@ -2,18 +2,18 @@ import React, { useState, } from 'react'
 import { Form, } from 'react-bootstrap'
 
 import { TFormControlEvent } from '../types'
-
 import './index.scss'
+import { validate } from './validation'
 
 
 interface IProps {
   label?: string
-  maxInputLength?: number
-  isRequired?: boolean
   placeholder?: string
   name?: string
   defaultValue?: string
   type?: 'text' | 'password'
+  maxInputLength?: number
+  isRequired?: boolean
   handleChange: (value: string, isValid: boolean) => void
 }
 
@@ -32,14 +32,14 @@ const TextInput: React.FC<IProps> = (props) => {
   const [error, setError] = useState<string>('')
   const [isValid, setValid] = useState<boolean>(true)
 
-  const validate = (str: string): boolean => {
-    if (maxInputLength && str.length > maxInputLength) {
-      setError(`Input exceeds max length of ${maxInputLength} characters`)
-      return false
-    }
+  const handleValidate = (str: string): boolean => {
+    const status = validate({
+      maxInputLength,
+      isRequired,
+    }, str)
 
-    if (isRequired && !str.length) {
-      setError('This field is required')
+    if (!status.valid && status.message) {
+      setError(status.message)
       return false
     }
 
@@ -50,8 +50,9 @@ const TextInput: React.FC<IProps> = (props) => {
   const fieldClass = isValid ? 'ui-form' : 'ui-form form-field-invalid'
 
   const update = (e: TFormControlEvent): void => {
-    setValid(validate(e.currentTarget.value))
-    handleChange(e.currentTarget.value, isValid)
+    const valid = handleValidate(e.currentTarget.value)
+    setValid(valid)
+    handleChange(e.currentTarget.value, valid)
   }
 
   return (
@@ -73,5 +74,5 @@ const TextInput: React.FC<IProps> = (props) => {
 }
 
 export {
-  TextInput
+  TextInput,
 }
