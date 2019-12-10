@@ -1,6 +1,5 @@
 @import '../style/colors.scss';
 
-$width: 400px;
 $side: 8px;
 $padding-horizontal: 0 $side * 2;
 $padding-vertical: 5px 0;
@@ -31,7 +30,6 @@ ul {
 
 .dropdown-wrapper {
   position: relative;
-  width: $width;
 }
 
 .dropdown-closed {
@@ -42,13 +40,13 @@ ul {
 }
 
 .dropdown {
-  width: $width;
   background: $lightest-grey;
   position: absolute;
   padding-bottom: 10px;
   top: 0px;
   border: 1px solid $darkgrey;
   border-radius: 5px;
+  width: 100%;
   z-index: 5;
 }
 

@@ -29,7 +29,7 @@ const searchIcon = (
 
 stories.add('Components.Dropdown', () => {
   return (
-    <>
+    <div style={{ maxWidth: '500px' }}>
       <h3 className='m-5'>With List of Items + No Search</h3>
       <div className='m-5'>
         <Dropdown 
@@ -39,8 +39,6 @@ stories.add('Components.Dropdown', () => {
           searchIcon={searchIcon}
         />
       </div>
-
-      <hr />
 
       <hr />
 
@@ -79,6 +77,6 @@ stories.add('Components.Dropdown', () => {
           {content}
         </Dropdown>
       </div>
-    </>
+    </div>
   )
 })
