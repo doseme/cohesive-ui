@@ -14,6 +14,8 @@ interface IProps {
   type?: 'text' | 'password'
   maxInputLength?: number
   isRequired?: boolean
+  disabled?: boolean
+  readOnly?: boolean
   handleChange: (value: string, isValid: boolean) => void
 }
 
@@ -23,6 +25,8 @@ const TextInput: React.FC<IProps> = (props) => {
     maxInputLength,
     isRequired,
     handleChange,
+    disabled,
+    readOnly,
     placeholder,
     name,
     type,
@@ -68,6 +72,8 @@ const TextInput: React.FC<IProps> = (props) => {
         placeholder={placeholder || ''}
         name={name}
         onBlur={update}
+        disabled={disabled}
+        readOnly={readOnly}
       />
     </div>
   )
