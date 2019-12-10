@@ -2,13 +2,13 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import noop from 'lodash/noop'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faPencilAlt, faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 import { IconButton } from './IconButton'
 
-const icon = (
+const icon = (icon: IconDefinition) => (
   <FontAwesomeIcon
-    icon={faPlus}
+    icon={icon}
   />
 )
 
@@ -22,7 +22,7 @@ storiesOf('Components.IconButton', module)
             onClick={noop}
             size='30px'
           >
-            {icon}
+            {icon(faPlus)}
           </IconButton>
         </div>
 
@@ -45,7 +45,7 @@ storiesOf('Components.IconButton', module)
             background='black'
             color='orange'
           >
-            {icon}
+            {icon(faTrash)}
           </IconButton>
         </div>
 
@@ -62,6 +62,32 @@ storiesOf('Components.IconButton', module)
 `}
         </code> 
 
+        <hr />
+
+        <div className='p-2'>
+          <IconButton 
+            onClick={noop}
+            size='30px'
+            background='none'
+            color='orange'
+            borderColor='orange'
+          >
+            {icon(faPencilAlt)}
+          </IconButton>
+        </div>
+
+        <code style={{ whiteSpace: 'pre-wrap' }}>
+{`
+<IconButton 
+  onClick={noop}
+  size='60px'
+  background='black'
+  color='orange'
+>
+  {icon}
+</IconButton>
+`}
+        </code> 
       </div>
     )
   })

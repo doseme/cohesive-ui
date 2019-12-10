@@ -8,15 +8,17 @@ interface IProps {
   size?: string
   background?: string
   color?: string
+  borderColor?: string
   onClick: () => void
 }
 
-const IconButton: React.FC<IProps> = ({ onClick, children, background, color, size, className, }): JSX.Element => {
+const IconButton: React.FC<IProps> = ({ onClick, borderColor, children, background, color, size, className, }): JSX.Element => {
   const style: React.CSSProperties = {
     height: size,
     width: size,
     background: background || CIRCLE_BUTTON_BLUE,
     color: color || LIGHTEST_GREY,
+    border: borderColor ? `1px solid ${borderColor}` : 'none',
   }
 
   return (
