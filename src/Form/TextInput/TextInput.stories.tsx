@@ -1,4 +1,5 @@
 import React from 'react'
+import noop from 'lodash/noop'
 import { storiesOf } from '@storybook/react'
 
 import { TextInput } from './TextInput'
@@ -13,7 +14,8 @@ storiesOf('Components.Form.TextInput', module)
             label='This is an optional label'
             maxInputLength={20}
             isRequired={true}
-            handleChange={() => {}}
+            handleChange={noop}
+            handleBlur={noop}
           />
         </div>
         <br /> 
@@ -26,7 +28,8 @@ storiesOf('Components.Form.TextInput', module)
             disabled={true}
             readOnly={true}
             defaultValue='Read only'
-            handleChange={() => {}}
+            handleChange={noop}
+            handleBlur={noop}
           />
         </div>
       </>

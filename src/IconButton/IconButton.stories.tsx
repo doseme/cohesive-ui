@@ -21,6 +21,7 @@ storiesOf('Components.IconButton', module)
           <IconButton 
             onClick={noop}
             size='30px'
+            data-test='create-button'
           >
             {icon(faPlus)}
           </IconButton>

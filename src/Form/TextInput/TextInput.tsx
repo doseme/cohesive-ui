@@ -16,7 +16,9 @@ interface IProps {
   isRequired?: boolean
   disabled?: boolean
   readOnly?: boolean
-  handleChange: (value: string, isValid: boolean) => void
+  handleChange?: (value: string) => void
+  handleBlur?: (value: string, isValid: boolean) => void
+  handleFocus?: () => void
 }
 
 const TextInput: React.FC<IProps> = (props) => {
@@ -24,13 +26,16 @@ const TextInput: React.FC<IProps> = (props) => {
     label,
     maxInputLength,
     isRequired,
+    handleBlur,
     handleChange,
+    handleFocus,
     disabled,
     readOnly,
     placeholder,
     name,
     type,
     defaultValue,
+    ...rest
   } = props
 
   const [error, setError] = useState<string>('')
@@ -51,12 +56,25 @@ const TextInput: React.FC<IProps> = (props) => {
     return true
   }
 
+
+
   const fieldClass = isValid ? 'ui-form' : 'ui-form form-field-invalid'
 
   const update = (e: TFormControlEvent): void => {
     const valid = handleValidate(e.currentTarget.value)
     setValid(valid)
-    handleChange(e.currentTarget.value, valid)
+    if (handleBlur) {
+      handleBlur(e.currentTarget.value, valid)
+    }
+  }
+
+  const clearAndHandleChange = (value: string) => {
+    setError('')
+    setValid(true)
+
+    if (handleChange) {
+      handleChange(value)
+    }
   }
 
   return (
@@ -66,12 +84,15 @@ const TextInput: React.FC<IProps> = (props) => {
         <small className='validation-error-text ml-auto pr-2'>{error}</small>
       </div>
       <Form.Control
+        {...rest}
         className={fieldClass}
         defaultValue={defaultValue}
         type={type || 'text'}
         placeholder={placeholder || ''}
         name={name}
         onBlur={update}
+        onChange={(e: TFormControlEvent) => clearAndHandleChange(e.currentTarget.value)}
+        onFocus={handleFocus}
         disabled={disabled}
         readOnly={readOnly}
       />
