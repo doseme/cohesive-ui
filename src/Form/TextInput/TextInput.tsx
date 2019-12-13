@@ -31,6 +31,7 @@ const TextInput: React.FC<IProps> = (props) => {
     name,
     type,
     defaultValue,
+    ...rest
   } = props
 
   const [error, setError] = useState<string>('')
@@ -66,6 +67,7 @@ const TextInput: React.FC<IProps> = (props) => {
         <small className='validation-error-text ml-auto pr-2'>{error}</small>
       </div>
       <Form.Control
+        {...rest}
         className={fieldClass}
         defaultValue={defaultValue}
         type={type || 'text'}
