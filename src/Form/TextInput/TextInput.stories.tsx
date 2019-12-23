@@ -11,7 +11,19 @@ storiesOf('Components.Form.TextInput', module)
       <>
         <div className='m-4'>
           <TextInput
-            label='This is an optional label'
+            label='This is an optional label describing a text field'
+            maxInputLength={20}
+            isRequired={true}
+            handleChange={noop}
+            handleBlur={noop}
+          />
+        </div>
+        <br />
+
+        <div className='m-4'>
+          <TextInput
+            label='This is an optional label describing a number only field'
+            type='number'
             maxInputLength={20}
             isRequired={true}
             handleChange={noop}
