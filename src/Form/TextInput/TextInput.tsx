@@ -11,7 +11,7 @@ interface IProps {
   placeholder?: string
   name?: string
   defaultValue?: string
-  type?: 'text' | 'password'
+  type?: 'text' | 'password' | 'number'
   maxInputLength?: number
   isRequired?: boolean
   disabled?: boolean
@@ -55,8 +55,6 @@ const TextInput: React.FC<IProps> = (props) => {
     setError('')
     return true
   }
-
-
 
   const fieldClass = isValid ? 'ui-form' : 'ui-form form-field-invalid'
 

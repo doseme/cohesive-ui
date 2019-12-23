@@ -6,6 +6,8 @@ import { Button } from '../Button'
 import './index.scss'
 
 interface IProps {
+  label?: string
+  isRequired?: boolean
   data?: string[]
   placeholder: string
   onSelect?: (item: string) => void
@@ -13,7 +15,7 @@ interface IProps {
   showSearchThreshold?: number
 }
 
-const Dropdown: React.FC<IProps> = ({ children, data, placeholder, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeholder, searchIcon, onSelect, showSearchThreshold = 10 }) => {
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState('')
@@ -120,6 +122,9 @@ const Dropdown: React.FC<IProps> = ({ children, data, placeholder, searchIcon, o
       className='dropdown-wrapper' 
       ref={node}
     >
+      <div className='d-flex'>
+        <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
+      </div>
       <div
         className='dropdown-closed'
         onClick={() => setShowContent(!showContent)}
