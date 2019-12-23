@@ -81,8 +81,10 @@ const dataContent =
 stories.add(
   'JSX',
   () =>
-    <SmartList
-      cols={cols}
-      data={content}
-    />
+    <div className='m-5'>
+      <SmartList
+        cols={cols}
+        data={content}
+      />
+    </div>
 )

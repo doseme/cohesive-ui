@@ -1,0 +1,83 @@
+@import '../style/colors.scss';
+
+$side: 8px;
+$padding-horizontal: 0 $side * 2;
+$padding-vertical: 5px 0;
+$padding-all: 5px 10px;
+
+.dropdown-placeholder {
+  padding: $padding-all;
+}
+
+.dropdown-search {
+  padding: 5px $side 5px $side;
+}
+
+ul {
+  padding: 0px !important;
+  margin: 0px !important;
+
+  li {
+    list-style: none;
+    padding: 3px $side 3px $side;
+    
+    &:hover {
+      background: $dropdown-blue !important;
+      cursor: pointer;
+    }
+  }
+}
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-closed {
+  padding: 5px $side 5px $side + 2;
+  background: $lightest-grey;
+  border: 1px solid $darkgrey;
+  border-radius: 5px;
+}
+
+.dropdown {
+  background: $lightest-grey;
+  position: absolute;
+  padding-bottom: 10px;
+  top: 0px;
+  border: 1px solid $darkgrey;
+  border-radius: 5px;
+  width: 100%;
+  z-index: 5;
+}
+
+.active {
+  border-color: $navy;
+}
+
+.dropdown-closed:after {
+  content: '◀▶';
+  font: 10px "Consolas", monospace;
+  color: #333;
+  transform: rotate(90deg);
+  right: 4px;
+  top: 11px;
+  padding: 0 0 2px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.dropdown-closed select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  background-image: none;
+  word-break: normal;
+}

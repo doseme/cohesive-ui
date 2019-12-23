@@ -29,6 +29,14 @@ storiesOf('Components.Buttons', module)
                   {color}
                 </Button>
 
+                <Button
+                  onClick={() => { }}
+                  variant={color}
+                  disabled={true}
+                >
+                  {color} (disabled)
+                </Button>
+
                 <div className='pr-3' />
 
                 <Button

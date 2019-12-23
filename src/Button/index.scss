@@ -21,6 +21,14 @@
     background: $color !important;
     border-color: $color;
   }
+  
+  &:disabled {
+    background: white;
+    cursor: not-allowed;
+    color: $color !important;
+    border-color: $color;
+    opacity: 0.25;
+  }
 }
 
 .btn-primary {

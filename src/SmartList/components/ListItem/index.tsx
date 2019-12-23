@@ -15,7 +15,7 @@ interface IProps {
 
 const ListItem: React.FC<IProps> = (props: IProps) => {
   const {
-    columns
+    columns,
   } = props
 
   return (
@@ -23,7 +23,12 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
       className='list-row align-items-center'>
       {
         columns.map(x =>
-          <Col key={x.name}>{x.element}</Col>
+          <Col 
+            key={x.name}
+            data-test={x.name}
+          >
+            {x.element}
+          </Col>
         )
       }
     </Row>
