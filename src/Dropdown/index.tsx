@@ -81,7 +81,10 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
 
   const listItems = (items: string[], callback: (item: string) => void) => (
     <>
-      <div className='dropdown-placeholder'>{selectedItem || placeholder}</div>
+      <div 
+        className='dropdown-placeholder'
+        data-test-placeholder
+      >{selectedItem || placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 
@@ -89,6 +92,7 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
         {
           items.map(item =>
             <li 
+              data-test={item}
               key={item}
               onClick={() => {
                   setSelectedItem(item)
@@ -136,6 +140,7 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
       </div>
       <div
         className='dropdown-closed'
+        data-test-current-item
         onClick={() => setShowContent(!showContent)}
       >
         {selectedItem || getDefaultValue || placeholder}
