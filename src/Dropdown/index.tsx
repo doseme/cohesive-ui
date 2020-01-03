@@ -13,9 +13,10 @@ interface IProps {
   onSelect?: (item: string) => void
   searchIcon?: JSX.Element
   showSearchThreshold?: number
+  defaultValue?: string
 }
 
-const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeholder, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeholder, defaultValue, searchIcon, onSelect, showSearchThreshold = 10 }) => {
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState('')
@@ -28,6 +29,12 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
 
     return () => {
       document.removeEventListener('mousedown', handleClickAway)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (defaultValue && data && data.includes(defaultValue)) {
+      setSelectedItem(defaultValue)
     }
   }, [])
 
@@ -74,7 +81,10 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
 
   const listItems = (items: string[], callback: (item: string) => void) => (
     <>
-      <div className='dropdown-placeholder'>{selectedItem || placeholder}</div>
+      <div 
+        className='dropdown-placeholder'
+        data-test-placeholder
+      >{selectedItem || placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 
@@ -82,6 +92,7 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
         {
           items.map(item =>
             <li 
+              data-test={item}
               key={item}
               onClick={() => {
                   setSelectedItem(item)
@@ -103,6 +114,8 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
   if (data && searchText) {
     filteredData = data.filter(x =>  x.toLowerCase().includes(searchText))
   }
+
+  const getDefaultValue = defaultValue && (data && data.includes(defaultValue) ? defaultValue : undefined)
 
   const content = showContent 
     ? 
@@ -127,9 +140,10 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
       </div>
       <div
         className='dropdown-closed'
+        data-test-current-item
         onClick={() => setShowContent(!showContent)}
       >
-        {selectedItem || placeholder}
+        {selectedItem || getDefaultValue || placeholder}
       </div>
       {content}
     </div>

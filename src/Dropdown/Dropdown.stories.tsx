@@ -68,7 +68,7 @@ stories.add('Components.Dropdown', () => {
 
       <hr />
 
-      <h3 className='m-'>Custom Content Dropdown</h3>
+      <h3 className='m-5'>Custom Content Dropdown</h3>
       <div className='m-5'>
         <Dropdown 
           placeholder='Custom Content Dropdown'
@@ -76,6 +76,19 @@ stories.add('Components.Dropdown', () => {
         >
           {content}
         </Dropdown>
+      </div>
+
+      <hr />
+
+      <h3 className='m-5'>With Default Value</h3>
+      <div className='m-5'>
+        <Dropdown 
+          placeholder='Select Hospital'
+          data={['Hospital A', 'Hospital B', 'Hospital C']}
+          onSelect={noop}
+          searchIcon={searchIcon}
+          defaultValue='Hospital C'
+        />
       </div>
     </div>
   )

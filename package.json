@@ -1,6 +1,6 @@
 {
   "name": "cohesive-ui",
-  "version": "0.4.14",
+  "version": "0.4.15",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -15,6 +15,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
     "@storybook/react": "^5.2.5",
+    "@types/enzyme": "^3.10.4",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.23",
     "@types/lodash": "^4.14.144",
     "@types/node": "^12.12.5",
@@ -22,6 +24,9 @@
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "node-sass": "^4.12.0",
     "react": "^16.11.0",
