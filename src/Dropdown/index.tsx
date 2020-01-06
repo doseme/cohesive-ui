@@ -22,22 +22,6 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
   const [selectedItem, setSelectedItem] = useState('')
   const node = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    document.addEventListener('mousedown', (e: MouseEvent) => {
-      handleClickAway(e)
-    })
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickAway)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (defaultValue && data && data.includes(defaultValue)) {
-      setSelectedItem(defaultValue)
-    }
-  }, [])
-
   const handleClickAway = (e: MouseEvent) => {
     // @ts-ignore - I dunno how to type this, whatever
     if (node && node.current && node.current.contains(e.target)) {
@@ -47,6 +31,22 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
     setSearchText('')
     setShowContent(false)
   }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', (e: MouseEvent) => {
+      handleClickAway(e)
+    })
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickAway)
+    }
+  }, [handleClickAway])
+
+  useEffect(() => {
+    if (defaultValue && data && data.includes(defaultValue)) {
+      setSelectedItem(defaultValue)
+    }
+  }, [defaultValue, data, setSelectedItem])
 
   const handleChange = (e: React.FormEvent<ReplaceProps<'input', BsPrefixProps<'input'> & FormControlProps>>) => {
     if (e.currentTarget.value) {
