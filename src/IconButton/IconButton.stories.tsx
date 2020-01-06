@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import noop from 'lodash/noop'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faPencilAlt, faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faPencilAlt, faTrash, IconDefinition, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { IconButton } from './IconButton'
 
@@ -81,11 +81,38 @@ storiesOf('Components.IconButton', module)
 {`
 <IconButton 
   onClick={noop}
-  size='60px'
-  background='black'
+  size='30px'
+  background='none'
   color='orange'
+  borderColor='orange'
 >
-  {icon}
+  {icon(faPencilAlt)}
+</IconButton>
+`}
+        </code> 
+
+        <hr />
+
+        <div className='p-2'>
+          <IconButton 
+            onClick={noop}
+            size='30px'
+            background='none'
+            color='red'
+          >
+            {icon(faTimes)}
+          </IconButton>
+        </div>
+
+        <code style={{ whiteSpace: 'pre-wrap' }}>
+{`
+<IconButton 
+  onClick={noop}
+  size='30px'
+  background='none'
+  color='red'
+>
+  {icon(faTimes)}
 </IconButton>
 `}
         </code> 
