@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, HTMLProps } from 'react'
 import { InputGroup, FormControl, FormControlProps, } from 'react-bootstrap'
 import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
 
 import { Button } from '../Button'
 import './index.scss'
 
-interface IProps {
+interface OverrideProps {
   label?: string
   isRequired?: boolean
   data?: string[]
@@ -16,7 +16,11 @@ interface IProps {
   defaultValue?: string
 }
 
-const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeholder, defaultValue, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
+
+type TProps = Omit<HTMLProps<HTMLElement>, keyof OverrideProps> & OverrideProps
+
+const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, placeholder, defaultValue, searchIcon, onSelect, showSearchThreshold = 10 }) => {
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState('')
@@ -131,7 +135,8 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
     : null
 
   return (
-    <div 
+    <div
+      id={id ? id : undefined}
       className='dropdown-wrapper' 
       ref={node}
     >
