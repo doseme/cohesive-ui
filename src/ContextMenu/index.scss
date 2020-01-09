@@ -1,0 +1,36 @@
+@import '../style/colors.scss';
+
+.context-menu {
+  border: 0px solid #e0e0e0;
+  width: 260px;
+}
+
+.context-menu-header {
+  height: 68px;
+  font-weight: 600;
+  background: $menu-grey;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.context-menu-item, .context-menu-header {
+  border-radius: 0px !important;
+}
+
+.icon {
+  color: $lightgrey;
+}
+
+.context-menu-item {
+  font-weight: lightest;
+}
+
+.item-text {
+  padding: 0 0 6px 5px;
+}
+
+.context-menu-item {
+  &:hover {
+    background: $menu-grey;
+    cursor: pointer;
+  }
+}
