@@ -32,5 +32,10 @@
   &:hover {
     background: $menu-grey;
     cursor: pointer;
+
+    .icon {
+      color: #09325f;
+    }
   }
+
 }

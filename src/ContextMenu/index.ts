@@ -1,3 +1,3 @@
-import { ContextMenu } from './ContextMenu'
+import { ContextMenu, IListItem } from './ContextMenu'
 
-export { ContextMenu }
+export { ContextMenu, IListItem }

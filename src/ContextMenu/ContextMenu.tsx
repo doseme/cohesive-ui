@@ -6,24 +6,28 @@ import './index.scss'
 export interface IListItem {
   id: number | string
   icon: JSX.Element
-  text: string | JSX.Element
+  text: string
 }
 
 interface IProps {
-  header?: string | JSX.Element
+  header?: string
   items: IListItem[]
 }
 
 const ContextMenu: React.FC<IProps> = (props): JSX.Element => {
   const header = props.header && (
-    <ListGroup.Item className='context-menu-header d-flex align-items-center'>
+    <ListGroup.Item 
+      data-test-head
+      className='context-menu-header d-flex align-items-center'
+    >
       {props.header}
     </ListGroup.Item>
   )
 
-  const items = props.items.map(item =>
+ const items = props.items.map(item =>
     <ListGroup.Item 
       key={item.id} 
+      data-test-item
       className='d-flex align-items-center context-menu-item pt-2 pb-2 pl-4 pr-4'
     >
       <span className='icon'>{item.icon}</span> <span className='item-text'>{item.text}</span>
@@ -36,6 +40,6 @@ const ContextMenu: React.FC<IProps> = (props): JSX.Element => {
       {items}
     </ListGroup>
   )
-  }
+}
 
 export { ContextMenu }

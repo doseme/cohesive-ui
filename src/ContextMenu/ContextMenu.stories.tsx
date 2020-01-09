@@ -14,20 +14,20 @@ const icon = (
   />
 )
 
-const items: IListItem[] = [
-  {
-    id: 1,
-    icon,
-    text: 'Settings',
-  },
-  {
-    id: 2,
-    icon,
-    text: <div>Back to DoseMeRx</div>,
-  },
-]
+stories.add('Basic', () => {
+  const items: IListItem[] = [
+    {
+      id: 1,
+      icon,
+      text: 'Settings',
+    },
+    {
+      id: 2,
+      icon,
+      text: 'Back to DoseMeRx'
+    },
+  ]
 
-stories.add('ContextMenu', () => {
   return (
     <div className='m-5'>
       <ContextMenu
@@ -37,3 +37,4 @@ stories.add('ContextMenu', () => {
     </div>
   )
 })
+

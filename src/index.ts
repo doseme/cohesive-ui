@@ -1,5 +1,6 @@
 import { AdminLogo } from './AdminLogo'
 import { Alert } from './Alert'
+import { ContextMenu, IListItem } from './ContextMenu'
 import { Dropdown } from './Dropdown'
 import { Footer } from './Footer'
 import { IconButton } from './IconButton'
@@ -31,11 +32,13 @@ export {
   Nav,
   List,
   SmartList,
+  ContextMenu,
   Form,
   TextInput,
 
   // Types
   IRowElement,
+  IListItem,
   IColumnElement,
   IHeaderItem,
 }
