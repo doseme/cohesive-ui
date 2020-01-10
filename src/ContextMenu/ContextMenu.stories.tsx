@@ -20,11 +20,13 @@ stories.add('Basic', () => {
       id: 1,
       icon,
       text: 'Settings',
+      onClick: () => { console.log('Clicked Settings') }
     },
     {
       id: 2,
       icon,
-      text: 'Back to DoseMeRx'
+      text: 'Back to DoseMeRx',
+      onClick: () => console.log('Clicked DoseMeRx')
     },
   ]
 

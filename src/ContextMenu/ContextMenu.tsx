@@ -7,6 +7,7 @@ export interface IListItem {
   id: number | string
   icon: JSX.Element
   text: string
+  onClick?: () => any
 }
 
 interface IProps {
@@ -29,8 +30,10 @@ const ContextMenu: React.FC<IProps> = (props): JSX.Element => {
       key={item.id} 
       data-test-item
       className='d-flex align-items-center context-menu-item pt-2 pb-2 pl-4 pr-4'
+      onClick={item.onClick}
     >
-      <span className='icon'>{item.icon}</span> <span className='item-text'>{item.text}</span>
+      <span className='icon'>{item.icon}</span> 
+      <span className='item-text'>{item.text}</span>
     </ListGroup.Item>
   )
 
