@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { HTMLProps } from 'react'
 import BsButton, { ButtonProps } from 'react-bootstrap/Button'
 
 import './index.scss'
@@ -13,6 +13,7 @@ export type TVariant = 'primary'
   | 'light'
 
 interface IProps extends ButtonProps {
+  id?: string
   onClick: () => void
   variant: TVariant
   className?: string
