@@ -19,6 +19,7 @@ interface IProps {
   handleChange?: (value: string) => void
   handleBlur?: (value: string, isValid: boolean) => void
   handleFocus?: () => void
+  className?: string
 }
 
 const TextInput: React.FC<IProps> = (props) => {
@@ -76,7 +77,7 @@ const TextInput: React.FC<IProps> = (props) => {
   }
 
   return (
-    <div>
+    <div className={props.className}>
       <div className='d-flex'>
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
         <small className='validation-error-text ml-auto pr-2'>{error}</small>
