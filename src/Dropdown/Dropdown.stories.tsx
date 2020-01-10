@@ -94,6 +94,19 @@ stories.add('Components.Dropdown', () => {
           defaultValue='Hospital C'
         />
       </div>
+
+      <hr />
+
+      <h3 className='m-5'>With Label</h3>
+      <div className='m-5'>
+        <Dropdown 
+          label='Select a Hospital'
+          placeholder='Select Hospital'
+          data={['Hospital A', 'Hospital B', 'Hospital C']}
+          onSelect={noop}
+          searchIcon={searchIcon}
+        />
+      </div>
     </div>
   )
 })

@@ -135,23 +135,26 @@ const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, pla
     : null
 
   return (
-    <div
-      id={id ? id : undefined}
-      className='dropdown-wrapper' 
-      ref={node}
-    >
+    <>
       <div className='d-flex'>
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
       </div>
+
       <div
-        className='dropdown-closed'
-        data-test-current-item
-        onClick={() => setShowContent(!showContent)}
+        id={id ? id : undefined}
+        className='dropdown-wrapper' 
+        ref={node}
       >
-        {selectedItem || getDefaultValue || placeholder}
+        <div
+          className='dropdown-closed'
+          data-test-current-item
+          onClick={() => setShowContent(!showContent)}
+        >
+          {selectedItem || getDefaultValue || placeholder}
+        </div>
+        {content}
       </div>
-      {content}
-    </div>
+    </>
   )
 }
 
