@@ -22,6 +22,7 @@ export interface IColumnElement {
 export interface IRowElement {
   id: number | string
   columns: IColumnElement[]
+  onClick?: (event: React.MouseEvent) => any
 }
 
 const SmartList: React.FC<IProps> = ({ data, cols }) => {
@@ -34,6 +35,7 @@ const SmartList: React.FC<IProps> = ({ data, cols }) => {
 
   const listContent = data.map(row =>
     <ListItem
+      onClick={row.onClick}
       key={row.id}
       columns={row.columns}
     />

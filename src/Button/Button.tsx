@@ -1,4 +1,4 @@
-import React, { HTMLProps } from 'react'
+import React from 'react'
 import BsButton, { ButtonProps } from 'react-bootstrap/Button'
 
 import './index.scss'
@@ -14,7 +14,7 @@ export type TVariant = 'primary'
 
 interface IProps extends ButtonProps {
   id?: string
-  onClick: () => void
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
   variant: TVariant
   className?: string
   shape?: 'circle' | 'rect'

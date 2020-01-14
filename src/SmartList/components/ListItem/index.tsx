@@ -11,16 +11,20 @@ interface IColumnElement {
 
 interface IProps {
   columns: IColumnElement[]
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => any
 }
 
 const ListItem: React.FC<IProps> = (props: IProps) => {
   const {
     columns,
+    onClick,
   } = props
 
   return (
     <Row
-      className='list-row align-items-center'>
+      className='list-row align-items-center'
+      onClick={onClick}
+    >
       {
         columns.map(x =>
           <Col 
