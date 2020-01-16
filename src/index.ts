@@ -17,6 +17,7 @@ import { Button } from './Button'
 import * as Nav from './Nav'
 import { Form } from './Form'
 import { TextInput } from './TextInput'
+import { DateInput } from './DateInput'
 
 
 export {
@@ -35,6 +36,7 @@ export {
   ContextMenu,
   Form,
   TextInput,
+  DateInput,
 
   // Types
   IRowElement,
