@@ -44,6 +44,17 @@ storiesOf('Components.Form.TextInput', module)
             handleBlur={noop}
           />
         </div>
+        <br /> 
+
+        <div className='m-4'>
+          <TextInput
+            type='date'
+            label='This is a date field'
+            isRequired={true}
+            handleChange={noop}
+            handleBlur={noop}
+          />
+        </div>
       </>
     )
   })

@@ -11,7 +11,7 @@ interface IProps {
   placeholder?: string
   name?: string
   defaultValue?: string
-  type?: 'text' | 'password' | 'number'
+  type?: 'text' | 'password' | 'number' | 'date'
   maxInputLength?: number
   isRequired?: boolean
   disabled?: boolean
