@@ -16,7 +16,7 @@ import { List } from './List'
 import { Button } from './Button'
 import * as Nav from './Nav'
 import { Form } from './Form'
-import { TextInput } from './Form/TextInput'
+import { TextInput } from './TextInput'
 
 
 export {

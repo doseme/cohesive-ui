@@ -1,6 +1,10 @@
+import moment, { Moment } from 'moment'
+
 export interface IValidators {
   maxInputLength?: number
   isRequired?: boolean
+  validDate?: boolean
+  dateNotInPast?: boolean
 }
 
 export interface IValidationResult {
