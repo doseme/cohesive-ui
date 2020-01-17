@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Header } from './components/Header'
 import { ListItem } from './components/ListItem'
+import { SearchInput } from './components/SearchInput'
 
 export interface IProps {
+  search?: boolean
   data: IRowElement[]
   cols: IHeaderItem[]
 }
@@ -25,7 +27,8 @@ export interface IRowElement {
   onClick?: (event: React.MouseEvent) => any
 }
 
-const SmartList: React.FC<IProps> = ({ data, cols }) => {
+const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
+  const [searchText, setSearchText] = useState('')
 
   const header = (
     <Header
@@ -41,8 +44,18 @@ const SmartList: React.FC<IProps> = ({ data, cols }) => {
     />
   )
 
+  const searchInput = search && (
+    <div className='d-flex justify-content-end'>
+      <SearchInput
+        onChange={setSearchText}
+        value={searchText}
+      />
+    </div>
+  )
+
   return (
-    <div>
+    <div className=''>
+      {searchInput}
       {header}
       <div>
         {listContent} 

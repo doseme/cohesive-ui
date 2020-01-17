@@ -87,10 +87,20 @@ const cols: IHeaderItem[] = [
 stories.add(
   'JSX',
   () =>
-    <div className='m-5'>
-      <SmartList
-        cols={cols}
-        data={content}
-      />
-    </div>
+  <div className='m-5'>
+    <SmartList
+      cols={cols}
+      data={content}
+    />
+
+    <br />
+    <h3>With a search input</h3>
+    <br />
+
+    <SmartList
+      cols={cols}
+      data={content}
+      search={true}
+    />
+  </div>
 )
