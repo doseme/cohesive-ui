@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Header } from './components/Header'
 import { ListItem } from './components/ListItem'
@@ -36,13 +36,33 @@ const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
     />
   )
 
-  const listContent = data.map(row =>
-    <ListItem
-      onClick={row.onClick}
-      key={row.id}
-      columns={row.columns}
-    />
-  )
+  const listContent = data.reduce<JSX.Element[]>((acc, row) => {
+    if (!searchText.length) {
+      acc = acc.concat(
+        <ListItem
+          onClick={row.onClick}
+          key={row.id}
+          columns={row.columns}
+        />
+      )
+      return acc
+    }
+
+    if (
+      row.columns.some(el => el.element.props.children && el.element.props.children.toString().includes(searchText))
+      ) {
+      acc = acc.concat(
+        <ListItem
+          onClick={row.onClick}
+          key={row.id}
+          columns={row.columns}
+        />
+      )
+      return acc
+    }
+
+    return acc
+  }, [])
 
   const searchInput = search && (
     <div className='d-flex justify-content-end'>
