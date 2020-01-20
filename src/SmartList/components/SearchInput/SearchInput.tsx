@@ -26,6 +26,8 @@ const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element 
     <div className='search-wrapper'>
       <InputGroup>
       <Form.Control
+        data-testid='search-input'
+        name='asdf'
         placeholder='Search'
         className='smart-list-search'
         type='text'
