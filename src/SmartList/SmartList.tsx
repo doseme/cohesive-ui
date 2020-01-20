@@ -18,7 +18,8 @@ export interface IHeaderItem {
 
 export interface IColumnElement {
   name: string
-  element: JSX.Element
+  element?: JSX.Element
+  text?: string
 }
 
 export interface IRowElement {
@@ -37,27 +38,7 @@ const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
   )
 
   const listContent = data.reduce<JSX.Element[]>((acc, row) => {
-    // if there is no search text entered, we just render all the items
-    if (!searchText) {
-      acc = acc.concat(
-        <ListItem
-          onClick={row.onClick}
-          key={row.id}
-          columns={row.columns}
-        />
-      )
-      return acc
-    }
-
-    // if there is some search text, we stringify the content and see if
-    // any of them match the search string
-    if (
-      row.columns.some(el => {
-        const content = el.element.props.children && el.element.props.children
-        const contentStr = content.toString()
-        return contentStr && !contentStr.includes('[object Object]') && contentStr.includes(searchText)
-      })
-    ) {
+    if (!searchText || (searchText && row.columns.some(el => el.text && el.text.includes(searchText)))) {
       acc = acc.concat(
         <ListItem
           onClick={row.onClick}

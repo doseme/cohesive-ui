@@ -39,10 +39,12 @@ const content: IRowElement[] = [
       {
         name: 'id',
         element: <div>1</div>,
+        text: '1',
       },
       {
         name: 'email',
-        element: <div>aa@bb.com</div>
+        element: <div>aa@bb.com</div>,
+        text: 'aa@bb.com',
       },
       {
         name: 'actions',
@@ -57,10 +59,12 @@ const content: IRowElement[] = [
       {
         name: 'id',
         element: <div>2</div>,
+        text: '2',
       },
       {
         name: 'email',
-        element: <div>cc@dd.com</div>
+        element: <div>cc@dd.com</div>,
+        text: 'cc@dd.com',
       },
       {
         name: 'actions',

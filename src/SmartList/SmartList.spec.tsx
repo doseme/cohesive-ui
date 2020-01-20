@@ -8,10 +8,6 @@ import { IRowElement } from './SmartList'
 
 const cols: IHeaderItem[] = [
   {
-    name: 'ID',
-    handleSort: noop
-  },
-  {
     name: 'Name',
     handleSort: noop
   },
@@ -23,8 +19,9 @@ const content: IRowElement[] = [
     onClick: noop, 
     columns: [
       {
-        name: 'id',
-        element: <div>One</div>
+        name: 'name',
+        element: <div>One</div>,
+        text: 'One',
       }
     ]
   },
@@ -33,8 +30,9 @@ const content: IRowElement[] = [
     onClick: noop, 
     columns: [
       {
-        name: 'id',
-        element: <div>Two</div>
+        name: 'name',
+        element: <div>Two</div>,
+        text: 'Two',
       }
     ]
   }
