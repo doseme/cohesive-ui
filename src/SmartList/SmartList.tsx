@@ -37,7 +37,7 @@ const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
   )
 
   const listContent = data.reduce<JSX.Element[]>((acc, row) => {
-    if (!searchText.length) {
+    if (!searchText) {
       acc = acc.concat(
         <ListItem
           onClick={row.onClick}
@@ -49,8 +49,17 @@ const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
     }
 
     if (
-      row.columns.some(el => el.element.props.children && el.element.props.children.toString().includes(searchText))
-      ) {
+      row.columns.some(el => {
+        // console.log(el.element.props.children.toString())
+        const content = el.element.props.children && el.element.props.children
+        const contentStr = content.toString()
+        return (
+          contentStr &&
+          !contentStr.includes('[object Object]')
+          && contentStr.includes(searchText)
+        )
+      })
+    ) {
       acc = acc.concat(
         <ListItem
           onClick={row.onClick}
@@ -74,13 +83,13 @@ const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
   )
 
   return (
-    <div className=''>
+    <>
       {searchInput}
       {header}
       <div>
         {listContent} 
       </div>
-    </div>
+    </>
   )
 }
 
