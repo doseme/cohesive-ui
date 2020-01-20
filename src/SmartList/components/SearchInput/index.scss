@@ -1,0 +1,22 @@
+.search-wrapper {
+  width: 250px;
+  margin: 0 0 15px 0;
+  position: relative;
+  color: grey;
+
+  .search-icon {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+  }
+
+  .smart-list-search {
+    border-right: none;
+  }
+
+  .search-icon-wrapper.input-group-text {
+    width: 40px;
+    background: white;
+    border-left: none;
+  }
+}

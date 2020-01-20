@@ -57,6 +57,8 @@
   },
   "devDependencies": {
     "@storybook/addon-info": "^5.2.5",
+    "@testing-library/jest-dom": "^5.0.0",
+    "@testing-library/react": "^9.4.0",
     "react-docgen-typescript-loader": "^3.3.0"
   }
 }
