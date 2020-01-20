@@ -1,10 +1,9 @@
 import noop from 'lodash/noop'
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, fireEvent, screen, getByText } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 
-import { SmartList, IHeaderItem } from './'
-import { IRowElement } from './SmartList'
+import { SmartList, IHeaderItem, IRowElement } from './'
 
 const cols: IHeaderItem[] = [
   {
