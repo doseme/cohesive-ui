@@ -15,7 +15,7 @@ storiesOf('Components.PaginationPanel', module)
         <PaginationPanel
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={async (pageNumber) => {
+          onPageChange={(pageNumber) => {
             updateCurrentPage(pageNumber)
           }}
         />
