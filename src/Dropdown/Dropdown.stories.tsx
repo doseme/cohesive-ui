@@ -3,6 +3,7 @@ import noop from 'lodash/noop'
 import { storiesOf } from '@storybook/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
 import { Dropdown } from '.'
 
 const stories = storiesOf('Components.Dropdown', module)
@@ -110,3 +111,4 @@ stories.add('Components.Dropdown', () => {
     </div>
   )
 })
+
