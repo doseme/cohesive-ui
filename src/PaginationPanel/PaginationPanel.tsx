@@ -33,6 +33,7 @@ const PaginationPanel: React.FC<IProps> = ({
   const firstButton: JSX.Element = (
     <Button
       variant={inactiveButtonClassName}
+      data-testid='firstButton'
       key='firstButton'
       size='sm'
       onClick={() => {
@@ -49,6 +50,7 @@ const PaginationPanel: React.FC<IProps> = ({
   const prevButton: JSX.Element = (
     <Button
       variant={inactiveButtonClassName}
+      data-testid='prevButton'
       key='prevButton'
       size='sm'
       className='ml-1'
@@ -66,6 +68,7 @@ const PaginationPanel: React.FC<IProps> = ({
   const nextButton: JSX.Element = (
     <Button
       variant={inactiveButtonClassName}
+      data-testid='nextButton'
       key='nextButton'
       size='sm'
       className='ml-1'
@@ -83,6 +86,7 @@ const PaginationPanel: React.FC<IProps> = ({
   const lastButton: JSX.Element = (
     <Button
       variant={inactiveButtonClassName}
+      data-testid='lastButton'
       key='lastButton'
       size='sm'
       className='ml-1'
@@ -101,6 +105,7 @@ const PaginationPanel: React.FC<IProps> = ({
     return (
       <Button
         variant={isCurrentPage ? activeButtonClassName : inactiveButtonClassName}
+        data-testid={`page-button-${pageNumber}`}
         size='sm'
         className='ml-1'
         onClick={() => {
@@ -114,34 +119,61 @@ const PaginationPanel: React.FC<IProps> = ({
     )
   }
 
-  const renderedNodes: JSX.Element[] = currentNodes.reduce<JSX.Element[]>((nodes, n) => {
+  const renderedNodes = currentNodes.reduce<{
+    bothDots: boolean 
+    nodes: JSX.Element[]
+  }>((data, n) => {
     if (n.type === 'navigation') {
       switch(n.action) {
         case 'gotoFirst':
-          return nodes.concat(firstButton)
+          return {
+            ...data,
+            nodes: data.nodes.concat(firstButton)
+          }
         case 'previous':
-          return nodes.concat(prevButton)
+          return {
+            ...data,
+            nodes: data.nodes.concat(prevButton)
+          }
         case 'next':
-          return nodes.concat(nextButton)
+          return {
+            ...data,
+            nodes: data.nodes.concat(nextButton)
+          }
         case 'gotoLast':
-          return nodes.concat(lastButton)
-      }
+          return {
+            ...data,
+            nodes: data.nodes.concat(lastButton)
+          }
+        }
     }
 
     if (n.type === 'dots') {
-      return nodes.concat(<span key={`dots-${(Math.random() * 10000000).toFixed(0)}`} className='ml-1'>{n.value}</span>)
+      if (!data.bothDots) {
+        return {
+          bothDots: true,
+          nodes: data.nodes.concat(<span key='dots-1' className='ml-1'>{n.value}</span>)
+        }
+      }
+      return {
+        ...data,
+        nodes: data.nodes.concat(<span key='dots-2' className='ml-1'>{n.value}</span>)
+      }
     }
 
     if (n.type === 'pageNumber') {
-      return nodes.concat(pageNumberButton(n.value, n.isCurrentPage))
+      return {
+        ...data,
+        nodes: data.nodes.concat(pageNumberButton(n.value, n.isCurrentPage))
+      }
     }
 
-    return nodes
-  }, [])
+    return data
+  }, {bothDots: false, nodes: []})
 
   return (
     <div className='d-flex justify-content-start w-100 pagination pt-1'>
-      {renderedNodes}
+      {renderedNodes.nodes}
     </div>
   )
 }

@@ -1,32 +1,32 @@
-type TNodeType = "dots" | "pageNumber" | "navigation";
+type TNodeType = 'dots' | 'pageNumber' | 'navigation'
 
-export type TNode = IPageNumberNode | IDotsNode | INavigationNode;
+export type TNode = IPageNumberNode | IDotsNode | INavigationNode
 
 export interface IPageNode {
-  type: TNodeType;
+  type: TNodeType
 }
 
 export interface IPageNumberNode extends IPageNode {
-  type: "pageNumber";
-  isCurrentPage: boolean;
-  value: number;
+  type: 'pageNumber'
+  isCurrentPage: boolean
+  value: number
 }
 
 export interface IDotsNode extends IPageNode {
-  type: "dots";
-  value: "...";
+  type: 'dots'
+  value: '...'
 }
 
 export interface INavigationNode extends IPageNode {
-  type: "navigation";
+  type: 'navigation'
   action: 'previous' | 'next' | 'gotoFirst' | 'gotoLast'
-  symbol: "<" | "<<" | ">" | ">>";
+  symbol: '<' | '<<' | '>' | '>>'
 }
 
 export interface IPaginateOptions {
-  perPage: number;
+  perPage: number
 }
 
 export interface IPaginationState {
-  currentPage: number;
+  currentPage: number
 }
