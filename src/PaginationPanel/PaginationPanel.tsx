@@ -33,6 +33,7 @@ const PaginationPanel: React.FC<IProps> = ({
   const firstButton: JSX.Element = (
     <Button
       variant={inactiveButtonClassName}
+      key='firstButton'
       size='sm'
       onClick={() => {
         goToPage(1)
@@ -48,6 +49,7 @@ const PaginationPanel: React.FC<IProps> = ({
   const prevButton: JSX.Element = (
     <Button
       variant={inactiveButtonClassName}
+      key='prevButton'
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -64,6 +66,7 @@ const PaginationPanel: React.FC<IProps> = ({
   const nextButton: JSX.Element = (
     <Button
       variant={inactiveButtonClassName}
+      key='nextButton'
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -80,6 +83,7 @@ const PaginationPanel: React.FC<IProps> = ({
   const lastButton: JSX.Element = (
     <Button
       variant={inactiveButtonClassName}
+      key='lastButton'
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -114,28 +118,22 @@ const PaginationPanel: React.FC<IProps> = ({
     if (n.type === 'navigation') {
       switch(n.action) {
         case 'gotoFirst':
-          nodes.push(firstButton)
-          return nodes
+          return nodes.concat(firstButton)
         case 'previous':
-          nodes.push(prevButton)
-          return nodes
+          return nodes.concat(prevButton)
         case 'next':
-          nodes.push(nextButton)
-          return nodes
+          return nodes.concat(nextButton)
         case 'gotoLast':
-          nodes.push(lastButton)
-          return nodes
+          return nodes.concat(lastButton)
       }
     }
 
     if (n.type === 'dots') {
-      nodes.push(<span className='ml-1'>{n.value}</span>)
-      return nodes
+      return nodes.concat(<span key={`dots-${(Math.random() * 10000000).toFixed(0)}`} className='ml-1'>{n.value}</span>)
     }
 
     if (n.type === 'pageNumber') {
-      nodes.push(pageNumberButton(n.value, n.isCurrentPage))
-      return nodes
+      return nodes.concat(pageNumberButton(n.value, n.isCurrentPage))
     }
 
     return nodes
