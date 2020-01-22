@@ -11,13 +11,11 @@ storiesOf('Components.PaginationPanel', module)
     return (
       <div>
         <h4>Pagination panel with 20 pages</h4>
-        <span>{'on page ' + currentPage + ' of ' + totalPages}</span>
+        <span>{`on page ${currentPage} of ${totalPages}`}</span>
         <PaginationPanel
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={(pageNumber) => {
-            updateCurrentPage(pageNumber)
-          }}
+          onPageChange={updateCurrentPage}
         />
       </div>
     )

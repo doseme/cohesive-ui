@@ -15,9 +15,7 @@ const PaginationTestWrapper: React.FC<IProps> = ({startPage, totalPages}) => {
     <PaginationPanel
       currentPage={currentPage}
       totalPages={totalPages}
-      onPageChange={(pageNumber) => {
-        updateCurrentPage(pageNumber)
-      }}
+      onPageChange={updateCurrentPage}
     />
   )
 }
