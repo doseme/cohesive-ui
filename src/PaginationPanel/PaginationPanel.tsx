@@ -18,10 +18,21 @@ const PaginationPanel: React.FC<IProps> = ({
   onPageChange
 }) => {
   const currentNodes: TNode[] = paginate(currentPage, totalPages)
+  
+  const activeButtonClassName = 'secondary'
+  const inactiveButtonClassName = 'primary'
+
+  const goToPage = (pageNumber: number) => {
+    if (pageNumber < 1 || pageNumber > totalPages) {
+      return
+    }
+
+    onPageChange(pageNumber)
+  }
 
   const firstButton: JSX.Element = (
     <Button
-      variant='light'
+      variant={inactiveButtonClassName}
       size='sm'
       onClick={() => {
         goToPage(1)
@@ -36,7 +47,7 @@ const PaginationPanel: React.FC<IProps> = ({
 
   const prevButton: JSX.Element = (
     <Button
-      variant='light'
+      variant={inactiveButtonClassName}
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -52,7 +63,7 @@ const PaginationPanel: React.FC<IProps> = ({
 
   const nextButton: JSX.Element = (
     <Button
-      variant='light'
+      variant={inactiveButtonClassName}
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -68,7 +79,7 @@ const PaginationPanel: React.FC<IProps> = ({
 
   const lastButton: JSX.Element = (
     <Button
-      variant='light'
+      variant={inactiveButtonClassName}
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -82,18 +93,10 @@ const PaginationPanel: React.FC<IProps> = ({
     </Button>
   )
 
-  const goToPage = (pageNumber: number) => {
-    if (pageNumber < 1 || pageNumber > totalPages) {
-      return
-    }
-
-    onPageChange(pageNumber)
-  }
-
   const pageNumberButton = (pageNumber: number, isCurrentPage: boolean): JSX.Element => {
     return (
       <Button
-        variant={isCurrentPage ? 'info' : 'light'}
+        variant={isCurrentPage ? activeButtonClassName : inactiveButtonClassName}
         size='sm'
         className='ml-1'
         onClick={() => {
