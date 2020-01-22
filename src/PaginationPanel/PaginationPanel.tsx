@@ -119,61 +119,34 @@ const PaginationPanel: React.FC<IProps> = ({
     )
   }
 
-  const renderedNodes = currentNodes.reduce<{
-    bothDots: boolean 
-    nodes: JSX.Element[]
-  }>((data, n) => {
+  const renderedNodes = currentNodes.reduce<JSX.Element[]>((nodes, n, ind) => {
     if (n.type === 'navigation') {
       switch(n.action) {
         case 'gotoFirst':
-          return {
-            ...data,
-            nodes: data.nodes.concat(firstButton)
-          }
+          return nodes.concat(firstButton)
         case 'previous':
-          return {
-            ...data,
-            nodes: data.nodes.concat(prevButton)
-          }
+          return nodes.concat(prevButton)
         case 'next':
-          return {
-            ...data,
-            nodes: data.nodes.concat(nextButton)
-          }
+          return nodes.concat(nextButton)
         case 'gotoLast':
-          return {
-            ...data,
-            nodes: data.nodes.concat(lastButton)
-          }
-        }
+          return nodes.concat(lastButton)
+      }
     }
 
     if (n.type === 'dots') {
-      if (!data.bothDots) {
-        return {
-          bothDots: true,
-          nodes: data.nodes.concat(<span key='dots-1' className='ml-1'>{n.value}</span>)
-        }
-      }
-      return {
-        ...data,
-        nodes: data.nodes.concat(<span key='dots-2' className='ml-1'>{n.value}</span>)
-      }
+      return nodes.concat(<span key={`dots-${ind}`} className='ml-1'>{n.value}</span>)
     }
 
     if (n.type === 'pageNumber') {
-      return {
-        ...data,
-        nodes: data.nodes.concat(pageNumberButton(n.value, n.isCurrentPage))
-      }
+      return nodes.concat(pageNumberButton(n.value, n.isCurrentPage))
     }
 
-    return data
-  }, {bothDots: false, nodes: []})
+    return nodes
+  }, [])
 
   return (
     <div className='d-flex justify-content-start w-100 pagination pt-1'>
-      {renderedNodes.nodes}
+      {renderedNodes}
     </div>
   )
 }
