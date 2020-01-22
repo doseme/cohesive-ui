@@ -1,0 +1,21 @@
+@import '../style/colors.scss';
+
+.form-field-invalid {
+  border-color: $invalidRed;
+} 
+
+.validation-error-text {
+  color: $invalidRed;
+}
+
+.form-field-label {
+  font-size: 14px;
+  padding: 0 0 5px 0;
+}
+
+.ui-form {
+  &:focus {
+    box-shadow: none;
+    border-color: $panelblue;
+  }
+}

@@ -1,38 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleDoubleLeft, faAngleRight, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 
-import { isNeighbour, isInStartEdge, isInEndEdge, bordersStartEdge, bordersEndEdge } from './utils'
+import { paginate } from './utils'
+import { TNode } from './types'
 
 interface IProps {
-  itemIds: string[]
-  perPage?: number
-  handleUpdate: (ids: string[]) => void
-  edgesToShow?: number
-  neighboursToShow?: number
+  currentPage: number
+  totalPages: number
+  onPageChange: (pageNumber: number) => void
 }
 
 const PaginationPanel: React.FC<IProps> = ({
-  edgesToShow = 2,
-  neighboursToShow = 1,
-  perPage = 5,
-  itemIds,
-  handleUpdate,
-  children
+  currentPage,
+  totalPages,
+  onPageChange
 }) => {
-  const [currentPage, setCurrentPage] = useState<number>(1)
+  const currentNodes: TNode[] = paginate(currentPage, totalPages)
+  
+  const activeButtonClassName = 'secondary'
+  const inactiveButtonClassName = 'primary'
 
-  const currentIds = itemIds.slice(
-    (currentPage - 1) * perPage,
-    currentPage * perPage
-  )
+  const goToPage = (pageNumber: number) => {
+    if (pageNumber < 1 || pageNumber > totalPages) {
+      return
+    }
 
-  const totalPages = Math.ceil(itemIds.length / perPage)
+    onPageChange(pageNumber)
+  }
 
   const firstButton: JSX.Element = (
     <Button
-      variant='light'
+      variant={inactiveButtonClassName}
+      data-testid='firstButton'
+      key='firstButton'
       size='sm'
       onClick={() => {
         goToPage(1)
@@ -47,7 +49,9 @@ const PaginationPanel: React.FC<IProps> = ({
 
   const prevButton: JSX.Element = (
     <Button
-      variant='light'
+      variant={inactiveButtonClassName}
+      data-testid='prevButton'
+      key='prevButton'
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -63,7 +67,9 @@ const PaginationPanel: React.FC<IProps> = ({
 
   const nextButton: JSX.Element = (
     <Button
-      variant='light'
+      variant={inactiveButtonClassName}
+      data-testid='nextButton'
+      key='nextButton'
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -79,7 +85,9 @@ const PaginationPanel: React.FC<IProps> = ({
 
   const lastButton: JSX.Element = (
     <Button
-      variant='light'
+      variant={inactiveButtonClassName}
+      data-testid='lastButton'
+      key='lastButton'
       size='sm'
       className='ml-1'
       onClick={() => {
@@ -93,66 +101,53 @@ const PaginationPanel: React.FC<IProps> = ({
     </Button>
   )
 
-  const goToPage = (pageNumber: number) => {
-    if (pageNumber < 1 || pageNumber > totalPages) {
-      return
-    }
-
-    setCurrentPage(pageNumber)
+  const pageNumberButton = (pageNumber: number, isCurrentPage: boolean): JSX.Element => {
+    return (
+      <Button
+        variant={isCurrentPage ? activeButtonClassName : inactiveButtonClassName}
+        data-testid={`page-button-${pageNumber}`}
+        size='sm'
+        className='ml-1'
+        onClick={() => {
+          goToPage(pageNumber)
+        }}
+        key={`page-button-${pageNumber}`}
+        disabled={totalPages === 0}
+      >
+        {pageNumber}
+      </Button>
+    )
   }
 
-  const pageNumberButton = (pageNumber: number): JSX.Element | null => {
-    if (
-      isNeighbour(pageNumber, currentPage, neighboursToShow)
-        || isInStartEdge(pageNumber, 1, edgesToShow)
-        || isInEndEdge(pageNumber, totalPages, edgesToShow)
-    ) {
-      return (
-        <Button
-          variant={pageNumber === currentPage ? 'info' : 'light'}
-          size='sm'
-          className='ml-1'
-          onClick={() => {
-            goToPage(pageNumber)
-          }}
-          key={`page-button-${pageNumber}`}
-          disabled={totalPages === 0}
-        >
-          {pageNumber}
-        </Button>
-      )
+  const renderedNodes = currentNodes.reduce<JSX.Element[]>((nodes, n, ind) => {
+    if (n.type === 'navigation') {
+      switch(n.action) {
+        case 'gotoFirst':
+          return nodes.concat(firstButton)
+        case 'previous':
+          return nodes.concat(prevButton)
+        case 'next':
+          return nodes.concat(nextButton)
+        case 'gotoLast':
+          return nodes.concat(lastButton)
+      }
     }
 
-    if ((bordersStartEdge(pageNumber, 1, edgesToShow)
-        && !isInEndEdge(currentPage - 1, totalPages, edgesToShow))
-      || (bordersEndEdge(pageNumber, totalPages, edgesToShow))
-        && !isInStartEdge(currentPage + 1, 1, edgesToShow)) {
-      return (<span className='ml-1' key={`page-spread-${pageNumber}`}>...</span>)
+    if (n.type === 'dots') {
+      return nodes.concat(<span key={`dots-${ind}`} className='ml-1'>{n.value}</span>)
     }
 
-    return null
-  }
+    if (n.type === 'pageNumber') {
+      return nodes.concat(pageNumberButton(n.value, n.isCurrentPage))
+    }
 
-  const pageNumbers = totalPages > 0
-    ? Array.from(Array(totalPages + 1).keys()).slice(1).map(pageNumberButton)
-    : pageNumberButton(1)
-
-  useEffect(() => {
-    handleUpdate(currentIds)
+    return nodes
   }, [])
 
   return (
-    <>
-      {children}
-
-      <div className='d-flex justify-content-start w-100 pagination pt-1'>
-        {firstButton}
-        {prevButton}
-        {pageNumbers}
-        {nextButton}
-        {lastButton}
-      </div>
-    </>
+    <div className='d-flex justify-content-start w-100 pagination pt-1'>
+      {renderedNodes}
+    </div>
   )
 }
 

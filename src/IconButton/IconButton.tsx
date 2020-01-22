@@ -9,7 +9,7 @@ interface IProps {
   background?: string
   color?: string
   borderColor?: string
-  onClick: () => void
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
 const IconButton: React.FC<IProps> = ({ onClick, borderColor, children, background, color, size, className, ...rest }): JSX.Element => {

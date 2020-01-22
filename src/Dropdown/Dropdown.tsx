@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, HTMLProps } from 'react'
 import { InputGroup, FormControl, FormControlProps, } from 'react-bootstrap'
 import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
 
 import { Button } from '../Button'
 import './index.scss'
 
-interface IProps {
+interface OverrideProps {
   label?: string
   isRequired?: boolean
   data?: string[]
@@ -13,23 +13,18 @@ interface IProps {
   onSelect?: (item: string) => void
   searchIcon?: JSX.Element
   showSearchThreshold?: number
+  defaultValue?: string
 }
 
-const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeholder, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
+
+type TProps = Omit<HTMLProps<HTMLElement>, keyof OverrideProps> & OverrideProps
+
+const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, placeholder, defaultValue, searchIcon, onSelect, showSearchThreshold = 10 }) => {
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState('')
   const node = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    document.addEventListener('mousedown', (e: MouseEvent) => {
-      handleClickAway(e)
-    })
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickAway)
-    }
-  }, [])
 
   const handleClickAway = (e: MouseEvent) => {
     // @ts-ignore - I dunno how to type this, whatever
@@ -40,6 +35,22 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
     setSearchText('')
     setShowContent(false)
   }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', (e: MouseEvent) => {
+      handleClickAway(e)
+    })
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickAway)
+    }
+  }, [handleClickAway])
+
+  useEffect(() => {
+    if (defaultValue && data && data.includes(defaultValue)) {
+      setSelectedItem(defaultValue)
+    }
+  }, [defaultValue, data, setSelectedItem])
 
   const handleChange = (e: React.FormEvent<ReplaceProps<'input', BsPrefixProps<'input'> & FormControlProps>>) => {
     if (e.currentTarget.value) {
@@ -74,7 +85,10 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
 
   const listItems = (items: string[], callback: (item: string) => void) => (
     <>
-      <div className='dropdown-placeholder'>{selectedItem || placeholder}</div>
+      <div 
+        className='dropdown-placeholder'
+        data-test-placeholder
+      >{selectedItem || placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 
@@ -82,6 +96,7 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
         {
           items.map(item =>
             <li 
+              data-test={item}
               key={item}
               onClick={() => {
                   setSelectedItem(item)
@@ -104,6 +119,8 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
     filteredData = data.filter(x =>  x.toLowerCase().includes(searchText))
   }
 
+  const getDefaultValue = defaultValue && (data && data.includes(defaultValue) ? defaultValue : undefined)
+
   const content = showContent 
     ? 
     (
@@ -118,21 +135,26 @@ const Dropdown: React.FC<IProps> = ({ children, label, isRequired, data, placeho
     : null
 
   return (
-    <div 
-      className='dropdown-wrapper' 
-      ref={node}
-    >
+    <>
       <div className='d-flex'>
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
       </div>
+
       <div
-        className='dropdown-closed'
-        onClick={() => setShowContent(!showContent)}
+        id={id ? id : undefined}
+        className='dropdown-wrapper' 
+        ref={node}
       >
-        {selectedItem || placeholder}
+        <div
+          className='dropdown-closed'
+          data-test-current-item
+          onClick={() => setShowContent(!showContent)}
+        >
+          {selectedItem || getDefaultValue || placeholder}
+        </div>
+        {content}
       </div>
-      {content}
-    </div>
+    </>
   )
 }
 

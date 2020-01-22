@@ -13,7 +13,8 @@ export type TVariant = 'primary'
   | 'light'
 
 interface IProps extends ButtonProps {
-  onClick: () => void
+  id?: string
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
   variant: TVariant
   className?: string
   shape?: 'circle' | 'rect'

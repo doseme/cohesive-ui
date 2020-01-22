@@ -3,48 +3,45 @@ import { Form, } from 'react-bootstrap'
 
 import { TFormControlEvent } from '../types'
 import './index.scss'
-import { validate } from './validation'
+import { validate, IValidators } from './validation'
 
 
 interface IProps {
   label?: string
-  placeholder?: string
   name?: string
   defaultValue?: string
-  type?: 'text' | 'password' | 'number'
-  maxInputLength?: number
-  isRequired?: boolean
+  dateNotInPast?: boolean
   disabled?: boolean
   readOnly?: boolean
   handleChange?: (value: string) => void
   handleBlur?: (value: string, isValid: boolean) => void
   handleFocus?: () => void
+  className?: string
 }
 
-const TextInput: React.FC<IProps> = (props) => {
+const DateInput: React.FC<IProps> = (props) => {
   const {
     label,
-    maxInputLength,
-    isRequired,
     handleBlur,
     handleChange,
     handleFocus,
+    dateNotInPast,
     disabled,
     readOnly,
-    placeholder,
     name,
-    type,
     defaultValue,
     ...rest
   } = props
+
+  const isRequired = true
 
   const [error, setError] = useState<string>('')
   const [isValid, setValid] = useState<boolean>(true)
 
   const handleValidate = (str: string): boolean => {
     const status = validate({
-      maxInputLength,
       isRequired,
+      dateNotInPast
     }, str)
 
     if (!status.valid && status.message) {
@@ -76,7 +73,7 @@ const TextInput: React.FC<IProps> = (props) => {
   }
 
   return (
-    <div>
+    <div className={props.className}>
       <div className='d-flex'>
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
         <small className='validation-error-text ml-auto pr-2'>{error}</small>
@@ -85,8 +82,7 @@ const TextInput: React.FC<IProps> = (props) => {
         {...rest}
         className={fieldClass}
         defaultValue={defaultValue}
-        type={type || 'text'}
-        placeholder={placeholder || ''}
+        type='date'
         name={name}
         onBlur={update}
         onChange={(e: TFormControlEvent) => clearAndHandleChange(e.currentTarget.value)}
@@ -99,5 +95,5 @@ const TextInput: React.FC<IProps> = (props) => {
 }
 
 export {
-  TextInput,
+  DateInput,
 }

@@ -32,7 +32,9 @@ stories.add('Components.Dropdown', () => {
     <div style={{ maxWidth: '500px' }}>
       <h3 className='m-5'>With List of Items + No Search</h3>
       <div className='m-5'>
-        <Dropdown 
+        <Dropdown
+          id='listItemsNoSearch'
+          className='hasName'
           placeholder='Select Hospital'
           data={['Hospital A', 'Hospital B', 'Hospital C']}
           onSelect={noop}
@@ -45,6 +47,7 @@ stories.add('Components.Dropdown', () => {
       <h3 className='m-5'>With List of Items + Search</h3>
       <div className='m-5'>
         <Dropdown 
+          id='listItemsWithSearch'
           placeholder='Select Hospital'
           data={[
             'Hospital A', 
@@ -68,15 +71,44 @@ stories.add('Components.Dropdown', () => {
 
       <hr />
 
-      <h3 className='m-'>Custom Content Dropdown</h3>
+      <h3 className='m-5'>Custom Content Dropdown</h3>
       <div className='m-5'>
         <Dropdown 
+          id='customContentDropdown'
           placeholder='Custom Content Dropdown'
           onSelect={noop}
         >
           {content}
         </Dropdown>
       </div>
+
+      <hr />
+
+      <h3 className='m-5'>With Default Value</h3>
+      <div className='m-5'>
+        <Dropdown 
+          id='withDefaultValue'
+          placeholder='Select Hospital'
+          data={['Hospital A', 'Hospital B', 'Hospital C']}
+          onSelect={noop}
+          searchIcon={searchIcon}
+          defaultValue='Hospital C'
+        />
+      </div>
+
+      <hr />
+
+      <h3 className='m-5'>With Label</h3>
+      <div className='m-5'>
+        <Dropdown 
+          label='Select a Hospital'
+          placeholder='Select Hospital'
+          data={['Hospital A', 'Hospital B', 'Hospital C']}
+          onSelect={noop}
+          searchIcon={searchIcon}
+        />
+      </div>
     </div>
   )
 })
+

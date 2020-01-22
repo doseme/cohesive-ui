@@ -25,6 +25,7 @@ storiesOf('Components.Buttons', module)
                 <Button
                   onClick={() => { }}
                   variant={color}
+                  id={color}
                 >
                   {color}
                 </Button>

@@ -3,7 +3,7 @@ import noop from 'lodash/noop'
 import { storiesOf } from '@storybook/react'
 
 import { Form } from './Form'
-import { TextInput } from './TextInput'
+import { TextInput } from '../TextInput'
 import { Button } from '../Button'
 
 
