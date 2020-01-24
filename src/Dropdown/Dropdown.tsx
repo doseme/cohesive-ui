@@ -7,6 +7,7 @@ import './index.scss'
 
 interface OverrideProps {
   label?: string
+  className?: string
   isRequired?: boolean
   data?: string[]
   placeholder: string
@@ -20,7 +21,7 @@ type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 type TProps = Omit<HTMLProps<HTMLElement>, keyof OverrideProps> & OverrideProps
 
-const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, placeholder, defaultValue, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultValue, searchIcon, onSelect, showSearchThreshold = 10 }) => {
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState('')
@@ -135,7 +136,7 @@ const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, pla
     : null
 
   return (
-    <>
+    <div className={className}>
       <div className='d-flex'>
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
       </div>
@@ -154,7 +155,7 @@ const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, pla
         </div>
         {content}
       </div>
-    </>
+    </div>
   )
 }
 
