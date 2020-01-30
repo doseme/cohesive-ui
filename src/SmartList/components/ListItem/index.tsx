@@ -8,6 +8,7 @@ import './index.scss'
 interface IProps {
   columns: IColumnElement[]
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => any
+  className?: string
 }
 
 const ListItem: React.FC<IProps> = (props: IProps) => {
@@ -18,7 +19,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
 
   return (
     <Row
-      className='list-row align-items-center'
+      className={`list-row align-items-center ${props.className || ''}`}
       onClick={onClick}
     >
       {
