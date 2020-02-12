@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { DetailedHTMLProps, ButtonHTMLAttributes } from 'react'
 
 import { CIRCLE_BUTTON_BLUE, LIGHTEST_GREY } from '../style/colors'
 import './index.scss'
 
-interface IProps {
+interface OverrideProps {
   className?: string
   size?: string
   background?: string
@@ -12,7 +12,11 @@ interface IProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const IconButton: React.FC<IProps> = ({ onClick, borderColor, children, background, color, size, className, ...rest }): JSX.Element => {
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
+
+type TProps = Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, keyof OverrideProps> & OverrideProps
+
+const IconButton: React.FC<TProps> = ({ onClick, borderColor, children, background, color, size, className, ...rest }): JSX.Element => {
   const style: React.CSSProperties = {
     height: size,
     width: size,
