@@ -5,6 +5,7 @@ import { BackArrow } from '../Icons/BackArrow'
 import { BackArrowHover } from '../Icons/BackArrowHover'
 
 interface IProps {
+  className?: string
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
@@ -19,7 +20,7 @@ const BackArrowButton: React.FC<IProps> = (props) => {
     <IconButton
       onClick={props.onClick}
       background='none'
-      className='p-0'
+      className={props.className ? `p-0 ${props.className}` : 'p-0'}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
