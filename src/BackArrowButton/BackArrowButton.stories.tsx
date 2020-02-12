@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { noop } from 'lodash'
 
-import { BackArrowButton } from '.'
+import { BackArrowButton } from './BackArrowButton'
 
 const stories = storiesOf('Components.BackArrowButton', module)
 
