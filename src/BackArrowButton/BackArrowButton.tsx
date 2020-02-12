@@ -11,10 +11,6 @@ interface IProps {
 const BackArrowButton: React.FC<IProps> = (props) => {
   const [ isHovering, setHovering ] = useState(false)
 
-  const toggleHover = () => {
-    setHovering(!isHovering)
-  }
-
   const buttonWithHover: JSX.Element = isHovering
     ? (<BackArrowHover />)
     : (<BackArrow />)
@@ -24,8 +20,8 @@ const BackArrowButton: React.FC<IProps> = (props) => {
       onClick={props.onClick}
       background='none'
       className='p-0'
-      onMouseEnter={toggleHover}
-      onMouseLeave={toggleHover}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
     >
       {buttonWithHover}
     </IconButton>
