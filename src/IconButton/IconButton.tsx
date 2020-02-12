@@ -1,6 +1,7 @@
 import React, { DetailedHTMLProps, ButtonHTMLAttributes } from 'react'
 
 import { CIRCLE_BUTTON_BLUE, LIGHTEST_GREY } from '../style/colors'
+
 import './index.scss'
 
 interface OverrideProps {
