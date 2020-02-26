@@ -5,26 +5,31 @@ import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
 import { Button } from '../Button'
 import './index.scss'
 
+interface IDropdownItem {
+  label?: string
+  value: string
+}
+
 interface OverrideProps {
   label?: string
   className?: string
   isRequired?: boolean
-  data?: string[]
+  data?: IDropdownItem[]
   placeholder: string
   onSelect?: (item: string) => void
   searchIcon?: JSX.Element
   showSearchThreshold?: number
-  defaultValue?: string
+  defaultIndex?: number
 }
 
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 type TProps = Omit<HTMLProps<HTMLElement>, keyof OverrideProps> & OverrideProps
 
-const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultValue, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultIndex, searchIcon, onSelect, showSearchThreshold = 10 }) => {
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
-  const [selectedItem, setSelectedItem] = useState('')
+  const [selectedItem, setSelectedItem] = useState<IDropdownItem>()
   const node = useRef<HTMLDivElement>(null)
 
   const handleClickAway = (e: MouseEvent) => {
@@ -48,10 +53,10 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
   }, [handleClickAway])
 
   useEffect(() => {
-    if (defaultValue && data && data.includes(defaultValue)) {
-      setSelectedItem(defaultValue)
+    if (defaultIndex && data) {
+      setSelectedItem(data[defaultIndex])
     }
-  }, [defaultValue, data, setSelectedItem])
+  }, [defaultIndex, data, setSelectedItem])
 
   const handleChange = (e: React.FormEvent<ReplaceProps<'input', BsPrefixProps<'input'> & FormControlProps>>) => {
     if (e.currentTarget.value) {
@@ -84,29 +89,30 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
     </InputGroup>
   )
 
-  const listItems = (items: string[], callback: (item: string) => void) => (
+  const listItems = (items: IDropdownItem[], callback: (item: string) => void) => (
     <>
       <div 
         className='dropdown-placeholder'
         data-test-placeholder
-      >{selectedItem || placeholder}</div>
+      >{selectedItem ? selectedItem.label || selectedItem.value : placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 
-      <ul>
+      <ul className='dropdown-list'>
         {
           items.map(item =>
             <li 
-              data-test={item}
-              key={item}
+              data-test={item.label || item.value}
+              key={item.value}
               onClick={() => {
                   setSelectedItem(item)
-                  callback(item)
+                  callback(item.value)
+                  setSearchText('')
                   setShowContent(false)
                 }
               }
             >
-              {item}
+              {item.label || item.value}
             </li>
           )
         }
@@ -117,10 +123,10 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
   let filteredData = data;
 
   if (data && searchText) {
-    filteredData = data.filter(x =>  x.toLowerCase().includes(searchText))
+    filteredData = data.filter(x => (x.label || x.value).toLowerCase().includes(searchText))
   }
 
-  const getDefaultValue = defaultValue && (data && data.includes(defaultValue) ? defaultValue : undefined)
+  const defaultLabel = defaultIndex && (data ? (data[defaultIndex].label || data[defaultIndex].value) : undefined)
 
   const content = showContent 
     ? 
@@ -151,7 +157,7 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
           data-test-current-item
           onClick={() => setShowContent(!showContent)}
         >
-          {selectedItem || getDefaultValue || placeholder}
+          {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || placeholder}
         </div>
         {content}
       </div>

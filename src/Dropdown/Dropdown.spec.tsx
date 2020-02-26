@@ -12,7 +12,11 @@ describe('Dropdown', () => {
     const wrapper = mount(
       <Dropdown 
         placeholder='DEV'
-        data={['Item 1', 'Item 2']}
+        data={[
+          {label: 'Item 1', value: '1'},
+          {label: 'Item 2', value: '2'},
+          {label: 'Item 3', value: '3'}
+        ]}
         onSelect={noop}
       />
     )
@@ -28,8 +32,12 @@ describe('Dropdown', () => {
     const wrapper = mount(
       <Dropdown 
         placeholder='DEV'
-        data={['Item 1', 'Item 2']}
-        defaultValue='Item 2'
+        data={[
+          {label: 'Item 1', value: '1'},
+          {label: 'Item 2', value: '2'},
+          {label: 'Item 3', value: '3'}
+        ]}
+        defaultIndex={1}
         onSelect={noop}
       />
     )

@@ -36,7 +36,11 @@ stories.add('Components.Dropdown', () => {
           id='listItemsNoSearch'
           className='hasName'
           placeholder='Select Hospital'
-          data={['Hospital A', 'Hospital B', 'Hospital C']}
+          data={[
+            {label: 'Hospital A', value: '1'},
+            {label: 'Hospital B', value: '2'},
+            {label: 'Hospital C', value: '3'}
+          ]}
           onSelect={noop}
           searchIcon={searchIcon}
         />
@@ -50,18 +54,18 @@ stories.add('Components.Dropdown', () => {
           id='listItemsWithSearch'
           placeholder='Select Hospital'
           data={[
-            'Hospital A', 
-            'Hospital B', 
-            'Hospital C', 
-            'Hospital D',
-            'Hospital E', 
-            'Hospital F', 
-            'Hospital G', 
-            'Hospital H',
-            'Hospital I', 
-            'Hospital J', 
-            'Hospital K', 
-            'Hospital L',
+            {label: 'Hospital A', value: '1'},
+            {label: 'Hospital B', value: '2'},
+            {label: 'Hospital C', value: '3'},
+            {label: 'Hospital D', value: '4'},
+            {label: 'Hospital E', value: '5'},
+            {label: 'Hospital F', value: '6'},
+            {label: 'Hospital G', value: '7'},
+            {label: 'Hospital H', value: '8'},
+            {label: 'Hospital I', value: '9'},
+            {label: 'Hospital J', value: '10'},
+            {label: 'Hospital K', value: '11'},
+            {label: 'Hospital L', value: '12'}
           ]}
           onSelect={noop}
           searchIcon={searchIcon}
@@ -89,22 +93,48 @@ stories.add('Components.Dropdown', () => {
         <Dropdown 
           id='withDefaultValue'
           placeholder='Select Hospital'
-          data={['Hospital A', 'Hospital B', 'Hospital C']}
+          data={[
+            {label: 'Hospital A', value: '1'},
+            {label: 'Hospital B', value: '2'},
+            {label: 'Hospital C', value: '3'}
+          ]}
           onSelect={noop}
           searchIcon={searchIcon}
-          defaultValue='Hospital C'
+          defaultIndex={2}
         />
       </div>
 
       <hr />
 
-      <h3 className='m-5'>With Label</h3>
+      <h3 className='m-5'>With Field Label</h3>
       <div className='m-5'>
         <Dropdown 
           id='withLabel'
           label='Select a Hospital'
           placeholder='Select Hospital'
-          data={['Hospital A', 'Hospital B', 'Hospital C']}
+          data={[
+            {label: 'Hospital A', value: '1'},
+            {label: 'Hospital B', value: '2'},
+            {label: 'Hospital C', value: '3'}
+          ]}
+          onSelect={noop}
+          searchIcon={searchIcon}
+        />
+      </div>
+
+      <hr />
+
+      <h3 className='m-5'>Optional Item Labels</h3>
+      <div className='m-5'>
+        <Dropdown 
+          id='withLabel'
+          label='Select a Hospital'
+          placeholder='Select Hospital'
+          data={[
+            {value: '1'},
+            {label: 'Hospital B', value: '2'},
+            {label: 'Hospital C', value: '3'}
+          ]}
           onSelect={noop}
           searchIcon={searchIcon}
         />
