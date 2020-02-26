@@ -76,11 +76,13 @@ const SmartList: React.FC<IProps> = ({ data, cols, search, textIfEmpty, header =
       <div>
         {data.length
           ? listContent
-          : <Row className='list-row align-items-center'>
-              <Col>
-                {textIfEmpty || ''} 
-              </Col>
-            </Row>}
+          : textIfEmpty
+            ? <Row className='list-row align-items-center'>
+                <Col>
+                  {textIfEmpty} 
+                </Col>
+              </Row>
+            : null}
       </div>
     </>
   )
