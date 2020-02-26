@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { Header } from './components/Header'
 import { ListItem } from './components/ListItem'
 import { SearchInput } from './components/SearchInput'
 
+import './index.scss'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 export interface IProps {
   search?: boolean
   data: IRowElement[]
   cols: IHeaderItem[]
+  textIfEmpty?: string
+  header?: boolean
 }
 
 export interface IHeaderItem {
@@ -29,10 +35,10 @@ export interface IRowElement {
   className?: string
 }
 
-const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
+const SmartList: React.FC<IProps> = ({ data, cols, search, textIfEmpty, header = true }) => {
   const [searchText, setSearchText] = useState('')
 
-  const header = (
+  const headerContent = (
     <Header
       cols={cols}
     />
@@ -54,7 +60,7 @@ const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
   }, [])
 
   const searchInput = search && (
-    <div className='d-flex justify-content-end'>
+    <div className='d-flex w-100 justify-content-end search-offset'>
       <SearchInput
         onChange={setSearchText}
         value={searchText}
@@ -64,10 +70,17 @@ const SmartList: React.FC<IProps> = ({ data, cols, search }) => {
 
   return (
     <>
-      {searchInput}
-      {header}
+      <div className='position-relative'>
+      {searchInput}</div>
+      {header && headerContent}
       <div>
-        {listContent} 
+        {data.length
+          ? listContent
+          : <Row className='list-row align-items-center'>
+              <Col>
+                {textIfEmpty || ''} 
+              </Col>
+            </Row>}
       </div>
     </>
   )

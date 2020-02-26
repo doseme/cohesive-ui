@@ -92,19 +92,51 @@ stories.add(
   'JSX',
   () =>
   <div className='m-5'>
+    <h3>Plain list with items</h3>
     <SmartList
       cols={cols}
       data={content}
     />
-
     <br />
+    <br />
+
     <h3>With a search input</h3>
-    <br />
-
     <SmartList
       cols={cols}
       data={content}
       search={true}
+    />
+    <br />
+    <br />
+
+    <h3>Custom empty table message</h3>
+    <SmartList
+      cols={cols}
+      data={[]}
+      textIfEmpty='No data in table.'
+    />
+    <br />
+    <br />
+
+    <h3>No header</h3>
+    <SmartList
+      cols={cols}
+      data={content}
+      header={false}
+    />
+    <br />
+    <br />
+
+    <h3>Combining two lists</h3>
+    <SmartList
+      cols={cols}
+      data={[]}
+      textIfEmpty='This is an empty row message, and any data below this is in a separate, headerless smart list!'
+    />
+    <SmartList
+      cols={cols}
+      data={content}
+      header={false}
     />
   </div>
 )
