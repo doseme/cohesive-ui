@@ -18,6 +18,7 @@ import { Button } from './Button'
 import * as Nav from './Nav'
 import { Form } from './Form'
 import { TextInput } from './TextInput'
+import { SearchInput } from './SearchInput'
 import { DateInput } from './DateInput'
 
 
@@ -37,6 +38,7 @@ export {
   Nav,
   PaginationPanel,
   Panel,
+  SearchInput,
   SmartList,
   TextInput,
 

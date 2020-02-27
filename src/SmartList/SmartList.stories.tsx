@@ -100,15 +100,6 @@ stories.add(
     <br />
     <br />
 
-    <h3>With a search input</h3>
-    <SmartList
-      cols={cols}
-      data={content}
-      search={true}
-    />
-    <br />
-    <br />
-
     <h3>Custom empty table message</h3>
     <SmartList
       cols={cols}

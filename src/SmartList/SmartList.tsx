@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Header } from './components/Header'
 import { ListItem } from './components/ListItem'
-import { SearchInput } from './components/SearchInput'
 
 import './index.scss'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 export interface IProps {
-  search?: boolean
   data: IRowElement[]
   cols: IHeaderItem[]
   textIfEmpty?: string
@@ -35,9 +33,7 @@ export interface IRowElement {
   className?: string
 }
 
-const SmartList: React.FC<IProps> = ({ data, cols, search, textIfEmpty, header = true }) => {
-  const [searchText, setSearchText] = useState('')
-
+const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, header = true }) => {
   const headerContent = (
     <Header
       cols={cols}
@@ -45,33 +41,20 @@ const SmartList: React.FC<IProps> = ({ data, cols, search, textIfEmpty, header =
   )
 
   const listContent = data.reduce<JSX.Element[]>((acc, row) => {
-    if (!searchText || (searchText && row.columns.some(el => el.text && el.text.includes(searchText)))) {
-      acc = acc.concat(
-        <ListItem
-          onClick={row.onClick}
-          key={row.id}
-          columns={row.columns}
-          className={row.className}
-        />
-      )
-    }
+    acc = acc.concat(
+      <ListItem
+        onClick={row.onClick}
+        key={row.id}
+        columns={row.columns}
+        className={row.className}
+      />
+    )
 
     return acc
   }, [])
 
-  const searchInput = search && (
-    <div className='search-offset'>
-      <SearchInput
-        onChange={setSearchText}
-        value={searchText}
-      />
-    </div>
-  )
-
   return (
     <>
-      <div className='position-relative'>
-      {searchInput}</div>
       {header && headerContent}
       <div>
         {data.length
