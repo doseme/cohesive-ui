@@ -60,13 +60,11 @@ const SmartList: React.FC<IProps> = ({ data, cols, search, textIfEmpty, header =
   }, [])
 
   const searchInput = search && (
-    <div className='d-flex w-100 justify-content-end search-offset'>
-      <Row>
-        <SearchInput
-          onChange={setSearchText}
-          value={searchText}
-        />
-      </Row>
+    <div className='search-offset'>
+      <SearchInput
+        onChange={setSearchText}
+        value={searchText}
+      />
     </div>
   )
 
