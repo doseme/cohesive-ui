@@ -16,7 +16,7 @@ interface OverrideProps {
   isRequired?: boolean
   data?: IDropdownItem[]
   placeholder: string
-  onSelect?: (item: string | number) => void
+  onSelect?: (item: string) => void
   searchIcon?: JSX.Element
   showSearchThreshold?: number
   defaultIndex?: number
