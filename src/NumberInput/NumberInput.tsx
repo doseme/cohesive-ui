@@ -2,7 +2,7 @@ import React, { useState, } from 'react'
 import { Form, } from 'react-bootstrap'
 
 import { TFormControlEvent } from '../types'
-import './index.scss'
+import '../shared/input.scss'
 import { validate } from './validation'
 
 
@@ -11,7 +11,6 @@ interface IProps {
   placeholder?: string
   name?: string
   defaultValue?: string
-  type?: 'number'
   onlyPositiveWholeNumber?: boolean
   disabled?: boolean
   isRequired?: boolean
@@ -85,7 +84,7 @@ const NumberInput: React.FC<IProps> = (props) => {
         {...rest}
         className={fieldClass}
         defaultValue={defaultValue}
-        type={type || 'text'}
+        type='text'
         placeholder={placeholder || ''}
         name={name}
         onBlur={update}
