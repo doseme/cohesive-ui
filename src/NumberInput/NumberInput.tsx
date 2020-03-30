@@ -6,15 +6,16 @@ import '../shared/input.scss'
 import { validate } from './validation'
 
 
+export type TNumberType = 'whole' | 'integer'
+
 interface IProps {
   label?: string
+  type: TNumberType
   placeholder?: string
   name?: string
   defaultValue?: string
-  type?: 'text' | 'password' | 'number'
-  maxInputLength?: number
-  isRequired?: boolean
   disabled?: boolean
+  isRequired?: boolean
   readOnly?: boolean
   handleChange?: (value: string) => void
   handleBlur?: (value: string, isValid: boolean) => void
@@ -22,19 +23,18 @@ interface IProps {
   className?: string
 }
 
-const TextInput: React.FC<IProps> = (props) => {
+const NumberInput: React.FC<IProps> = (props) => {
   const {
     label,
-    maxInputLength,
-    isRequired,
     handleBlur,
     handleChange,
     handleFocus,
     disabled,
     readOnly,
-    placeholder,
-    name,
     type,
+    placeholder,
+    isRequired,
+    name,
     defaultValue,
     ...rest
   } = props
@@ -44,8 +44,7 @@ const TextInput: React.FC<IProps> = (props) => {
 
   const handleValidate = (str: string): boolean => {
     const status = validate({
-      maxInputLength,
-      isRequired,
+      type
     }, str)
 
     if (!status.valid && status.message) {
@@ -86,7 +85,7 @@ const TextInput: React.FC<IProps> = (props) => {
         {...rest}
         className={fieldClass}
         defaultValue={defaultValue}
-        type={type || 'text'}
+        type='text'
         placeholder={placeholder || ''}
         name={name}
         onBlur={update}
@@ -100,5 +99,5 @@ const TextInput: React.FC<IProps> = (props) => {
 }
 
 export {
-  TextInput,
+  NumberInput,
 }
