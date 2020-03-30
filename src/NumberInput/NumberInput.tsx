@@ -33,7 +33,6 @@ const NumberInput: React.FC<IProps> = (props) => {
     isRequired,
     onlyPositiveWholeNumber,
     name,
-    type,
     defaultValue,
     ...rest
   } = props
