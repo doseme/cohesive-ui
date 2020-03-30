@@ -1,5 +1,7 @@
+import { TNumberType } from './NumberInput'
+
 export interface IValidators {
-  onlyPositiveWholeNumber?: boolean
+  type: TNumberType
   isRequired?: boolean
 }
 
@@ -9,9 +11,14 @@ export interface IValidationResult {
 }
 
 // https://stackoverflow.com/questions/10834796/validate-that-a-string-is-a-positive-integer/10834843
-const isNormalInteger = (str: string): boolean => {
+const isWhole = (str: string): boolean => {
   const n = Math.floor(Number(str))
   return n !== Infinity && String(n) === str && n >= 0
+}
+
+const isInteger = (str: string): boolean => {
+  const n = Math.floor(Number(str))
+  return n !== Infinity && String(n) === str
 }
 
 const validate = (rules: IValidators, text: string): IValidationResult => {
@@ -22,10 +29,16 @@ const validate = (rules: IValidators, text: string): IValidationResult => {
     }
   }
 
-  // 0 or greater
-  if (rules.onlyPositiveWholeNumber && !isNormalInteger(text)) {
+  if (rules.type === 'whole' && !isWhole(text)) {
     return {
-      message: 'Only positive, whole numbers are allowed',
+      message: 'Only whole numbers are allowed',
+      valid: false,
+    }
+  }
+
+  if (rules.type === 'integer' && !isInteger(text)) {
+    return {
+      message: 'Only integers are allowed',
       valid: false,
     }
   }

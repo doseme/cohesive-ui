@@ -6,12 +6,14 @@ import '../shared/input.scss'
 import { validate } from './validation'
 
 
+export type TNumberType = 'whole' | 'integer'
+
 interface IProps {
   label?: string
+  type: TNumberType
   placeholder?: string
   name?: string
   defaultValue?: string
-  onlyPositiveWholeNumber?: boolean
   disabled?: boolean
   isRequired?: boolean
   readOnly?: boolean
@@ -29,9 +31,9 @@ const NumberInput: React.FC<IProps> = (props) => {
     handleFocus,
     disabled,
     readOnly,
+    type,
     placeholder,
     isRequired,
-    onlyPositiveWholeNumber,
     name,
     defaultValue,
     ...rest
@@ -42,7 +44,7 @@ const NumberInput: React.FC<IProps> = (props) => {
 
   const handleValidate = (str: string): boolean => {
     const status = validate({
-      onlyPositiveWholeNumber
+      type
     }, str)
 
     if (!status.valid && status.message) {

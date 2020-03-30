@@ -6,43 +6,57 @@ import {
 
 describe('validate', () => {
   const rules: IValidators = {
-    onlyPositiveWholeNumber: true,
+    type: 'whole',
     isRequired: true
-
   }
 
   const invalid: IValidationResult = {
     valid: false,
-    message: 'Only positive, whole numbers are allowed',
+    message: 'Only whole numbers are allowed',
   }
 
-  test('onlyPositiveWholeNumber invalid', () => {
-    const actual = validate(rules, 'asdf')
+  test('isWhole invalid', () => {
+    const actual = validate({ type: 'whole' }, 'asdf')
     expect(actual).toEqual(invalid)
   })
 
-  test('onlyPositiveWholeNumber invalid', () => {
-    const actual = validate(rules, '123.')
+  test('isWhole invalid', () => {
+    const actual = validate({ type: 'whole' }, '123.')
     expect(actual).toEqual(invalid)
   })
 
-  test('onlyPositiveWholeNumber invalid', () => {
-    const actual = validate(rules, '-123')
+  test('isWhole invalid', () => {
+    const actual = validate({ type: 'whole' }, '-123')
     expect(actual).toEqual(invalid)
   })
 
-  test('onlyPositiveWholeNumber invalid', () => {
-    const actual = validate(rules, '')
+  test('isRequired invalid', () => {
+    const actual = validate({ type: 'whole', isRequired: true }, '')
     expect(actual).toEqual({ valid: false, message: 'This field is required' })
   })
 
-  test('onlyPositiveWholeNumber valid', () => {
-    const actual = validate(rules, '123')
+  test('isWhole valid', () => {
+    const actual = validate({ type: 'whole' }, '123')
     expect(actual).toEqual({ valid: true })
   })
 
-  test('onlyPositiveWholeNumber valid', () => {
-    const actual = validate(rules, '0')
+  test('isWhole valid', () => {
+    const actual = validate({ type: 'whole' }, '0')
+    expect(actual).toEqual({ valid: true })
+  })
+
+  test('isInteger invalid', () => {
+    const actual = validate({ type: 'integer' }, '0.1')
+    expect(actual).toEqual({ valid: false, message: 'Only integers are allowed' })
+  })
+
+  test('isInteger valid', () => {
+    const actual = validate({ type: 'integer' }, '-1')
+    expect(actual).toEqual({ valid: true })
+  })
+
+  test('isInteger valid', () => {
+    const actual = validate({ type: 'integer' }, '1')
     expect(actual).toEqual({ valid: true })
   })
 })
