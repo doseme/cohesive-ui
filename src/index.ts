@@ -5,6 +5,7 @@ import { ContextMenu, IListItem } from './ContextMenu'
 import { Dropdown } from './Dropdown'
 import { Footer } from './Footer'
 import { IconButton } from './IconButton'
+import { NumberInput } from './NumberInput'
 import { PaginationPanel } from './PaginationPanel'
 import { Panel } from './Panel'
 import { 
@@ -36,6 +37,7 @@ export {
   IconButton,
   List,
   Nav,
+  NumberInput,
   PaginationPanel,
   Panel,
   SearchInput,
