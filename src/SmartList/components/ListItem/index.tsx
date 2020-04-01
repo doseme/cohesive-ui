@@ -17,9 +17,15 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     onClick,
   } = props
 
+  let className = `list-row align-items-center ${props.className || ''}`
+
+  if (onClick) {
+    className += 'hover-cursor'
+  }
+
   return (
     <Row
-      className={`list-row align-items-center ${props.className || ''}`}
+      className={className}
       onClick={onClick}
     >
       {
