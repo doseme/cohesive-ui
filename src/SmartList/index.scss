@@ -6,13 +6,16 @@
   background: white;
   border-bottom: 2px solid $lightgrey;
 
-  &:hover {
-    background: lighten($lightgrey, 10%);
-    cursor: pointer;
-  }
 
   button:nth-of-type(2n) {
     margin: 0 0 0 4px;
+  }
+}
+
+.hover-cursor {
+  &:hover {
+    background: lighten($lightgrey, 10%);
+    cursor: pointer;
   }
 }
 
@@ -20,4 +23,12 @@
   position: absolute;
   top: -48px;
   right: -15px;
+}
+
+.col {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

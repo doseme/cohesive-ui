@@ -54,7 +54,6 @@ const content: IRowElement[] = [
   },
   {
     id: 2,
-    onClick: () => console.log('Clicked on 2'),
     columns: [
       {
         name: 'id',
@@ -63,7 +62,34 @@ const content: IRowElement[] = [
       },
       {
         name: 'email',
-        element: <div>cc@dd.com</div>,
+        element: <div>not@clickable.com</div>,
+        text: 'cc@dd.com',
+      },
+      {
+        name: 'actions',
+        element: actions,
+      }
+    ]
+  },
+  {
+    id: 3,
+    columns: [
+      {
+        name: 'id',
+        element: <div>3</div>,
+        text: '3',
+      },
+      {
+        name: 'email',
+        element: (
+          <div>
+            Long long long Long long long Long long long Long long long Long long long Long long long
+            Long long long Long long long Long long long Long long long Long long long Long long long
+            Long long long Long long long Long long long Long long long Long long long Long long long
+            Long long long Long long long Long long long Long long long Long long long Long long long
+            Long long long Long long long Long long long Long long long Long long long Long long long
+          </div>
+        ),
         text: 'cc@dd.com',
       },
       {
