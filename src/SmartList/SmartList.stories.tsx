@@ -82,7 +82,7 @@ const content: IRowElement[] = [
       {
         name: 'email',
         element: (
-          <div style={{ textOverflow: 'ellipsis' }}>
+          <div>
             Long long long Long long long Long long long Long long long Long long long Long long long
             Long long long Long long long Long long long Long long long Long long long Long long long
             Long long long Long long long Long long long Long long long Long long long Long long long
