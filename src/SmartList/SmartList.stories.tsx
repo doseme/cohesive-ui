@@ -135,7 +135,7 @@ stories.add(
     <br />
     <br />
 
-    <h3>As a placeholder</h3>
+    <h3>Loading state</h3>
     <SmartList
       cols={cols}
       data={[]}

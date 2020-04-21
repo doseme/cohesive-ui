@@ -54,25 +54,36 @@ const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header 
     return acc
   }, [])
 
+  const displayContent = (): JSX.Element | null => {
+    if (loading) {
+      return <div>
+        <Row>
+          <Col className='list-placeholder'></Col>
+        </Row>
+      </div>
+    }
+
+    if (data.length) {
+      return <div>{listContent}</div>
+    }
+
+    if (textIfEmpty) {
+      return <div>
+        <Row className='list-row align-items-center'>
+          <Col>
+            {textIfEmpty} 
+          </Col>
+        </Row>
+      </div>
+    }
+
+    return null
+  }
+
   return (
     <>
       {header && headerContent}
-      <div>
-        {loading
-          ? <Row>
-              <Col className='list-placeholder'></Col>
-            </Row>
-          : data.length
-            ? listContent
-            : textIfEmpty
-              ? <Row className='list-row align-items-center'>
-                  <Col>
-                    {textIfEmpty} 
-                  </Col>
-                </Row>
-              : null
-        }
-      </div>
+      {displayContent()}
     </>
   )
 }
