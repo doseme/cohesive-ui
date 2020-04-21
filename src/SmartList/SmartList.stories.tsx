@@ -135,6 +135,15 @@ stories.add(
     <br />
     <br />
 
+    <h3>As a placeholder</h3>
+    <SmartList
+      cols={cols}
+      data={[]}
+      placeholderHeight={300}
+    />
+    <br />
+    <br />
+
     <h3>No header</h3>
     <SmartList
       cols={cols}

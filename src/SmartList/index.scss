@@ -12,6 +12,10 @@
   }
 }
 
+.list-placeholder {
+  background: white;
+}
+
 .hover-cursor {
   &:hover {
     background: lighten($lightgrey, 10%);

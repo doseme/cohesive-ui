@@ -11,6 +11,7 @@ export interface IProps {
   data: IRowElement[]
   cols: IHeaderItem[]
   textIfEmpty?: string
+  placeholderHeight?: number
   header?: boolean
 }
 
@@ -33,7 +34,7 @@ export interface IRowElement {
   className?: string
 }
 
-const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, header = true }) => {
+const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, placeholderHeight, header = true }) => {
   const headerContent = (
     <Header
       cols={cols}
@@ -65,7 +66,14 @@ const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, header = true })
                   {textIfEmpty} 
                 </Col>
               </Row>
-            : null}
+            : placeholderHeight
+              ? <Row>
+                  <Col style={{height: `${placeholderHeight}px`}} className='list-placeholder'>
+                    &nbsp;
+                  </Col>
+                </Row>
+              : null
+        }
       </div>
     </>
   )
