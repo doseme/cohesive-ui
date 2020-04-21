@@ -33,7 +33,24 @@ storiesOf('Components.Buttons', module)
                 <Button
                   onClick={() => { }}
                   variant={color}
+                  loading
+                >
+                  {color}
+                </Button>
+
+                <Button
+                  onClick={() => { }}
+                  variant={color}
                   disabled={true}
+                >
+                  {color} (disabled)
+                </Button>
+
+                <Button
+                  onClick={() => { }}
+                  variant={color}
+                  disabled={true}
+                  loading
                 >
                   {color} (disabled)
                 </Button>
