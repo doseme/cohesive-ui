@@ -1,6 +1,6 @@
 import React from 'react'
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { SizeProp } from '@fortawesome/fontawesome-svg-core'
 
 import './index.scss'
@@ -14,8 +14,8 @@ interface IProps {
 const Spinner: React.FC<IProps> = ({className, size, color}): JSX.Element => {
   return (
     <FontAwesomeIcon
-      className={className || 'fa-pulse'}
-      icon={faSpinner}
+      className={className || 'fa-spin'}
+      icon={faCircleNotch}
       size={size || 'sm'}
       color={color || 'black'}
     />

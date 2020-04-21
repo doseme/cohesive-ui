@@ -139,7 +139,7 @@ stories.add(
     <SmartList
       cols={cols}
       data={[]}
-      placeholderHeight={300}
+      loading
     />
     <br />
     <br />
