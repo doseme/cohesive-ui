@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, HTMLProps } from 'react'
-import { InputGroup, FormControl, FormControlProps, } from 'react-bootstrap'
-import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
+import { InputGroup, FormControl } from 'react-bootstrap'
 
 import { Button } from '../Button'
 import './index.scss'
@@ -58,9 +57,9 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
     }
   }, [defaultIndex, data, setSelectedItem])
 
-  const handleChange = (e: React.FormEvent<ReplaceProps<'input', BsPrefixProps<'input'> & FormControlProps>>) => {
+  const handleChange = (e: React.FormEvent<FormControl & HTMLInputElement>) => {
     if (e.currentTarget.value) {
-      setSearchText(e.currentTarget.value.toLowerCase())
+      setSearchText(e.currentTarget.value.toString().toLowerCase())
       return
     }
     setSearchText('')

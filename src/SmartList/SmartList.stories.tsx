@@ -135,6 +135,15 @@ stories.add(
     <br />
     <br />
 
+    <h3>Loading state</h3>
+    <SmartList
+      cols={cols}
+      data={[]}
+      loading
+    />
+    <br />
+    <br />
+
     <h3>No header</h3>
     <SmartList
       cols={cols}

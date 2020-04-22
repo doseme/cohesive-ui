@@ -1,10 +1,9 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
-import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FormControlProps } from 'react-bootstrap'
+import { FormControl } from 'react-bootstrap'
 
 import { TExtendsHTMLElement } from '../types'
 import './index.scss'
@@ -17,7 +16,7 @@ interface IProps {
 }
 
 const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element => {
-  const handleChange = (e: React.FormEvent<ReplaceProps<'input', BsPrefixProps<'input'> & FormControlProps>>) => {
+  const handleChange = (e: React.FormEvent<FormControl & HTMLInputElement>) => {
     const value = e.currentTarget && e.currentTarget.value
     props.onChange(value || '')
   }

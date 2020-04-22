@@ -21,6 +21,7 @@ import { Form } from './Form'
 import { TextInput } from './TextInput'
 import { SearchInput } from './SearchInput'
 import { DateInput } from './DateInput'
+import { Spinner } from './Spinner'
 
 
 export {
@@ -42,6 +43,7 @@ export {
   Panel,
   SearchInput,
   SmartList,
+  Spinner,
   TextInput,
 
   // Types

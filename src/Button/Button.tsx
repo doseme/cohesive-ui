@@ -1,6 +1,8 @@
 import React from 'react'
 import BsButton, { ButtonProps } from 'react-bootstrap/Button'
 
+import { Spinner } from '../Spinner'
+
 import './index.scss'
 
 export type TVariant = 'primary'
@@ -18,17 +20,27 @@ interface IProps extends ButtonProps {
   variant: TVariant
   className?: string
   shape?: 'circle' | 'rect'
+  loading?: boolean
 }
 
-const Button: React.FC<IProps> = ({ onClick, children, shape, className, ...rest }): JSX.Element => {
+const Button: React.FC<IProps> = ({ onClick, children, shape, className, loading, variant, ...rest }): JSX.Element => {
   return (
-    <BsButton
-      onClick={onClick}
-      className={`${shape} ${className}`}
-      {...rest}
-    >
-      {children}
-    </BsButton>
+    <div>
+      <BsButton
+        onClick={onClick}
+        className={`${shape} ${className}`}
+        variant={variant}
+        {...rest}
+      >
+        {loading
+          ? <div className='spinner-container'>
+              <div className='child-keep-width'>{children}</div>
+              <div className='spinner-display w-100'><Spinner color={variant}/></div>
+            </div>
+          : children
+        }
+      </BsButton>
+    </div>
   )
 }
 

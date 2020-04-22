@@ -12,6 +12,7 @@ export interface IProps {
   cols: IHeaderItem[]
   textIfEmpty?: string
   header?: boolean
+  loading?: boolean
 }
 
 export interface IHeaderItem {
@@ -33,7 +34,7 @@ export interface IRowElement {
   className?: string
 }
 
-const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, header = true }) => {
+const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header = true }) => {
   const headerContent = (
     <Header
       cols={cols}
@@ -53,20 +54,36 @@ const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, header = true })
     return acc
   }, [])
 
+  const displayContent = (): JSX.Element | null => {
+    if (loading) {
+      return <div>
+        <Row>
+          <Col className='list-placeholder'></Col>
+        </Row>
+      </div>
+    }
+
+    if (data.length) {
+      return <div>{listContent}</div>
+    }
+
+    if (textIfEmpty) {
+      return <div>
+        <Row className='list-row align-items-center'>
+          <Col>
+            {textIfEmpty} 
+          </Col>
+        </Row>
+      </div>
+    }
+
+    return null
+  }
+
   return (
     <>
       {header && headerContent}
-      <div>
-        {data.length
-          ? listContent
-          : textIfEmpty
-            ? <Row className='list-row align-items-center'>
-                <Col>
-                  {textIfEmpty} 
-                </Col>
-              </Row>
-            : null}
-      </div>
+      {displayContent()}
     </>
   )
 }
