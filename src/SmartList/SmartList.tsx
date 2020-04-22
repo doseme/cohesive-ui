@@ -37,7 +37,7 @@ export interface IRowElement {
 const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header = true }) => {
   const headerContent = (
     <Header
-      cols={loading ? [] : cols}
+      cols={cols}
     />
   )
 
