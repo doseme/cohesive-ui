@@ -10,13 +10,18 @@ import Col from 'react-bootstrap/Col'
 export interface IProps {
   data: IRowElement[]
   cols: IHeaderItem[]
+  selectableItems?: boolean
   textIfEmpty?: string
   header?: boolean
   loading?: boolean
 }
 
+// If displayName is falsy, name will be used for the column title
+// EXCEPT in the case of an empty string, which will show a blank column title.
+// Implemented this way for backward compatibility with pre 0.9.0
 export interface IHeaderItem {
   name: string
+  displayName?: string 
   className?: string
   handleSort?: (column: string) => void
 }
@@ -32,11 +37,13 @@ export interface IRowElement {
   columns: IColumnElement[]
   onClick?: (event: React.MouseEvent) => any
   className?: string
+  disabled?: boolean
 }
 
-const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header = true }) => {
+const SmartList: React.FC<IProps> = ({ data, cols, selectableItems, textIfEmpty, loading, header = true }) => {
   const headerContent = (
     <Header
+      selectOffset={selectableItems}
       cols={cols}
     />
   )
@@ -46,7 +53,9 @@ const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header 
       <ListItem
         onClick={row.onClick}
         key={row.id}
+        rowId={row.id}
         columns={row.columns}
+        disabled={row.disabled}
         className={row.className}
       />
     )

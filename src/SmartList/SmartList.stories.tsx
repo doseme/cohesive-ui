@@ -114,6 +114,21 @@ const cols: IHeaderItem[] = [
   }
 ]
 
+const colsBlankActions: IHeaderItem[] = [
+  {
+    name: 'ID',
+    handleSort: () => {/***/}
+  },
+  {
+    name: 'Email',
+    handleSort: () => {/***/}
+  },
+  {
+    name: 'Actions',
+    displayName: ''
+  }
+]
+
 stories.add(
   'JSX',
   () =>
@@ -163,6 +178,15 @@ stories.add(
       cols={cols}
       data={content}
       header={false}
+    />
+
+    <br />
+    <br />
+
+    <h3>Column without title</h3>
+    <SmartList
+      cols={colsBlankActions}
+      data={content}
     />
   </div>
 )
