@@ -21,7 +21,7 @@ export interface IProps {
 // Implemented this way for backward compatibility with pre 0.9.0
 export interface IHeaderItem {
   name: string
-  displayName?: string 
+  displayName?: string
   className?: string
   handleSort?: (column: string) => void
 }
