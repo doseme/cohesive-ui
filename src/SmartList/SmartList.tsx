@@ -29,6 +29,7 @@ export interface IHeaderItem {
   name: string
   displayName?: string
   className?: string
+  sortable?: boolean
   handleSort?: (column: string) => void
 }
 

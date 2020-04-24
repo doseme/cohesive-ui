@@ -117,11 +117,13 @@ const cols: IHeaderItem[] = [
 const colsBlankActions: IHeaderItem[] = [
   {
     name: 'ID',
-    handleSort: () => {/***/}
+    handleSort: () => {/***/},
+    sortable: true
   },
   {
     name: 'Email',
-    handleSort: () => {/***/}
+    handleSort: () => {/***/},
+    sortable: true
   },
   {
     name: 'Actions',

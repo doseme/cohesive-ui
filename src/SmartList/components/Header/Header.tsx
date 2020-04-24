@@ -11,8 +11,6 @@ import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { NAVY } from '../../../style/colors'
 
 const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) => {
-  const noop = () => {}
-
   const [allChecked, toggleAllChecked] = useState(false)
   const [sortColumn, setSortColumn] = useState<string>(cols[0].name)
   const [sortAscending, setSortAscending] = useState(true)
@@ -104,6 +102,10 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
     toggleAllChecked(!allChecked)
   }
 
+  const sortable = (x: IHeaderItem): boolean => {
+    return !!onSort && !(useDisplayName(x) && x.displayName === '') && !!x.sortable
+  }
+
   return (
     <Row
       id='smart-list-header'
@@ -123,10 +125,10 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
       {cols.map((x, idx) => 
         <Col 
           key={`header-column-${x.name}`}
-          onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleSortButtonClicked(idx)}
+          onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => sortable(x) && handleSortButtonClicked(idx)}
         >
           {nameDisplay(x)}
-          {onSort && !(useDisplayName(x) && x.displayName === '') && sortButton(x)}
+          {sortable(x) && sortButton(x)}
         </Col>
       )}
     </Row>
