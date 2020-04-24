@@ -139,22 +139,33 @@ stories.add(
       }, {})
     )
 
+    const [sortColIndex, setSortColIndex] = useState(0)
+    const [sortColAscending, setSortColAscending] = useState(true)
+
+    const handleSort = (colIndex: number, ascending: boolean): void => {
+      setSortColIndex(colIndex)
+      setSortColAscending(ascending)
+    }
+    
+    const sortedContent = (content: IRowElement[]): IRowElement[] => {
+      return content.concat().sort((a, b) => {
+        const one = a.columns[sortColIndex].text || ''
+        const two = b.columns[sortColIndex].text || ''
+
+        if (sortColAscending) {
+          return (one > two ? 1 : -1)
+        }
+
+        return (one < two ? 1 : -1)
+      })
+    }
+
     const updateSelected = (selectedRows: ISelectedRows): void => {
       setSelected(selectedRows)
     }
 
     return (
       <div className='m-5'>
-        <h3>Selectable list items</h3>
-        <SmartList
-          cols={cols}
-          data={content}
-          selectedRows={selected}
-          updateSelected={updateSelected}
-        />
-        <br />
-        <br />
-
         <h3>Plain list with items</h3>
         <SmartList
           cols={cols}
@@ -209,6 +220,18 @@ stories.add(
         <SmartList
           cols={colsBlankActions}
           data={content}
+        />
+
+        <br />
+        <br />
+
+        <h3>Selectable list items, sortable columns, nameless column for Actions</h3>
+        <SmartList
+          cols={colsBlankActions}
+          data={sortedContent(content)}
+          selectedRows={selected}
+          onRowSelect={updateSelected}
+          onSort={handleSort}
         />
       </div>
     )

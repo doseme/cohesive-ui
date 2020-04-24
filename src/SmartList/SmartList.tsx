@@ -15,7 +15,8 @@ export interface IProps {
   data: IRowElement[]
   cols: IHeaderItem[]
   selectedRows?: ISelectedRows
-  updateSelected?: (selected: ISelectedRows) => void
+  onRowSelect?: (selected: ISelectedRows) => void
+  onSort?: (colIndex: number, ascending: boolean) => void
   textIfEmpty?: string
   header?: boolean
   loading?: boolean
@@ -49,14 +50,15 @@ const SmartList: React.FC<IProps> = ({
   data,
   cols,
   selectedRows,
-  updateSelected,
+  onRowSelect,
+  onSort,
   textIfEmpty,
   loading,
   header = true 
 }) => {
 
   const handleSelectAll = (all: boolean): void => {
-    if (updateSelected) {
+    if (onRowSelect) {
       const newState: ISelectedRows = data.reduce<ISelectedRows>((acc, row) => {
         acc[row.id] = all
         return acc
@@ -64,12 +66,12 @@ const SmartList: React.FC<IProps> = ({
 
       console.log(newState)
 
-      updateSelected(newState)
+      onRowSelect(newState)
     }
   }
 
   const handleSelect = (id: string | number, selected: boolean): void => {
-    if (updateSelected && selectedRows) {
+    if (onRowSelect && selectedRows) {
       const newState: ISelectedRows = data.reduce<ISelectedRows>((acc, row) => {
         if (id === row.id) {
           acc[row.id] = selected
@@ -82,7 +84,7 @@ const SmartList: React.FC<IProps> = ({
       
       console.log(newState)
 
-      updateSelected(newState)
+      onRowSelect(newState)
     }
   }
 
@@ -96,11 +98,11 @@ const SmartList: React.FC<IProps> = ({
     }
   }
 
-
   const headerContent = (
     <Header
       selectAllCol={!!selectedRows}
       onSelectAll={handleSelectAll}
+      onSort={onSort}
       cols={cols}
     />
   )
