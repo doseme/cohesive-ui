@@ -2,5 +2,6 @@ import { IHeaderItem } from '../../SmartList'
 
 export interface IProps {
   cols: IHeaderItem[]
-  selectOffset?: boolean
+  selectAllCol?: boolean
+  onSelectAll?: (checked: boolean) => void
 }

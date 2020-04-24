@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { SmartList } from './SmartList'
+import { SmartList, ISelectedRows } from './SmartList'
 import { IRowElement, IHeaderItem } from './SmartList'
 import { Button } from '../Button'
 
@@ -43,7 +43,7 @@ const content: IRowElement[] = [
       },
       {
         name: 'email',
-        element: <div>aa@bb.com</div>,
+        element: <div><a href='mailto:aa@bb.com'>aa@bb.com</a></div>,
         text: 'aa@bb.com',
       },
       {
@@ -62,7 +62,7 @@ const content: IRowElement[] = [
       },
       {
         name: 'email',
-        element: <div>not@clickable.com</div>,
+        element: <div>selectable@not-clickable.com</div>,
         text: 'cc@dd.com',
       },
       {
@@ -131,62 +131,86 @@ const colsBlankActions: IHeaderItem[] = [
 
 stories.add(
   'JSX',
-  () =>
-  <div className='m-5'>
-    <h3>Plain list with items</h3>
-    <SmartList
-      cols={cols}
-      data={content}
-    />
-    <br />
-    <br />
+  () => {
+    const [selected, setSelected] = useState<ISelectedRows>(
+      content.reduce<ISelectedRows>((acc, row) => {
+        acc[row.id] = false
+        return acc
+      }, {})
+    )
 
-    <h3>Custom empty table message</h3>
-    <SmartList
-      cols={cols}
-      data={[]}
-      textIfEmpty='No data in table.'
-    />
-    <br />
-    <br />
+    const updateSelected = (selectedRows: ISelectedRows): void => {
+      setSelected(selectedRows)
+    }
 
-    <h3>Loading state</h3>
-    <SmartList
-      cols={cols}
-      data={[]}
-      loading
-    />
-    <br />
-    <br />
+    return (
+      <div className='m-5'>
+        <h3>Selectable list items</h3>
+        <SmartList
+          cols={cols}
+          data={content}
+          selectedRows={selected}
+          updateSelected={updateSelected}
+        />
+        <br />
+        <br />
 
-    <h3>No header</h3>
-    <SmartList
-      cols={cols}
-      data={content}
-      header={false}
-    />
-    <br />
-    <br />
+        <h3>Plain list with items</h3>
+        <SmartList
+          cols={cols}
+          data={content}
+        />
+        <br />
+        <br />
 
-    <h3>Combining two lists</h3>
-    <SmartList
-      cols={cols}
-      data={[]}
-      textIfEmpty='This is an empty row message, and any data below this is in a separate, headerless smart list!'
-    />
-    <SmartList
-      cols={cols}
-      data={content}
-      header={false}
-    />
+        <h3>Custom empty table message</h3>
+        <SmartList
+          cols={cols}
+          data={[]}
+          textIfEmpty='No data in table.'
+        />
+        <br />
+        <br />
 
-    <br />
-    <br />
+        <h3>Loading state</h3>
+        <SmartList
+          cols={cols}
+          data={[]}
+          loading
+        />
+        <br />
+        <br />
 
-    <h3>Column without title</h3>
-    <SmartList
-      cols={colsBlankActions}
-      data={content}
-    />
-  </div>
+        <h3>No header</h3>
+        <SmartList
+          cols={cols}
+          data={content}
+          header={false}
+        />
+        <br />
+        <br />
+
+        <h3>Combining two lists</h3>
+        <SmartList
+          cols={cols}
+          data={[]}
+          textIfEmpty='This is an empty row message, and any data below this is in a separate, headerless smart list!'
+        />
+        <SmartList
+          cols={cols}
+          data={content}
+          header={false}
+        />
+
+        <br />
+        <br />
+
+        <h3>Column without title</h3>
+        <SmartList
+          cols={colsBlankActions}
+          data={content}
+        />
+      </div>
+    )
+  }
 )

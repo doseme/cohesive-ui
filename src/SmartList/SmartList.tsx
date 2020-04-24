@@ -7,10 +7,15 @@ import './index.scss'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+export interface ISelectedRows {
+  [id: string]: boolean
+}
+
 export interface IProps {
   data: IRowElement[]
   cols: IHeaderItem[]
-  selectableItems?: boolean
+  selectedRows?: ISelectedRows
+  updateSelected?: (selected: ISelectedRows) => void
   textIfEmpty?: string
   header?: boolean
   loading?: boolean
@@ -40,10 +45,62 @@ export interface IRowElement {
   disabled?: boolean
 }
 
-const SmartList: React.FC<IProps> = ({ data, cols, selectableItems, textIfEmpty, loading, header = true }) => {
+const SmartList: React.FC<IProps> = ({ 
+  data,
+  cols,
+  selectedRows,
+  updateSelected,
+  textIfEmpty,
+  loading,
+  header = true 
+}) => {
+
+  const handleSelectAll = (all: boolean): void => {
+    if (updateSelected) {
+      const newState: ISelectedRows = data.reduce<ISelectedRows>((acc, row) => {
+        acc[row.id] = all
+        return acc
+      }, {})
+
+      console.log(newState)
+
+      updateSelected(newState)
+    }
+  }
+
+  const handleSelect = (id: string | number, selected: boolean): void => {
+    if (updateSelected && selectedRows) {
+      const newState: ISelectedRows = data.reduce<ISelectedRows>((acc, row) => {
+        if (id === row.id) {
+          acc[row.id] = selected
+          return acc
+        }
+
+        acc[row.id] = selectedRows[row.id]
+        return acc
+      }, {})
+      
+      console.log(newState)
+
+      updateSelected(newState)
+    }
+  }
+
+  const handleClick = (row: IRowElement, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (row.onClick) {
+      row.onClick(event)
+    }
+
+    if (selectedRows) {
+      handleSelect(row.id, !selectedRows[row.id])
+    }
+  }
+
+
   const headerContent = (
     <Header
-      selectOffset={selectableItems}
+      selectAllCol={!!selectedRows}
+      onSelectAll={handleSelectAll}
       cols={cols}
     />
   )
@@ -51,12 +108,15 @@ const SmartList: React.FC<IProps> = ({ data, cols, selectableItems, textIfEmpty,
   const listContent = data.reduce<JSX.Element[]>((acc, row) => {
     acc = acc.concat(
       <ListItem
-        onClick={row.onClick}
+        onClick={(e) => handleClick(row, e)}
         key={row.id}
         rowId={row.id}
         columns={row.columns}
         disabled={row.disabled}
         className={row.className}
+        selectable={!!selectedRows}
+        selected={selectedRows && selectedRows[row.id]}
+        onSelect={handleSelect}
       />
     )
 

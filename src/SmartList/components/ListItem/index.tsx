@@ -12,6 +12,7 @@ interface IProps {
   className?: string
   selectable?: boolean // backwards compatibilty < 0.9.0
   selected?: boolean
+  onSelect?: (id: string | number, newState: boolean) => void
   disabled?: boolean
 }
 
@@ -21,9 +22,14 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     onClick,
     selectable,
     selected,
+    onSelect,
     disabled,
     rowId
   } = props
+  
+  const handleSelected = (): void => {
+    onSelect && onSelect(rowId, !selected)
+  }
 
   let className = `list-row align-items-center ${props.className || ''}`
 
@@ -31,7 +37,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     className += 'selected '
   }
 
-  if (onClick) {
+  if (onClick || selectable) {
     className += 'hover-cursor'
   }
 
@@ -44,12 +50,14 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
         selectable && <Col
           key={`list-select-${rowId}`}
           data-test={`check-col-${rowId}`}
+          xs={1}
         >
           <input
             type='checkbox'
             id={`list-check-${rowId}`}
             disabled={disabled}
             checked={selected || false}
+            onClick={handleSelected}
           />
         </Col>
       }
