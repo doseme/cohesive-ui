@@ -65,8 +65,6 @@ const SmartList: React.FC<IProps> = ({
         return acc
       }, {})
 
-      console.log(newState)
-
       onRowSelect(newState)
     }
   }
@@ -83,8 +81,6 @@ const SmartList: React.FC<IProps> = ({
         return acc
       }, {})
       
-      console.log(newState)
-
       onRowSelect(newState)
     }
   }

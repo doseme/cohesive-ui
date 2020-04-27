@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 import { IProps } from './types'
 import { IHeaderItem } from '../../SmartList'
-
-import './index.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { NAVY } from '../../../style/colors'
+import './index.scss'
 
 const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) => {
   const [allChecked, toggleAllChecked] = useState(false)
