@@ -3,3 +3,13 @@
 .panel-outer {
   box-shadow: 2px 2px 2px $shadow;
 }
+
+.panel-section {
+  width: 100%;
+  padding: 1em 2.75em 1em 1.75em;
+  border-top: 1px solid $lightgrey;
+}
+
+.panel-section-side {
+  border-left: 20px solid $skyblue;
+}
