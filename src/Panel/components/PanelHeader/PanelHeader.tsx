@@ -37,7 +37,7 @@ const PanelHeader: React.FC<IProps> = ({ title, info }) => {
   }
 
   return (
-    <div className='panel-header'>
+    <div className='panel-header d-flex align-items-center'>
       {title}
       {getInfo()}
     </div>
