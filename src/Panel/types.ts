@@ -7,6 +7,6 @@ export interface IProps {
   title?: string
   className?: string
   bodyClassName?: string
-  sections?: ISection[]
+  sections: ISection[]
   info?: string
 }

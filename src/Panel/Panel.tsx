@@ -23,7 +23,7 @@ const Panel: React.FC<IProps> = ({ title, info, bodyClassName, sections, childre
   const body: JSX.Element = (
     <PanelBody bodyClassName={bodyClassName}>
       {
-        sections?.map(x => 
+        sections.map(x => 
           <div className='d-flex'>
             <div className='panel-section-side'></div>
             <div className='panel-section' key={x.id}>{x.element}</div>
