@@ -3,7 +3,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { IColumnElement } from '../../SmartList'
-import './list-item.scss'
 
 interface IProps {
   columns: IColumnElement[]

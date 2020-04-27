@@ -4,9 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import { IProps } from '../types'
 import { ListItem } from './components/ListItem'
 import { Header } from './components/Header'
-
 import './index.scss'
-
 
 const BasicList: React.FC<IProps> = (props) => {
   const displayContent = (): JSX.Element | null => {
