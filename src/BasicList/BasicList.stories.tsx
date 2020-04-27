@@ -1,11 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { SmartList } from './SmartList'
+import { BasicList } from './BasicList'
 import { IRowElement, IHeaderItem } from '../types'
 import { Button } from '../Button'
 
-const stories = storiesOf('Components.SmartList', module)
+const stories = storiesOf('Components.BasicList', module)
 
 const actions = (
   <div className='d-flex'>
@@ -16,17 +16,7 @@ const actions = (
         console.log('Clicked on action 1')
       }}
     >
-      Action 1
-    </Button>
-
-    <Button
-      variant='warning'
-      onClick={(e: React.MouseEvent) => {
-        e.stopPropagation()
-        console.log('Clicked on action 2')
-      }}
-    >
-      Action 2
+      ...
     </Button>
   </div>
 )
@@ -83,11 +73,7 @@ const content: IRowElement[] = [
         name: 'email',
         element: (
           <div>
-            Long long long Long long long Long long long Long long long Long long long Long long long
-            Long long long Long long long Long long long Long long long Long long long Long long long
-            Long long long Long long long Long long long Long long long Long long long Long long long
-            Long long long Long long long Long long long Long long long Long long long Long long long
-            Long long long Long long long Long long long Long long long Long long long Long long long
+            cc@dd.com
           </div>
         ),
         text: 'cc@dd.com',
@@ -103,11 +89,9 @@ const content: IRowElement[] = [
 const cols: IHeaderItem[] = [
   {
     name: 'ID',
-    handleSort: () => {/***/}
   },
   {
     name: 'Email',
-    handleSort: () => {/***/}
   },
   {
     name: 'Actions',
@@ -119,15 +103,16 @@ stories.add(
   () =>
   <div className='m-5'>
     <h3>Plain list with items</h3>
-    <SmartList
+    <BasicList
+      header={true}
       cols={cols}
       data={content}
     />
     <br />
     <br />
 
-    <h3>Custom empty table message</h3>
-    <SmartList
+    {/* <h3>Custom empty table message</h3>
+    <BasicList
       cols={cols}
       data={[]}
       textIfEmpty='No data in table.'
@@ -136,7 +121,7 @@ stories.add(
     <br />
 
     <h3>Loading state</h3>
-    <SmartList
+    <BasicList
       cols={cols}
       data={[]}
       loading
@@ -145,7 +130,7 @@ stories.add(
     <br />
 
     <h3>No header</h3>
-    <SmartList
+    <BasicList
       cols={cols}
       data={content}
       header={false}
@@ -154,15 +139,16 @@ stories.add(
     <br />
 
     <h3>Combining two lists</h3>
-    <SmartList
+    <BasicList
       cols={cols}
       data={[]}
       textIfEmpty='This is an empty row message, and any data below this is in a separate, headerless smart list!'
     />
-    <SmartList
+
+    <BasicList
       cols={cols}
       data={content}
       header={false}
-    />
+    /> */}
   </div>
 )

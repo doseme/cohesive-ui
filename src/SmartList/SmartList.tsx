@@ -1,38 +1,11 @@
 import React from 'react'
-
-import { Header } from './components/Header'
-import { ListItem } from './components/ListItem'
-
-import './index.scss'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export interface IProps {
-  data: IRowElement[]
-  cols: IHeaderItem[]
-  textIfEmpty?: string
-  header?: boolean
-  loading?: boolean
-}
-
-export interface IHeaderItem {
-  name: string
-  className?: string
-  handleSort?: (column: string) => void
-}
-
-export interface IColumnElement {
-  name: string
-  element?: JSX.Element
-  text?: string
-}
-
-export interface IRowElement {
-  id: number | string
-  columns: IColumnElement[]
-  onClick?: (event: React.MouseEvent) => any
-  className?: string
-}
+import { Header } from './components/Header'
+import { ListItem } from './components/ListItem'
+import { IProps } from '../types'
+import './index.scss'
 
 const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header = true }) => {
   const headerContent = (
