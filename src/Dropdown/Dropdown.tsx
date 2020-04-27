@@ -1,29 +1,34 @@
 import React, { useState, useRef, useEffect, HTMLProps } from 'react'
-import { InputGroup, FormControl, FormControlProps, } from 'react-bootstrap'
-import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
+import { InputGroup, FormControl } from 'react-bootstrap'
 
 import { Button } from '../Button'
 import './index.scss'
 
+interface IDropdownItem {
+  label?: string
+  value: string
+}
+
 interface OverrideProps {
   label?: string
+  className?: string
   isRequired?: boolean
-  data?: string[]
+  data?: IDropdownItem[]
   placeholder: string
   onSelect?: (item: string) => void
   searchIcon?: JSX.Element
   showSearchThreshold?: number
-  defaultValue?: string
+  defaultIndex?: number
 }
 
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 type TProps = Omit<HTMLProps<HTMLElement>, keyof OverrideProps> & OverrideProps
 
-const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, placeholder, defaultValue, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultIndex, searchIcon, onSelect, showSearchThreshold = 10 }) => {
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
-  const [selectedItem, setSelectedItem] = useState('')
+  const [selectedItem, setSelectedItem] = useState<IDropdownItem>()
   const node = useRef<HTMLDivElement>(null)
 
   const handleClickAway = (e: MouseEvent) => {
@@ -47,14 +52,14 @@ const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, pla
   }, [handleClickAway])
 
   useEffect(() => {
-    if (defaultValue && data && data.includes(defaultValue)) {
-      setSelectedItem(defaultValue)
+    if (defaultIndex && data) {
+      setSelectedItem(data[defaultIndex])
     }
-  }, [defaultValue, data, setSelectedItem])
+  }, [defaultIndex, data, setSelectedItem])
 
-  const handleChange = (e: React.FormEvent<ReplaceProps<'input', BsPrefixProps<'input'> & FormControlProps>>) => {
+  const handleChange = (e: React.FormEvent<FormControl & HTMLInputElement>) => {
     if (e.currentTarget.value) {
-      setSearchText(e.currentTarget.value.toLowerCase())
+      setSearchText(e.currentTarget.value.toString().toLowerCase())
       return
     }
     setSearchText('')
@@ -83,29 +88,30 @@ const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, pla
     </InputGroup>
   )
 
-  const listItems = (items: string[], callback: (item: string) => void) => (
+  const listItems = (items: IDropdownItem[], callback: (item: string) => void) => (
     <>
       <div 
         className='dropdown-placeholder'
         data-test-placeholder
-      >{selectedItem || placeholder}</div>
+      >{selectedItem ? selectedItem.label || selectedItem.value : placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 
-      <ul>
+      <ul className='dropdown-list'>
         {
           items.map(item =>
             <li 
-              data-test={item}
-              key={item}
+              data-test={item.label || item.value}
+              key={item.value}
               onClick={() => {
                   setSelectedItem(item)
-                  callback(item)
+                  callback(item.value)
+                  setSearchText('')
                   setShowContent(false)
                 }
               }
             >
-              {item}
+              {item.label || item.value}
             </li>
           )
         }
@@ -116,10 +122,10 @@ const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, pla
   let filteredData = data;
 
   if (data && searchText) {
-    filteredData = data.filter(x =>  x.toLowerCase().includes(searchText))
+    filteredData = data.filter(x => (x.label || x.value).toLowerCase().includes(searchText))
   }
 
-  const getDefaultValue = defaultValue && (data && data.includes(defaultValue) ? defaultValue : undefined)
+  const defaultLabel = defaultIndex && (data ? (data[defaultIndex].label || data[defaultIndex].value) : undefined)
 
   const content = showContent 
     ? 
@@ -135,7 +141,7 @@ const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, pla
     : null
 
   return (
-    <>
+    <div className={className}>
       <div className='d-flex'>
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
       </div>
@@ -150,11 +156,11 @@ const Dropdown: React.FC<TProps> = ({ id, children, label, isRequired, data, pla
           data-test-current-item
           onClick={() => setShowContent(!showContent)}
         >
-          {selectedItem || getDefaultValue || placeholder}
+          {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || placeholder}
         </div>
         {content}
       </div>
-    </>
+    </div>
   )
 }
 

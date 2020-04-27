@@ -11,6 +11,7 @@ storiesOf('Components.Form.DateInput', module)
       <>
         <div className='m-4'>
           <DateInput
+            name='start'
             label='This is a date field. Currently date fields are required by default'
             handleChange={noop}
             handleBlur={noop}
@@ -20,6 +21,7 @@ storiesOf('Components.Form.DateInput', module)
 
         <div className='m-4'>
           <DateInput
+            name='start'
             label='This date field does not accept past dates'
             handleChange={noop}
             handleBlur={noop}

@@ -50,6 +50,11 @@ ul {
   z-index: 5;
 }
 
+.dropdown-list {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
 .active {
   border-color: $navy;
 }

@@ -80,6 +80,7 @@ const DateInput: React.FC<IProps> = (props) => {
       </div>
       <Form.Control
         {...rest}
+        data-testid={name}
         className={fieldClass}
         defaultValue={defaultValue}
         type='date'

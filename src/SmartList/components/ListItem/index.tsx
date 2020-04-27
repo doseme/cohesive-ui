@@ -3,11 +3,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { IColumnElement } from '../../SmartList'
-import './index.scss'
+import '../../index.scss'
 
 interface IProps {
   columns: IColumnElement[]
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => any
+  className?: string
 }
 
 const ListItem: React.FC<IProps> = (props: IProps) => {
@@ -16,9 +17,15 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     onClick,
   } = props
 
+  let className = `list-row align-items-center ${props.className || ''}`
+
+  if (onClick) {
+    className += 'hover-cursor'
+  }
+
   return (
     <Row
-      className='list-row align-items-center'
+      className={className}
       onClick={onClick}
     >
       {

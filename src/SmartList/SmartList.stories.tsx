@@ -54,7 +54,6 @@ const content: IRowElement[] = [
   },
   {
     id: 2,
-    onClick: () => console.log('Clicked on 2'),
     columns: [
       {
         name: 'id',
@@ -63,7 +62,34 @@ const content: IRowElement[] = [
       },
       {
         name: 'email',
-        element: <div>cc@dd.com</div>,
+        element: <div>not@clickable.com</div>,
+        text: 'cc@dd.com',
+      },
+      {
+        name: 'actions',
+        element: actions,
+      }
+    ]
+  },
+  {
+    id: 3,
+    columns: [
+      {
+        name: 'id',
+        element: <div>3</div>,
+        text: '3',
+      },
+      {
+        name: 'email',
+        element: (
+          <div>
+            Long long long Long long long Long long long Long long long Long long long Long long long
+            Long long long Long long long Long long long Long long long Long long long Long long long
+            Long long long Long long long Long long long Long long long Long long long Long long long
+            Long long long Long long long Long long long Long long long Long long long Long long long
+            Long long long Long long long Long long long Long long long Long long long Long long long
+          </div>
+        ),
         text: 'cc@dd.com',
       },
       {
@@ -92,19 +118,51 @@ stories.add(
   'JSX',
   () =>
   <div className='m-5'>
+    <h3>Plain list with items</h3>
     <SmartList
       cols={cols}
       data={content}
     />
-
     <br />
-    <h3>With a search input</h3>
     <br />
 
+    <h3>Custom empty table message</h3>
+    <SmartList
+      cols={cols}
+      data={[]}
+      textIfEmpty='No data in table.'
+    />
+    <br />
+    <br />
+
+    <h3>Loading state</h3>
+    <SmartList
+      cols={cols}
+      data={[]}
+      loading
+    />
+    <br />
+    <br />
+
+    <h3>No header</h3>
     <SmartList
       cols={cols}
       data={content}
-      search={true}
+      header={false}
+    />
+    <br />
+    <br />
+
+    <h3>Combining two lists</h3>
+    <SmartList
+      cols={cols}
+      data={[]}
+      textIfEmpty='This is an empty row message, and any data below this is in a separate, headerless smart list!'
+    />
+    <SmartList
+      cols={cols}
+      data={content}
+      header={false}
     />
   </div>
 )
