@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { IProps } from './types'
+import { TProps } from './types'
 import { PanelHeader } from './components/PanelHeader'
 import { PanelBody } from './components/PanelBody'
 
 import './index.scss'
 
-const Panel: React.FC<IProps> = ({ title, info, bodyClassName, sections, children }) => {
+const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, children }) => {
   const getTitle = (): JSX.Element | null => {
     if (!title) {
       return null
