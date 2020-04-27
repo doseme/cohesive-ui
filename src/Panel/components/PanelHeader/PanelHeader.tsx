@@ -1,5 +1,6 @@
 import React from 'react'
-import * as BS from 'react-bootstrap'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
@@ -12,19 +13,19 @@ const PanelHeader: React.FC<IPanelHeaderProps> = ({ title, info }) => {
     if (info) {
       return (
         <span className='info-icon'>
-          <BS.OverlayTrigger
+          <OverlayTrigger
             placement='top'
             overlay={
-              <BS.Tooltip id='tooltip-tdm'>
+              <Tooltip id='tooltip-tdm'>
                 {info}
-              </BS.Tooltip>
+              </Tooltip>
             }
           >
             <FontAwesomeIcon
               className='ml-1'
               icon={faQuestionCircle}
             />
-          </BS.OverlayTrigger>
+          </OverlayTrigger>
         </span>
       )
     }
