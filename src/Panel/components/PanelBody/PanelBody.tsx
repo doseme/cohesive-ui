@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { IPanelBodyProps } from '../../types'
+import { IPanelBodyProps } from '../../Panel'
 import './index.scss'
 
 const PanelBody: React.FC<IPanelBodyProps> = ({ bodyClassName, children }) => {

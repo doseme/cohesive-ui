@@ -3,7 +3,7 @@ import * as BS from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
-import { IPanelHeaderProps } from '../../types'
+import { IPanelHeaderProps } from '../../Panel'
 
 import './index.scss'
 

@@ -1,10 +1,30 @@
 import React from 'react'
 
-import { TProps } from './types'
 import { PanelHeader } from './components/PanelHeader'
 import { PanelBody } from './components/PanelBody'
 
 import './index.scss'
+
+export interface ISection {
+  id: number
+  element: JSX.Element
+}
+
+export interface IPanelHeaderProps { 
+  title?: string
+  info?: string
+}
+
+export interface IPanelBodyProps {
+  bodyClassName?: string
+}
+
+export interface IPanelProps {
+  sections: ISection[]
+  className?: string
+}
+
+export type TProps = IPanelProps & IPanelHeaderProps & IPanelBodyProps
 
 const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, children }) => {
   const getTitle = (): JSX.Element | null => {
