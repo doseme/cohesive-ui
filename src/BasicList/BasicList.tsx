@@ -1,10 +1,18 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 
-import { IProps } from '../types'
+import { IRowElement, IHeaderItem } from '../types'
 import { ListItem } from './components/ListItem'
 import { Header } from './components/Header'
 import './index.scss'
+
+export interface IProps {
+  data: IRowElement[]
+  cols: IHeaderItem[]
+  textIfEmpty?: string
+  header?: boolean
+  loading?: boolean
+}
 
 const BasicList: React.FC<IProps> = (props) => {
   const displayContent = (): JSX.Element | null => {

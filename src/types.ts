@@ -5,14 +5,6 @@ import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
 export type TFormControlEvent = ReplaceProps<React.ReactType<any>, BsPrefixProps<React.ReactType<any>> & FormControlProps>
 export type TExtendsHTMLElement<T> = Omit<HTMLProps<HTMLElement>, keyof T> & T
 
-export interface IProps {
-  data: IRowElement[]
-  cols: IHeaderItem[]
-  textIfEmpty?: string
-  header?: boolean
-  loading?: boolean
-}
-
 export interface IHeaderItem {
   name: string
   className?: string

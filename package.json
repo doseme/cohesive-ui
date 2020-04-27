@@ -1,6 +1,6 @@
 {
   "name": "cohesive-ui",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -44,7 +44,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "build": "yarn webpack --mode=production --types",
+    "build": "yarn webpack --mode=development --types",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "test": "jest",
     "storybook": "start-storybook -p 6006"

@@ -4,8 +4,16 @@ import Col from 'react-bootstrap/Col'
 
 import { Header } from './components/Header'
 import { ListItem } from './components/ListItem'
-import { IProps } from '../types'
+import { IRowElement, IHeaderItem } from '../types'
 import './index.scss'
+
+export interface IProps {
+  data: IRowElement[]
+  cols: IHeaderItem[]
+  textIfEmpty?: string
+  header?: boolean
+  loading?: boolean
+}
 
 const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header = true }) => {
   const headerContent = (
