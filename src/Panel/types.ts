@@ -3,10 +3,18 @@ export interface ISection {
   element: JSX.Element
 }
 
-export interface IProps {
+export interface IPanelHeaderProps { 
   title?: string
-  className?: string
-  bodyClassName?: string
-  sections: ISection[]
   info?: string
 }
+
+export interface IPanelBodyProps {
+  bodyClassName?: string
+}
+
+export interface IPanelProps {
+  sections: ISection[]
+  className?: string
+}
+
+export type TProps = IPanelProps & IPanelHeaderProps & IPanelBodyProps

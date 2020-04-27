@@ -17,7 +17,7 @@ const Header: React.FC<IProps> = ({ cols }) => {
       {cols.map(x => 
         <Col 
           onClick={() => x.handleSort ? x.handleSort(x.name) : noop}
-          key={`header-column-${x.name}`}
+          key={x.name}
         >
           {x.name}
         </Col>

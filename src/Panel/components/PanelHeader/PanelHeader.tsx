@@ -3,11 +3,11 @@ import * as BS from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
-import { IProps } from '../../types'
+import { IPanelHeaderProps } from '../../types'
 
 import './index.scss'
 
-const PanelHeader: React.FC<IProps> = ({ title, info }) => {
+const PanelHeader: React.FC<IPanelHeaderProps> = ({ title, info }) => {
   const getInfo = (): JSX.Element | null => {
     if (info) {
       return (
