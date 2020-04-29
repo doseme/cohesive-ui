@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { SmartList, ISelectedRows } from './SmartList'
-import { IRowElement, IHeaderItem } from './SmartList'
+import { SmartList } from './SmartList'
 import { Button } from '../Button'
+import { IRowElement, IHeaderItem, ISelectedRows } from '../../src/types'
 
 const stories = storiesOf('Components.SmartList', module)
 

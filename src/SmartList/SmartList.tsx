@@ -1,15 +1,11 @@
 import React from 'react'
-
-import { Header } from './components/Header'
-import { ListItem } from './components/ListItem'
-
-import './index.scss'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export interface ISelectedRows {
-  [id: string]: boolean
-}
+import { Header } from './components/Header'
+import { ListItem } from './components/ListItem'
+import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
+import './index.scss'
 
 export interface IProps {
   data: IRowElement[]
@@ -20,31 +16,6 @@ export interface IProps {
   textIfEmpty?: string
   header?: boolean
   loading?: boolean
-}
-
-// If displayName is falsy, name will be used for the column title
-// EXCEPT in the case of an empty string, which will show a blank column title.
-// Implemented this way for backward compatibility with pre 0.9.0
-export interface IHeaderItem {
-  name: string
-  displayName?: string
-  className?: string
-  sortable?: boolean
-  handleSort?: (column: string) => void
-}
-
-export interface IColumnElement {
-  name: string
-  element?: JSX.Element
-  text?: string
-}
-
-export interface IRowElement {
-  id: number | string
-  columns: IColumnElement[]
-  onClick?: (event: React.MouseEvent) => any
-  className?: string
-  disabled?: boolean
 }
 
 const SmartList: React.FC<IProps> = ({ 

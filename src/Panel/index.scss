@@ -1,7 +1,15 @@
-@mixin panel-padding {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+@import '../style/colors.scss';
 
-  padding-left: 1.0rem;
-  padding-right: 1.0rem;
+.panel-outer {
+  box-shadow: 2px 2px 2px $shadow;
+}
+
+.panel-section {
+  width: 100%;
+  padding: 1em 2.75em 1em 1.75em;
+  border-top: 1px solid $lightgrey;
+}
+
+.panel-section-side {
+  border-left: 20px solid $skyblue;
 }

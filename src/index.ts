@@ -14,6 +14,7 @@ import {
   IColumnElement,
   IHeaderItem,
 } from './SmartList'
+import { BasicList } from './BasicList'
 import { List } from './List'
 import { Button } from './Button'
 import * as Nav from './Nav'
@@ -30,6 +31,7 @@ export {
   Alert,
   Button,
   BackArrowButton,
+  BasicList,
   ContextMenu,
   DateInput,
   Dropdown,

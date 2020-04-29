@@ -134,7 +134,7 @@ const PaginationPanel: React.FC<IProps> = ({
     }
 
     if (n.type === 'dots') {
-      return nodes.concat(<span key={`dots-${ind}`} className='ml-1'>{n.value}</span>)
+      return nodes.concat(<span key={ind} className='ml-1'>{n.value}</span>)
     }
 
     if (n.type === 'pageNumber') {
