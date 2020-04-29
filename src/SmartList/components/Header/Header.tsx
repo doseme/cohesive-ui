@@ -123,6 +123,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
       </Col>}
       {cols.map((x, idx) => 
         <Col 
+          data-testid={`header-column-${x.name}`}
           key={`header-column-${x.name}`}
           onClick={() => sortable(x) && handleSortButtonClicked(idx)}
         >

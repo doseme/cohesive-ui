@@ -45,11 +45,13 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     <Row
       className={className}
       onClick={onClick}
+      id={`row-id-${rowId}`}
+      data-testid={`row-id-${rowId}`}
     >
       {
         selectable && <Col
           key={`list-select-${rowId}`}
-          data-test={`check-col-${rowId}`}
+          data-testid={`check-col-${rowId}`}
           xs={1}
         >
           <input
