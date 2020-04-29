@@ -19,7 +19,7 @@ const PaginationPanel: React.FC<IProps> = ({
 }) => {
   const currentNodes: TNode[] = paginate(currentPage, totalPages)
   
-  const activeButtonClassName = 'secondary'
+  const activeButtonClassName = 'info'
   const inactiveButtonClassName = 'primary'
 
   const goToPage = (pageNumber: number) => {

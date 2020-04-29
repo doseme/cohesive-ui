@@ -124,7 +124,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
       {cols.map((x, idx) => 
         <Col 
           key={`header-column-${x.name}`}
-          onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => sortable(x) && handleSortButtonClicked(idx)}
+          onClick={() => sortable(x) && handleSortButtonClicked(idx)}
         >
           {nameDisplay(x)}
           {sortable(x) && sortButton(x)}

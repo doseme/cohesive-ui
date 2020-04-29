@@ -1,7 +1,7 @@
 @import '../style/colors.scss';
 
 @mixin button($color) {
-  background: white;
+  background: $color;
   border: 1px solid;
   height: 32px;
   display: flex;
@@ -9,12 +9,12 @@
   line-height: 1;
 
   border-color: $color;
-  color: $color;
+  color: white;
 
   &:hover {
-    background: $color;
+    background: darken($color, 10);
     color: white;
-    border-color: $color;
+    border-color: darken($color, 10);
   }
 
   &:active {
@@ -33,11 +33,11 @@
 }
 
 .btn-primary {
-  @include button($darkgrey);
+  @include button($darkblue);
 }
 
 .btn-secondary {
-  @include button($darkblue);
+  @include button($darkgrey);
 }
 
 .btn-success {
@@ -68,8 +68,16 @@
   border-radius: 50%;
   display: inline-block;
   font-size: 12px;
-  width: 50px;
-  height: 50px;
+
+  &.btn-sm {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.btn-lg {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .spinner-container {
