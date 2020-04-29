@@ -1,30 +1,31 @@
 import React from 'react'
-import * as BS from 'react-bootstrap'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
-import { IProps } from '../../types'
+import { IPanelHeaderProps } from '../../Panel'
 
 import './index.scss'
 
-const PanelHeader: React.FC<IProps> = ({ title, info }) => {
+const PanelHeader: React.FC<IPanelHeaderProps> = ({ title, info }) => {
   const getInfo = (): JSX.Element | null => {
     if (info) {
       return (
         <span className='info-icon'>
-          <BS.OverlayTrigger
+          <OverlayTrigger
             placement='top'
             overlay={
-              <BS.Tooltip id='tooltip-tdm'>
+              <Tooltip id='tooltip-tdm'>
                 {info}
-              </BS.Tooltip>
+              </Tooltip>
             }
           >
             <FontAwesomeIcon
               className='ml-1'
               icon={faQuestionCircle}
             />
-          </BS.OverlayTrigger>
+          </OverlayTrigger>
         </span>
       )
     }
@@ -37,7 +38,7 @@ const PanelHeader: React.FC<IProps> = ({ title, info }) => {
   }
 
   return (
-    <div className='panel-header'>
+    <div className='panel-header d-flex align-items-center'>
       {title}
       {getInfo()}
     </div>

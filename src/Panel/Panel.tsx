@@ -1,12 +1,32 @@
 import React from 'react'
 
-import { IProps } from './types'
 import { PanelHeader } from './components/PanelHeader'
 import { PanelBody } from './components/PanelBody'
 
 import './index.scss'
 
-const Panel: React.FC<IProps> = ({ title, info, bodyClassName, children }) => {
+export interface ISection {
+  id: number
+  element: JSX.Element
+}
+
+export interface IPanelHeaderProps { 
+  title?: string
+  info?: string
+}
+
+export interface IPanelBodyProps {
+  bodyClassName?: string
+}
+
+export interface IPanelProps {
+  sections: ISection[]
+  className?: string
+}
+
+export type TProps = IPanelProps & IPanelHeaderProps & IPanelBodyProps
+
+const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, children }) => {
   const getTitle = (): JSX.Element | null => {
     if (!title) {
       return null
@@ -20,18 +40,24 @@ const Panel: React.FC<IProps> = ({ title, info, bodyClassName, children }) => {
     )
   }
 
-  const getBody = (): JSX.Element | null => {
-    return (
-      <PanelBody bodyClassName={bodyClassName}>
-        {children}
-      </PanelBody>
-    )
-  }
+  const body: JSX.Element = (
+    <PanelBody bodyClassName={bodyClassName}>
+      {
+        sections.map(x => 
+          <div className='d-flex'>
+            <div className='panel-section-side'></div>
+            <div className='panel-section' key={x.id}>{x.element}</div>
+          </div>
+        )
+      }
+      {children}
+    </PanelBody>
+  )
 
   return (
     <div className='panel-outer w-100'>
       {getTitle()}
-      {getBody()}
+      {body}
     </div>
     )
 
