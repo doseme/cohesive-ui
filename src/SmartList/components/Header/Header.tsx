@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 import { IProps } from './types'
-import { IHeaderItem } from '../../SmartList'
+import { IHeaderItem } from '../../../types'
 import { NAVY } from '../../../style/colors'
 import './index.scss'
 

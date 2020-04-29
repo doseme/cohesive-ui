@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 
 import { SmartList } from './SmartList'
 import { Button } from '../Button'
-import { IRowElement, IHeaderItem, ISelectedRows } from '../../src/types'
+import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
 
 const stories = storiesOf('Components.SmartList', module)
 
