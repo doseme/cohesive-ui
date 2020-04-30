@@ -7,19 +7,37 @@ import '../../index.scss'
 
 interface IProps {
   columns: IColumnElement[]
+  rowId: number | string
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => any
   className?: string
+  selectable?: boolean // backwards compatibilty < 0.9.0
+  selected?: boolean
+  onSelect?: (id: string | number, newState: boolean) => void
+  disabled?: boolean
 }
 
 const ListItem: React.FC<IProps> = (props: IProps) => {
   const {
     columns,
     onClick,
+    selectable,
+    selected,
+    onSelect,
+    disabled,
+    rowId
   } = props
+  
+  const handleSelected = (): void => {
+    onSelect && onSelect(rowId, !selected)
+  }
 
   let className = `list-row align-items-center ${props.className || ''}`
 
-  if (onClick) {
+  if (selected) {
+    className += 'selected '
+  }
+
+  if (onClick || selectable) {
     className += 'hover-cursor'
   }
 
@@ -27,7 +45,24 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     <Row
       className={className}
       onClick={onClick}
+      id={`row-id-${rowId}`}
+      data-testid={`row-id-${rowId}`}
     >
+      {
+        selectable && <Col
+          key={`list-select-${rowId}`}
+          data-testid={`check-col-${rowId}`}
+          xs={1}
+        >
+          <input
+            type='checkbox'
+            id={`list-check-${rowId}`}
+            disabled={disabled}
+            checked={selected || false}
+            onClick={handleSelected}
+          />
+        </Col>
+      }
       {
         columns.map(x =>
           <Col 

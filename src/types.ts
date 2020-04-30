@@ -5,10 +5,21 @@ import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers'
 export type TFormControlEvent = ReplaceProps<React.ReactType<any>, BsPrefixProps<React.ReactType<any>> & FormControlProps>
 export type TExtendsHTMLElement<T> = Omit<HTMLProps<HTMLElement>, keyof T> & T
 
+// If displayName is falsy, name will be used for the column title
+// EXCEPT in the case of an empty string, which will show a blank column title.
+// Implemented this way for backward compatibility with pre 0.9.0
 export interface IHeaderItem {
   name: string
+  displayName?: string
   className?: string
+  sortable?: boolean
   handleSort?: (column: string) => void
+}
+
+export interface IColumnElement {
+  name: string
+  element?: JSX.Element
+  text?: string
 }
 
 export interface IRowElement {
@@ -16,10 +27,9 @@ export interface IRowElement {
   columns: IColumnElement[]
   onClick?: (event: React.MouseEvent) => any
   className?: string
+  disabled?: boolean
 }
 
-export interface IColumnElement {
-  name: string
-  element?: JSX.Element
-  text?: string
+export interface ISelectedRows {
+  [id: string]: boolean
 }

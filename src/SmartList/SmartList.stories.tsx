@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { SmartList } from './SmartList'
-import { IRowElement, IHeaderItem } from '../types'
 import { Button } from '../Button'
+import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
 
 const stories = storiesOf('Components.SmartList', module)
 
@@ -43,7 +43,7 @@ const content: IRowElement[] = [
       },
       {
         name: 'email',
-        element: <div>aa@bb.com</div>,
+        element: <div><a href='mailto:aa@bb.com'>aa@bb.com</a></div>,
         text: 'aa@bb.com',
       },
       {
@@ -62,7 +62,7 @@ const content: IRowElement[] = [
       },
       {
         name: 'email',
-        element: <div>not@clickable.com</div>,
+        element: <div>selectable@not-clickable.com</div>,
         text: 'cc@dd.com',
       },
       {
@@ -114,55 +114,128 @@ const cols: IHeaderItem[] = [
   }
 ]
 
+const colsBlankActions: IHeaderItem[] = [
+  {
+    name: 'ID',
+    handleSort: () => {/***/},
+    sortable: true
+  },
+  {
+    name: 'Email',
+    handleSort: () => {/***/},
+    sortable: true
+  },
+  {
+    name: 'Actions',
+    displayName: ''
+  }
+]
+
 stories.add(
   'JSX',
-  () =>
-  <div className='m-5'>
-    <h3>Plain list with items</h3>
-    <SmartList
-      cols={cols}
-      data={content}
-    />
-    <br />
-    <br />
+  () => {
+    const [selected, setSelected] = useState<ISelectedRows>(
+      content.reduce<ISelectedRows>((acc, row) => {
+        acc[row.id] = false
+        return acc
+      }, {})
+    )
 
-    <h3>Custom empty table message</h3>
-    <SmartList
-      cols={cols}
-      data={[]}
-      textIfEmpty='No data in table.'
-    />
-    <br />
-    <br />
+    const [sortColIndex, setSortColIndex] = useState(0)
+    const [sortColAscending, setSortColAscending] = useState(true)
 
-    <h3>Loading state</h3>
-    <SmartList
-      cols={cols}
-      data={[]}
-      loading
-    />
-    <br />
-    <br />
+    const handleSort = (colIndex: number, ascending: boolean): void => {
+      setSortColIndex(colIndex)
+      setSortColAscending(ascending)
+    }
+    
+    const sortedContent = (content: IRowElement[]): IRowElement[] => {
+      return content.concat().sort((a, b) => {
+        const one = a.columns[sortColIndex].text || ''
+        const two = b.columns[sortColIndex].text || ''
 
-    <h3>No header</h3>
-    <SmartList
-      cols={cols}
-      data={content}
-      header={false}
-    />
-    <br />
-    <br />
+        if (sortColAscending) {
+          return (one > two ? 1 : -1)
+        }
 
-    <h3>Combining two lists</h3>
-    <SmartList
-      cols={cols}
-      data={[]}
-      textIfEmpty='This is an empty row message, and any data below this is in a separate, headerless smart list!'
-    />
-    <SmartList
-      cols={cols}
-      data={content}
-      header={false}
-    />
-  </div>
+        return (one < two ? 1 : -1)
+      })
+    }
+
+    const updateSelected = (selectedRows: ISelectedRows): void => {
+      setSelected(selectedRows)
+    }
+
+    return (
+      <div className='m-5'>
+        <h3>Plain list with items</h3>
+        <SmartList
+          cols={cols}
+          data={content}
+        />
+        <br />
+        <br />
+
+        <h3>Custom empty table message</h3>
+        <SmartList
+          cols={cols}
+          data={[]}
+          textIfEmpty='No data in table.'
+        />
+        <br />
+        <br />
+
+        <h3>Loading state</h3>
+        <SmartList
+          cols={cols}
+          data={[]}
+          loading
+        />
+        <br />
+        <br />
+
+        <h3>No header</h3>
+        <SmartList
+          cols={cols}
+          data={content}
+          header={false}
+        />
+        <br />
+        <br />
+
+        <h3>Combining two lists</h3>
+        <SmartList
+          cols={cols}
+          data={[]}
+          textIfEmpty='This is an empty row message, and any data below this is in a separate, headerless smart list!'
+        />
+        <SmartList
+          cols={cols}
+          data={content}
+          header={false}
+        />
+
+        <br />
+        <br />
+
+        <h3>Column without title</h3>
+        <SmartList
+          cols={colsBlankActions}
+          data={content}
+        />
+
+        <br />
+        <br />
+
+        <h3>Selectable list items, sortable columns, nameless column for Actions</h3>
+        <SmartList
+          cols={colsBlankActions}
+          data={sortedContent(content)}
+          selectedRows={selected}
+          onRowSelect={updateSelected}
+          onSort={handleSort}
+        />
+      </div>
+    )
+  }
 )

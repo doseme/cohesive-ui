@@ -20,6 +20,9 @@ export const NAVY = 'rgb(14, 78, 149)'
 export const DROPDOWN_BLUE = 'rgb(197, 218, 246)'
 export const LIGHTEST_GREY = 'rgb(252, 252, 252)'
 export const CIRCLE_BUTTON_BLUE = 'rgb(43, 82, 136)'
+export const MENU_GREY = 'rgb(244, 244, 244)'
+export const LINK_TEXT = 'rgb(224, 135, 120)'
+export const LIST_SELECTED = 'rgb(240, 246, 253)'
 export const SKYBLUE = 'rgb(241, 246, 253)'
 
 interface IColor {
@@ -27,7 +30,6 @@ interface IColor {
   color: string
 }
 export const colors: IColor[] = [
-  { name: 'SKYBLUE', color: SKYBLUE },
   { name: 'PANELBLUE', color: PANELBLUE },
   { name: 'TEAL', color: TEAL },
   { name: 'DARKTEAL', color: DARKTEAL },
@@ -50,4 +52,8 @@ export const colors: IColor[] = [
   { name: 'DROPDOWN_BLUE', color: DROPDOWN_BLUE },
   { name: 'LIGHTEST_GREY', color: LIGHTEST_GREY },
   { name: 'CIRCLE_BUTTON_BLUE', color: CIRCLE_BUTTON_BLUE },
+  { name: 'MENU_GREY', color: MENU_GREY },
+  { name: 'LIST_SELECTED', color: LIST_SELECTED },
+  { name: 'LINK_TEXT', color: LINK_TEXT },
+  { name: 'SKYBLUE', color: SKYBLUE },
 ]

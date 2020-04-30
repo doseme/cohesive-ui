@@ -14,6 +14,16 @@ import { SmartList } from 'cohesive-ui'
 import 'cohesive-ui/style/colors.scss'
 ```
 
+You need to import the stylesheet too:
+
+```
+// Global stylesheet
+import 'cohesive-ui/index.css';
+
+// Get our colors:
+@import 'cohesive-ui/style/colors.scss';
+```
+
 # Development 
 
 ### With Storybook

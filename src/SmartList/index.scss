@@ -37,3 +37,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.selected {
+  background: $list-selected;
+}
+
+a { 
+  color: $link-text;
+}

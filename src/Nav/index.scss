@@ -1,5 +1,7 @@
+@import '../style/colors.scss';
+
 .layout {
-  background: rgb(246, 247, 251);
+  background: $bgwhite;
   min-height: 100vh;
   flex: 1 1 auto;
   display: flex;
