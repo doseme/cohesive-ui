@@ -29,10 +29,10 @@ const SmartList: React.FC<IProps> = ({
   header = true 
 }) => {
 
-  const handleSelectAll = (all: boolean): void => {
+  const handleSelectAll = (allSelected: boolean): void => {
     if (onRowSelect) {
       const newState: ISelectedRows = data.reduce<ISelectedRows>((acc, row) => {
-        acc[row.id] = all
+        acc[row.id] = allSelected
         return acc
       }, {})
 

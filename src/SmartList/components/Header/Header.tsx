@@ -17,32 +17,18 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
   // If IHeaderItem.displayName is falsy, name will be used for the column title
   // EXCEPT in the case of an empty string, which will show a blank column.
   // Implemented this way for backward compatibility with pre 0.9.0
-
-  const useDisplayName = (item: IHeaderItem): boolean => {
-    if (typeof item.displayName === 'undefined') {
-      return false
-    }
-
-    if (item.displayName || item.displayName === '') {
-      return true
-    }
-
-    return false
-  }
-
-
   const nameDisplay = (item: IHeaderItem): string => {
-    if (useDisplayName(item)) {
-      return item.displayName!
+    if (!!item.displayName || item.displayName === '') {
+      return item.displayName
     }
 
     return item.name
   }
 
   const handleSortButtonClicked = (colIndex: number): void => {
-    const item = cols[colIndex]
-
     if (onSort) {
+      const item = cols[colIndex]
+
       if (sortColumn === item.name) {
         onSort(colIndex, !sortAscending)
         setSortAscending(!sortAscending)
@@ -102,7 +88,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
   }
 
   const sortable = (x: IHeaderItem): boolean => {
-    return !!onSort && !(useDisplayName(x) && x.displayName === '') && !!x.sortable
+    return !!onSort && !(x.displayName && x.displayName === '') && !!x.sortable
   }
 
   return (
@@ -116,7 +102,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
        >
          <input
            type='checkbox'
-           id={`check-select-all`}
+           id='check-select-all'
            checked={allChecked}
            onClick={handleAllChecked}
          />

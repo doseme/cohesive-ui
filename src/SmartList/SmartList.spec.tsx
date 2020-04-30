@@ -8,7 +8,7 @@ import { IProps } from './SmartList'
 
 const cols: IHeaderItem[] = [
   {
-    name: 'Name',
+    name: 'name',
     handleSort: noop
   },
 ]
@@ -48,7 +48,7 @@ const SmartListSortWrapper: React.FC<IProps> = ({data, cols}) => {
   }
 
   const sortedContent = (content: IRowElement[]): IRowElement[] => {
-    const sorted = content.concat().sort((a, b) => {
+    const sorted = content.sort((a, b) => {
       const one = a.columns[sortColIndex].text || ''
       const two = b.columns[sortColIndex].text || ''
 
@@ -97,15 +97,19 @@ describe('SmartList', () => {
 
     const preOrder = screen.getAllByTestId(/row-id-.*/)
 
+    console.log(preOrder.map(x => x.id))
+
     expect(preOrder.length).toBe(2)
 
     expect(preOrder[0].id).toBe('row-id-1')
     expect(preOrder[1].id).toBe('row-id-2')
 
-    fireEvent.click(screen.getByTestId('header-column-Name'))
+    fireEvent.click(screen.getByTestId('header-column-name'))
     await new Promise(r => setTimeout(r, 2000));
 
     const postOrder = screen.getAllByTestId(/row-id-.*/)
+
+    console.log(postOrder.map(x => x.id))
 
     expect(postOrder.length).toBe(2)
 
