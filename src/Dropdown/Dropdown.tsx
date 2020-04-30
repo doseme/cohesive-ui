@@ -57,7 +57,7 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
     }
   }, [defaultIndex, data, setSelectedItem])
 
-  const handleChange = (e: React.FormEvent<FormControl & HTMLInputElement>) => {
+  const handleChange = (e: React.FormEvent<any>) => {
     if (e.currentTarget.value) {
       setSearchText(e.currentTarget.value.toString().toLowerCase())
       return
