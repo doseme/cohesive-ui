@@ -1,6 +1,6 @@
 {
   "name": "cohesive-ui",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -8,8 +8,7 @@
   ],
   "types": "dist/index.d.ts",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
     "build": "yarn rollup -c rollup.config.js",
     "build-storybook": "build-storybook -c .storybook -o docs",
