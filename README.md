@@ -6,6 +6,14 @@ View it live in Storybook [here](https://doseme.github.io/cohesive-ui/).
 
 # Usage
 
+We have some peer dependencies:
+
+```sh
+yarn add @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome moment react react-bootstrap react-dom
+```
+
+You can use the library like this:
+
 ```ts
 // components
 import { SmartList } from 'cohesive-ui'
