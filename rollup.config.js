@@ -25,6 +25,8 @@ export default {
   ],
   plugins: [
     typescript(),
-    sass()
+    sass({
+      output: true
+    })
   ]
 }
