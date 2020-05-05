@@ -2,12 +2,15 @@
 
 .panel-outer {
   box-shadow: 6px 6px 8px 2px $shadow;
+
+  .with-border {
+    border-top: 1px solid $lightgrey;
+  }
 }
 
 .panel-section {
   width: 100%;
   padding: 1em 2.75em 1em 1.75em;
-  border-top: 1px solid $lightgrey;
 }
 
 .panel-section-side {
