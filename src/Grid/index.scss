@@ -24,6 +24,7 @@ $breakpoint-large: 60em; // 960px
   position: relative;
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 .co-row [class^="co-col"] {
