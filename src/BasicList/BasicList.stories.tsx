@@ -109,14 +109,14 @@ const basicContent: IRowElement[] = [
     id: 1, 
     columns: [
       { name: 'Name', text: 'foo bar' },
-      { name: 'Actions', element: <Button onClick={noop} variant='primary'>...</Button> }
+      { name: 'Actions', element: <div>...</div> }
     ],
   },
   {
     id: 2, 
     columns: [
       { name: 'Name', text: 'bar foo' },
-      { name: 'Actions', element: <Button onClick={noop} variant='secondary'>...</Button> }
+      { name: 'Actions', element: <div>...</div> }
     ],
   },
 ]

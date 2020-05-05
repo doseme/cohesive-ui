@@ -11,7 +11,7 @@ interface IProps {
 const Header: React.FC<IProps> = ({ cols }) => {
   return (
     <Row
-      className='basic-list-header pt-2 pb-2 d-flex align-items-center'
+      className='basic-list-header d-flex align-items-center'
     >
       {cols.map(x => 
         <Col key={x.name} width={x.width}>

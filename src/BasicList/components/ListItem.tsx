@@ -2,6 +2,7 @@ import React from 'react'
 import { Row, Col } from '../../Grid'
 
 import { IColumnElement, IHeaderItem } from '../../SmartList'
+import './list-item.scss';
 
 interface IProps {
   columns: IColumnElement[]
@@ -14,7 +15,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     columns,
   } = props
 
-  let className = `list-row align-items-center ${props.className || ''}`
+  let className = `basic-list-row align-items-center ${props.className || ''}`
 
   return (
     <Row className={className}>
