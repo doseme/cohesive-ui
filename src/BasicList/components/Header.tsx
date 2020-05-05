@@ -14,7 +14,7 @@ const Header: React.FC<IProps> = ({ cols }) => {
       className='basic-list-header pt-2 pb-2 d-flex align-items-center'
     >
       {cols.map(x => 
-        <Col key={x.name}>
+        <Col key={x.name} width={x.width}>
           <b>{x.name}</b>
         </Col>
       )}
