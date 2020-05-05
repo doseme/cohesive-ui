@@ -1,6 +1,5 @@
 import React from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+import { Row, Col } from '../../Grid'
 
 import { IHeaderItem } from '../../types'
 import './header.scss'
@@ -12,10 +11,10 @@ interface IProps {
 const Header: React.FC<IProps> = ({ cols }) => {
   return (
     <Row
-      className='basic-list-header pt-2 pb-2 d-flex align-items-center'
+      className='basic-list-header d-flex align-items-center'
     >
       {cols.map(x => 
-        <Col key={x.name}>
+        <Col key={x.name} width={x.width}>
           <b>{x.name}</b>
         </Col>
       )}

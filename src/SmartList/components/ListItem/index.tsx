@@ -1,6 +1,5 @@
 import React from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import { Row, Col } from '../../../Grid'
 
 import { IColumnElement } from '../../../types'
 import '../../index.scss'
@@ -52,14 +51,13 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
         selectable && <Col
           key={`list-select-${rowId}`}
           data-testid={`check-col-${rowId}`}
-          xs={1}
         >
           <input
             type='checkbox'
             id={`list-check-${rowId}`}
             disabled={disabled}
             checked={selected || false}
-            onClick={handleSelected}
+            onChange={handleSelected}
           />
         </Col>
       }

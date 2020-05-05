@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+import { Row, Col } from '../../../Grid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
@@ -98,20 +97,21 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
     >
       {selectAllCol && <Col
         key='select-all-col'
-        xs={1}
        >
          <input
            type='checkbox'
            id='check-select-all'
            checked={allChecked}
+           onChange={() => {}}
            onClick={handleAllChecked}
          />
       </Col>}
       {cols.map((x, idx) => 
         <Col 
           data-testid={`header-column-${x.name}`}
-          key={`header-column-${x.name}`}
+          key={x.name}
           onClick={() => sortable(x) && handleSortButtonClicked(idx)}
+          className={onSort ? 'cursor-pointer' : ''}
         >
           {nameDisplay(x)}
           {sortable(x) && sortButton(x)}

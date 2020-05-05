@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'
 import noop from 'lodash/noop'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Container, Row, Col } from '../Grid'
 
 import { Panel } from './Panel'
 import { IconButton } from '../IconButton'
@@ -48,23 +49,31 @@ storiesOf('Components.Panel', module)
 
     return (
       <>
-        <div className='m-4'>
-          <h3>With a title and info icon</h3>
-          <Panel
-            title='Quick View and Shortcuts'
-            sections={[topSection, bottomSection]}
-            info='Some interesting info'
-          >
-          </Panel>
-        </div>
+        <h3>With a title and info icon</h3>
+        <Container>
+          <Row>
+            <Col width={4}>
+              <Panel
+                title='Quick View and Shortcuts'
+                sections={[topSection, bottomSection]}
+                info='Some interesting info'
+              >
+              </Panel>
+            </Col>
+          </Row>
+        </Container>
         <br />
 
-        <div className='m-4'>
-          <h3>Without a title</h3>
-          <Panel
-            sections={[topSection, bottomSection]}
-          />
-        </div>
+        <h3>Without a title</h3>
+        <Container>
+          <Row>
+            <Col width={4}>
+              <Panel
+                sections={[topSection, bottomSection]}
+              />
+            </Col>
+          </Row>
+        </Container>
         <br />
       </>
     )
