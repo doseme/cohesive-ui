@@ -13,7 +13,7 @@
     "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp src/style/colors.scss dist/style/colors.scss",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "test": "jest",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006  -s ./src"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",

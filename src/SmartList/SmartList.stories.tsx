@@ -54,6 +54,7 @@ const content: IRowElement[] = [
   },
   {
     id: 2,
+    onClick: () => console.log('Clicked on 2'),
     columns: [
       {
         name: 'id',
@@ -62,7 +63,7 @@ const content: IRowElement[] = [
       },
       {
         name: 'email',
-        element: <div>selectable@not-clickable.com</div>,
+        element: <div>cc@dd.com</div>,
         text: 'cc@dd.com',
       },
       {
@@ -202,13 +203,13 @@ stories.add(
         />
         <br />
         <br />
-
         <h3>Combining two lists</h3>
         <SmartList
           cols={cols}
           data={[]}
           textIfEmpty='This is an empty row message, and any data below this is in a separate, headerless smart list!'
         />
+
         <SmartList
           cols={cols}
           data={content}
