@@ -10,7 +10,7 @@ const stories = storiesOf('Components.BasicList', module)
 const actions = (
   <div className='d-flex'>
     <Button
-      variant='primary'
+      variant='secondary'
       onClick={(e: React.MouseEvent) => {
         e.stopPropagation()
         console.log('Clicked on action 1')

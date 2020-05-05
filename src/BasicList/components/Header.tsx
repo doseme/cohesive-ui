@@ -1,6 +1,5 @@
 import React from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+import { Row, Col } from '../../Grid'
 
 import { IHeaderItem } from '../../types'
 import './header.scss'
