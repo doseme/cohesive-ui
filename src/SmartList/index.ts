@@ -1,9 +1,12 @@
 import {
   SmartList,
+} from './SmartList'
+
+import {
   IRowElement,
   IColumnElement,
   IHeaderItem,
-} from './SmartList'
+} from '../types'
 
 export { 
   SmartList,

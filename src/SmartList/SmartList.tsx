@@ -1,42 +1,75 @@
 import React from 'react'
+import { Row, Col } from '../Grid'
 
 import { Header } from './components/Header'
 import { ListItem } from './components/ListItem'
-
+import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
 import './index.scss'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 export interface IProps {
   data: IRowElement[]
   cols: IHeaderItem[]
+  selectedRows?: ISelectedRows
+  onRowSelect?: (selected: ISelectedRows) => void
+  onSort?: (colIndex: number, ascending: boolean) => void
   textIfEmpty?: string
   header?: boolean
   loading?: boolean
 }
 
-export interface IHeaderItem {
-  name: string
-  className?: string
-  handleSort?: (column: string) => void
-}
+const SmartList: React.FC<IProps> = ({ 
+  data,
+  cols,
+  selectedRows,
+  onRowSelect,
+  onSort,
+  textIfEmpty,
+  loading,
+  header = true 
+}) => {
 
-export interface IColumnElement {
-  name: string
-  element?: JSX.Element
-  text?: string
-}
+  const handleSelectAll = (allSelected: boolean): void => {
+    if (onRowSelect) {
+      const newState: ISelectedRows = data.reduce<ISelectedRows>((acc, row) => {
+        acc[row.id] = allSelected
+        return acc
+      }, {})
 
-export interface IRowElement {
-  id: number | string
-  columns: IColumnElement[]
-  onClick?: (event: React.MouseEvent) => any
-  className?: string
-}
+      onRowSelect(newState)
+    }
+  }
 
-const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header = true }) => {
+  const handleSelect = (id: string | number, selected: boolean): void => {
+    if (onRowSelect && selectedRows) {
+      const newState: ISelectedRows = data.reduce<ISelectedRows>((acc, row) => {
+        if (id === row.id) {
+          acc[row.id] = selected
+          return acc
+        }
+
+        acc[row.id] = selectedRows[row.id]
+        return acc
+      }, {})
+      
+      onRowSelect(newState)
+    }
+  }
+
+  const handleClick = (row: IRowElement, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (row.onClick) {
+      row.onClick(event)
+    }
+
+    if (selectedRows) {
+      handleSelect(row.id, !selectedRows[row.id])
+    }
+  }
+
   const headerContent = (
     <Header
+      selectAllCol={!!selectedRows}
+      onSelectAll={handleSelectAll}
+      onSort={onSort}
       cols={cols}
     />
   )
@@ -44,10 +77,15 @@ const SmartList: React.FC<IProps> = ({ data, cols, textIfEmpty, loading, header 
   const listContent = data.reduce<JSX.Element[]>((acc, row) => {
     acc = acc.concat(
       <ListItem
-        onClick={row.onClick}
+        onClick={(e) => handleClick(row, e)}
         key={row.id}
+        rowId={row.id}
         columns={row.columns}
+        disabled={row.disabled}
         className={row.className}
+        selectable={!!selectedRows}
+        selected={selectedRows && selectedRows[row.id]}
+        onSelect={handleSelect}
       />
     )
 

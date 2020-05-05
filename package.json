@@ -1,24 +1,48 @@
 {
   "name": "cohesive-ui",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "files": [
     "dist"
   ],
   "types": "dist/index.d.ts",
   "license": "MIT",
-  "dependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.6.3",
+  "dependencies": {},
+  "scripts": {
+    "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp -r src/style/colors.scss dist/style/colors.scss && cp src/style/global.css dist/style/global.css",
+    "build-storybook": "build-storybook -c .storybook -o docs",
+    "test": "jest",
+    "storybook": "start-storybook -p 6006  -s ./src"
+  },
+  "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
+    "moment": "^2.24.0",
+    "react": "^16.11.0",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.11.0"
+  },
+  "resolutions": {
+    "@types/react": "^16.9.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "@storybook/addon-info": "^5.2.5",
     "@storybook/react": "^5.2.5",
+    "@testing-library/jest-dom": "^5.0.0",
+    "@testing-library/react": "^9.4.0",
     "@types/enzyme": "^3.10.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.23",
     "@types/lodash": "^4.14.144",
+    "@types/moment": "^2.13.0",
     "@types/node": "^12.12.5",
     "@types/react": "^16.9.9",
     "acorn": "^6.4.1",
@@ -32,9 +56,11 @@
     "minimist": "^0.2.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
-    "react": "^16.11.0",
-    "react-bootstrap": "^1.0.0-beta.14",
-    "react-dom": "^16.11.0",
+    "react-bootstrap": "^1.0.1",
+    "react-docgen-typescript-loader": "^3.3.0",
+    "rollup": "^2.7.5",
+    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-typescript2": "^0.27.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "ts-jest": "^24.2.0",
@@ -42,25 +68,5 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-node-externals": "^1.7.2"
-  },
-  "scripts": {
-    "build": "yarn webpack --mode=production --types",
-    "prepare": "yarn test && yarn build && cp -r src/style dist/",
-    "build-storybook": "build-storybook -c .storybook -o docs",
-    "test": "jest",
-    "storybook": "start-storybook -p 6006"
-  },
-  "peerDependencies": {
-    "@types/react-bootstrap": "^0.32.20",
-    "react-bootstrap": "^1.0.0-beta.14"
-  },
-  "resolutions": {
-    "@types/react": "^16.9.9"
-  },
-  "devDependencies": {
-    "@storybook/addon-info": "^5.2.5",
-    "@testing-library/jest-dom": "^5.0.0",
-    "@testing-library/react": "^9.4.0",
-    "react-docgen-typescript-loader": "^3.3.0"
   }
 }

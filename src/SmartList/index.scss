@@ -6,6 +6,14 @@
   background: white;
   border-bottom: 2px solid $lightgrey;
 
+  .co-col {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
+
 
   button:nth-of-type(2n) {
     margin: 0 0 0 4px;
@@ -30,10 +38,10 @@
   right: -15px;
 }
 
-.col {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.selected {
+  background: $list-selected;
+}
+
+a { 
+  color: $link-text;
 }

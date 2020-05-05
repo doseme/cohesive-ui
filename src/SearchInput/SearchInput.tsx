@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element => {
-  const handleChange = (e: React.FormEvent<FormControl & HTMLInputElement>) => {
+  const handleChange = (e: React.FormEvent<any>) => {
     const value = e.currentTarget && e.currentTarget.value
     props.onChange(value || '')
   }

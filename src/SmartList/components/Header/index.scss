@@ -3,10 +3,14 @@
 #smart-list-header {
   background: $panelblue;
   color: white;
-  height: 60px;
+  height: 44px;
   font-weight: bold;
 
   .fa-w-10 {
     font-size: 15px;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
   }
 }
