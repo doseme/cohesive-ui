@@ -8,6 +8,7 @@
 // import { NumberInput } from './NumberInput'
 // import { PaginationPanel } from './PaginationPanel'
 import { Panel } from './Panel'
+import { Container, Row, Col } from './Grid'
 import { 
   SmartList,
   IRowElement,
@@ -30,6 +31,9 @@ export {
   // AdminLogo,
   // Alert,
   Button,
+  Container,
+  Row,
+  Col,
   // BackArrowButton,
   BasicList,
   // ContextMenu,
