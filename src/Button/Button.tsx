@@ -1,5 +1,4 @@
 import React from 'react'
-import BsButton, { ButtonProps } from 'react-bootstrap/Button'
 
 import { Spinner } from '../Spinner'
 
@@ -14,8 +13,7 @@ export type TVariant = 'primary'
   | 'dark'
   | 'light'
 
-interface IProps extends ButtonProps {
-  id?: string
+interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
   variant: TVariant
   className?: string
@@ -24,22 +22,26 @@ interface IProps extends ButtonProps {
 }
 
 const Button: React.FC<IProps> = ({ onClick, children, shape, className, loading, variant, ...rest }): JSX.Element => {
+  const content = (
+    loading
+      ? <div className='spinner-container'>
+        <div className='child-keep-width'>{children}</div>
+        <div className='spinner-display w-100'>
+          <Spinner color={variant} />
+        </div>
+      </div>
+      : children
+  )
+
   return (
     <div>
-      <BsButton
+      <button
         onClick={onClick}
-        className={`${shape} ${className}`}
-        variant={variant}
+        className={`${shape} ${className} btn-${variant}`}
         {...rest}
       >
-        {loading
-          ? <div className='spinner-container'>
-              <div className='child-keep-width'>{children}</div>
-              <div className='spinner-display w-100'><Spinner color={variant}/></div>
-            </div>
-          : children
-        }
-      </BsButton>
+        {content}
+      </button>
     </div>
   )
 }

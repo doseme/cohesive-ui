@@ -15,6 +15,7 @@
   color: white;
 
   &:hover {
+    cursor: pointer;
     background: darken($color, 10);
     color: white;
     border-color: darken($color, 10);
@@ -89,7 +90,7 @@
 
 .spinner-display {
   position: absolute;
-  top: 0px;
+  top: -4px;
 }
 
 .child-keep-width {

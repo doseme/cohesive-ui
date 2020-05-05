@@ -9,7 +9,9 @@ interface IProps {
   color?: string
 }
 
-const Spinner: React.FC<IProps> = ({className = 'fa-spin', size = 'sm', color = 'black'}): JSX.Element => {
+const Spinner: React.FC<IProps> = ({
+  className = 'fa-spin', size = 'sm', color = 'black'
+}): JSX.Element => {
   return (
     <FontAwesomeIcon
       className={className}
