@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp -r src/style/colors.scss dist/style/colors.scss src/style/global.css dist/style/global.css",
+    "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp -r src/style/colors.scss dist/style/colors.scss && cp src/style/global.css dist/style/global.css",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "test": "jest",
     "storybook": "start-storybook -p 6006  -s ./src"
