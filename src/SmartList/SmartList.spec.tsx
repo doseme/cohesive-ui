@@ -1,22 +1,20 @@
-import noop from 'lodash/noop'
 import React, { useState } from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, screen, fireEvent } from '@testing-library/react'
 
 import { SmartList, IHeaderItem, IRowElement } from './'
-import { IProps } from './SmartList'
 
 const cols: IHeaderItem[] = [
   {
     name: 'name',
-    handleSort: noop
+    sortable: true,
+    displayName: 'name'
   },
 ]
 
-const content: IRowElement[] = [
+const contentFactory = (): IRowElement[] => [
   {
     id: 1, 
-    onClick: noop, 
     columns: [
       {
         name: 'name',
@@ -27,7 +25,6 @@ const content: IRowElement[] = [
   },
   {
     id: 2, 
-    onClick: noop, 
     columns: [
       {
         name: 'name',
@@ -38,46 +35,12 @@ const content: IRowElement[] = [
   }
 ]
 
-const SmartListSortWrapper: React.FC<IProps> = ({data, cols}) => {
-  const [sortColIndex, setSortColIndex] = useState(0)
-  const [sortColAscending, setSortColAscending] = useState(true)
-
-  const handleSort = (colIndex: number, ascending: boolean): void => {
-    setSortColIndex(colIndex)
-    setSortColAscending(ascending)
-  }
-
-  const sortedContent = (content: IRowElement[]): IRowElement[] => {
-    const sorted = content.sort((a, b) => {
-      const one = a.columns[sortColIndex].text || ''
-      const two = b.columns[sortColIndex].text || ''
-
-      if (sortColAscending) {
-        return (one > two ? 1 : -1)
-      }
-
-      return (one < two ? 1 : -1)
-    })
-    
-
-    return sorted
-  }
-
-  return (
-    <SmartList
-      cols={cols}
-      data={sortedContent(data)}
-      onSort={handleSort}
-    />
-  )
-}
-
 describe('SmartList', () => {
   it('displays content', () => {
     render(
       <SmartList
         cols={cols}
-        data={content}
+        data={contentFactory()}
       />
     )
     expect(screen.queryByText(/One/)).toBeTruthy()
@@ -87,17 +50,36 @@ describe('SmartList', () => {
 
 describe('SmartList', () => {
   it('sorts content correctly', async () => {
+    const SmartListWrapper = () => {
+      const [content, setContent] = useState(contentFactory())
+      const handleSort = (index: number, asc: boolean) => {
+        const updated = content.concat().sort((a, b) => {
+          const one = a.columns[index].text || ''
+          const two = b.columns[index].text || ''
 
-    render(
-      <SmartListSortWrapper
-        data={content}
-        cols={cols}
-      />
-    )
+          if (asc) {
+            return (one > two ? 1 : -1)
+          }
+
+          return (one < two ? 1 : -1)
+        })
+
+        setContent(updated)
+      }
+
+
+      return (
+        <SmartList
+          data={content}
+          cols={cols}
+          onSort={handleSort}
+        />
+      )
+    } 
+
+    render(<SmartListWrapper />)
 
     const preOrder = screen.getAllByTestId(/row-id-.*/)
-
-    console.log(preOrder.map(x => x.id))
 
     expect(preOrder.length).toBe(2)
 
@@ -108,8 +90,6 @@ describe('SmartList', () => {
     await new Promise(r => setTimeout(r, 2000));
 
     const postOrder = screen.getAllByTestId(/row-id-.*/)
-
-    console.log(postOrder.map(x => x.id))
 
     expect(postOrder.length).toBe(2)
 

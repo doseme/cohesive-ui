@@ -1,10 +1,9 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col } from '../Grid'
 
 import { IRowElement, IHeaderItem } from '../types'
 import { ListItem } from './components/ListItem'
 import { Header } from './components/Header'
-import './index.scss'
 
 export interface IProps {
   data: IRowElement[]
@@ -30,6 +29,7 @@ const BasicList: React.FC<IProps> = (props) => {
           key={row.id}
           columns={row.columns}
           className={row.className}
+          cols={props.cols}
         />
       )
 

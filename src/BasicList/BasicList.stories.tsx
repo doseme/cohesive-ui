@@ -1,5 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import noop from 'lodash/noop'
 
 import { BasicList } from './BasicList'
 import { IRowElement, IHeaderItem } from '../types'
@@ -10,7 +11,7 @@ const stories = storiesOf('Components.BasicList', module)
 const actions = (
   <div className='d-flex'>
     <Button
-      variant='primary'
+      variant='secondary'
       onClick={(e: React.MouseEvent) => {
         e.stopPropagation()
         console.log('Clicked on action 1')
@@ -98,6 +99,28 @@ const cols: IHeaderItem[] = [
   }
 ]
 
+const colsWithWidth: IHeaderItem[] = [
+  { name: 'Name', width: 10 },
+  { name: 'Actions', width: 2 },
+]
+
+const basicContent: IRowElement[] = [
+  {
+    id: 1, 
+    columns: [
+      { name: 'Name', text: 'foo bar' },
+      { name: 'Actions', element: <div>...</div> }
+    ],
+  },
+  {
+    id: 2, 
+    columns: [
+      { name: 'Name', text: 'bar foo' },
+      { name: 'Actions', element: <div>...</div> }
+    ],
+  },
+]
+
 stories.add(
   'JSX',
   () =>
@@ -107,6 +130,15 @@ stories.add(
       header={true}
       cols={cols}
       data={content}
+    />
+
+    <br />
+
+    <h3>List specifying column width</h3>
+    <BasicList
+      header={true}
+      cols={colsWithWidth}
+      data={basicContent}
     />
   </div>
 )

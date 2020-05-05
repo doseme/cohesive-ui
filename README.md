@@ -22,13 +22,13 @@ import { SmartList } from 'cohesive-ui'
 import 'cohesive-ui/style/colors.scss'
 ```
 
-You need to import the stylesheet too:
+You need to import the stylesheet too. `global.css` contains useful utilities, like `d-flex` and `p-5`, `m-3`, `w-100` helpers (taken from Bootstrap 4).
 
 ```
 // Global stylesheet
-import 'cohesive-ui/index.css';
+import 'cohesive-ui/style/global.css';
 
-// Get our colors:
+// Optionally, get our colors:
 @import 'cohesive-ui/style/colors.scss';
 ```
 

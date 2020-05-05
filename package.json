@@ -1,6 +1,6 @@
 {
   "name": "cohesive-ui",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -10,10 +10,10 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp src/style/colors.scss dist/style/colors.scss",
+    "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp -r src/style/colors.scss dist/style/colors.scss src/style/global.css dist/style/global.css",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "test": "jest",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006  -s ./src"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",

@@ -6,12 +6,16 @@
   height: 32px;
   display: flex;
   align-items: center;
-  line-height: 1;
+  line-height: 0.5;
+  border-radius: 5px;
+  font-size: 1.075rem;
+  padding: 12px;
 
   border-color: $color;
   color: white;
 
   &:hover {
+    cursor: pointer;
     background: darken($color, 10);
     color: white;
     border-color: darken($color, 10);
@@ -86,7 +90,7 @@
 
 .spinner-display {
   position: absolute;
-  top: 0px;
+  top: -4px;
 }
 
 .child-keep-width {
