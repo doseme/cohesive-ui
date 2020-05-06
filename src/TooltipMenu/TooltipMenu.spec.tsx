@@ -12,7 +12,14 @@ describe('TooltipMenu', () => {
     }
     const onSelect = jest.fn()
       
-    render(<TooltipMenu data={[ item ]} onSelect={onSelect} />)
+    render(
+      <TooltipMenu 
+        data={[item]} 
+        onSelect={onSelect} 
+        onClickaway={() => {}}
+        open={true}
+      />
+    )
 
     fireEvent.click(screen.getByText(/This is the element/))
 
