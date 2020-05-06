@@ -45,8 +45,6 @@ storiesOf('Components.TooltipMenu', module)
       <>
         <h3>Display dynamically</h3>
         {ButtonWithMenu(data)}
-        <br />
-        {/* {ButtonWithMenu(custom)} */}
       </>
     )
   })
