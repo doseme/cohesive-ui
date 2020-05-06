@@ -48,7 +48,7 @@ const content: IRowElement[] = [
       },
       {
         name: 'actions',
-        element: <div></div>
+        element: actions
       }
     ]
   },
@@ -68,7 +68,7 @@ const content: IRowElement[] = [
       },
       {
         name: 'actions',
-        element: <div></div>,
+        element: actions,
       }
     ]
   },
@@ -95,7 +95,7 @@ const content: IRowElement[] = [
       },
       {
         name: 'actions',
-        element: <div></div>,
+        element: actions,
       }
     ]
   }
@@ -169,8 +169,7 @@ stories.add(
       },
       {
         name: 'Actions',
-        displayName: '',
-        width: 1
+        displayName: ''
       }
     ]
 
