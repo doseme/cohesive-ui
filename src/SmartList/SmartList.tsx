@@ -81,6 +81,7 @@ const SmartList: React.FC<IProps> = ({
         onClick={(e) => handleClick(row, e)}
         key={row.id}
         rowId={row.id}
+        cols={cols}
         columns={row.columns}
         disabled={row.disabled}
         className={row.className}

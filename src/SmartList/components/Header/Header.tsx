@@ -97,6 +97,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll }) => {
     >
       {selectAllCol && <Col
         key='select-all-col'
+        width={1}
        >
          <input
            type='checkbox'
@@ -109,6 +110,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll }) => {
       {cols.map((x, idx) => 
         <Col 
           data-testid={`header-column-${x.name}`}
+          width={x.width}
           key={x.name}
           onClick={() => sortable(x) && handleSortButtonClicked(x, idx)}
           className={sortable(x) ? 'cursor-pointer' : ''}
