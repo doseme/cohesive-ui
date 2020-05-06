@@ -26,7 +26,7 @@ $breakpoint-large: 60em; // 960px
   display: flex;
 }
 
-.co-row [class^="co-col"] {
+.co-row [class*="co-col"] {
   float: left;
   margin: 0.5rem 2%;
   min-height: 0.125rem;

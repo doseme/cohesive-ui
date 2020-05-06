@@ -11,7 +11,8 @@ export interface IProps {
   cols: IHeaderItem[]
   selectedRows?: ISelectedRows
   onRowSelect?: (selected: ISelectedRows) => void
-  onSort?: (colIndex: number, ascending: boolean) => void
+  activeRow?: string
+  onActivate?: (id: string) => void
   textIfEmpty?: string
   header?: boolean
   loading?: boolean
@@ -22,7 +23,8 @@ const SmartList: React.FC<IProps> = ({
   cols,
   selectedRows,
   onRowSelect,
-  onSort,
+  activeRow,
+  onActivate,
   textIfEmpty,
   loading,
   header = true 
@@ -60,8 +62,8 @@ const SmartList: React.FC<IProps> = ({
       row.onClick(event)
     }
 
-    if (selectedRows) {
-      handleSelect(row.id, !selectedRows[row.id])
+    if (onActivate) {
+      onActivate(row.id.toString())
     }
   }
 
@@ -69,7 +71,6 @@ const SmartList: React.FC<IProps> = ({
     <Header
       selectAllCol={!!selectedRows}
       onSelectAll={handleSelectAll}
-      onSort={onSort}
       cols={cols}
     />
   )
@@ -83,6 +84,7 @@ const SmartList: React.FC<IProps> = ({
         columns={row.columns}
         disabled={row.disabled}
         className={row.className}
+        isActive={row.id.toString() === activeRow}
         selectable={!!selectedRows}
         selected={selectedRows && selectedRows[row.id]}
         onSelect={handleSelect}

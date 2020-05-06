@@ -8,7 +8,7 @@ import { IHeaderItem } from '../../../types'
 import { NAVY } from '../../../style/colors'
 import './index.scss'
 
-const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) => {
+const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll }) => {
   const [allChecked, toggleAllChecked] = useState(false)
   const [sortColumn, setSortColumn] = useState<string>(cols[0].name)
   const [sortAscending, setSortAscending] = useState(true)
@@ -24,17 +24,17 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
     return item.name
   }
 
-  const handleSortButtonClicked = (colIndex: number): void => {
-    if (onSort) {
+  const handleSortButtonClicked = (col: IHeaderItem, colIndex: number): void => {
+    if (col.handleSort) {
       const item = cols[colIndex]
 
       if (sortColumn === item.name) {
-        onSort(colIndex, !sortAscending)
+        col.handleSort(colIndex, !sortAscending)
         setSortAscending(!sortAscending)
         return
       }
 
-      onSort(colIndex, true)
+      col.handleSort(colIndex, true)
       setSortAscending(true)
       setSortColumn(item.name)
     }
@@ -87,7 +87,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
   }
 
   const sortable = (x: IHeaderItem): boolean => {
-    return !!onSort && !(x.displayName && x.displayName === '') && !!x.sortable
+    return !!x.handleSort && !(x.displayName && x.displayName === '')
   }
 
   return (
@@ -110,8 +110,8 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSort, onSelectAll }) =
         <Col 
           data-testid={`header-column-${x.name}`}
           key={x.name}
-          onClick={() => sortable(x) && handleSortButtonClicked(idx)}
-          className={onSort ? 'cursor-pointer' : ''}
+          onClick={() => sortable(x) && handleSortButtonClicked(x, idx)}
+          className={sortable(x) ? 'cursor-pointer' : ''}
         >
           {nameDisplay(x)}
           {sortable(x) && sortButton(x)}

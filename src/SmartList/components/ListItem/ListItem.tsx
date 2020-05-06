@@ -9,7 +9,8 @@ interface IProps {
   rowId: number | string
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => any
   className?: string
-  selectable?: boolean // backwards compatibilty < 0.9.0
+  isActive?: boolean
+  selectable?: boolean
   selected?: boolean
   onSelect?: (id: string | number, newState: boolean) => void
   disabled?: boolean
@@ -19,6 +20,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
   const {
     columns,
     onClick,
+    isActive,
     selectable,
     selected,
     onSelect,
@@ -32,8 +34,8 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
 
   let className = `list-row align-items-center ${props.className || ''}`
 
-  if (selected) {
-    className += 'selected '
+  if (isActive) {
+    className += 'active-row '
   }
 
   if (onClick || selectable) {
