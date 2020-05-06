@@ -7,7 +7,6 @@ import { SmartList, IHeaderItem, IRowElement } from './'
 const cols: IHeaderItem[] = [
   {
     name: 'name',
-    sortable: true,
     displayName: 'name'
   },
 ]
@@ -67,12 +66,19 @@ describe('SmartList', () => {
         setContent(updated)
       }
 
+      const cols: IHeaderItem[] = [
+        {
+          name: 'name',
+          displayName: 'name',
+          handleSort
+        },
+      ]
+
 
       return (
         <SmartList
           data={content}
           cols={cols}
-          onSort={handleSort}
         />
       )
     } 
