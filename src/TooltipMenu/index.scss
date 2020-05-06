@@ -1,6 +1,7 @@
 @import '../style/colors.scss';
 
 $li-height: 50px;
+$z-index: 50;
 
 .arrow-up {
   width: 0; 
@@ -9,7 +10,7 @@ $li-height: 50px;
   border-right: 10px solid transparent;
   border-bottom: 10px solid white;
   position: absolute;
-  z-index: 2;
+  z-index: $z-index + 1;
   top: -10px;
   left: 25px;
 }
@@ -17,6 +18,8 @@ $li-height: 50px;
 .co-tooltip-outer {
   position: absolute;
   overflow: hidden;
+  z-index: $z-index;
+  background: white;
   border-radius: 18px;
   box-shadow: 0px 0px 12px 4px $shadow;
 }
@@ -29,7 +32,7 @@ ul.co-tooltip-wrapper-list {
   padding: 5px 0;
   margin: 0;
   overflow-y: scroll;
-  max-height: $li-height * 5.75;
+  max-height: $li-height * 6;
 
   li {
     height: $li-height;
