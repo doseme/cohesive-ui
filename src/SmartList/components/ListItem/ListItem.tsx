@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col } from '../../../Grid'
 
-import { IColumnElement } from '../../../types'
+import { IColumnElement, IHeaderItem } from '../../../types'
 import '../../index.scss'
 
 interface IProps {
@@ -9,16 +9,19 @@ interface IProps {
   rowId: number | string
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => any
   className?: string
-  selectable?: boolean // backwards compatibilty < 0.9.0
+  isActive?: boolean
+  selectable?: boolean
   selected?: boolean
   onSelect?: (id: string | number, newState: boolean) => void
   disabled?: boolean
+  cols?: IHeaderItem[]
 }
 
 const ListItem: React.FC<IProps> = (props: IProps) => {
   const {
     columns,
     onClick,
+    isActive,
     selectable,
     selected,
     onSelect,
@@ -32,8 +35,8 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
 
   let className = `list-row align-items-center ${props.className || ''}`
 
-  if (selected) {
-    className += 'selected '
+  if (isActive) {
+    className += 'active-row '
   }
 
   if (onClick || selectable) {
@@ -49,6 +52,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     >
       {
         selectable && <Col
+          width={1}
           key={`list-select-${rowId}`}
           data-testid={`check-col-${rowId}`}
         >
@@ -62,10 +66,11 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
         </Col>
       }
       {
-        columns.map(x =>
+        columns.map((x, idx) =>
           <Col 
             key={x.name}
             data-test={x.name}
+            width={props.cols && props.cols[idx].width}
           >
             {x.element || x.text}
           </Col>

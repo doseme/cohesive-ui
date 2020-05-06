@@ -104,11 +104,9 @@ const content: IRowElement[] = [
 const cols: IHeaderItem[] = [
   {
     name: 'ID',
-    handleSort: () => {/***/}
   },
   {
     name: 'Email',
-    handleSort: () => {/***/}
   },
   {
     name: 'Actions',
@@ -118,13 +116,9 @@ const cols: IHeaderItem[] = [
 const colsBlankActions: IHeaderItem[] = [
   {
     name: 'ID',
-    handleSort: () => {/***/},
-    sortable: true
   },
   {
     name: 'Email',
-    handleSort: () => {/***/},
-    sortable: true
   },
   {
     name: 'Actions',
@@ -141,6 +135,7 @@ stories.add(
         return acc
       }, {})
     )
+    const [activeRow, setActiveRow] = useState('')
 
     const [sortColIndex, setSortColIndex] = useState(0)
     const [sortColAscending, setSortColAscending] = useState(true)
@@ -163,9 +158,20 @@ stories.add(
       })
     }
 
-    const updateSelected = (selectedRows: ISelectedRows): void => {
-      setSelected(selectedRows)
-    }
+    const colsSortable: IHeaderItem[] = [
+      {
+        name: 'ID',
+        handleSort,
+      },
+      {
+        name: 'Email',
+        handleSort,
+      },
+      {
+        name: 'Actions',
+        displayName: ''
+      }
+    ]
 
     return (
       <div className='m-5'>
@@ -228,13 +234,14 @@ stories.add(
         <br />
         <br />
 
-        <h3>Selectable list items, sortable columns, nameless column for Actions</h3>
+        <h3>Selectable list items, click to choose active row, sortable columns, nameless column for Actions</h3>
         <SmartList
-          cols={colsBlankActions}
+          cols={colsSortable}
           data={sortedContent(content)}
           selectedRows={selected}
-          onRowSelect={updateSelected}
-          onSort={handleSort}
+          onRowSelect={setSelected}
+          activeRow={activeRow}
+          onActivate={setActiveRow}
         />
       </div>
     )
