@@ -2,16 +2,15 @@ import React, { useRef, useEffect } from 'react'
 
 import './index.scss'
 
-export interface IData { 
+export interface ITooltipMenuData { 
   id: string | number
   value: string
   element?: JSX.Element
 }
 
 export interface IProps {
-  data: IData[]
-  onSelect?: (item: IData) => any
-  width?: string
+  data: ITooltipMenuData[]
+  onSelect?: (item: ITooltipMenuData) => any
   style?: object
   open: boolean 
   onClickaway: () => any
@@ -46,7 +45,7 @@ const TooltipMenu: React.FC<IProps> = (props) => {
     return <React.Fragment />
   }
 
-  const handleSelect = (item: IData) => {
+  const handleSelect = (item: ITooltipMenuData) => {
     if (!props.onSelect) {
       return
     }
@@ -66,9 +65,9 @@ const TooltipMenu: React.FC<IProps> = (props) => {
   ))
 
   return (
-    <div className='co-wrapper' ref={node}>
+    <div className='co-wrapper w-100' ref={node}>
       <Triangle />
-      <div className='co-tooltip-outer' style={{ width: props.width || 'auto' }}>
+      <div className='co-tooltip-outer w-100'>
         <div className='co-tooltip-wrapper'>
           <ul className='co-tooltip-wrapper-list'>
             {items}

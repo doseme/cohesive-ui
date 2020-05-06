@@ -1,3 +1,3 @@
-import { TooltipMenu } from './TooltipMenu'
+import { TooltipMenu, ITooltipMenuData } from './TooltipMenu'
 
-export { TooltipMenu }
+export { TooltipMenu, ITooltipMenuData }

@@ -15,7 +15,7 @@ import {
   IColumnElement,
   IHeaderItem,
 } from './SmartList'
-import { TooltipMenu } from './TooltipMenu'
+import { TooltipMenu, ITooltipMenuData } from './TooltipMenu'
 import { BasicList } from './BasicList'
 // import { List } from './List'
 import { Button } from './Button'
@@ -32,6 +32,7 @@ export {
   // AdminLogo,
   // Alert,
   TooltipMenu,
+  ITooltipMenuData,
   Button,
   Container,
   Row,

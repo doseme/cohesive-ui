@@ -1,11 +1,11 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { TooltipMenu, IData } from './TooltipMenu'
+import { TooltipMenu, ITooltipMenuData } from './TooltipMenu'
 
 describe('TooltipMenu', () => {
   it('renders items and handles click', () => {
-    const item: IData = {
+    const item: ITooltipMenuData = {
       id: 1,
       value: 'Element',
       element: <div data-testid='my-element'>This is the element</div>

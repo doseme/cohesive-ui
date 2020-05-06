@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { TooltipMenu, IData } from './TooltipMenu'
+import { TooltipMenu, ITooltipMenuData } from './TooltipMenu'
 import { Button } from '../Button'
 
 
-const data: IData[] = [
+const data: ITooltipMenuData[] = [
   { id: 1, value: 'Hospital 1' },
   { id: 2, value: 'Hospital 2' },
   { id: 3, value: 'Hospital 3' },
@@ -18,14 +18,13 @@ const data: IData[] = [
 
 storiesOf('Components.TooltipMenu', module)
   .add('Various', () => {
-    const ButtonWithMenu = (data: IData[]) => {
+    const ButtonWithMenu = (data: ITooltipMenuData[]) => {
       const [open, setOpen] = useState(true)
 
       const tooltip = 
         <div style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '15px', left: '20px' }}>
+          <div style={{ position: 'absolute', top: '15px', left: '20px', minWidth: '250px' }}>
             <TooltipMenu
-              width='250px'
               data={data}
               open={open}
               onClickaway={() => setOpen(false)}
