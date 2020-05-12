@@ -27,6 +27,7 @@ You need to import the stylesheet too. `global.css` contains useful utilities, l
 ```
 // Global stylesheet
 import 'cohesive-ui/style/global.css';
+import 'cohesive-ui/dist/cohesive-ui.esm.css';
 
 // Optionally, get our colors:
 @import 'cohesive-ui/style/colors.scss';
