@@ -15,12 +15,12 @@ interface IProps extends React.HTMLAttributes<HTMLElement> {
   name: string
   options: IToggleOption[]
 }
-type TProps = Overwrite<IProps, {
+export type TToggleProps = Overwrite<IProps, {
   onChange: (option: IToggleOption) => any
 }>
 
-const Toggle: React.FC<TProps> = (props): JSX.Element => {
-  if (props.selected) {
+const Toggle: React.FC<TToggleProps> = (props): JSX.Element => {
+  if (!props.selected) {
     console.warn(`<Toggle /> requires a \`selected\` prop.`)
   }
 
@@ -30,13 +30,12 @@ const Toggle: React.FC<TProps> = (props): JSX.Element => {
   }
 
   const radioButtons: JSX.Element[] = props.options.map(x =>
-    <>
-      <label 
-        htmlFor={x.id}
-        className={x.id === props.selected ? 'co-toggle-label co-toggle-label-selected' : 'co-toggle-label'}
-      >
-        {x.label}
-      </label>
+    <label 
+      htmlFor={x.id}
+      key={x.id}
+      className={x.id === props.selected ? 'co-toggle-label co-toggle-label-selected' : 'co-toggle-label'}
+    >
+      {x.label}
       <input 
         type='radio' 
         onChange={handleChange}
@@ -46,7 +45,7 @@ const Toggle: React.FC<TProps> = (props): JSX.Element => {
         value={x.value}
         data-testid={x.testid}
       />
-    </>
+    </label>
   )
 
   const className = `co-toggle-group ${props.className}`
