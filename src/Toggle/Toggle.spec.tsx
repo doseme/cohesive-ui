@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '@testing-library/jest-dom'
 import { render, fireEvent, screen } from '@testing-library/react'
 
-import { Toggle, IToggleOption } from './Toggle'
+import { Toggle, IToggleOption } from './index'
 
 describe('Toggle', () => {
   it('changes between selected items', () => {
