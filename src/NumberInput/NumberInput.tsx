@@ -56,7 +56,7 @@ const NumberInput: React.FC<IProps> = (props) => {
     return true
   }
 
-  const fieldClass = isValid ? 'ui-form' : 'ui-form form-field-invalid'
+  const fieldClass = isValid ? 'ui-form co-input' : 'ui-form form-field-invalid co-input'
 
   const update = (e: TFormControlEvent): void => {
     const valid = handleValidate(e.currentTarget.value)
@@ -81,7 +81,7 @@ const NumberInput: React.FC<IProps> = (props) => {
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
         <small className='validation-error-text ml-auto pr-2'>{error}</small>
       </div>
-      <Form.Control
+      <input
         {...rest}
         className={fieldClass}
         defaultValue={defaultValue}

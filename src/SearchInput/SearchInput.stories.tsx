@@ -27,7 +27,7 @@ storiesOf('Components.SearchInput', module)
           <SearchInput
             value={searchText2}
             onChange={setSearchText2}
-            placeholder='Find it here!...'
+            placeholder='Find it here!'
           />
         </div>
       </>

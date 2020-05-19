@@ -1,5 +1,14 @@
 @import '../style/colors.scss';
 
+.co-input {
+  border: none;
+  font-size: 1rem;
+  padding: 8px;
+  border: 1px solid $lightgrey;
+  border-radius: 4px;
+  font-weight: lighter;
+}
+
 .form-field-invalid {
   border-color: $invalidRed;
 } 
@@ -10,7 +19,7 @@
 
 .form-field-label {
   font-size: 14px;
-  padding: 0 0 5px 0;
+  padding: 0 0 8px 0;
 }
 
 .ui-form {
