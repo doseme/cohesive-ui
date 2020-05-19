@@ -1,10 +1,8 @@
-import React, { useState, } from 'react'
-import { Form, } from 'react-bootstrap'
+import React, { useState } from 'react'
 
-import { TFormControlEvent } from '../types'
 import '../shared/input.scss'
 import { validate } from './validation'
-
+import { Input } from '../Input/Input'
 
 interface IProps {
   label?: string
@@ -16,9 +14,9 @@ interface IProps {
   isRequired?: boolean
   disabled?: boolean
   readOnly?: boolean
-  handleChange?: (value: string) => void
-  handleBlur?: (value: string, isValid: boolean) => void
-  handleFocus?: () => void
+  onChange?: (value: string) => void
+  onBlur?: (value: string, isValid: boolean) => void
+  onFocus?: () => void
   className?: string
 }
 
@@ -27,9 +25,9 @@ const TextInput: React.FC<IProps> = (props) => {
     label,
     maxInputLength,
     isRequired,
-    handleBlur,
-    handleChange,
-    handleFocus,
+    onBlur,
+    onChange,
+    onFocus,
     disabled,
     readOnly,
     placeholder,
@@ -42,7 +40,7 @@ const TextInput: React.FC<IProps> = (props) => {
   const [error, setError] = useState<string>('')
   const [isValid, setValid] = useState<boolean>(true)
 
-  const handleValidate = (str: string): boolean => {
+  const onValidate = (str: string): boolean => {
     const status = validate({
       maxInputLength,
       isRequired,
@@ -59,11 +57,11 @@ const TextInput: React.FC<IProps> = (props) => {
 
   const fieldClass = isValid ? 'ui-form co-input' : 'ui-form form-field-invalid co-input'
 
-  const update = (e: TFormControlEvent): void => {
-    const valid = handleValidate(e.currentTarget.value)
+  const update = (e: React.FormEvent<HTMLInputElement>): void => {
+    const valid = onValidate(e.currentTarget.value)
     setValid(valid)
-    if (handleBlur) {
-      handleBlur(e.currentTarget.value, valid)
+    if (onBlur) {
+      onBlur(e.currentTarget.value, valid)
     }
   }
 
@@ -71,8 +69,8 @@ const TextInput: React.FC<IProps> = (props) => {
     setError('')
     setValid(true)
 
-    if (handleChange) {
-      handleChange(value)
+    if (onChange) {
+      onChange(value)
     }
   }
 
@@ -82,16 +80,17 @@ const TextInput: React.FC<IProps> = (props) => {
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
         <small className='validation-error-text ml-auto pr-2'>{error}</small>
       </div>
-      <input
+      <Input 
         {...rest}
         className={fieldClass}
         defaultValue={defaultValue}
         type={type || 'text'}
         placeholder={placeholder || ''}
         name={name}
+        valid={isValid}
         onBlur={update}
-        onChange={(e: TFormControlEvent) => clearAndHandleChange(e.currentTarget.value)}
-        onFocus={handleFocus}
+        onChange={(e) => clearAndHandleChange(e.currentTarget.value)}
+        onFocus={onFocus}
         disabled={disabled}
         readOnly={readOnly}
       />

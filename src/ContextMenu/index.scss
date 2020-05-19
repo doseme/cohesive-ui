@@ -1,7 +1,8 @@
 @import '../style/colors.scss';
 
 .context-menu {
-  border: 0px solid #e0e0e0;
+  border: 1px solid #e0e0e0;
+  padding: unset;
   width: 260px;
 }
 

@@ -1,11 +1,10 @@
 import React from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
 
 import './index.scss'
 
 export interface IListItem {
   id: number | string
-  icon: JSX.Element
+  icon?: JSX.Element
   text: string
   onClick?: () => any
 }
@@ -15,18 +14,18 @@ interface IProps {
   items: IListItem[]
 }
 
-const ContextMenu: React.FC<IProps> = (props): JSX.Element => {
+export const ContextMenu: React.FC<IProps> = (props): JSX.Element => {
   const header = props.header && (
-    <ListGroup.Item 
+    <li
       data-test-head
-      className='context-menu-header d-flex align-items-center'
+      className='context-menu-header d-flex align-items-center pl-4 pr-4'
     >
       {props.header}
-    </ListGroup.Item>
+    </li>
   )
 
  const items = props.items.map(item =>
-    <ListGroup.Item 
+    <li
       key={item.id} 
       data-test-item
       className='d-flex align-items-center context-menu-item pt-2 pb-2 pl-4 pr-4'
@@ -34,15 +33,13 @@ const ContextMenu: React.FC<IProps> = (props): JSX.Element => {
     >
       <span className='icon'>{item.icon}</span> 
       <span className='item-text'>{item.text}</span>
-    </ListGroup.Item>
+    </li>
   )
 
   return (
-    <ListGroup className='context-menu'>
+    <ul className='context-menu'>
       {header}
       {items}
-    </ListGroup>
+    </ul>
   )
 }
-
-export { ContextMenu }

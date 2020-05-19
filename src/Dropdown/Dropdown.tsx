@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect, HTMLProps } from 'react'
-import { InputGroup, FormControl } from 'react-bootstrap'
 
-import { Button } from '../Button'
 import './index.scss'
 
 interface IDropdownItem {
@@ -66,26 +64,27 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
   }
 
   const searchInput = (
-    <InputGroup className='dropdown-search'>
-      <FormControl
+    <div className='dropdown-search'>
+      <input
         placeholder='Search...'
         aria-label='Search'
         onChange={handleChange}
+        value={searchText}
       />
       {
-        searchIcon && (
-          <InputGroup.Append>
-            <Button
-              className='h-100'
-              variant='light'
-              onClick={() => {/***/ }}
-            >
-              {searchIcon}
-            </Button>
-          </InputGroup.Append>
-        )
+        // searchIcon && (
+        //   <div.Append>
+        //     <Button
+        //       className='h-100'
+        //       variant='light'
+        //       onClick={() => {/***/ }}
+        //     >
+        //       {searchIcon}
+        //     </Button>
+        //   </InputGroup.Append>
+        // )
       }
-    </InputGroup>
+    </div>
   )
 
   const listItems = (items: IDropdownItem[], callback: (item: string) => void) => (
