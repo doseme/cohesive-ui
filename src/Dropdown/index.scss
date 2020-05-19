@@ -11,6 +11,11 @@ $padding-all: 5px 10px;
 
 .dropdown-search {
   padding: 5px $side 5px $side;
+  width: 90%;
+
+  input {
+    width: 100%;
+  }
 }
 
 ul.dropdown-list {

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, HTMLProps } from 'react'
 
+import { Input } from '../Input/Input'
 import './index.scss'
 
 interface IDropdownItem {
@@ -65,11 +66,11 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
 
   const searchInput = (
     <div className='dropdown-search'>
-      <input
+      <Input
         placeholder='Search...'
         aria-label='Search'
         onChange={handleChange}
-        value={searchText}
+        valid={true}
       />
       {
         // searchIcon && (
