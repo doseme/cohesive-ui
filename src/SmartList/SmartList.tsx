@@ -97,11 +97,11 @@ const SmartList: React.FC<IProps> = ({
 
   const displayContent = (): JSX.Element | null => {
     if (loading) {
-      return <div>
-        <Row>
+      return (
+        <div data-testid='smart-list-loading'>
           <Col className='list-placeholder'></Col>
-        </Row>
-      </div>
+        </div>
+      )
     }
 
     if (data.length) {
@@ -122,10 +122,10 @@ const SmartList: React.FC<IProps> = ({
   }
 
   return (
-    <>
+    <div>
       {header && headerContent}
       {displayContent()}
-    </>
+    </div>
   )
 }
 

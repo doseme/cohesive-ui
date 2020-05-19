@@ -19,6 +19,7 @@ export interface IHeaderItem {
 export interface IColumnElement {
   name: string
   element?: JSX.Element
+  className?: string
   text?: string
 }
 

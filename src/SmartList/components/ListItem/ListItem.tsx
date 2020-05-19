@@ -70,6 +70,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
           <Col 
             key={x.name}
             data-test={x.name}
+            className={x.className || ''}
             width={props.cols && props.cols[idx].width}
           >
             {x.element || x.text}

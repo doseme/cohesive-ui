@@ -113,7 +113,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll }) => {
           width={x.width}
           key={x.name}
           onClick={() => sortable(x) && handleSortButtonClicked(x, idx)}
-          className={sortable(x) ? 'cursor-pointer' : ''}
+          className={sortable(x) ? `cursor-pointer ${x.className}` : x.className}
         >
           {nameDisplay(x)}
           {sortable(x) && sortButton(x)}
