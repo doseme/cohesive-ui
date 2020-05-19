@@ -1,7 +1,7 @@
 // TOOO: Support absolute import from node_modules
 @import '../style/colors.scss';
 
-.co-smart-list {
+.co-smart-list, .list-placeholder {
   box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.06);
 }
 
