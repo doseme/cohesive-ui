@@ -97,7 +97,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll }) => {
     >
       {selectAllCol && <Col
         key='select-all-col'
-        width={1}
+        width='checkbox-only'
        >
          <input
            type='checkbox'

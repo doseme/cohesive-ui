@@ -122,7 +122,7 @@ const SmartList: React.FC<IProps> = ({
   }
 
   return (
-    <div>
+    <div className='co-smart-list'>
       {header && headerContent}
       {displayContent()}
     </div>

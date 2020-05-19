@@ -52,7 +52,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     >
       {
         selectable && <Col
-          width={1}
+          width='checkbox-only'
           key={`list-select-${rowId}`}
           data-testid={`check-col-${rowId}`}
         >

@@ -199,7 +199,7 @@ stories.add(
             { name: 'First Name. Last Name', width: 4 },
             { name: 'Date of Birth', width: 2, className: 'co-col-hide-med' },
             { name: 'Last Modified', width: 3 },
-            { name: 'Actions', width: 1 },
+            { name: 'Actions' },
           ]}
           data={[
             {
@@ -269,6 +269,7 @@ stories.add(
           activeRow={activeRow}
           onActivate={setActiveRow}
         />
+
       </div>
     )
   }
