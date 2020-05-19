@@ -1,10 +1,11 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button } from '../Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleDoubleLeft, faAngleRight, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 
 import { paginate } from './utils'
 import { TNode } from './types'
+import './index.scss'
 
 interface IProps {
   currentPage: number
@@ -134,7 +135,7 @@ const PaginationPanel: React.FC<IProps> = ({
     }
 
     if (n.type === 'dots') {
-      return nodes.concat(<span key={ind} className='ml-1'>{n.value}</span>)
+    return nodes.concat(<span key={ind} className='ml-1 co-dots'>{n.value}</span>)
     }
 
     if (n.type === 'pageNumber') {

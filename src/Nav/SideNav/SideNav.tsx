@@ -33,7 +33,7 @@ const SideNav: React.FC<IProps> = ({ navLinks, handleNavTo }): JSX.Element => {
   return (
     <Navbar
       id='sidenav'
-      className='d-flex flex-column align-items-start bg-white'
+      className='d-flex flex-column align-items-start'
     >
       {sideNavLinks}
     </Navbar>
