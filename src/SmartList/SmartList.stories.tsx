@@ -161,7 +161,6 @@ stories.add(
     const colsSortable: IHeaderItem[] = [
       {
         name: 'ID',
-        handleSort,
       },
       {
         name: 'Email',
@@ -188,6 +187,33 @@ stories.add(
           cols={cols}
           data={[]}
           textIfEmpty='No data in table.'
+        />
+        <br />
+        <br />
+
+        <h3>Many Columns</h3>
+        <SmartList
+          cols={[
+            { name: '', width: 1 },
+            { name: 'ID', width: 1 },
+            { name: 'First Name. Last Name', width: 4 },
+            { name: 'Date of Birth', width: 2, className: 'co-col-hide-med' },
+            { name: 'Last Modified', width: 3 },
+            { name: 'Actions' },
+          ]}
+          data={[
+            {
+              id: 1,
+              columns: [
+                { name: '', element: <input type="checkbox" /> },
+                { text: '1234', name: 'ID' },
+                { text: 'Very Long Patient Name', name: 'First Name, Last Name' },
+                { text: '11/01/2020', name: 'Date of Birth', className: 'co-col-hide-med' },
+                { text: 'June 06 2018 09:00', name: 'Last Modified' },
+                { element: <button>...</button>, name: 'Actions' },
+              ]
+            }
+          ]}
         />
         <br />
         <br />
@@ -243,6 +269,7 @@ stories.add(
           activeRow={activeRow}
           onActivate={setActiveRow}
         />
+
       </div>
     )
   }
