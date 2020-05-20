@@ -5,13 +5,16 @@ import './index.scss'
 interface IProps {
   style?: Record<string, any>
   className?: string
-  maxWidth?: boolean
+  fluid?: boolean
 }
 
 const Container: React.FC<IProps> = (props) => {
   const style = props.style || {}
-  const maxWidth =  props.maxWidth ? '60rem' : 'none'
-  return <div style={{ ...style, maxWidth }} className='co-container'>{props.children}</div>
+  let className = 'co-container'
+  if (props.fluid) {
+    className += ' co-container-fluid'
+  }
+  return <div style={style} className={className}>{props.children}</div>
 }
 
 export {

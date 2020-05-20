@@ -26,17 +26,19 @@ const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element 
   )
 
   return (
-    <div className='search-wrapper'>
-      <input
-        data-testid='search-input'
-        placeholder={props.placeholder || 'Search'}
-        className='smart-list-search'
-        type='text'
-        value={props.value}
-        onChange={handleChange}
-      />
+    <div className='search-outer'>
+      <div className='search-wrapper'>
+        <input
+          data-testid='search-input'
+          placeholder={props.placeholder || 'Search'}
+          className='smart-list-search'
+          type='text'
+          value={props.value}
+          onChange={handleChange}
+        />
         <div className='co-search-icon'>
           {icon}
+        </div>
       </div>
     </div>
   )

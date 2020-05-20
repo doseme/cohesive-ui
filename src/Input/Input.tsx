@@ -45,7 +45,7 @@ export const Input: React.FC<IInputProps> = (props) => {
       type={type || 'text'}
       placeholder={placeholder || ''}
       name={name}
-      onBlur={onBlur}
+      onBlur={e => { console.log('Input:onBlur'); onBlur && onBlur(e) }}
       onChange={onChange}
       onFocus={onFocus}
       disabled={disabled}

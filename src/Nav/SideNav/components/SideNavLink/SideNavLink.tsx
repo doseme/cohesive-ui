@@ -15,7 +15,7 @@ const SideNavLink: React.FC<IProps> = ({
   route,
   icon,
 }): JSX.Element => {
-  const base = 'm-1 w-100 text-muted d-flex align-items-center'
+  const base = 'w-100 text-muted d-flex align-items-center'
   const className = location.pathname.includes(route)
     ? `co-nav-link co-nav-link-selected ${base}`
     : `co-nav-link base`
