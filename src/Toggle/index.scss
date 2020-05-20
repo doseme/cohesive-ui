@@ -1,0 +1,43 @@
+@import '../style/colors.scss';
+@import '../style/mixins.scss';
+
+$toggle-group-height: 35px;
+$radio-width: 70px;
+
+.co-toggle-group {
+  display: flex;
+  height: $toggle-group-height;
+  @include align-center;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  .co-toggle-label {
+    cursor: pointer;
+    padding: 5px;
+    color: black;
+    background: $toggle-grey;
+    height: $toggle-group-height - 8px;
+    min-width: $radio-width;
+    @include center;
+  }
+
+  .co-toggle-label:first-of-type {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .co-toggle-label:last-of-type {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .co-toggle-label-selected {
+    height: 100%;
+    border-radius: 10px;
+    min-width: $radio-width + 10px;
+    color: white;
+    background: $toggle-blue;
+  }
+}

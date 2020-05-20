@@ -19,6 +19,7 @@ import { TooltipMenu, ITooltipMenuData } from './TooltipMenu'
 import { BasicList } from './BasicList'
 // import { List } from './List'
 import { Button } from './Button'
+import * as Toggle from './Toggle'
 // import * as Nav from './Nav'
 // import { Form } from './Form'
 // import { TextInput } from './TextInput'
@@ -53,6 +54,7 @@ export {
   // SearchInput,
   SmartList,
   Spinner,
+  Toggle,
   // TextInput,
 
   // Types
