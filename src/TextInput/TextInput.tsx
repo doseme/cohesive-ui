@@ -59,10 +59,8 @@ const TextInput: React.FC<IProps> = (props) => {
 
   const update = (e: React.FormEvent<HTMLInputElement>): void => {
     const valid = onValidate(e.currentTarget.value)
-    console.log('Validate')
     setValid(valid)
     if (onBlur) {
-      console.log('Calling onBlur')
       onBlur(e.currentTarget.value, valid)
     }
   }
