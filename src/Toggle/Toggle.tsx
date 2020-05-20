@@ -20,10 +20,6 @@ export type TToggleProps = Overwrite<IProps, {
 }>
 
 const Toggle: React.FC<TToggleProps> = (props): JSX.Element => {
-  if (!props.selected) {
-    console.warn(`<Toggle /> requires a \`selected\` prop.`)
-  }
-
   const handleChange = (event: React.FormEvent<HTMLDivElement>) => {
     const selectedOption = props.options.find(x => x.id === event.currentTarget.id)!
     props.onChange(selectedOption)
