@@ -1,7 +1,6 @@
 import React, { useState, } from 'react'
 
-import { TFormControlEvent } from '../types'
-import { validate, IValidators } from './validation'
+import { validate } from './validation'
 import './index.scss'
 
 
@@ -54,7 +53,7 @@ const DateInput: React.FC<IProps> = (props) => {
 
   const fieldClass = isValid ? 'ui-form co-input' : 'ui-form form-field-invalid co-input'
 
-  const update = (e: TFormControlEvent): void => {
+  const update = (e: React.FormEvent<HTMLInputElement>): void => {
     const valid = handleValidate(e.currentTarget.value)
     setValid(valid)
     if (handleBlur) {
@@ -85,7 +84,7 @@ const DateInput: React.FC<IProps> = (props) => {
         type='date'
         name={name}
         onBlur={update}
-        onChange={(e: TFormControlEvent) => clearAndHandleChange(e.currentTarget.value)}
+        onChange={e => clearAndHandleChange(e.currentTarget.value)}
         onFocus={handleFocus}
         disabled={disabled}
         readOnly={readOnly}

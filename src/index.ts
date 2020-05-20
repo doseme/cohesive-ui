@@ -1,5 +1,4 @@
 export * from './AdminLogo'
-// import { Alert } from './Alert'
 export * from './BackArrowButton'
 export * from './ContextMenu'
 export * from './Dropdown'
