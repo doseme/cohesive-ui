@@ -1,9 +1,8 @@
 import React, { useState, } from 'react'
-import { Form, } from 'react-bootstrap'
 
 import { TFormControlEvent } from '../types'
-import './index.scss'
 import { validate, IValidators } from './validation'
+import './index.scss'
 
 
 interface IProps {
