@@ -28,7 +28,7 @@ export const Input: React.FC<IInputProps> = (props) => {
     placeholder,
     valid,
     name,
-    type,
+    type = 'text',
     defaultValue,
     children,
     ...rest
@@ -42,7 +42,7 @@ export const Input: React.FC<IInputProps> = (props) => {
       data-testid={name}
       className={fieldClass}
       defaultValue={defaultValue}
-      type={type || 'text'}
+      type={type}
       placeholder={placeholder || ''}
       name={name}
       onBlur={e => onBlur && onBlur(e)}

@@ -1,7 +1,7 @@
 @import '../style/colors.scss';
 
 .context-menu {
-  border: 1px solid #e0e0e0;
+  border: 1px solid $toggle-grey;
   padding: unset;
   width: 260px;
   background: white;
@@ -11,7 +11,7 @@
   height: 68px;
   font-weight: 600;
   background: $menu-grey;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid $toggle-grey;
 }
 
 .context-menu-item, .context-menu-header {
