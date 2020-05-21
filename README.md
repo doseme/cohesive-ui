@@ -9,7 +9,7 @@ View it live in Storybook [here](https://doseme.github.io/cohesive-ui/).
 We have some peer dependencies:
 
 ```sh
-yarn add @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome moment react react-dom
+yarn add @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome moment react react-dom classnames
 ```
 
 You can use the library like this:

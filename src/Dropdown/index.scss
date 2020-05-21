@@ -5,11 +5,11 @@ $padding-horizontal: 0 $side * 2;
 $padding-vertical: 5px 0;
 $padding-all: 5px 10px;
 
-.dropdown-placeholder {
+.co-dropdown-placeholder {
   padding: $padding-all;
 }
 
-.dropdown-search {
+.co-dropdown-search {
   padding: 5px $side 5px $side;
   width: 100%;
 
@@ -22,7 +22,7 @@ $padding-all: 5px 10px;
   }
 }
 
-ul.dropdown-list {
+ul.co-dropdown-list {
   padding: 0px !important;
   margin: 0px !important;
 
@@ -37,18 +37,18 @@ ul.dropdown-list {
   }
 }
 
-.dropdown-wrapper {
+.co-dropdown-wrapper {
   position: relative;
 }
 
-.dropdown-closed {
+.co-dropdown-closed {
   padding: 8px;
   background: $lightest-grey;
   border: 1px solid $darkgrey;
   border-radius: 5px;
 }
 
-.dropdown {
+.co-dropdown {
   background: $lightest-grey;
   position: absolute;
   padding-bottom: 10px;
@@ -59,7 +59,7 @@ ul.dropdown-list {
   z-index: 5;
 }
 
-.dropdown-list {
+.co-dropdown-list {
   max-height: 200px;
   overflow-y: scroll;
 }
@@ -68,7 +68,7 @@ ul.dropdown-list {
   border-color: $navy;
 }
 
-.dropdown-closed:after {
+.co-dropdown-closed:after {
   content: '◀▶';
   font: 10px "Consolas", monospace;
   color: #333;
@@ -80,7 +80,7 @@ ul.dropdown-list {
   pointer-events: none;
 }
 
-.dropdown-closed select {
+.co-dropdown-closed select {
   appearance: none;
   display: block;
   width: 100%;
