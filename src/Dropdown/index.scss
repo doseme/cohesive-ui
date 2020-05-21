@@ -11,6 +11,15 @@ $padding-all: 5px 10px;
 
 .dropdown-search {
   padding: 5px $side 5px $side;
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+
+  .search-wrapper {
+    width: 100%;
+  }
 }
 
 ul.dropdown-list {
@@ -33,7 +42,7 @@ ul.dropdown-list {
 }
 
 .dropdown-closed {
-  padding: 5px $side 5px $side + 2;
+  padding: 8px;
   background: $lightest-grey;
   border: 1px solid $darkgrey;
   border-radius: 5px;

@@ -24,8 +24,18 @@ const icon = (
 const navLinks: INavLink[] = [
   {
     icon,
+    label: 'Home',
+    route: '/',
+  },
+  {
+    icon,
     label: 'Installations',
     route: '/installations',
+  },
+  {
+    icon,
+    label: 'Users',
+    route: '/users',
   }
 ]
 

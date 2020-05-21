@@ -8,7 +8,9 @@
   ],
   "types": "dist/index.d.ts",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "classnames": "^2.2.6"
+  },
   "scripts": {
     "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp -r src/style/colors.scss dist/style/colors.scss && cp src/style/global.css dist/style/global.css",
     "build-storybook": "build-storybook -c .storybook -o docs",
@@ -21,7 +23,6 @@
     "@fortawesome/react-fontawesome": "^0.1.7",
     "moment": "^2.24.0",
     "react": "^16.11.0",
-    "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.11.0"
   },
   "resolutions": {
@@ -38,6 +39,7 @@
     "@storybook/react": "^5.2.5",
     "@testing-library/jest-dom": "^5.0.0",
     "@testing-library/react": "^9.4.0",
+    "@types/classnames": "^2.2.10",
     "@types/enzyme": "^3.10.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.23",
@@ -56,7 +58,6 @@
     "minimist": "^0.2.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
-    "react-bootstrap": "^1.0.1",
     "react-docgen-typescript-loader": "^3.3.0",
     "rollup": "^2.7.5",
     "rollup-plugin-sass": "^1.2.2",
@@ -66,7 +67,6 @@
     "ts-jest": "^24.2.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-cli": "^3.3.9"
   }
 }

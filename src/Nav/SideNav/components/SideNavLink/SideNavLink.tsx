@@ -1,5 +1,4 @@
 import React from 'react'
-import * as BS from 'react-bootstrap'
 
 import './index.scss'
 
@@ -16,19 +15,19 @@ const SideNavLink: React.FC<IProps> = ({
   route,
   icon,
 }): JSX.Element => {
-  const base = 'm-1 w-100 text-muted d-flex align-items-center'
+  const base = 'w-100 text-muted d-flex align-items-center'
   const className = location.pathname.includes(route)
-    ? `navbar-selected ${base}`
-    : base
+    ? `co-nav-link co-nav-link-selected ${base}`
+    : `co-nav-link base`
 
   return (
-    <BS.Nav
+    <nav
       onClick={handleNavigateTo}
       className={className}
     >
       {icon}
       <span className='ml-2 link-label'>{label}</span>
-    </BS.Nav>
+    </nav>
   )
 }
 

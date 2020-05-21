@@ -21,6 +21,34 @@ $padding: 0 0.75rem;
   }
 }
 
+@media (min-width: 576px) {
+  .co-container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .co-container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .co-container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .co-container {
+    max-width: 1140px;
+  }
+}
+
+.co-container-fluid {
+  max-width: none !important;
+}
+
 .co-row {
   position: relative;
   width: 100%;

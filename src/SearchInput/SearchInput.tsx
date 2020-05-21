@@ -1,9 +1,6 @@
 import React from 'react'
-import Form from 'react-bootstrap/Form'
-import InputGroup from 'react-bootstrap/InputGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FormControl } from 'react-bootstrap'
 
 import { TExtendsHTMLElement } from '../types'
 import './index.scss'
@@ -21,27 +18,28 @@ const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element 
     props.onChange(value || '')
   }
 
+  const icon = props.customSearchIcon || (
+    <FontAwesomeIcon
+      className='search-icon'
+      icon={faSearch}
+    />
+  )
+
   return (
-    <div className='search-wrapper'>
-      <InputGroup>
-        <Form.Control
+    <div className='search-outer'>
+      <div className='search-wrapper'>
+        <input
           data-testid='search-input'
-          name='asdf'
           placeholder={props.placeholder || 'Search'}
           className='smart-list-search'
           type='text'
           value={props.value}
           onChange={handleChange}
         />
-        <InputGroup.Append>
-          <InputGroup.Text className='search-icon-wrapper'>
-            {props.customSearchIcon || <FontAwesomeIcon
-              className='m-2 search-icon'
-              icon={faSearch}
-            />}
-          </InputGroup.Text>
-        </InputGroup.Append>
-      </InputGroup>
+        <div className='co-search-icon'>
+          {icon}
+        </div>
+      </div>
     </div>
   )
 }

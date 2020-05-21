@@ -2438,3 +2438,44 @@
     margin-left: auto !important;
   }
 }
+
+.bg-white {
+  background-color: white;
+}
+
+input, button {
+  font-size: inherit;
+}
+
+div, input, button {
+  box-sizing: border-box;
+}
+
+.co-h1, .co-h2, .co-h3, .co-h4, .co-h5, .co-h6 {
+  margin: 0 !important;
+  font-weight: 500;
+}
+
+.co-h1 {
+  font-size: 2.5rem;
+}
+
+.co-h2 {
+  font-size: 2rem;
+}
+
+.co-h3 {
+  font-size: 1.75rem;
+}
+
+.co-h4 {
+  font-size: 1.5rem;
+}
+
+.co-h5 {
+  font-size: 1.25rem;
+}
+
+.co-h6 {
+  font-size: 1rem;
+}

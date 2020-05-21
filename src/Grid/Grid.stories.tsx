@@ -16,7 +16,7 @@ storiesOf('Layout.Grid', module)
         <ul>
           <li>- You can have col from 1 - 12</li>
           <li>- No max width by default</li>
-          <li>- Apply a <code>`maxWidth={true}`</code> props for a max width of 60rem. It will center itself automatically.</li>
+          <li>- Apply a <code>`fluid={true}`</code> props for a no max width. It will center itself automatically.</li>
         </ul>
 
         <br />
@@ -24,7 +24,7 @@ storiesOf('Layout.Grid', module)
         <Container>
           <code style={{ whiteSpace: 'pre' }}>
 {`
-<Container style={style} maxWidth={true}>
+<Container style={style} fluid={true}>
   <Row>
     <Col width={6}>Column width-6</Col>
     <Col width={6}>Column width-6</Col>
@@ -34,7 +34,7 @@ storiesOf('Layout.Grid', module)
           </code>
         </Container>
 
-        <Container style={style} maxWidth={true}>
+        <Container style={style} fluid={true}>
           <Row>
             <Col width={6}>Column width-6 with max width</Col>
             <Col width={6}>Column width-6 with max width</Col>

@@ -1,17 +1,14 @@
-import React from 'react'
+import React, { HTMLProps } from 'react'
+import classnames from 'classnames'
 
 import './index.scss'
 
-interface IProps {
-  style?: Record<string, any>
-  className?: string
-  maxWidth?: boolean
-}
+type TProps = HTMLProps<HTMLDivElement> & { fluid?: boolean }
 
-const Container: React.FC<IProps> = (props) => {
-  const style = props.style || {}
-  const maxWidth =  props.maxWidth ? '60rem' : 'none'
-  return <div style={{ ...style, maxWidth }} className='co-container'>{props.children}</div>
+const Container: React.FC<TProps> = (props) => {
+  let className = classnames('co-container', { 'co-container-fluid': props.fluid })
+
+  return <div className={className}>{props.children}</div>
 }
 
 export {

@@ -14,8 +14,8 @@ storiesOf('Components.Form.TextInput', module)
             label='This is an optional label describing a text field'
             maxInputLength={20}
             isRequired={true}
-            handleChange={noop}
-            handleBlur={noop}
+            onChange={noop}
+            onBlur={noop}
           />
         </div>
         <br />
@@ -26,8 +26,8 @@ storiesOf('Components.Form.TextInput', module)
             type='number'
             maxInputLength={20}
             isRequired={true}
-            handleChange={noop}
-            handleBlur={noop}
+            onChange={noop}
+            onBlur={noop}
           />
         </div>
         <br /> 
@@ -40,8 +40,19 @@ storiesOf('Components.Form.TextInput', module)
             disabled={true}
             readOnly={true}
             defaultValue='Read only'
-            handleChange={noop}
-            handleBlur={noop}
+            onChange={noop}
+            onBlur={noop}
+          />
+        </div>
+
+        <div className='m-4'>
+          <TextInput
+            label='This has a default value'
+            maxInputLength={20}
+            isRequired={true}
+            defaultValue='Default value'
+            onChange={noop}
+            onBlur={noop}
           />
         </div>
       </>

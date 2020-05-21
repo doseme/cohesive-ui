@@ -1,22 +1,29 @@
-.search-wrapper {
-  width: 250px;
-  margin: 0;
-  position: relative;
-  color: grey;
+@import '../style/colors';
 
-  .search-icon {
-    position: absolute;
-    top: 3px;
-    right: 5px;
-  }
+.search-outer {
+  display: flex;
 
-  .smart-list-search {
-    border-right: none;
-  }
+  .search-wrapper {
+    position: relative;
 
-  .search-icon-wrapper.input-group-text {
-    width: 40px;
-    background: white;
-    border-left: none;
+    .smart-list-search {
+      font-size: 1rem;
+      margin: 0;
+      position: relative;
+      color: grey;
+      border: 1px solid $lightgrey;
+      border-radius: 4px;
+      padding: 8px;
+      font-weight: lighter;
+    }
+
+    .co-search-icon {
+      position: absolute;
+      background: white;
+      top: 10px;
+      right: 5px;
+      border-right: 4px solid white;
+      border-left: 4px solid white;
+    }
   }
 }
