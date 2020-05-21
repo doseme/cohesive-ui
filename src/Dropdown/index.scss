@@ -11,9 +11,13 @@ $padding-all: 5px 10px;
 
 .dropdown-search {
   padding: 5px $side 5px $side;
-  width: 90%;
+  width: 100%;
 
   input {
+    width: 100%;
+  }
+
+  .search-wrapper {
     width: 100%;
   }
 }

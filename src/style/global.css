@@ -2447,7 +2447,7 @@ input, button {
   font-size: inherit;
 }
 
-div {
+div, input, button {
   box-sizing: border-box;
 }
 

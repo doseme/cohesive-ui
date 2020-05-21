@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, HTMLProps } from 'react'
 
-import { Input } from '../Input/Input'
+import { SearchInput } from '../SearchInput'
 import './index.scss'
 
 interface IDropdownItem {
@@ -56,9 +56,9 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
     }
   }, [defaultIndex, data, setSelectedItem])
 
-  const handleChange = (e: React.FormEvent<any>) => {
-    if (e.currentTarget.value) {
-      setSearchText(e.currentTarget.value.toString().toLowerCase())
+  const handleChange = (value: string) => {
+    if (value) {
+      setSearchText(value.toString().toLowerCase())
       return
     }
     setSearchText('')
@@ -66,25 +66,12 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
 
   const searchInput = (
     <div className='dropdown-search'>
-      <Input
+      <SearchInput
         placeholder='Search...'
         aria-label='Search'
         onChange={handleChange}
-        valid={true}
+        value={searchText}
       />
-      {
-        // searchIcon && (
-        //   <div.Append>
-        //     <Button
-        //       className='h-100'
-        //       variant='light'
-        //       onClick={() => {/***/ }}
-        //     >
-        //       {searchIcon}
-        //     </Button>
-        //   </InputGroup.Append>
-        // )
-      }
     </div>
   )
 
