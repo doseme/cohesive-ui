@@ -9,6 +9,7 @@ const createEntry = ({ format, file }) => {
       format,
     },
     external: [
+      'classnames',
       'react',
       '@fortawesome/react-fontawesome',
       '@fortawesome/free-solid-svg-icons',
