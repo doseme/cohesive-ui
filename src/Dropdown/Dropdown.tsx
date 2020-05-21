@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, HTMLProps } from 'react'
-import { InputGroup, FormControl } from 'react-bootstrap'
 
-import { Button } from '../Button'
+import { SearchInput } from '../SearchInput'
 import './index.scss'
 
 interface IDropdownItem {
@@ -57,47 +56,35 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
     }
   }, [defaultIndex, data, setSelectedItem])
 
-  const handleChange = (e: React.FormEvent<any>) => {
-    if (e.currentTarget.value) {
-      setSearchText(e.currentTarget.value.toString().toLowerCase())
+  const handleChange = (value: string) => {
+    if (value) {
+      setSearchText(value.toString().toLowerCase())
       return
     }
     setSearchText('')
   }
 
   const searchInput = (
-    <InputGroup className='dropdown-search'>
-      <FormControl
+    <div className='co-dropdown-search'>
+      <SearchInput
         placeholder='Search...'
         aria-label='Search'
         onChange={handleChange}
+        value={searchText}
       />
-      {
-        searchIcon && (
-          <InputGroup.Append>
-            <Button
-              className='h-100'
-              variant='light'
-              onClick={() => {/***/ }}
-            >
-              {searchIcon}
-            </Button>
-          </InputGroup.Append>
-        )
-      }
-    </InputGroup>
+    </div>
   )
 
   const listItems = (items: IDropdownItem[], callback: (item: string) => void) => (
     <>
       <div 
-        className='dropdown-placeholder'
+        className='co-dropdown-placeholder'
         data-test-placeholder
       >{selectedItem ? selectedItem.label || selectedItem.value : placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 
-      <ul className='dropdown-list'>
+      <ul className='co-dropdown-list'>
         {
           items.map(item =>
             <li 
@@ -130,7 +117,7 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
   const content = showContent 
     ? 
     (
-      <div className='dropdown'>
+      <div className='co-dropdown'>
         {
           filteredData && onSelect
             ? listItems(filteredData, onSelect)
@@ -148,11 +135,11 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
 
       <div
         id={id ? id : undefined}
-        className='dropdown-wrapper' 
+        className='co-dropdown-wrapper' 
         ref={node}
       >
         <div
-          className='dropdown-closed'
+          className='co-dropdown-closed'
           data-test-current-item
           onClick={() => setShowContent(!showContent)}
         >

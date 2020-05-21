@@ -1,9 +1,7 @@
 import React, { useState, } from 'react'
-import { Form, } from 'react-bootstrap'
 
-import { TFormControlEvent } from '../types'
-import '../shared/input.scss'
 import { validate } from './validation'
+import '../shared/input.scss'
 
 
 export type TNumberType = 'whole' | 'integer'
@@ -56,9 +54,9 @@ const NumberInput: React.FC<IProps> = (props) => {
     return true
   }
 
-  const fieldClass = isValid ? 'ui-form' : 'ui-form form-field-invalid'
+  const fieldClass = isValid ? 'ui-form co-input' : 'ui-form form-field-invalid co-input'
 
-  const update = (e: TFormControlEvent): void => {
+  const update = (e: React.FormEvent<HTMLInputElement>): void => {
     const valid = handleValidate(e.currentTarget.value)
     setValid(valid)
     if (handleBlur) {
@@ -81,7 +79,7 @@ const NumberInput: React.FC<IProps> = (props) => {
         <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
         <small className='validation-error-text ml-auto pr-2'>{error}</small>
       </div>
-      <Form.Control
+      <input
         {...rest}
         className={fieldClass}
         defaultValue={defaultValue}
@@ -89,7 +87,7 @@ const NumberInput: React.FC<IProps> = (props) => {
         placeholder={placeholder || ''}
         name={name}
         onBlur={update}
-        onChange={(e: TFormControlEvent) => clearAndHandleChange(e.currentTarget.value)}
+        onChange={(e) => clearAndHandleChange(e.currentTarget.value)}
         onFocus={handleFocus}
         disabled={disabled}
         readOnly={readOnly}

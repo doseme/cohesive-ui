@@ -14,11 +14,11 @@ storiesOf('Components.SearchInput', module)
       <>
         <div className='m-4'>
           <h3>Search Input</h3>
-          <SearchInput
-            value={searchText1}
-            onChange={setSearchText1}
-          />
-        </div>
+            <SearchInput
+              value={searchText1}
+              onChange={setSearchText1}
+            />
+          </div>
         <br />
         <br />
 
@@ -27,7 +27,7 @@ storiesOf('Components.SearchInput', module)
           <SearchInput
             value={searchText2}
             onChange={setSearchText2}
-            placeholder='Find it here!...'
+            placeholder='Find it here!'
           />
         </div>
       </>

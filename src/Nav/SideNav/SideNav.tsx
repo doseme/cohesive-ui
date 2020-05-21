@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from 'react-bootstrap/Navbar'
 
 import { SideNavLink } from './components/SideNavLink'
 
@@ -31,12 +30,12 @@ const SideNav: React.FC<IProps> = ({ navLinks, handleNavTo }): JSX.Element => {
   )
 
   return (
-    <Navbar
+    <nav
       id='sidenav'
-      className='d-flex flex-column align-items-start bg-white'
+      className='d-flex flex-column align-items-start'
     >
       {sideNavLinks}
-    </Navbar>
+    </nav>
   )
 }
 
