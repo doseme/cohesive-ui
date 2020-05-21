@@ -65,7 +65,7 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
   }
 
   const searchInput = (
-    <div className='dropdown-search'>
+    <div className='co-dropdown-search'>
       <SearchInput
         placeholder='Search...'
         aria-label='Search'
@@ -78,13 +78,13 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
   const listItems = (items: IDropdownItem[], callback: (item: string) => void) => (
     <>
       <div 
-        className='dropdown-placeholder'
+        className='co-dropdown-placeholder'
         data-test-placeholder
       >{selectedItem ? selectedItem.label || selectedItem.value : placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
 
-      <ul className='dropdown-list'>
+      <ul className='co-dropdown-list'>
         {
           items.map(item =>
             <li 
@@ -117,7 +117,7 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
   const content = showContent 
     ? 
     (
-      <div className='dropdown'>
+      <div className='co-dropdown'>
         {
           filteredData && onSelect
             ? listItems(filteredData, onSelect)
@@ -135,11 +135,11 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
 
       <div
         id={id ? id : undefined}
-        className='dropdown-wrapper' 
+        className='co-dropdown-wrapper' 
         ref={node}
       >
         <div
-          className='dropdown-closed'
+          className='co-dropdown-closed'
           data-test-current-item
           onClick={() => setShowContent(!showContent)}
         >
