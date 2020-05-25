@@ -1,3 +1,4 @@
+export * from './style/colors'
 export * from './AdminLogo'
 export * from './BackArrowButton'
 export * from './ContextMenu'
