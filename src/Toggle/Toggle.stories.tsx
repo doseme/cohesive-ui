@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { Toggle, IToggleOption } from './Toggle'
+import { Row, Col } from '../Grid'
 
 const currentArchived: IToggleOption[] = [
   {
@@ -40,13 +41,34 @@ storiesOf('Components.Toggle', module)
 
     return (
       <>
-        <div className='p-2'>
-          <Comp options={currentArchived} defaultSelected='current' />
-        </div>
+        <h2>Expands to fill the container</h2>
+        <Comp options={currentArchived} defaultSelected='current' />
+        <br />
+        <Comp options={sizes} defaultSelected='medium' />
 
-        <div className='p-2'>
-          <Comp options={sizes} defaultSelected='medium' />
-        </div>
+        <h2>Use Grid/Col to contraint</h2>
+
+<code style={{ whiteSpace: 'pre-wrap' }}>
+{`
+<Row>
+  <Col width={5}>
+    <Comp options={sizes} defaultSelected='medium' />
+  </Col>
+</Row>
+`}
+</code>
+<br />
+
+        <Row>
+          <Col width={5}>
+            <Toggle 
+              name='Patients to show'
+              selected='medium'
+              options={sizes}
+              onChange={() => {}}
+            />
+          </Col>
+        </Row>
       </>
     )
   })

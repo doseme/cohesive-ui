@@ -1,12 +1,14 @@
 @import '../style/colors.scss';
 @import '../style/mixins.scss';
 
-$toggle-group-height: 35px;
-$radio-width: 70px;
+$toggle-group-height: 40px;
+$radio-width: 80px;
 
 .co-toggle-group {
   display: flex;
-  height: $toggle-group-height;
+  background: $toggle-grey;
+  height: 36px;
+  border-radius: 10px;
   @include align-center;
 
   input[type="radio"] {
@@ -15,17 +17,13 @@ $radio-width: 70px;
 
   .co-toggle-label {
     cursor: pointer;
-    padding: 5px;
+    margin: 0;
+    font-weight: normal;
+    padding: 0 5px;
     color: black;
-    background: $toggle-grey;
-    height: $toggle-group-height - 8px;
-    min-width: $radio-width;
+    flex-grow: 1;
+    height: 36px;
     @include center;
-  }
-
-  .co-toggle-label:first-of-type {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
   }
 
   .co-toggle-label:last-of-type {
@@ -34,9 +32,10 @@ $radio-width: 70px;
   }
 
   .co-toggle-label-selected {
+    box-sizing: content-box;
+    padding: 2px 5px;
     height: 100%;
     border-radius: 10px;
-    min-width: $radio-width + 10px;
     color: white;
     background: $toggle-blue;
   }

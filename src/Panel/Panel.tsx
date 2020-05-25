@@ -12,6 +12,7 @@ export interface ISection {
 
 export interface IPanelHeaderProps { 
   title?: string
+  headerClass?: string
   info?: string
 }
 
@@ -26,7 +27,7 @@ export interface IPanelProps {
 
 export type TProps = IPanelProps & IPanelHeaderProps & IPanelBodyProps
 
-const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, children }) => {
+const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, children, headerClass }) => {
   const getTitle = (): JSX.Element | null => {
     if (!title) {
       return null
@@ -36,6 +37,7 @@ const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, childre
       <PanelHeader
         title={title}
         info={info}
+        headerClass={headerClass}
       />
     )
   }
