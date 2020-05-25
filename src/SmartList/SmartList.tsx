@@ -10,6 +10,7 @@ export interface IProps {
   data: IRowElement[]
   cols: IHeaderItem[]
   selectedRows?: ISelectedRows
+  headerClass?: string
   onRowSelect?: (selected: ISelectedRows) => void
   activeRow?: string
   onActivate?: (id: string) => void
@@ -25,6 +26,7 @@ const SmartList: React.FC<IProps> = ({
   onRowSelect,
   activeRow,
   onActivate,
+  headerClass,
   textIfEmpty,
   loading,
   header = true 
@@ -71,6 +73,7 @@ const SmartList: React.FC<IProps> = ({
     <Header
       selectAllCol={!!selectedRows}
       onSelectAll={handleSelectAll}
+      className={headerClass}
       cols={cols}
     />
   )

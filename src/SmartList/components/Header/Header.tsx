@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { Row, Col } from '../../../Grid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import classnames from 'classnames'
 
 import { IProps } from './types'
 import { IHeaderItem } from '../../../types'
 import { NAVY } from '../../../style/colors'
 import './index.scss'
 
-const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll }) => {
+const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className }) => {
   const [allChecked, toggleAllChecked] = useState(false)
   const [sortColumn, setSortColumn] = useState<string>(cols[0].name)
   const [sortAscending, setSortAscending] = useState(true)
@@ -90,11 +91,10 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll }) => {
     return !!x.handleSort && !(x.displayName && x.displayName === '')
   }
 
+  const klass = classnames(className, 'co-smart-list-header', 'pt-2 pb-2 d-flex align-items-center')
+
   return (
-    <Row
-      id='smart-list-header'
-      className='pt-2 pb-2 d-flex align-items-center'
-    >
+    <Row className={klass}>
       {selectAllCol && <Col
         key='select-all-col'
         width='checkbox-only'
