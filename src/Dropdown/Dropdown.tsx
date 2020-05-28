@@ -89,6 +89,10 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     if (onBlur) {
       onBlur(item, true)
     }
+
+    if (onSelect) {
+      onSelect(item)
+    }
   }
 
   const listItems = (items: IDropdownItem[]) => (
