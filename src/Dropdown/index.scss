@@ -48,6 +48,18 @@ ul.co-dropdown-list {
   border-radius: 5px;
 }
 
+.co-dropdown-invalid {
+  border: 1px solid red;
+}
+
+.form-field-label-invalid {
+  color: red;
+}
+
+.co-dropdown-label {
+  margin: 0;
+}
+
 .co-dropdown {
   background: $lightest-grey;
   position: absolute;

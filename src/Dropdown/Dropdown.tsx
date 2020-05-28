@@ -1,30 +1,29 @@
-import React, { useState, useRef, useEffect, HTMLProps } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import classnames from 'classnames'
 
 import { SearchInput } from '../SearchInput'
 import './index.scss'
 
-interface IDropdownItem {
+export interface IDropdownItem {
   label?: string
   value: string
 }
 
-interface OverrideProps {
+interface IProps {
+  id?: string
   label?: string
   className?: string
   isRequired?: boolean
   data?: IDropdownItem[]
   placeholder: string
-  onSelect?: (item: string) => void
-  searchIcon?: JSX.Element
+  onSelect?: (item: IDropdownItem) => void
+  onBlur?: (item: IDropdownItem | null, isValid: boolean) => any
   showSearchThreshold?: number
-  defaultIndex?: number
+  defaultValue?: string
 }
 
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
-
-type TProps = Omit<HTMLProps<HTMLElement>, keyof OverrideProps> & OverrideProps
-
-const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultIndex, searchIcon, onSelect, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultValue, onSelect, onBlur, showSearchThreshold = 10 }) => {
+  const [valid, setValid] = useState(true)
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState<IDropdownItem>()
@@ -38,6 +37,15 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
 
     setSearchText('')
     setShowContent(false)
+    setValid(true)
+
+    if (isRequired && !selectedItem) {
+      setValid(false)
+
+      if (onBlur) {
+        onBlur(null, false)
+      }
+    }
   }
 
   useEffect(() => {
@@ -51,10 +59,10 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
   }, [handleClickAway])
 
   useEffect(() => {
-    if (defaultIndex && data) {
-      setSelectedItem(data[defaultIndex])
+    if (defaultValue && data) {
+      setSelectedItem(data.find(x => x.value === defaultValue))
     }
-  }, [defaultIndex, data, setSelectedItem])
+  }, [defaultValue, data, setSelectedItem])
 
   const handleChange = (value: string) => {
     if (value) {
@@ -75,11 +83,19 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
     </div>
   )
 
-  const listItems = (items: IDropdownItem[], callback: (item: string) => void) => (
+  const update = (item: IDropdownItem): void => {
+    setValid(true)
+
+    if (onBlur) {
+      onBlur(item, true)
+    }
+  }
+
+  const listItems = (items: IDropdownItem[]) => (
     <>
       <div 
         className='co-dropdown-placeholder'
-        data-test-placeholder
+        data-testid='placeholder'
       >{selectedItem ? selectedItem.label || selectedItem.value : placeholder}</div>
 
       {data && data.length > showSearchThreshold && searchInput}
@@ -88,11 +104,11 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
         {
           items.map(item =>
             <li 
-              data-test={item.label || item.value}
+              data-testid={item.label || item.value}
               key={item.value}
               onClick={() => {
                   setSelectedItem(item)
-                  callback(item.value)
+                  update(item)
                   setSearchText('')
                   setShowContent(false)
                 }
@@ -112,7 +128,14 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
     filteredData = data.filter(x => (x.label || x.value).toLowerCase().includes(searchText))
   }
 
-  const defaultLabel = defaultIndex && (data ? (data[defaultIndex].label || data[defaultIndex].value) : undefined)
+  let defaultLabel: string | undefined
+
+  if (defaultValue && data && data.length) {
+    const defaultItem = data.find(x => x.value === defaultValue)
+    if (defaultItem) {
+      defaultLabel = defaultItem.label || defaultItem.value
+    }
+  }
 
   const content = showContent 
     ? 
@@ -120,17 +143,26 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
       <div className='co-dropdown'>
         {
           filteredData && onSelect
-            ? listItems(filteredData, onSelect)
+            ? listItems(filteredData)
             : children
         }
       </div>
     ) 
     : null
 
+  const errorMessage = !valid && (
+    <div className={classnames('form-field-label', { 'form-field-label-invalid': !valid })}>
+      This field is required
+    </div>
+  )
+
   return (
     <div className={className}>
-      <div className='d-flex'>
-        <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
+      <div className='d-flex justify-content-between co-dropdown-label'>
+        <div className='form-field-label'>
+          {label}{isRequired ? '*' : ''}
+        </div>
+        {errorMessage}
       </div>
 
       <div
@@ -139,8 +171,8 @@ const Dropdown: React.FC<TProps> = ({ id, className, children, label, isRequired
         ref={node}
       >
         <div
-          className='co-dropdown-closed'
-          data-test-current-item
+          className={classnames('co-dropdown-closed', { 'co-dropdown-invalid': !valid })}
+          data-testid='current-item'
           onClick={() => setShowContent(!showContent)}
         >
           {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || placeholder}
