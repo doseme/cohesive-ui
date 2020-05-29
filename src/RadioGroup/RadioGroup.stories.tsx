@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { RadioGroup, IRadioOption } from './BinarySelector'
+import { RadioGroup, IRadioOption } from './RadioGroup'
 import { Button } from '../Button'
 
 const stories = storiesOf('Components.RadioGroup', module)
@@ -39,7 +39,7 @@ stories.add('Various', () => {
           }}
         />
         <br />
-        <Button onClick={() => isRequired && setForceValidate(true)} variant='primary'>Submit</Button>
+        <Button onClick={() => isRequired && !value && setForceValidate(true)} variant='primary'>Submit</Button>
       </>
     )
   }
