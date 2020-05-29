@@ -12,6 +12,7 @@ interface IProps {
   type?: 'text' | 'password' | 'number'
   maxInputLength?: number
   disabled?: boolean
+  isRequired?: boolean
   readOnly?: boolean
   onChange?: (value: string) => void
   onBlur?: (value: string, isValid: boolean) => void
@@ -78,7 +79,6 @@ const TextInput: React.FC<IProps & ILabelProps> = (props) => {
       <Label 
         label={label}
         error={error}
-        isRequired={isRequired}
       />
       <Input 
         {...rest}

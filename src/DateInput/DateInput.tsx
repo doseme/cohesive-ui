@@ -76,7 +76,6 @@ const DateInput: React.FC<IProps> = (props) => {
       <Label
         label={label}
         error={error}
-        isRequired={isRequired}
       />
       <input
         {...rest}

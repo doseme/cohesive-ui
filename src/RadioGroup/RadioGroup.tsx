@@ -13,6 +13,7 @@ export interface IRadioOption {
 interface IProps {
   options: IRadioOption[]
   selected?: string
+  isRequired?: boolean
   onSelect: (opt: IRadioOption) => any
   errorState?: boolean
 }
@@ -58,7 +59,6 @@ const RadioGroup: React.FC<TRadioGroupProps> = (props) => {
     <div>
       <Label
         label={props.label}
-        isRequired={props.isRequired}
       />
       <div className={className}>
         {options}
