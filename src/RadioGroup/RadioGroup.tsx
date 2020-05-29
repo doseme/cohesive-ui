@@ -31,6 +31,8 @@ const RadioGroup: React.FC<TRadioGroupProps> = (props) => {
       <div 
         className={className}
         onClick={() => props.onSelect(opt)}
+        data-testid={opt.id}
+        key={opt.id}
       >
         <label 
           htmlFor={opt.id}
