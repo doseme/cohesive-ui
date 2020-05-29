@@ -12,7 +12,7 @@ describe('validate', () => {
 
     const expected: IValidationResult = {
       valid: false,
-      message: 'This field is required',
+      message: 'Required',
     }
 
     const actual = validate(rules, '')

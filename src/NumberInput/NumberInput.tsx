@@ -4,7 +4,7 @@ import { validate } from './validation'
 import '../shared/input.scss'
 
 
-export type TNumberType = 'whole' | 'integer'
+export type TNumberType = 'whole' | 'integer' | 'positiveFloat'
 
 interface IProps {
   label?: string

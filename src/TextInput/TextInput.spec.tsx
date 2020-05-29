@@ -22,12 +22,12 @@ describe('TextInput', () => {
     // type some text and blur - input is valid
     fireEvent.change(screen.getByTestId('my-input'), { target: { value: 'value' } })
     fireEvent.blur(screen.getByTestId('my-input'))
-    expect(screen.queryByTestId(/This field is required/)).toBeNull()
+    expect(screen.queryByTestId(/Required/)).toBeNull()
 
     // set to empty string and blur - now the input is invalid
     fireEvent.change(screen.getByTestId('my-input'), { target: { value: '' } })
     fireEvent.blur(screen.getByTestId('my-input'))
 
-    expect(screen.queryByText(/This field is required/)).toBeInTheDocument()
+    expect(screen.queryByText(/Required/)).toBeInTheDocument()
   })
 })
