@@ -1,13 +1,9 @@
 import React from 'react'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
+import { TrashFill } from '../Icons/TrashFill'
 import { Container, Row, Col } from '../Grid'
 import { Button } from '../Button'
 import './index.scss'
-
-import './index.scss'
-import { TrashFill } from '../Icons/TrashFill'
 
 interface IProps {
   entityType: string
