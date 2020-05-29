@@ -15,15 +15,6 @@
   border-color: $invalidRed;
 } 
 
-.validation-error-text {
-  color: $invalidRed;
-}
-
-.form-field-label {
-  font-size: 14px;
-  padding: 0 0 8px 0;
-}
-
 .ui-form {
   &:focus {
     box-shadow: none;

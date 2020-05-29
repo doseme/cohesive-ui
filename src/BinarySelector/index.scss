@@ -1,0 +1,53 @@
+@import '../style/mixins.scss';
+@import '../style/colors.scss';
+
+.co-radio-wrapper {
+  border: 1px solid silver;
+  overflow: hidden;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.co-radio-wrapper-error {
+  border: 1px solid $invalidRed;
+}
+
+.co-radio-input {
+  display: none;
+}
+
+.co-radio-input-wrapper-selected {
+  background: $toggle-selected;
+}
+
+.co-radio-input-wrapper-unselected {
+  background: $toggle-unselected;
+}
+
+.co-radio-input-wrapper {
+  padding: 10px 20px;
+  @include center;
+}
+
+.co-radio-input-wrapper, .co-radio-label {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.co-radio-input-wrapper:not(:first-child) {
+  border-left: 1px solid silver;
+}
+
+.co-radio-input-wrapper-error {
+  color: $invalidRed;
+}
+
+.co-radio-input-wrapper-error:not(:first-child) {
+  border-left: 1px solid $invalidRed;
+}
+
+// .co-radio-label:not(:first-child) {
+// }

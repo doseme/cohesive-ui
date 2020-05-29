@@ -2,6 +2,7 @@ import React, { useState, } from 'react'
 
 import { validate } from './validation'
 import '../shared/input.scss'
+import { Label } from '../Label'
 
 
 export type TNumberType = 'whole' | 'integer'
@@ -75,10 +76,11 @@ const NumberInput: React.FC<IProps> = (props) => {
 
   return (
     <div className={props.className}>
-      <div className='d-flex'>
-        <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
-        <small className='validation-error-text ml-auto pr-2'>{error}</small>
-      </div>
+      <Label 
+        label={label}
+        error={error}
+        isRequired={isRequired}
+      />
       <input
         {...rest}
         className={fieldClass}

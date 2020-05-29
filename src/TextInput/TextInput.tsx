@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 
-import '../shared/input.scss'
 import { validate } from './validation'
 import { Input } from '../Input/Input'
+import { Label, ILabelProps } from '../Label'
+import '../shared/input.scss'
 
 interface IProps {
-  label?: string
   placeholder?: string
   name?: string
   defaultValue?: string
   type?: 'text' | 'password' | 'number'
   maxInputLength?: number
-  isRequired?: boolean
   disabled?: boolean
   readOnly?: boolean
   onChange?: (value: string) => void
@@ -20,7 +19,7 @@ interface IProps {
   className?: string
 }
 
-const TextInput: React.FC<IProps> = (props) => {
+const TextInput: React.FC<IProps & ILabelProps> = (props) => {
   const {
     label,
     maxInputLength,
@@ -76,10 +75,11 @@ const TextInput: React.FC<IProps> = (props) => {
 
   return (
     <div className={props.className}>
-      <div className='d-flex'>
-        <div className='form-field-label'>{label}{isRequired ? '*' : ''}</div>
-        <small className='validation-error-text ml-auto pr-2'>{error}</small>
-      </div>
+      <Label 
+        label={label}
+        error={error}
+        isRequired={isRequired}
+      />
       <Input 
         {...rest}
         className={fieldClass}
