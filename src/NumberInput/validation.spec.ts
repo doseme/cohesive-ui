@@ -12,7 +12,7 @@ describe('validate', () => {
 
   const invalid: IValidationResult = {
     valid: false,
-    message: 'Only whole numbers are allowed',
+    message: 'Whole numbers only',
   }
 
   test('isWhole invalid', () => {
@@ -32,7 +32,7 @@ describe('validate', () => {
 
   test('isRequired invalid', () => {
     const actual = validate({ type: 'whole', isRequired: true }, '')
-    expect(actual).toEqual({ valid: false, message: 'This field is required' })
+    expect(actual).toEqual({ valid: false, message: 'Required' })
   })
 
   test('isWhole valid', () => {
@@ -47,7 +47,7 @@ describe('validate', () => {
 
   test('isInteger invalid', () => {
     const actual = validate({ type: 'integer' }, '0.1')
-    expect(actual).toEqual({ valid: false, message: 'Only integers are allowed' })
+    expect(actual).toEqual({ valid: false, message: 'Integers only' })
   })
 
   test('isInteger valid', () => {
@@ -58,5 +58,25 @@ describe('validate', () => {
   test('isInteger valid', () => {
     const actual = validate({ type: 'integer' }, '1')
     expect(actual).toEqual({ valid: true })
+  })
+
+  test('isFloat valid', () => {
+    const actual = validate({ type: 'positiveFloat' }, '1')
+    expect(actual).toEqual({ valid: true })
+  })
+
+  test('isFloat valid', () => {
+    const actual = validate({ type: 'positiveFloat' }, '1.0')
+    expect(actual).toEqual({ valid: true })
+  })
+
+  test('isFloat valid', () => {
+    const actual = validate({ type: 'positiveFloat' }, '0')
+    expect(actual).toEqual({ valid: true })
+  })
+
+  test('isFloat valid', () => {
+    const actual = validate({ type: 'positiveFloat' }, '-1.2')
+    expect(actual).toEqual({ valid: false, message: 'Positive numbers only' })
   })
 })
