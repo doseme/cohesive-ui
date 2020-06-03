@@ -1,3 +1,41 @@
+@import '../style/colors.scss';
+
 .co-dots {
   padding: 4px 0 0 0;
 } 
+
+.pagination {
+  .co-pagination-btn {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 16px;
+    display: flex;
+    align-items: center;;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: grey;
+    cursor: pointer;
+    margin: 0 2px;
+
+    &:focus { 
+      outline:0;
+    }
+  }
+
+  .co-pagination-btn {
+    &:hover {
+      background: $pagination-grey;
+    }
+  }
+
+  .co-pagination-active {
+    background: $panelblue;
+    color:white;
+
+    &:hover {
+      background: $panelblue;
+    }
+  }
+}

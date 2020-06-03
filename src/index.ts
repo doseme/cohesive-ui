@@ -14,11 +14,13 @@ export * from './BasicList'
 // import { List } from './List'
 export * from './Button'
 export * from './TextInput'
+export * from './RadioGroup'
 export * from './SearchInput'
 export * from './Footer'
 export * from './DateInput'
 export * from './Spinner'
 export * from './Toggle'
+export * from './style/colors'
 
 import * as Nav from './Nav'
 export { Nav }

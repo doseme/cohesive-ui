@@ -13,7 +13,7 @@ export interface IValidationResult {
 const validate = (rules: IValidators, text: string): IValidationResult => {
   if (rules.isRequired && (!text.length || moment(text, 'YYYY-MM-DD').toString() === 'Invalid date')) {
     return {
-      message: 'This field is required',
+      message: 'Required',
       valid: false
     }
   }

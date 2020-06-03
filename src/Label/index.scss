@@ -1,0 +1,10 @@
+@import '../../style/colors.scss';
+
+.validation-error-text {
+  color: $invalidRed;
+}
+
+.form-field-label {
+  font-size: 14px;
+  padding: 0 0 5px 0;
+}

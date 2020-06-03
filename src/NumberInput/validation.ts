@@ -21,24 +21,36 @@ const isInteger = (str: string): boolean => {
   return n !== Infinity && String(n) === str
 }
 
+const isPositiveFloat = (str: string): boolean => {
+  const n = parseFloat(str)
+  return !isNaN(n) && n >= 0
+}
+
 const validate = (rules: IValidators, text: string): IValidationResult => {
   if (rules.isRequired && !text.length) {
     return {
-      message: 'This field is required',
+      message: 'Required',
       valid: false,
     }
   }
 
   if (rules.type === 'whole' && !isWhole(text)) {
     return {
-      message: 'Only whole numbers are allowed',
+      message: 'Whole numbers only',
       valid: false,
     }
   }
 
   if (rules.type === 'integer' && !isInteger(text)) {
     return {
-      message: 'Only integers are allowed',
+      message: 'Integers only',
+      valid: false,
+    }
+  }
+
+  if (rules.type === 'positiveFloat' && !isPositiveFloat(text)) {
+    return {
+      message: 'Positive numbers only',
       valid: false,
     }
   }

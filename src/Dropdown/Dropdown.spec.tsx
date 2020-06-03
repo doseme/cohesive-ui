@@ -1,15 +1,14 @@
 import noop from 'lodash/noop'
 import React from 'react'
-import Adapter from 'enzyme-adapter-react-16'
-import Enzyme, { mount } from 'enzyme'
+import { render, screen, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { Dropdown } from './'
 
-Enzyme.configure({ adapter: new Adapter() })
-
 describe('Dropdown', () => {
   it('selects a value', () => {
-    const wrapper = mount(
+    const onBlur = jest.fn()
+    render(
       <Dropdown 
         placeholder='DEV'
         data={[
@@ -18,18 +17,18 @@ describe('Dropdown', () => {
           {label: 'Item 3', value: '3'}
         ]}
         onSelect={noop}
+        onBlur={onBlur}
       />
     )
-    expect(wrapper.find('[data-test-current-item]').text()).toBe('DEV')
 
-    wrapper.find('[data-test-current-item]').simulate('click')
-    wrapper.find('[data-test="Item 1"]').simulate('click')
+    fireEvent.click(screen.getByTestId('current-item'))
+    fireEvent.click(screen.getByTestId('Item 1'))
 
-    expect(wrapper.find('[data-test-current-item]').text()).toBe('Item 1')
+    expect(onBlur).toHaveBeenCalledWith({ label: 'Item 1', value: '1' }, true)
   })
 
   it('has a default value', () => {
-    const wrapper = mount(
+    render(
       <Dropdown 
         placeholder='DEV'
         data={[
@@ -37,10 +36,36 @@ describe('Dropdown', () => {
           {label: 'Item 2', value: '2'},
           {label: 'Item 3', value: '3'}
         ]}
-        defaultIndex={1}
         onSelect={noop}
+        defaultValue='2'
       />
     )
-    expect(wrapper.find('[data-test-current-item]').text()).toBe('Item 2')
+
+    expect(screen.getByText(/Item 2/)).toBeInTheDocument()
+  })
+
+  it('validates required on blur', () => {
+    render(
+      <>
+        <div data-testid='other'></div>
+        <Dropdown
+          placeholder='DEV'
+          label='Select a hopsital'
+          data={[
+            { label: 'Item 1', value: '1' },
+            { label: 'Item 2', value: '2' },
+            { label: 'Item 3', value: '3' }
+          ]}
+          isRequired
+          onSelect={noop}
+        />
+      </>
+    )
+
+    fireEvent.click(screen.getByTestId('current-item'))
+    // simulate clicking away from the dropdown without making a selection
+    fireEvent.mouseDown(screen.getByTestId('other'))
+
+    expect(screen.getByText(/This field is required/)).toBeInTheDocument()
   })
 })

@@ -21,12 +21,6 @@ const content = (
 )
 
 
-const searchIcon = (
-  <FontAwesomeIcon
-    icon={faSearch}
-  />
-)
-
 stories.add('Components.Dropdown', () => {
   return (
     <div style={{ maxWidth: '500px' }}>
@@ -42,7 +36,6 @@ stories.add('Components.Dropdown', () => {
             {label: 'Hospital C', value: '3'}
           ]}
           onSelect={noop}
-          searchIcon={searchIcon}
         />
       </div>
 
@@ -68,7 +61,6 @@ stories.add('Components.Dropdown', () => {
             {label: 'Hospital L', value: '12'}
           ]}
           onSelect={noop}
-          searchIcon={searchIcon}
         />
       </div>
 
@@ -99,8 +91,7 @@ stories.add('Components.Dropdown', () => {
             {label: 'Hospital C', value: '3'}
           ]}
           onSelect={noop}
-          searchIcon={searchIcon}
-          defaultIndex={2}
+          defaultValue='2'
         />
       </div>
 
@@ -118,7 +109,6 @@ stories.add('Components.Dropdown', () => {
             {label: 'Hospital C', value: '3'}
           ]}
           onSelect={noop}
-          searchIcon={searchIcon}
         />
       </div>
 
@@ -136,7 +126,24 @@ stories.add('Components.Dropdown', () => {
             {label: 'Hospital C', value: '3'}
           ]}
           onSelect={noop}
-          searchIcon={searchIcon}
+        />
+      </div>
+
+      <hr />
+
+      <h3 className='m-5'>Error on blur with nothing selected</h3>
+      <div className='m-5'>
+        <Dropdown 
+          id='withLabel'
+          label='Select a Hospital'
+          placeholder='Select Hospital'
+          isRequired
+          data={[
+            {value: '1'},
+            {label: 'Hospital B', value: '2'},
+            {label: 'Hospital C', value: '3'}
+          ]}
+          onSelect={noop}
         />
       </div>
     </div>

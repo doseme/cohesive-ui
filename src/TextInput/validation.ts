@@ -22,7 +22,7 @@ const validate = (rules: IValidators, text: string): IValidationResult => {
 
   if (rules.isRequired && !text.length) {
     return {
-      message: 'This field is required',
+      message: 'Required',
       valid: false,
     }
   }
