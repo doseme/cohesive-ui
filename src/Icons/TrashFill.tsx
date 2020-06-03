@@ -1,8 +1,13 @@
 import React from 'react'
 
-const TrashFill: React.FC = () => {
+interface IProps {
+  height?: number
+  width?: number
+}
+
+const TrashFill: React.FC<IProps> = (props) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={props.width || 24} height={props.height || 24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id="Trash/trash-hover-fill">
         <g id="Trash button :hover Copy">
           <g id="Trash/MASTER-trash-default">
