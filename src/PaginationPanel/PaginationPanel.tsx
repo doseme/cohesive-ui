@@ -20,8 +20,8 @@ const PaginationPanel: React.FC<IProps> = ({
 }) => {
   const currentNodes: TNode[] = paginate(currentPage, totalPages)
   
-  const activeButtonClassName = 'info'
-  const inactiveButtonClassName = 'primary'
+  const activeButtonClassName = 'co-pagination-btn co-pagination-active'
+  const inactiveButtonClassName = 'co-pagination-btn co-pagination-inactive'
 
   const goToPage = (pageNumber: number) => {
     if (pageNumber < 1 || pageNumber > totalPages) {
@@ -32,11 +32,10 @@ const PaginationPanel: React.FC<IProps> = ({
   }
 
   const firstButton: JSX.Element = (
-    <Button
-      variant={inactiveButtonClassName}
+    <button
+      className={inactiveButtonClassName}
       data-testid='firstButton'
       key='firstButton'
-      size='sm'
       onClick={() => {
         goToPage(1)
       }}
@@ -45,16 +44,14 @@ const PaginationPanel: React.FC<IProps> = ({
       <FontAwesomeIcon
         icon={faAngleDoubleLeft}
       />
-    </Button>
+    </button>
   )
 
   const prevButton: JSX.Element = (
-    <Button
-      variant={inactiveButtonClassName}
+    <button
       data-testid='prevButton'
       key='prevButton'
-      size='sm'
-      className='ml-1'
+      className={inactiveButtonClassName}
       onClick={() => {
         goToPage(currentPage - 1)
       }}
@@ -63,16 +60,14 @@ const PaginationPanel: React.FC<IProps> = ({
       <FontAwesomeIcon
         icon={faAngleLeft}
       />
-    </Button>
+    </button>
   )
 
   const nextButton: JSX.Element = (
-    <Button
-      variant={inactiveButtonClassName}
+    <button
+      className={inactiveButtonClassName}
       data-testid='nextButton'
       key='nextButton'
-      size='sm'
-      className='ml-1'
       onClick={() => {
         goToPage(currentPage + 1)
       }}
@@ -81,16 +76,14 @@ const PaginationPanel: React.FC<IProps> = ({
       <FontAwesomeIcon
         icon={faAngleRight}
       />
-    </Button>
+    </button>
   )
 
   const lastButton: JSX.Element = (
-    <Button
-      variant={inactiveButtonClassName}
+    <button
+      className={inactiveButtonClassName}
       data-testid='lastButton'
       key='lastButton'
-      size='sm'
-      className='ml-1'
       onClick={() => {
         goToPage(totalPages)
       }}
@@ -99,16 +92,14 @@ const PaginationPanel: React.FC<IProps> = ({
       <FontAwesomeIcon
         icon={faAngleDoubleRight}
       />
-    </Button>
+    </button>
   )
 
   const pageNumberButton = (pageNumber: number, isCurrentPage: boolean): JSX.Element => {
     return (
-      <Button
-        variant={isCurrentPage ? activeButtonClassName : inactiveButtonClassName}
+      <button
+        className={isCurrentPage ? activeButtonClassName : inactiveButtonClassName}
         data-testid={`page-button-${pageNumber}`}
-        size='sm'
-        className='ml-1'
         onClick={() => {
           goToPage(pageNumber)
         }}
@@ -116,7 +107,7 @@ const PaginationPanel: React.FC<IProps> = ({
         disabled={totalPages === 0}
       >
         {pageNumber}
-      </Button>
+      </button>
     )
   }
 
