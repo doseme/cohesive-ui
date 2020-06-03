@@ -11,6 +11,12 @@
   width: 100%;
 }
 
+.co-input[disabled] {
+  color: grey;
+  background: $menu-grey;
+  cursor: not-allowed;
+}
+
 .form-field-invalid {
   border-color: $invalidRed;
 } 
