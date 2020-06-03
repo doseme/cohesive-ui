@@ -1,0 +1,29 @@
+.confirm-modal {
+  border-top: 6px solid red;
+  background-color: white;
+  margin-top: 150px;
+
+  button {
+    text-transform: uppercase;
+  }
+  
+  .delete-icon {
+    color: red;
+  }
+
+  width: 538px;
+  padding: 25px 15px;
+
+  .buttons {
+    margin-top: 25px;
+
+    .btn {
+      margin-left: 15px;
+    }
+  }
+}
+
+.confirm-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
