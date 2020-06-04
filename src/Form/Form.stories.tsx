@@ -29,6 +29,16 @@ storiesOf('Components.Form', module)
           />
           <br />
 
+          <TextInput
+            label='Disabled input'
+            defaultValue='Cant change this'
+            maxInputLength={20}
+            disabled
+            onChange={noop}
+            onBlur={noop}
+          />
+          <br />
+
           <Button 
             variant='primary'
             type='submit'
