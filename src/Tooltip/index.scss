@@ -1,0 +1,27 @@
+@import '../style/colors.scss';
+
+.ToolTipPortal > div {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+$li-height: 50px;
+
+.co-tooltip-items {
+  padding: 0;
+  margin: 0;
+  width: 200px;
+}
+
+.co-tooltip-item {
+  height: $li-height;
+  padding: 0 18px;
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+
+
+  &:hover {
+    cursor: pointer;
+    background: $menu-grey;
+  }
+}
