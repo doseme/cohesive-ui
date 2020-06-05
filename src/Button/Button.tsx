@@ -25,13 +25,14 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<IProps> = ({ onClick, children, shape, className, loading, variant, size, ...rest }): JSX.Element => {
   const content = (
     loading
-      ? <div className='spinner-container'>
-        <div className='child-keep-width'>{children}</div>
-        <div className='spinner-display w-100'>
-          <Spinner color={variant} />
+      ? (
+        <div className='spinner-container' data-testid='loading'>
+          <div className='child-keep-width'>{children}</div>
+          <div className='spinner-display w-100'>
+            <Spinner color={variant} />
+          </div>
         </div>
-      </div>
-      : children
+      ) : children
   )
 
   const sizeClass = size ? `co-btn-${size}` : ''
