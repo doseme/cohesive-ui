@@ -81,6 +81,7 @@ storiesOf('Components.Panel', module)
           <Row>
             <Col width={4}>
               <Panel
+                title='With load state'
                 loading={true}
                 sections={[topSection, bottomSection]}
               />
