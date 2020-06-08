@@ -25,7 +25,6 @@ const ConfirmModal: React.FC<IProps> = (props) => {
       setLoading(true)
       setError('')
       await props.onConfirm()
-      props.onCancel()
     } catch (e) {
       setError(e.message || e)
     } finally {
