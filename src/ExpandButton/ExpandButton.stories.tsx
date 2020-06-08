@@ -9,7 +9,12 @@ storiesOf('Components.ExpandButton', module)
     return (
       <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
         <div id='holder' style={{ position: 'absolute' }}>
-          <ExpandButton className='expand-button-override'>Add new patient</ExpandButton>
+          <ExpandButton
+            onClick={() => console.log('Click')} 
+            className='expand-button-override'
+          >
+            Add new patient
+          </ExpandButton>
         </div>
       </div>
     )

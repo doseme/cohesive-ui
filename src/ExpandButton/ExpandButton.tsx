@@ -8,14 +8,20 @@ import './index.scss'
 
 interface IProps {
   className?: string
+  onClick: () => any
+  id?: string
 }
 
 const ExpandButton: React.FC<IProps> = props => {
   const className = classnames('co-expand-wrapper', props.className)
 
   return (
-    <div className={className}>
+    <div 
+      className={className}
+      id={props.id}
+    >
       <button
+        onClick={props.onClick}
         className='co-expand-button'
       >
         <IconButton

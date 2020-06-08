@@ -8,6 +8,11 @@
   display: flex;
   align-items: center;
   transition: 0.5s;
+  outline: none;
+
+  :focus {
+    outline: none;
+  }
 }
 
 .co-expand-button {
@@ -16,6 +21,7 @@
   border-radius: 30px;
   border: none;
   background: none;
+  outline: none;
 }
 
 .co-expand-button-text {
