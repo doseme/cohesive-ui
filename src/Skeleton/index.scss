@@ -1,0 +1,27 @@
+@import '../style/colors.scss';
+
+.co-skeleton, .co-skeleton-white {
+  height: 36px;
+}
+
+.co-skeleton-white {
+  background: white;
+}
+
+.co-skeleton {
+  background: $menu-grey;
+  border: 5px solid white;
+}
+
+.co-skeleton-rounded {
+  border-radius: 10px;
+}
+
+.co-skeleton-circle {
+  border-radius: 50%;
+  width: 36px;
+  border: 5px solid white;
+  height: 100%;
+  background: $menu-grey;
+  content: "";
+}

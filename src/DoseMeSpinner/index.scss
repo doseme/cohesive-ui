@@ -1,0 +1,19 @@
+.co-doseme-spinner {
+  position: relative; 
+  width: 64px;
+  height: 64px;
+
+  .co-thin-spinner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .co-thin-spinner, .co-doseme-icon {
+    position: absolute;
+  }
+  
+  .co-doseme-icon {
+    top: 26px;
+    left: 26px;
+  }
+}
