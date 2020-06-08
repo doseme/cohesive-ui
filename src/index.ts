@@ -24,6 +24,7 @@ export * from './DateInput'
 export * from './Spinner'
 export * from './Toggle'
 export * from './style/colors'
+export * from './ExpandButton'
 
 import * as Nav from './Nav'
 export { Nav }
