@@ -7,7 +7,7 @@ import './index.scss'
 const DoseMeSpinner: React.FC = props => {
   return (
     <div className='co-doseme-spinner'>
-      <ThinSpinner />
+      <ThinSpinner r={35} />
       <DoseMe />
     </div>
 
