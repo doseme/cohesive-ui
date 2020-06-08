@@ -16,6 +16,7 @@ describe('TextInput', () => {
         defaultValue='Default value'
         onChange={noop}
         onBlur={noop}
+        units='mg'
       />
     )
 
@@ -29,5 +30,6 @@ describe('TextInput', () => {
     fireEvent.blur(screen.getByTestId('my-input'))
 
     expect(screen.queryByText(/Required/)).toBeInTheDocument()
+    screen.getByText('mg')
   })
 })
