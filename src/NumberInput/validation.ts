@@ -22,8 +22,18 @@ const isInteger = (str: string): boolean => {
 }
 
 const isPositiveFloat = (str: string): boolean => {
-  const n = parseFloat(str)
-  return !isNaN(n) && n >= 0
+  const [beforeDecimal, afterDecimal, rest] = str.split('.')
+  if (rest) {
+    // only allow 1 decimal point
+    return false
+  }
+  
+  if (afterDecimal) {
+    // contains floating values
+    return isWhole(beforeDecimal) && isWhole(afterDecimal)
+  }
+
+  return isWhole(beforeDecimal)
 }
 
 const validate = (rules: IValidators, text: string): IValidationResult => {
