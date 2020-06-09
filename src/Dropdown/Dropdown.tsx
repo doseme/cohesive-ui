@@ -155,7 +155,7 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     : null
 
   const errorMessage = !valid && (
-    <div className={classnames('form-field-label', { 'form-field-label-invalid': !valid })}>
+    <div className={classnames('co-form-field-label', { 'co-form-field-label-invalid': !valid })}>
       This field is required
     </div>
   )
@@ -163,7 +163,7 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
   return (
     <div className={className}>
       <div className='d-flex justify-content-between co-dropdown-label'>
-        <div className='form-field-label'>
+        <div className='co-form-field-label'>
           {label}{isRequired ? '*' : ''}
         </div>
         {errorMessage}
