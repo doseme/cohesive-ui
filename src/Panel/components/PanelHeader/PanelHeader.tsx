@@ -4,9 +4,7 @@ import classnames from 'classnames'
 import { IPanelHeaderProps } from '../../Panel'
 import { Spinner } from '../../../Spinner'
 import { ThinSpinner } from '../../../Icons/ThinSpinner'
-
 import './index.scss'
-import { ProgressPlugin } from 'webpack'
 
 const PanelHeader: React.FC<IPanelHeaderProps> = ({ title, info, headerClass, loading }) => {
   if (!title) {
