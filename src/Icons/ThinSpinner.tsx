@@ -25,15 +25,17 @@ const ThinSpinner: React.FC<IProps> = (props) => {
       width={width}
       height={width}
       viewBox="0 0 100 100"
-      preserveAspectRatio="xMidYMid">
+      preserveAspectRatio="xMidYMid"
+      role='loading'
+    >
       <circle
         cx="50"
         cy="50"
         fill="none"
         stroke={stroke}
-        stroke-width={strokeWidth}
+        strokeWidth={strokeWidth}
         r={r}
-        stroke-dasharray={strokeDasharray}
+        strokeDasharray={strokeDasharray}
         transform="rotate(37.5 50 50)"
       >
         <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1.3" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
