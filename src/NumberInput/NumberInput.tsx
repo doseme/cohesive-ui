@@ -89,7 +89,7 @@ const NumberInput: React.FC<IProps> = (props) => {
         defaultValue={defaultValue}
         type='text'
         placeholder={placeholder || ''}
-        valid={!!error}
+        valid={isValid}
         name={name}
         onBlur={update}
         onChange={(e) => clearAndHandleChange(e.currentTarget.value)}
