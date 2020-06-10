@@ -1,8 +1,9 @@
 import React, { useState, } from 'react'
 
 import { validate } from './validation'
-import '../shared/input.scss'
 import { Label } from '../Label'
+import { Input } from '../Input'
+import '../shared/input.scss'
 
 
 export type TNumberType = 'whole' | 'integer' | 'positiveFloat'
@@ -20,6 +21,7 @@ interface IProps {
   handleBlur?: (value: string, isValid: boolean) => void
   handleFocus?: () => void
   className?: string
+  units?: string
 }
 
 const NumberInput: React.FC<IProps> = (props) => {
@@ -35,6 +37,7 @@ const NumberInput: React.FC<IProps> = (props) => {
     isRequired,
     name,
     defaultValue,
+    units,
     ...rest
   } = props
 
@@ -80,18 +83,20 @@ const NumberInput: React.FC<IProps> = (props) => {
         label={label}
         error={error}
       />
-      <input
+      <Input
         {...rest}
         className={fieldClass}
         defaultValue={defaultValue}
         type='text'
         placeholder={placeholder || ''}
+        valid={isValid}
         name={name}
         onBlur={update}
         onChange={(e) => clearAndHandleChange(e.currentTarget.value)}
         onFocus={handleFocus}
         disabled={disabled}
         readOnly={readOnly}
+        units={units}
       />
     </div>
   )

@@ -55,6 +55,18 @@ storiesOf('Components.Form.TextInput', module)
             onBlur={noop}
           />
         </div>
+
+        <div className='m-4'>
+          <TextInput
+            label='With units'
+            maxInputLength={20}
+            isRequired={true}
+            defaultValue='Default value'
+            onChange={noop}
+            onBlur={noop}
+            units='mg'
+          />
+        </div>
       </>
     )
   })

@@ -1,0 +1,47 @@
+.co-expand-wrapper {
+  width: 44px;
+  height: 44px;
+  background: white;
+  overflow-y: hidden;
+  box-shadow: 0px 2px 12px rgba(18, 50, 120, 0.18);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  transition: 0.5s;
+  outline: none;
+
+  :focus {
+    outline: none;
+  }
+}
+
+.co-expand-button {
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.co-expand-button-text {
+  opacity: 0;
+  white-space: nowrap;
+  margin: 0px 10px;
+  transition: 0.5s;
+}
+
+.co-expand-wrapper:hover {
+  width: 180px;
+
+  .co-expand-button-text {
+    opacity: 1;
+  }
+}
+
+.co-expand-icon {
+  height: 32px;
+  width: 32px;
+  flex-grow: 0;     /* do not grow   - initial value: 0 */
+  flex-shrink: 0;   /* do not shrink - initial value: 1 */
+}

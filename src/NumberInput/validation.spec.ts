@@ -60,6 +60,12 @@ describe('validate', () => {
     expect(actual).toEqual({ valid: true })
   })
 
+  test('isFloat invalid', () => {
+    const actual = validate({ type: 'positiveFloat' }, '1.1s')
+    expect(actual).toEqual({ valid: false, message: 'Positive numbers only' })
+  })
+
+
   test('isFloat valid', () => {
     const actual = validate({ type: 'positiveFloat' }, '1')
     expect(actual).toEqual({ valid: true })

@@ -4,6 +4,8 @@ import { Row, Col } from '../Grid'
 import { Header } from './components/Header'
 import { ListItem } from './components/ListItem'
 import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
+import { ThinSpinner } from '../Icons/ThinSpinner'
+import { LOADING_GREY } from '../style/colors'
 import './index.scss'
 
 export interface IProps {
@@ -102,7 +104,14 @@ const SmartList: React.FC<IProps> = ({
     if (loading) {
       return (
         <div data-testid='smart-list-loading'>
-          <Col className='list-placeholder'></Col>
+          <Col className='list-placeholder d-flex align-items-center'>
+            <ThinSpinner
+              strokeWidth={12}
+              r={30}
+              stroke={LOADING_GREY}
+              width='60px'
+            />
+          </Col>
         </div>
       )
     }

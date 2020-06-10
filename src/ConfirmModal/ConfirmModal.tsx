@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { TrashFill } from '../Icons/TrashFill'
 import { Container, Row, Col } from '../Grid'
@@ -17,6 +17,21 @@ const capitalizeString = (str: string) => {
 }
 
 const ConfirmModal: React.FC<IProps> = (props) => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string>()
+  
+  const handleConfirm = async () => {
+    try {
+      setLoading(true)
+      setError('')
+      await props.onConfirm()
+    } catch (e) {
+      setError(e.message || e)
+    } finally {
+      setLoading(false) 
+    }
+  }
+
   return (
     <div data-testid='confirm-modal' className='confirm-modal'>
       <Container>
@@ -33,6 +48,7 @@ const ConfirmModal: React.FC<IProps> = (props) => {
               The selected {props.entityType}(s) will be permanently deleted from the system.<br />
               This action cannot be undone.
             </div>
+            {error && <div className='co-confirm-modal-error pt-2'>{error}</div>}
           </Col>
 
           <Col width={2}>
@@ -53,7 +69,9 @@ const ConfirmModal: React.FC<IProps> = (props) => {
               <Button
                 data-testid='confirm-modal-confirm'
                 variant='danger'
-                onClick={props.onConfirm}
+                loading={loading}
+                disabled={loading}
+                onClick={handleConfirm}
               >
                 Erase this {(props.entityType)}
               </Button>

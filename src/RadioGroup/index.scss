@@ -32,6 +32,8 @@
 }
 
 .co-radio-input-wrapper, .co-radio-label {
+  margin: 0;
+  font-weight: normal;
   &:hover {
     cursor: pointer;
   }

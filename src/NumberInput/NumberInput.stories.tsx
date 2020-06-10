@@ -18,6 +18,16 @@ storiesOf('Components.Form.NumberInput', module)
           />
         </div>
         <br />
+        <div className='m-4'>
+          <NumberInput
+            label='This is an optional label describing a float'
+            type='positiveFloat'
+            isRequired={true}
+            handleChange={noop}
+            handleBlur={noop}
+            units='mg/dL'
+          />
+        </div>
       </>
     )
   })
