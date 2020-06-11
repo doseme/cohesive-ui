@@ -41,7 +41,7 @@ const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element 
           data-testid='search-input'
           placeholder={props.placeholder || 'Search'}
           className='smart-list-search'
-          type='text'
+          type='search'
           value={props.value}
           onChange={handleChange}
         />
