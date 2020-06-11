@@ -11,7 +11,7 @@ export interface ILabelProps {
 const Label: React.FC<IProps & ILabelProps> = (props) => {
   return (
     <div className='d-flex'>
-      <div className='form-field-label'>{props.label}</div>
+      <div className='co-form-field-label'>{props.label}</div>
       <small className='validation-error-text ml-auto pr-2'>{props.error}</small>
     </div>
   )

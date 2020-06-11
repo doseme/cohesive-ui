@@ -13,3 +13,21 @@ stories.add('Layout with Navigation', () => {
     />
   )
 })
+
+stories.add('with async load state and error handling', () => {
+  const delay = (ms: number = 1000) => 
+    new Promise((res, rej) => 
+      setTimeout(() => rej('An error occurred!'), ms))
+
+  const confirm = async () => {
+    await delay()
+  }
+
+  return (
+    <ConfirmModal 
+      entityType='Patient'
+      onCancel={() => {}}
+      onConfirm={confirm}
+    />
+  )
+})

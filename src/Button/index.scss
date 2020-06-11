@@ -1,7 +1,7 @@
 @import '../style/colors.scss';
 
 @mixin button($color) {
-  background: $color;
+  background: $color !important;
   border: 1px solid;
   height: 34px;
   display: flex;
@@ -12,12 +12,12 @@
   padding: 12px;
 
   border-color: $color;
-  color: white;
+  color: white !important;
 
   &:hover {
     cursor: pointer;
     background: darken($color, 10);
-    color: white;
+    color: white !important;
     border-color: darken($color, 10);
   }
 
@@ -28,7 +28,7 @@
   }
   
   &:disabled {
-    background: white;
+    background: white !important;
     cursor: not-allowed;
     color: $color !important;
     border-color: $color;

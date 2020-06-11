@@ -24,12 +24,15 @@ export const MENU_GREY = 'rgb(244, 244, 244)'
 export const LINK_TEXT = 'rgb(224, 135, 120)'
 export const LIST_SELECTED = 'rgb(240, 246, 253)'
 export const SKYBLUE = 'rgb(241, 246, 253)'
+export const DOSEME_BLUE = 'rgb(9, 50, 95)'
+export const LOADING_GREY = 'rgb(174, 174, 174)'
 
 interface IColor {
   name: string
   color: string
 }
 export const colors: IColor[] = [
+  { name: 'LOADING_GREY', color: LOADING_GREY },
   { name: 'PANELBLUE', color: PANELBLUE },
   { name: 'TEAL', color: TEAL },
   { name: 'DARKTEAL', color: DARKTEAL },
@@ -56,4 +59,5 @@ export const colors: IColor[] = [
   { name: 'LIST_SELECTED', color: LIST_SELECTED },
   { name: 'LINK_TEXT', color: LINK_TEXT },
   { name: 'SKYBLUE', color: SKYBLUE },
+  { name: 'DOSEME_BLUE', color: DOSEME_BLUE },
 ]

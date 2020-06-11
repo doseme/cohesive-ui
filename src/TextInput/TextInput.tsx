@@ -18,6 +18,7 @@ interface IProps {
   onBlur?: (value: string, isValid: boolean) => void
   onFocus?: () => void
   className?: string
+  units?: string
 }
 
 const TextInput: React.FC<IProps & ILabelProps> = (props) => {
@@ -34,6 +35,7 @@ const TextInput: React.FC<IProps & ILabelProps> = (props) => {
     name,
     type,
     defaultValue,
+    units,
     ...rest
   } = props
 
@@ -93,6 +95,7 @@ const TextInput: React.FC<IProps & ILabelProps> = (props) => {
         onFocus={onFocus}
         disabled={disabled}
         readOnly={readOnly}
+        units={units}
       />
     </div>
   )

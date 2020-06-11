@@ -25,6 +25,7 @@ interface IProps {
 const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultValue, onSelect, onBlur, showSearchThreshold = 10 }) => {
   const [valid, setValid] = useState(true)
   const [showContent, setShowContent] = useState(false)
+  const [touched, setTouched] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState<IDropdownItem>()
   const node = useRef<HTMLDivElement>(null)
@@ -39,7 +40,7 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     setShowContent(false)
     setValid(true)
 
-    if (isRequired && !selectedItem) {
+    if (touched && isRequired && !selectedItem) {
       setValid(false)
 
       if (onBlur) {
@@ -155,16 +156,16 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     : null
 
   const errorMessage = !valid && (
-    <div className={classnames('form-field-label', { 'form-field-label-invalid': !valid })}>
-      This field is required
+    <div className={classnames('co-form-field-label', { 'co-form-field-label-invalid': !valid })}>
+      <small>Required</small>
     </div>
   )
 
   return (
     <div className={className}>
       <div className='d-flex justify-content-between co-dropdown-label'>
-        <div className='form-field-label'>
-          {label}{isRequired ? '*' : ''}
+        <div className='co-form-field-label'>
+          {label}
         </div>
         {errorMessage}
       </div>
@@ -177,7 +178,10 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
         <div
           className={classnames('co-dropdown-closed', { 'co-dropdown-invalid': !valid })}
           data-testid='current-item'
-          onClick={() => setShowContent(!showContent)}
+          onClick={() => {
+            setTouched(true)
+            setShowContent(!showContent)}
+          }
         >
           {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || placeholder}
         </div>

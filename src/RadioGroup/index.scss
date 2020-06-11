@@ -8,6 +8,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: 42px;
 }
 
 .co-radio-wrapper-error {
@@ -32,6 +33,8 @@
 }
 
 .co-radio-input-wrapper, .co-radio-label {
+  margin: 0;
+  font-weight: normal;
   &:hover {
     cursor: pointer;
   }

@@ -9,11 +9,11 @@
   padding: 0 0 0 2.25rem;
   box-shadow: 2px 2px 2px $shadow;
 
-  .info-icon {
-    margin-left: 15px;
+  .co-panel-header-title {
+    padding: 0 0 2px 0;
+  }
 
-    svg {
-      color: white;
-    }
+  .co-panel-header-spinner {
+    padding: 0 8px;
   }
 }
