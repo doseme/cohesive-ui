@@ -36,7 +36,8 @@ const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element 
         <input
           ref={input}
           readOnly={true}
-          autoComplete='none'
+          autoComplete='new-password' // prevents Chrome's moronic autocomplete
+          name='search-patients'
           onFocus={onFocus}
           data-testid='search-input'
           placeholder={props.placeholder || 'Search'}
