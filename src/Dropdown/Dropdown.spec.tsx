@@ -66,6 +66,6 @@ describe('Dropdown', () => {
     // simulate clicking away from the dropdown without making a selection
     fireEvent.mouseDown(screen.getByTestId('other'))
 
-    expect(screen.getByText(/This field is required/)).toBeInTheDocument()
+    expect(screen.getByText(/Required/)).toBeInTheDocument()
   })
 })
