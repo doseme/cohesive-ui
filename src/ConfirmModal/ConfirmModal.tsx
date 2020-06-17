@@ -10,6 +10,10 @@ interface IProps {
   entityName?: string
   onCancel: () => any
   onConfirm: () => any
+  message?: string | JSX.Element
+  title?: string | JSX.Element
+  cancelButtonLabel?: string
+  confirButtonLabel?: string
 }
 
 const capitalizeString = (str: string) => {
@@ -31,6 +35,14 @@ const ConfirmModal: React.FC<IProps> = (props) => {
       setLoading(false) 
     }
   }
+  const message = props.message || (
+    <React.Fragment>
+      The selected {props.entityType}(s) will be permanently deleted from the system.<br />
+      This action cannot be undone.
+    </React.Fragment>
+  )
+
+  const title = props.title || `Delete ${capitalizeString(props.entityType)}`
 
   return (
     <div data-testid='confirm-modal' className='confirm-modal'>
@@ -42,11 +54,10 @@ const ConfirmModal: React.FC<IProps> = (props) => {
           </Col>
 
           <Col>
-            <h4 className='co-h4 pb-2'>Delete {capitalizeString(props.entityType)}</h4>
+            <h4 className='co-h4 pb-2'>{title}</h4>
             <div className='confirm-subtitle'>{props.entityName || ''}</div>
             <div>
-              The selected {props.entityType}(s) will be permanently deleted from the system.<br />
-              This action cannot be undone.
+              {message}
             </div>
             {error && <div className='co-confirm-modal-error pt-2'>{error}</div>}
           </Col>
@@ -64,7 +75,7 @@ const ConfirmModal: React.FC<IProps> = (props) => {
                 className='mr-3'
                 onClick={props.onCancel}
               >
-                Cancel
+                {props.cancelButtonLabel || 'Cancel'}
               </Button>
               <Button
                 data-testid='confirm-modal-confirm'
@@ -73,7 +84,7 @@ const ConfirmModal: React.FC<IProps> = (props) => {
                 disabled={loading}
                 onClick={handleConfirm}
               >
-                Erase this {(props.entityType)}
+                {props.confirButtonLabel || `Erase this ${(props.entityType)}`}
               </Button>
             </div>
           </Col>
