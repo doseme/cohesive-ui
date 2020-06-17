@@ -4,7 +4,7 @@ import './index.scss'
 
 interface IProps {
   show: boolean
-  onHide?: () => any
+  onHide?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => any
 }
 
 const Modal: React.FC<IProps> = (props) => {
@@ -13,7 +13,7 @@ const Modal: React.FC<IProps> = (props) => {
       (e.nativeEvent.target as HTMLDivElement).classList.contains('overlay') &&
       props.onHide
     ) {
-      props.onHide()
+      props.onHide(e)
     }
   }
 
