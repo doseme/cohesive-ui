@@ -13,7 +13,7 @@ interface IProps {
   message?: string | JSX.Element
   title?: string | JSX.Element
   cancelButtonLabel?: string
-  confirButtonLabel?: string
+  confirmButtonLabel?: string
 }
 
 const capitalizeString = (str: string) => {
@@ -84,7 +84,7 @@ const ConfirmModal: React.FC<IProps> = (props) => {
                 disabled={loading}
                 onClick={handleConfirm}
               >
-                {props.confirButtonLabel || `Erase this ${(props.entityType)}`}
+                {props.confirmButtonLabel || `Erase this ${(props.entityType)}`}
               </Button>
             </div>
           </Col>

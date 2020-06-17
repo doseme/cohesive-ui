@@ -50,7 +50,7 @@ stories.add('customize message and button label', () => {
       title='Archive Patient'
       message='The selected patient will be archived from the system. Are you sure?'
       cancelButtonLabel='Dismiss'
-      confirButtonLabel='Archive'
+      confirmButtonLabel='Archive'
     />
   )
 })
