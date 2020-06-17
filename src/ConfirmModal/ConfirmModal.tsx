@@ -24,11 +24,11 @@ const ConfirmModal: React.FC<IProps> = (props) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string>()
   
-  const handleConfirm = async () => {
+  const handleConfirm = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     try {
       setLoading(true)
       setError('')
-      await props.onConfirm()
+      await props.onConfirm(event)
     } catch (e) {
       setError(e.message || e)
     } finally {
