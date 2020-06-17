@@ -8,8 +8,8 @@ import './index.scss'
 interface IProps {
   entityType: string
   entityName?: string
-  onCancel: () => any
-  onConfirm: () => any
+  onCancel: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
+  onConfirm: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
   message?: string | JSX.Element
   title?: string | JSX.Element
   cancelButtonLabel?: string
