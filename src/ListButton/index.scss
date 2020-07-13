@@ -1,0 +1,16 @@
+.co-list-button {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 12px rgba(18, 50, 120, 0.18);
+  border-radius: 18px;
+  border: none;
+  padding: 7px 14px;
+  outline: none;
+}
+
+.co-list-button:disabled {
+  opacity: 0.7;
+}
+
+.co-list-button:hover {
+  cursor: pointer;
+}
