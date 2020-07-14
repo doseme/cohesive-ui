@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Trash: React.FC = () => {
+import { IconProps } from './'
+
+const Trash: React.FC<IconProps & React.HTMLAttributes<HTMLOrSVGElement>> = (props) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g id="Trash/MASTER-trash-default">
-        <rect id="Rectangle" x="7" y="7" width="10" height="2" fill="#AEAEAE" />
-        <rect id="Rectangle_2" x="11" y="6" width="2" height="1" fill="#AEAEAE" />
-        <path id="Rectangle_3" fillRule="evenodd" clipRule="evenodd" d="M8 9H16L14.9828 18H8.98941L8 9Z" fill="#AEAEAE" />
-      </g>
+    <svg {...props} width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0.333008" y="1.33331" width="13.3333" height="2.66667" fill={props.background || "#AEAEAE"}/>
+      <rect x="5.66699" width="2.66667" height="1.33333" fill={props.background || "#AEAEAE"} />
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M1.66699 4H12.3337L10.9774 16H2.98621L1.66699 4Z" fill={props.background || "#AEAEAE"} />
     </svg>
   )
 }
