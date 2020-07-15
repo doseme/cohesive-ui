@@ -5,6 +5,8 @@ import './index.scss'
 
 export interface IDateProps extends React.HTMLAttributes<HTMLInputElement>{
   label?: string
+  initialValue?: IDateState
+  onDateChange?: (event: React.FormEvent<HTMLInputElement>, value: IDateState) => any
 }
 
 export interface IValidity {
@@ -49,11 +51,17 @@ export const Date: React.FC<IDateProps> = props => {
     message: ''
   })
 
-  const [value, setValue] = useState<IDateState>({
+  const [value, setValue] = useState<IDateState>(props.initialValue || {
     dd: '',
     mm: '',
     yyyy: ''
   })
+
+  const finalizeChange = (event: React.FormEvent<HTMLInputElement>, newValue: IDateState) => {
+    setValue(newValue)
+    setValidity(validate(newValue))
+    props.onDateChange?.(event, newValue)
+  }
 
   const ddChange = (event: React.FormEvent<HTMLInputElement>) => {
     const arr = event.currentTarget.value.split('')
@@ -65,23 +73,20 @@ export const Date: React.FC<IDateProps> = props => {
     if (arr.length === 1) {
       const d = parseInt(arr[0])
       if (d >= 4) {
-        setValue({ ...value, dd: `0${d}` })
-        setValidity(validate({ ...value, dd: `0${d}` }))
+        const newValue = { ...value, dd: `0${d}` } 
+        finalizeChange(event, newValue)
         return mmRef.current?.focus()
       }
 
-      setValidity(validate({ ...value, dd: event.currentTarget.value }))
-      return setValue({ ...value, dd: event.currentTarget.value })
+      const newValue = { ...value, dd: event.currentTarget.value }
+      finalizeChange(event, newValue)
     }
 
     if (arr.length >= 2) {
-      const val = arr.splice(0, 2).join('')
-      setValue({ ...value, dd: val })
-      setValidity(validate({ ...value, dd: val }))
-      return mmRef.current?.focus()
+      const newValue = {...value, dd: arr.splice(0, 2).join('') }
+      finalizeChange(event, newValue)
+      mmRef.current?.focus()
     }
-
-    setValidity(validate({ ...value, dd: event.currentTarget.value }))
   }
 
   const mmChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -94,20 +99,19 @@ export const Date: React.FC<IDateProps> = props => {
     if (arr.length === 1) {
       const d = parseInt(arr[0])
       if (d >= 2) {
-        setValue({ ...value, mm: `0${d}` })
-        setValidity(validate({ ...value, mm: `0${d}`}))
+        const newValue = { ...value, mm: `0${d}` } 
+        finalizeChange(event, newValue)
         return yyyyRef.current?.focus()
       }
 
-      setValidity(validate({ ...value, mm: event.currentTarget.value }))
-      return setValue({ ...value, mm: event.currentTarget.value })
+      const newValue = { ...value, mm: event.currentTarget.value }
+      return finalizeChange(event, newValue)
     }
 
     if (arr.length >= 2) {
-      const val = arr.splice(0, 2).join('')
-      setValue({ ...value, mm: val })
-      setValidity(validate({ ...value, mm: val }))
-      return yyyyRef.current?.focus()
+      const newValue = {...value, mm: arr.splice(0, 2).join('') }
+      finalizeChange(event, newValue)
+      yyyyRef.current?.focus()
     }
   }
 
@@ -117,13 +121,12 @@ export const Date: React.FC<IDateProps> = props => {
     if (arr.length >= 4) {
       // do not allow 5 digits
       // TODO: update this in the year 9999 to support 5 digits
-      const newVal = arr.splice(0, 4).join('')
-      setValidity(validate({ ...value, yyyy: newVal }))
-      return setValue({ ...value, yyyy: newVal })
+      const newVal = { ...value, yyyy: arr.splice(0, 4).join('')  }
+      return finalizeChange(event, newVal)
     }
 
-    setValue({ ...value, yyyy: event.currentTarget.value })
-    setValidity(validate({ ...value, yyyy: event.currentTarget.value }))
+    const newVal = { ...value, yyyy: event.currentTarget.value }
+    finalizeChange(event, newVal)
   }
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, ref: 'mm' | 'yyyy') => {
