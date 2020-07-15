@@ -9,10 +9,6 @@ const defaultValue: IDateState = {
   yyyy: '1990'
 }
 
-const onChange = (event: React.FormEvent<HTMLInputElement>, value: IDateState) => {
-  //
-}
-
 storiesOf('Date', module)
   .add('date', () => {
     return (
@@ -27,7 +23,6 @@ storiesOf('Date', module)
           <Date 
             label='DOB' 
             initialValue={defaultValue}
-            onDateChange={onChange}
             format='DD/MM/YYYY'
           />
         </div>
