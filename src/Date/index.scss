@@ -1,0 +1,39 @@
+@import '../style/colors.scss';
+
+.form-field-invalid {
+  border-color: $invalidRed;
+} 
+
+.validation-error-text {
+  color: $invalidRed;
+}
+
+.co-form-field-label {
+  font-size: 14px;
+  padding: 0 0 5px 0;
+}
+
+.ui-form {
+  &:focus {
+    box-shadow: none;
+    border-color: $panelblue;
+  }
+}
+
+.co-date-input {
+  border: none;
+  outline: none;
+}
+
+.co-date-slash {
+  font-weight: bolder;
+  margin: 0 5px;
+}
+
+.co-date-two-digits {
+  width: 30px;
+}
+
+.co-date-four-digits {
+  width: 60px;
+}
