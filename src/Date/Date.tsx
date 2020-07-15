@@ -63,55 +63,35 @@ export const Date: React.FC<IDateProps> = props => {
     props.onDateChange?.(event, newValue)
   }
 
-  const ddChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const ddmmChange = (event: React.FormEvent<HTMLInputElement>, ref: 'dd' | 'mm') => {
     const arr = event.currentTarget.value.split('')
 
     if (arr.length === 0) {
-      return setValue({ ...value, dd: event.currentTarget.value })
+      return setValue({ ...value, [ref]: event.currentTarget.value })
     }
 
     if (arr.length === 1) {
       const d = parseInt(arr[0])
-      if (d >= 4) {
-        const newValue = { ...value, dd: `0${d}` } 
+      // 4x invalid for days, 2x invalid for months
+      if (d >= (ref === 'dd' ? 4 : 2)) {
+        const newValue = { ...value, [ref]: `0${d}` } 
         finalizeChange(event, newValue)
         return mmRef.current?.focus()
       }
 
-      const newValue = { ...value, dd: event.currentTarget.value }
+      const newValue = { ...value, [ref]: event.currentTarget.value }
       finalizeChange(event, newValue)
     }
 
     if (arr.length >= 2) {
-      const newValue = {...value, dd: arr.splice(0, 2).join('') }
+      const newValue = {...value, [ref]: arr.splice(0, 2).join('') }
       finalizeChange(event, newValue)
-      mmRef.current?.focus()
-    }
-  }
-
-  const mmChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const arr = event.currentTarget.value.split('')
-
-    if (arr.length === 0) {
-      return setValue({ ...value, mm: event.currentTarget.value })
-    }
-
-    if (arr.length === 1) {
-      const d = parseInt(arr[0])
-      if (d >= 2) {
-        const newValue = { ...value, mm: `0${d}` } 
-        finalizeChange(event, newValue)
-        return yyyyRef.current?.focus()
+      if (ref === 'dd') {
+        mmRef.current?.focus()
       }
-
-      const newValue = { ...value, mm: event.currentTarget.value }
-      return finalizeChange(event, newValue)
-    }
-
-    if (arr.length >= 2) {
-      const newValue = {...value, mm: arr.splice(0, 2).join('') }
-      finalizeChange(event, newValue)
-      yyyyRef.current?.focus()
+      if (ref === 'mm') {
+        yyyyRef.current?.focus()
+      }
     }
   }
 
@@ -155,7 +135,7 @@ export const Date: React.FC<IDateProps> = props => {
           className='co-date-input co-date-two-digits'
           value={value.dd}
           placeholder='DD'
-          onChange={ddChange}
+          onChange={e => ddmmChange(e, 'dd')}
         />
 
         <span className='co-date-slash'>/</span>
@@ -168,7 +148,7 @@ export const Date: React.FC<IDateProps> = props => {
           className='co-date-input co-date-two-digits'
           value={value.mm}
           onKeyDown={e => onKeyDown(e, 'mm')}
-          onChange={mmChange}
+          onChange={e => ddmmChange(e, 'mm')}
         />
 
         <span className='co-date-slash'>/</span>
