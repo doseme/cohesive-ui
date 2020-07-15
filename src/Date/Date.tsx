@@ -7,6 +7,7 @@ export interface IDateProps extends React.HTMLAttributes<HTMLInputElement>{
   label?: string
   initialValue?: IDateState
   onDateChange?: (event: React.FormEvent<HTMLInputElement>, value: IDateState) => any
+  format: 'DD/MM/YYYY' | 'MM/DD/YYYY'
 }
 
 export interface IValidity {
@@ -63,6 +64,20 @@ export const Date: React.FC<IDateProps> = props => {
     props.onDateChange?.(event, newValue)
   }
 
+  const ddFocusNextField = () => {
+    if (props.format === 'DD/MM/YYYY') {
+      return mmRef.current?.focus()
+    }
+    return yyyyRef.current?.focus()
+  }
+
+  const mmFocusNextField = () => {
+    if (props.format === 'MM/DD/YYYY') {
+      return ddRef.current?.focus()
+    }
+    return yyyyRef.current?.focus()
+  }
+
   const ddmmChange = (event: React.FormEvent<HTMLInputElement>, ref: 'dd' | 'mm') => {
     const arr = event.currentTarget.value.split('')
 
@@ -76,7 +91,10 @@ export const Date: React.FC<IDateProps> = props => {
       if (d >= (ref === 'dd' ? 4 : 2)) {
         const newValue = { ...value, [ref]: `0${d}` } 
         finalizeChange(event, newValue)
-        return mmRef.current?.focus()
+        if (ref === 'dd') {
+          return ddFocusNextField()
+        }
+        return mmFocusNextField()
       }
 
       const newValue = { ...value, [ref]: event.currentTarget.value }
@@ -86,12 +104,11 @@ export const Date: React.FC<IDateProps> = props => {
     if (arr.length >= 2) {
       const newValue = {...value, [ref]: arr.splice(0, 2).join('') }
       finalizeChange(event, newValue)
+
       if (ref === 'dd') {
-        mmRef.current?.focus()
+        return ddFocusNextField()
       }
-      if (ref === 'mm') {
-        yyyyRef.current?.focus()
-      }
+      return mmFocusNextField()
     }
   }
 
@@ -109,17 +126,84 @@ export const Date: React.FC<IDateProps> = props => {
     finalizeChange(event, newVal)
   }
 
-  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, ref: 'mm' | 'yyyy') => {
-    if (value.mm === '' && ref === 'mm' && (event.key === 'Backspace' || event.keyCode === 8)) {
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, ref: 'dd' | 'mm' | 'yyyy') => {
+    if (ref === 'dd' && props.format === 'MM/DD/YYYY' && value.dd === '' && (event.key === 'Backspace' || event.keyCode === 8)) {
+      mmRef.current?.focus()
+    }
+
+    if (ref === 'mm' && props.format === 'DD/MM/YYYY' && value.mm === '' && (event.key === 'Backspace' || event.keyCode === 8)) {
       ddRef.current?.focus()
     }
 
-    if (value.yyyy === '' && ref === 'yyyy' && (event.key === 'Backspace' || event.keyCode === 8)) {
-      mmRef.current?.focus()
+      // leaving the yyyy box
+    if (ref === 'yyyy' && value.yyyy === '' && (event.key === 'Backspace' || event.keyCode === 8)) {
+      if (props.format === 'DD/MM/YYYY') {
+        return mmRef.current?.focus()
+      }
+
+      ddRef.current?.focus()
     }
   }
 
   const fieldClass = validity.valid ? 'ui-form co-input' : 'ui-form form-field-invalid co-input'
+
+  const ddField = (
+    <input
+      ref={ddRef}
+      type='text'
+      name='dd'
+      className='co-date-input co-date-two-digits'
+      value={value.dd}
+      placeholder='DD'
+      onKeyDown={e => onKeyDown(e, 'dd')}
+      onChange={e => ddmmChange(e, 'dd')}
+    />
+  )
+
+  const mmField = (
+    <input
+      ref={mmRef}
+      type='text'
+      name='mm'
+      placeholder='MM'
+      className='co-date-input co-date-two-digits'
+      value={value.mm}
+      onKeyDown={e => onKeyDown(e, 'mm')}
+      onChange={e => ddmmChange(e, 'mm')}
+    />
+  )
+
+  const yyyyField = (
+    <input
+      ref={yyyyRef}
+      type='text'
+      name='yyyy'
+      className='co-date-input co-date-four-digits'
+      placeholder='YYYY'
+      value={value.yyyy}
+      onKeyDown={e => onKeyDown(e, 'yyyy')}
+      onChange={yyyyChange}
+    />
+  )
+
+
+  const fields = props.format === 'DD/MM/YYYY' ? (
+    <React.Fragment>
+      {ddField}
+      <span className='co-date-slash'>/</span>
+      {mmField}
+      <span className='co-date-slash'>/</span>
+      {yyyyField}
+    </React.Fragment>
+  ) : (
+      <React.Fragment>
+        {mmField}
+        <span className='co-date-slash'>/</span>
+        {ddField}
+      <span className='co-date-slash'>/</span>
+      {yyyyField}
+      </React.Fragment>
+    )
 
   return (
     <div className={props.className}>
@@ -128,41 +212,7 @@ export const Date: React.FC<IDateProps> = props => {
         error={validity.message}
       />
       <div className={fieldClass}>
-        <input
-          ref={ddRef}
-          type='text'
-          name='dd'
-          className='co-date-input co-date-two-digits'
-          value={value.dd}
-          placeholder='DD'
-          onChange={e => ddmmChange(e, 'dd')}
-        />
-
-        <span className='co-date-slash'>/</span>
-
-        <input
-          ref={mmRef}
-          type='text'
-          name='mm'
-          placeholder='MM'
-          className='co-date-input co-date-two-digits'
-          value={value.mm}
-          onKeyDown={e => onKeyDown(e, 'mm')}
-          onChange={e => ddmmChange(e, 'mm')}
-        />
-
-        <span className='co-date-slash'>/</span>
-
-        <input
-          ref={yyyyRef}
-          type='text'
-          name='yyyy'
-          className='co-date-input co-date-four-digits'
-          placeholder='YYYY'
-          value={value.yyyy}
-          onKeyDown={e => onKeyDown(e, 'yyyy')}
-          onChange={yyyyChange}
-        />
+        {fields}
       </div>
     </div>
   )
