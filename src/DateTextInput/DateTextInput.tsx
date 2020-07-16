@@ -43,7 +43,7 @@ export interface IDateState {
   yyyy: string
 }
 
-export const Date: React.FC<IDateProps> = props => {
+export const DateTextInput: React.FC<IDateProps> = props => {
   const ddRef = createRef<HTMLInputElement>()
   const mmRef = createRef<HTMLInputElement>()
   const yyyyRef = createRef<HTMLInputElement>()

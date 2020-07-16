@@ -1,4 +1,4 @@
-import { validate, IDateState } from '../Date'
+import { validate, IDateState } from '../DateTextInput'
 
 describe('validate', () => {
   it('validates day', () => {

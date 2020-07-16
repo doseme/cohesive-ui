@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Date, IDateState } from './Date'
+import { DateTextInput, IDateState } from './DateTextInput'
 
 const defaultValue: IDateState = {
   dd: '01',
@@ -14,13 +14,13 @@ storiesOf('Date', module)
     return (
       <React.Fragment>
         <div style={{ width: '175px' }}>
-          <Date label='DOB' format='MM/DD/YYYY' />
+          <DateTextInput label='DOB' format='MM/DD/YYYY' />
         </div>
 
         <br />
 
         <div style={{ width: '175px' }}>
-          <Date 
+          <DateTextInput 
             label='DOB' 
             initialValue={defaultValue}
             format='DD/MM/YYYY'
