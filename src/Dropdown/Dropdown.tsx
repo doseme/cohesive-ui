@@ -6,6 +6,7 @@ import './index.scss'
 
 export interface IDropdownItem {
   label?: string
+  disabled?: boolean
   value: string
 }
 
@@ -111,7 +112,11 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
             <li 
               data-testid={item.label || item.value}
               key={item.value}
+              className={classnames({ 'co-dropdown-item-disabled': item.disabled })}
               onClick={() => {
+                  if (item.disabled) {
+                    return
+                  }
                   setSelectedItem(item)
                   update(item)
                   setSearchText('')
