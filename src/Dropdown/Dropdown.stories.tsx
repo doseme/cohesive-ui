@@ -146,6 +146,24 @@ stories.add('Components.Dropdown', () => {
           onSelect={noop}
         />
       </div>
+
+      <hr />
+
+      <h3 className='m-5'>With disable options</h3>
+      <div className='m-5'>
+        <Dropdown 
+          id='withLabel'
+          label='Select a Hospital'
+          placeholder='Select Hospital'
+          isRequired
+          data={[
+            {value: '1'},
+            {label: 'Hospital B', value: '2', disabled: true},
+            {label: 'Hospital C', value: '3'}
+          ]}
+          onSelect={noop}
+        />
+      </div>
     </div>
   )
 })

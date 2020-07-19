@@ -35,6 +35,14 @@ ul.co-dropdown-list {
       cursor: pointer;
     }
   }
+
+  li.co-dropdown-item-disabled {
+    opacity: 0.5;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
 }
 
 .co-dropdown-wrapper {
