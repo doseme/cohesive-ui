@@ -8,6 +8,7 @@ export interface IDateProps extends React.HTMLAttributes<HTMLInputElement>{
   initialValue?: IDateState
   onDateChange?: (event: React.FormEvent<HTMLInputElement>, value: IDateState, valid: boolean) => any
   format: 'DD/MM/YYYY' | 'MM/DD/YYYY'
+  customValidator?: (value: IDateState) => IValidity
 }
 
 export interface IValidity {
@@ -66,7 +67,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
 
   const finalizeChange = (event: React.FormEvent<HTMLInputElement>, newValue: IDateState) => {
     setValue(newValue)
-    const status = validate(newValue)
+    const status = validate(newValue, props.customValidator)
     setValidity(status)
     props.onDateChange?.(event, newValue, status.valid)
   }
