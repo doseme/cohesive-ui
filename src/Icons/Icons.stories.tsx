@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 // fuckton of imports, wonder if there is an easier way
+import { Archive } from './Archive'
 import { BackArrow } from './BackArrow'
 import { DoseMe } from './DoseMe'
 import { BackArrowHover } from './BackArrowHover'
@@ -45,6 +46,11 @@ stories.add(
       'JSX',
       () =>
         <div className='d-flex flex-column' style={{ width: '300px' }}>
+          <div className='d-flex justify-content-between'>
+            <div>Archive</div>
+            <Archive />
+          </div>
+
           <div className='d-flex justify-content-between'>
             <div>DoseMe</div>
             <DoseMe />
