@@ -1,6 +1,6 @@
 @import '../style/colors.scss';
 
-.co-expand-button {
+.co-add-button {
   color: $doseme-blue;
   display: flex;
   align-items: center;
@@ -15,7 +15,21 @@
   }
 }
 
-.co-expand-icon {
+.co-add-button-disabled {
+  opacity: 0.3;
+  color: grey;
+
+  .co-add-icon {
+    background: grey !important; // override blue
+  }
+
+  &:hover {
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+.co-add-icon {
   height: 32px;
   width: 32px;
   margin: 0 10px 0 0;

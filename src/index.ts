@@ -1,4 +1,5 @@
 export * from './style/colors'
+export * from './AddButton'
 export * from './AdminLogo'
 export * from './BackArrowButton'
 export * from './ContextMenu'
@@ -27,7 +28,6 @@ export * from './DateInput'
 export * from './Spinner'
 export * from './Toggle'
 export * from './style/colors'
-export * from './ExpandButton'
 
 import * as Nav from './Nav'
 export { Nav }

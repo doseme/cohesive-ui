@@ -1,29 +1,34 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import classnames from 'classnames'
 
 import { IconButton } from '../IconButton'
 import './index.scss'
 
-const ExpandButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = props => {
+interface IAddButtonProps {
+  disabled?: boolean
+}
+
+const AddButton: React.FC<React.HTMLAttributes<HTMLDivElement> & IAddButtonProps> = props => {
+  const className = classnames('co-add-button', { 'co-add-button-disabled': props.disabled })
   return (
-    <button
+    <div
       {...props}
-      onClick={props.onClick}
-      className='co-expand-button'
+      className={className}
     >
       <IconButton
         onClick={() => { }}
-        className='co-expand-icon'
+        className='co-add-icon'
       >
         <FontAwesomeIcon icon={faPlus} />
       </IconButton>
 
       {props.children}
-    </button>
+    </div>
   )
 }
 
 export {
-  ExpandButton
+  AddButton
 }
