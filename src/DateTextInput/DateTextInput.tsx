@@ -6,7 +6,7 @@ import './index.scss'
 export interface IDateProps extends React.HTMLAttributes<HTMLInputElement>{
   label?: string
   initialValue?: IDateState
-  onDateChange?: (event: React.FormEvent<HTMLInputElement>, value: IDateState) => any
+  onDateChange?: (event: React.FormEvent<HTMLInputElement>, value: IDateState, valid: boolean) => any
   format: 'DD/MM/YYYY' | 'MM/DD/YYYY'
 }
 
@@ -27,6 +27,12 @@ export const validate = (value: IDateState, customValidator?: (value: IDateState
   const yyyy = parseInt(value.yyyy)
 
   if (dd < 1 || dd > 31 || mm < 1 || mm > 12 || yyyy < 0) {
+    return { valid: false, message: 'Invalid date' }
+  }
+
+
+  // do not allow invalid days, like 31st of Feb.
+  if (new Date(`${yyyy}-${mm}-${dd}`).getDate() !== dd) {
     return { valid: false, message: 'Invalid date' }
   }
 
@@ -61,7 +67,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
   const finalizeChange = (event: React.FormEvent<HTMLInputElement>, newValue: IDateState) => {
     setValue(newValue)
     setValidity(validate(newValue))
-    props.onDateChange?.(event, newValue)
+    props.onDateChange?.(event, newValue, validity.valid)
   }
 
   const ddFocusNextField = () => {
@@ -82,7 +88,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
     const arr = event.currentTarget.value.split('')
 
     if (arr.length === 0) {
-      return setValue({ ...value, [ref]: event.currentTarget.value })
+      return finalizeChange(event, { ...value, [ref]: event.currentTarget.value })
     }
 
     if (arr.length === 1) {
