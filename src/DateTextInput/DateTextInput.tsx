@@ -66,8 +66,9 @@ export const DateTextInput: React.FC<IDateProps> = props => {
 
   const finalizeChange = (event: React.FormEvent<HTMLInputElement>, newValue: IDateState) => {
     setValue(newValue)
-    setValidity(validate(newValue))
-    props.onDateChange?.(event, newValue, validity.valid)
+    const status = validate(newValue)
+    setValidity(status)
+    props.onDateChange?.(event, newValue, status.valid)
   }
 
   const ddFocusNextField = () => {
@@ -158,6 +159,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
       ref={ddRef}
       type='text'
       name='dd'
+      data-testid='dd'
       className='co-date-input co-date-two-digits'
       value={value.dd}
       placeholder='DD'
@@ -170,6 +172,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
     <input
       ref={mmRef}
       type='text'
+      data-testid='mm'
       name='mm'
       placeholder='MM'
       className='co-date-input co-date-two-digits'
@@ -183,6 +186,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
     <input
       ref={yyyyRef}
       type='text'
+      data-testid='yyyy'
       name='yyyy'
       className='co-date-input co-date-four-digits'
       placeholder='YYYY'
