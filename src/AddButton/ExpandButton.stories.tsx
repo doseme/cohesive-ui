@@ -13,7 +13,7 @@ storiesOf('Components.ExpandButton', module)
             onClick={() => console.log('Click')} 
             className='expand-button-override'
           >
-            Add new patient
+            Add patient
           </ExpandButton>
         </div>
       </div>

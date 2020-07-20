@@ -48,6 +48,14 @@ storiesOf('Components.ListButton', module)
             <span>Delete (5) Items</span>
           </span>
         </ListButton>
+
+        <br /><br />
+
+        <ListButton size='sm'>
+          <span className='d-flex align-items-center'>
+            props.size = 'sm'
+          </span>
+        </ListButton>
       </div>
     )
 })
