@@ -29,7 +29,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     rowId
   } = props
   
-  const handleSelected = (): void => {
+  const handleSelected = (e: any): void => {
     onSelect && onSelect(rowId, !selected)
   }
 
@@ -62,6 +62,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
             disabled={disabled}
             checked={selected || false}
             onChange={handleSelected}
+            onClick={e => { e.stopPropagation(); }}
           />
         </Col>
       }
