@@ -4,3 +4,4 @@ export interface IconProps {
 
 export * from './Archive'
 export * from './Trash'
+export * from './ThinSpinner'
