@@ -1,0 +1,13 @@
+.co-icon-button {
+  .co-icon-disabled {
+    opacity: 0.5;
+
+    &:hover {
+      fill: #AEAEAE;
+      border: 1px solid white;
+      box-shadow: none;
+      opacity: 0.5 !important;
+      cursor: not-allowed;
+    }
+  } 
+}
