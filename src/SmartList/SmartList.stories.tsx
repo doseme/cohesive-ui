@@ -174,6 +174,16 @@ stories.add(
 
     return (
       <div className='m-5'>
+        <h3>Minimum of 10 rows</h3>
+        <SmartList
+          cols={colsBlankActions}
+          data={content}
+          minRowsToShow={10}
+        />
+
+        <br />
+        <br />
+
         <h3>Plain list with items</h3>
         <SmartList
           cols={cols}
@@ -187,6 +197,16 @@ stories.add(
           cols={cols}
           data={[]}
           textIfEmpty='No data in table.'
+        />
+        <br />
+        <br />
+
+        <h3>Custom empty table message with 10 rows always showing</h3>
+        <SmartList
+          cols={cols}
+          data={[]}
+          textIfEmpty='No data in table.'
+          minRowsToShow={10}
         />
         <br />
         <br />

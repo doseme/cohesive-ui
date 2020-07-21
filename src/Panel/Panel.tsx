@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 
 import { PanelHeader } from './components/PanelHeader'
 import { PanelBody } from './components/PanelBody'
@@ -29,7 +30,7 @@ export interface IPanelProps {
 
 export type TProps = IPanelProps & IPanelHeaderProps & IPanelBodyProps
 
-const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, children, headerClass, loading }) => {
+const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, children, headerClass, loading, className }) => {
   const getTitle = (): JSX.Element | null => {
     if (!title) {
       return null
@@ -59,8 +60,10 @@ const Panel: React.FC<TProps> = ({ title, info, bodyClassName, sections, childre
     </PanelBody>
   )
 
+  const klassName = classnames(className, 'panel-outer w-100')
+
   return (
-    <div className='panel-outer w-100'>
+    <div className={klassName}>
       {getTitle()}
       {body}
     </div>

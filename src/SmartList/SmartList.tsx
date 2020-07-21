@@ -7,6 +7,8 @@ import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
 import { ThinSpinner } from '../Icons/ThinSpinner'
 import { LOADING_GREY } from '../style/colors'
 import './index.scss'
+import { min } from 'lodash'
+import { faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
 
 export interface IProps {
   data: IRowElement[]
@@ -19,6 +21,7 @@ export interface IProps {
   textIfEmpty?: string
   header?: boolean
   loading?: boolean
+  minRowsToShow?: number
 }
 
 const SmartList: React.FC<IProps> = ({ 
@@ -31,6 +34,7 @@ const SmartList: React.FC<IProps> = ({
   headerClass,
   textIfEmpty,
   loading,
+  minRowsToShow,
   header = true 
 }) => {
 
@@ -100,6 +104,15 @@ const SmartList: React.FC<IProps> = ({
     return acc
   }, [])
 
+  if (minRowsToShow && listContent.length < minRowsToShow) {
+    const filler = minRowsToShow - listContent.length
+    for (let i = 0; i < filler; i++) {
+      listContent.push(
+        <Row className='list-row co-empty-list-row' key={`empty-${i}`} />
+      )
+    }
+  }
+
   const displayContent = (): JSX.Element | null => {
     if (loading) {
       return (
@@ -121,13 +134,35 @@ const SmartList: React.FC<IProps> = ({
     }
 
     if (textIfEmpty) {
-      return <div>
-        <Row className='list-row align-items-center'>
-          <Col>
-            {textIfEmpty} 
-          </Col>
-        </Row>
-      </div>
+      if (minRowsToShow) {
+        const emptyRows: JSX.Element[] = []
+        for (let i = 0; i < minRowsToShow - 1; i++) {
+          emptyRows.push(
+            <Row className='list-row co-empty-list-row' key={`empty-${i}`} />
+          )
+        }
+
+        return (
+          <div>
+            <Row className='list-row align-items-center'>
+              <Col>
+                {textIfEmpty}
+              </Col>
+            </Row>
+            {emptyRows}
+          </div>
+        )
+      }
+
+      return (
+        <div>
+          <Row className='list-row align-items-center'>
+            <Col>
+              {textIfEmpty}
+            </Col>
+          </Row>
+        </div>
+      )
     }
 
     return null

@@ -1,12 +1,18 @@
 import React from 'react'
+import classnames from 'classnames'
 
 import './index.scss'
 
-export const ListButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = props => {
+interface IListButtonProps {
+  size?: 'sm' | 'normal'
+}
+
+export const ListButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & IListButtonProps> = props => {
+  const className = classnames('co-list-button', props.className, { 'co-list-button-sm': props.size === 'sm' })
   return (
     <button 
       {...props} 
-      className='co-list-button'
+      className={className}
     >
       {props.children}
     </button>
