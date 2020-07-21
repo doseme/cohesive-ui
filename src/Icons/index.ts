@@ -2,6 +2,9 @@ export interface IconProps {
   background?: string
 }
 
-export * from './Archive'
-export * from './Trash'
 export * from './ThinSpinner'
+export * from './Final/Archive'
+export * from './Final/Unarchive'
+export * from './Final/Edit'
+export * from './Trash'
+export * from './TrashFill'

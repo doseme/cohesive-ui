@@ -2,13 +2,13 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { EditIconButton } from './Final/Edit/EditIconButton'
-import { DeleteIconButton } from './Final/Delete/DeleteIconButton'
-import { ArchiveIconButton } from './Final/Archive/ArchiveIconButton'
-import { UnarchiveIconButton } from './Final/Unarchive/UnarchiveIconButton'
+import { EditIconButton } from './Final/Edit'
+import { DeleteIconButton } from './Final/Delete'
+import { ArchiveIconButton } from './Final/Archive'
+import { UnarchiveIconButton } from './Final/Unarchive'
 import './index.scss'
 
-const stories = storiesOf('EditIconButton', module)
+const stories = storiesOf('Icon Buttons', module)
 
 stories.add('Icons buttons', () => {
   return (
