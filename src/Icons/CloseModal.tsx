@@ -10,8 +10,8 @@ const CloseModal: React.FC = () => {
         </g>
       </g>
       <defs>
-        <filter id="filter0_d" x="1.30499" y="2.30502" width="31.39" height="31.39" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <filter id="filter0_d" x="1.30499" y="2.30502" width="31.39" height="31.39" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
           <feOffset dx="1" dy="2" />
           <feGaussianBlur stdDeviation="2.5" />
