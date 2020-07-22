@@ -16,6 +16,8 @@ export * from './PaginationPanel'
 export * from './Panel'
 export * from './Grid'
 export * from './SmartList'
+import { SearchHint as SmartListSearcHint } from './SmartList'
+export { SmartListSearcHint }
 export * from './TooltipMenu'
 export * from './BasicList'
 export * from './Button'

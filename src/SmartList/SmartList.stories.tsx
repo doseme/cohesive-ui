@@ -4,6 +4,8 @@ import { storiesOf } from '@storybook/react'
 import { SmartList } from './SmartList'
 import { Button } from '../Button'
 import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
+import { SearchHint } from './components/SearchHint'
+import { DOSEME_BLUE, PANELBLUE } from '../style/colors'
 
 const stories = storiesOf('Components.SmartList', module)
 
@@ -174,6 +176,20 @@ stories.add(
 
     return (
       <div className='m-5'>
+        <h3>Show Search Hint</h3>
+        <SmartList
+          cols={colsBlankActions}
+          data={content}
+          searchHint={
+            <SearchHint style={{ background: PANELBLUE, color: 'white' }}>
+              <div>This is the preview</div>
+            </SearchHint>
+          }
+        />
+
+        <br />
+        <br />
+
         <h3>Minimum of 10 rows</h3>
         <SmartList
           cols={colsBlankActions}

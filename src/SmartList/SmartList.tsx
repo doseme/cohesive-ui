@@ -10,6 +10,7 @@ import './index.scss'
 
 export interface IProps {
   data: IRowElement[]
+  searchHint?: JSX.Element
   cols: IHeaderItem[]
   selectedRows?: ISelectedRows
   headerClass?: string
@@ -30,6 +31,7 @@ const SmartList: React.FC<IProps> = ({
   selectedRows,
   onRowSelect,
   activeRow,
+  searchHint,
   onActivate,
   headerClass,
   textIfEmpty,
@@ -105,8 +107,12 @@ const SmartList: React.FC<IProps> = ({
     return acc
   }, [])
 
+  if (searchHint) {
+    listContent.push(searchHint)
+  }
+
   if (minRowsToShow && listContent.length < minRowsToShow) {
-    const filler = minRowsToShow - listContent.length
+    const filler = minRowsToShow - listContent.length - (searchHint ? 0 : 1)
     for (let i = 0; i < filler; i++) {
       listContent.push(
         <Row className='list-row co-empty-list-row' key={`empty-${i}`} />
@@ -130,7 +136,7 @@ const SmartList: React.FC<IProps> = ({
       )
     }
 
-    if (data.length) {
+    if (data.length || searchHint) {
       return <div>{listContent}</div>
     }
 

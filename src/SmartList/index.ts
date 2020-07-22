@@ -1,17 +1,3 @@
-import {
-  SmartList,
-} from './SmartList'
-
-import {
-  IRowElement,
-  IColumnElement,
-  IHeaderItem,
-} from '../types'
-
-export { 
-  SmartList,
-  IRowElement,
-  IColumnElement,
-  IHeaderItem,
-}
-
+export * from './SmartList'
+export * from '../types'
+export * from './components/SearchHint'
