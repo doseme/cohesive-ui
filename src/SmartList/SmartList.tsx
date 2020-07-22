@@ -7,8 +7,6 @@ import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
 import { ThinSpinner } from '../Icons/ThinSpinner'
 import { LOADING_GREY } from '../style/colors'
 import './index.scss'
-import { min } from 'lodash'
-import { faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
 
 export interface IProps {
   data: IRowElement[]
@@ -17,6 +15,7 @@ export interface IProps {
   headerClass?: string
   onRowSelect?: (selected: ISelectedRows) => void
   activeRow?: string
+  defaultSort?: 'asc' | 'desc'
   onActivate?: (id: string) => void
   textIfEmpty?: string
   header?: boolean
@@ -26,6 +25,7 @@ export interface IProps {
 
 const SmartList: React.FC<IProps> = ({ 
   data,
+  defaultSort,
   cols,
   selectedRows,
   onRowSelect,
@@ -79,6 +79,7 @@ const SmartList: React.FC<IProps> = ({
     <Header
       selectAllCol={!!selectedRows}
       onSelectAll={handleSelectAll}
+      defaultSort={defaultSort}
       className={headerClass}
       cols={cols}
     />
@@ -116,7 +117,7 @@ const SmartList: React.FC<IProps> = ({
   const displayContent = (): JSX.Element | null => {
     if (loading) {
       return (
-        <div data-testid='smart-list-loading'>
+        <div data-testid='smart-list-loading' className='justify-content-center'>
           <Col className='list-placeholder d-flex align-items-center'>
             <ThinSpinner
               strokeWidth={12}

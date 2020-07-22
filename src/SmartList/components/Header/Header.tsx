@@ -9,7 +9,11 @@ import { IHeaderItem } from '../../../types'
 import { NAVY } from '../../../style/colors'
 import './index.scss'
 
-const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className }) => {
+/**
+ * `defaultSort` is only used to set the icon. It's only for the UI.
+ * It does not actually sort the list - you need to do that yourself
+ */
+const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, defaultSort }) => {
   const [allChecked, toggleAllChecked] = useState(false)
   const [sortColumn, setSortColumn] = useState<string>(cols[0].name)
   const [sortAscending, setSortAscending] = useState(true)
@@ -42,28 +46,40 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className }
   }
 
   const sortButton = (item: IHeaderItem): JSX.Element => {
+    const sortAscendingIcon = (
+      <div className='fa-layers ml-1'>
+        <FontAwesomeIcon
+          className='fa-stack pb-2'
+          color={NAVY}
+          icon={faCaretUp}
+        />
+      </div>
+    )
+
+    const sortDescendingIcon = (
+      <div className='fa-layers ml-1'>
+        <FontAwesomeIcon
+          className='fa-stack pt-2'
+          color={NAVY}
+          icon={faCaretDown}
+        />
+      </div>
+    )
+
     if (item.name === sortColumn) {
       if (sortAscending) {
-        return (
-          <div className='fa-layers ml-1'>
-            <FontAwesomeIcon
-              className='fa-stack pb-2'
-              color={NAVY}
-              icon={faCaretUp}
-            />
-          </div>
-        )
+        return sortAscendingIcon
       }
 
-      return (
-        <div className='fa-layers ml-1'>
-          <FontAwesomeIcon
-            className='fa-stack pt-2'
-            color={NAVY}
-            icon={faCaretDown}
-          />
-        </div>
-      )
+      return sortDescendingIcon
+    }
+
+    if (defaultSort === 'asc') {
+      return sortAscendingIcon
+    }
+
+    if (defaultSort === 'desc') {
+      return sortDescendingIcon
     }
 
     return (
