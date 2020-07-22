@@ -1,15 +1,18 @@
 @import '../style/colors.scss';
 
 .co-dots {
-  padding: 4px 0 0 0;
+  padding: 2px 0;
+  margin: 0 2px;
+  width: 32px;
 } 
 
 .pagination {
   .co-pagination-btn {
     border-radius: 50%;
-    width: 30px;
+    width: 32px;
     height: 30px;
     padding: 16px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;;
     justify-content: center;
