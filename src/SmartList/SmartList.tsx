@@ -124,7 +124,7 @@ const SmartList: React.FC<IProps> = ({
     if (loading) {
       return (
         <div data-testid='smart-list-loading' className='justify-content-center'>
-          <Col className='list-placeholder d-flex align-items-center'>
+          <Col className='list-placeholder justify-content-center d-flex align-items-center'>
             <ThinSpinner
               strokeWidth={12}
               r={30}
