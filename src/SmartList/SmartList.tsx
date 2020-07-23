@@ -112,7 +112,7 @@ const SmartList: React.FC<IProps> = ({
   }
 
   if (minRowsToShow && listContent.length < minRowsToShow) {
-    const filler = minRowsToShow - listContent.length - (searchHint ? 0 : 1)
+    const filler = minRowsToShow - listContent.length
     for (let i = 0; i < filler; i++) {
       listContent.push(
         <Row className='list-row co-empty-list-row' key={`empty-${i}`} />

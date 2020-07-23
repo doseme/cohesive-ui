@@ -7,6 +7,8 @@ import { DeleteIconButton } from './Final/Delete'
 import { ArchiveIconButton } from './Final/Archive'
 import { UnarchiveIconButton } from './Final/Unarchive'
 import './index.scss'
+import { HollowCircle } from './HollowCircle'
+import { Schedule } from './Schedule'
 
 const stories = storiesOf('Icon Buttons', module)
 
@@ -60,6 +62,21 @@ stories.add('Icons buttons', () => {
             </td>
           </tr>
 
+          <tr>
+            <td>
+              <HollowCircle stroke='red' />
+            </td>
+            <td>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <Schedule stroke='blue' />
+            </td>
+            <td>
+            </td>
+          </tr>
         </tbody>
       </table>
     </React.Fragment>
