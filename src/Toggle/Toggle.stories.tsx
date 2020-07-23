@@ -3,12 +3,14 @@ import { storiesOf } from '@storybook/react'
 
 import { Toggle, IToggleOption } from './Toggle'
 import { Row, Col } from '../Grid'
+import { Icons } from '..'
 
 const currentArchived: IToggleOption[] = [
   {
     id: 'current',
     value: 'current',
     label: 'Current',
+    element: <div>Active<Icons.HollowCircle stroke='red' /></div>
   },
   {
     id: 'archived',
