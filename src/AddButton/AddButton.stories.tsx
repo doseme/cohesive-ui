@@ -15,15 +15,25 @@ storiesOf('Components.AddButton', module)
           Add patient
       </AddButton>
 
-        <br />
+      <br />
 
-        <AddButton
-          onClick={() => console.log('Click')}
-          className='expand-button-override'
-          disabled={true}
-        >
-          Add patient
+      <AddButton
+        onClick={() => console.log('Click')}
+        className='expand-button-override'
+        disabled={true}
+      >
+        Add patient
       </AddButton>
-      </React.Fragment>
-    )
-  })
+
+      <br />
+
+      <AddButton
+        onClick={() => console.log('Click')}
+        size='sm'
+        className='expand-button-override'
+      >
+        Small
+    </AddButton>
+    </React.Fragment>
+  )
+})

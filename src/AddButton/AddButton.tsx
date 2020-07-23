@@ -8,10 +8,14 @@ import './index.scss'
 
 interface IAddButtonProps {
   disabled?: boolean
+  size?: 'sm'
 }
 
 const AddButton: React.FC<React.HTMLAttributes<HTMLDivElement> & IAddButtonProps> = props => {
-  const className = classnames('co-add-button', { 'co-add-button-disabled': props.disabled })
+  const className = classnames('co-add-button', { 
+    'co-add-button-disabled': props.disabled,
+    'co-add-button-sm': props.size === 'sm'
+  })
   return (
     <div
       {...props}
@@ -20,6 +24,7 @@ const AddButton: React.FC<React.HTMLAttributes<HTMLDivElement> & IAddButtonProps
       <IconButton
         onClick={() => { }}
         className='co-add-icon'
+        size={props.size === 'sm' ? '24px' : ''}
       >
         <FontAwesomeIcon icon={faPlus} />
       </IconButton>
