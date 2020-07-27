@@ -58,18 +58,6 @@ const Dropdown: React.FC<IProps> = (props) => {
 
   useOnClickOutside(node, onClose)
 
-  const searchInput = (
-    <div className='co-dropdown-search'>
-      <SearchInput
-        placeholder='Search...'
-        aria-label='Search'
-        onChange={handleChange}
-        value={searchText}
-        childRef={searchRef}
-      />
-    </div>
-  )
-
   const update = (item: IDropdownItem): void => {
     setValid(true)
 
@@ -82,6 +70,18 @@ const Dropdown: React.FC<IProps> = (props) => {
     }
   }
 
+  const searchInput = props.showSearchThreshold && props.data.length > props.showSearchThreshold ? (
+    <div className='co-dropdown-search'>
+      <SearchInput
+        placeholder='Search...'
+        aria-label='Search'
+        onChange={handleChange}
+        value={searchText}
+        childRef={searchRef}
+      />
+    </div>
+  ) : null
+
   const listItems = (items: IDropdownItem[]) => (
     <>
       <div 
@@ -89,8 +89,7 @@ const Dropdown: React.FC<IProps> = (props) => {
         data-testid='placeholder'
       >{selectedItem ? selectedItem.label || selectedItem.value : props.placeholder}</div>
 
-      {props.data && props.showSearchThreshold && props.data.length > props.showSearchThreshold && searchInput}
-
+      {searchInput}
       <ul className='co-dropdown-list'>
         {
           items.map(item =>
@@ -129,18 +128,15 @@ const Dropdown: React.FC<IProps> = (props) => {
     defaultLabel = selectedItem.label || selectedItem.value
   }
 
-  const content = showContent 
-    ? 
-    (
-      <div className='co-dropdown'>
-        {
-          filteredData && props.onSelect
-            ? listItems(filteredData)
-            : props.children
-        }
-      </div>
-    ) 
-    : null
+  const content = showContent && (
+    <div className='co-dropdown'>
+      {
+        filteredData && props.onSelect
+          ? listItems(filteredData)
+          : props.children
+      }
+    </div>
+  ) 
 
   const errorMessage = !valid && (
     <div className={classnames('co-form-field-label', { 'co-form-field-label-invalid': !valid })}>
