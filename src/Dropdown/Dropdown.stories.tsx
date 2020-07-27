@@ -24,110 +24,6 @@ const content = (
 stories.add('Components.Dropdown', () => {
   return (
     <div style={{ maxWidth: '500px' }}>
-      <h3 className='m-5'>With List of Items + No Search</h3>
-      <div className='m-5'>
-        <Dropdown
-          id='listItemsNoSearch'
-          className='hasName'
-          placeholder='Select Hospital'
-          data={[
-            {label: 'Hospital A', value: '1'},
-            {label: 'Hospital B', value: '2'},
-            {label: 'Hospital C', value: '3'}
-          ]}
-          onSelect={noop}
-        />
-      </div>
-
-      <hr />
-
-      <h3 className='m-5'>With List of Items + Search</h3>
-      <div className='m-5'>
-        <Dropdown 
-          id='listItemsWithSearch'
-          placeholder='Select Hospital'
-          data={[
-            {label: 'Hospital A', value: '1'},
-            {label: 'Hospital B', value: '2'},
-            {label: 'Hospital C', value: '3'},
-            {label: 'Hospital D', value: '4'},
-            {label: 'Hospital E', value: '5'},
-            {label: 'Hospital F', value: '6'},
-            {label: 'Hospital G', value: '7'},
-            {label: 'Hospital H', value: '8'},
-            {label: 'Hospital I', value: '9'},
-            {label: 'Hospital J', value: '10'},
-            {label: 'Hospital K', value: '11'},
-            {label: 'Hospital L', value: '12'}
-          ]}
-          onSelect={noop}
-        />
-      </div>
-
-
-      <hr />
-
-      <h3 className='m-5'>Custom Content Dropdown</h3>
-      <div className='m-5'>
-        <Dropdown 
-          id='customContentDropdown'
-          placeholder='Custom Content Dropdown'
-          onSelect={noop}
-        >
-          {content}
-        </Dropdown>
-      </div>
-
-      <hr />
-
-      <h3 className='m-5'>With Default Value</h3>
-      <div className='m-5'>
-        <Dropdown 
-          id='withDefaultValue'
-          placeholder='Select Hospital'
-          data={[
-            {label: 'Hospital A', value: '1'},
-            {label: 'Hospital B', value: '2'},
-            {label: 'Hospital C', value: '3'}
-          ]}
-          onSelect={noop}
-          defaultValue='2'
-        />
-      </div>
-
-      <hr />
-
-      <h3 className='m-5'>With Field Label</h3>
-      <div className='m-5'>
-        <Dropdown 
-          id='withLabel'
-          label='Select a Hospital'
-          placeholder='Select Hospital'
-          data={[
-            {label: 'Hospital A', value: '1'},
-            {label: 'Hospital B', value: '2'},
-            {label: 'Hospital C', value: '3'}
-          ]}
-          onSelect={noop}
-        />
-      </div>
-
-      <hr />
-
-      <h3 className='m-5'>Optional Item Labels</h3>
-      <div className='m-5'>
-        <Dropdown 
-          id='withLabel'
-          label='Select a Hospital'
-          placeholder='Select Hospital'
-          data={[
-            {value: '1'},
-            {label: 'Hospital B', value: '2'},
-            {label: 'Hospital C', value: '3'}
-          ]}
-          onSelect={noop}
-        />
-      </div>
 
       <hr />
 
@@ -149,7 +45,7 @@ stories.add('Components.Dropdown', () => {
 
       <hr />
 
-      <h3 className='m-5'>With disable options</h3>
+      {/* <h3 className='m-5'>With disable options</h3>
       <div className='m-5'>
         <Dropdown 
           id='withLabel'
@@ -163,7 +59,7 @@ stories.add('Components.Dropdown', () => {
           ]}
           onSelect={noop}
         />
-      </div>
+      </div> */}
     </div>
   )
 })

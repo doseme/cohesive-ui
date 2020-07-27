@@ -29,31 +29,30 @@ const useClickAway = (ref: RefObject<HTMLDivElement>, isRequired?: boolean, onBl
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [touched, setTouched] = useState(false)
-  const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     const handleClickAway = (e: any) => {
       if (ref && ref.current && ref.current.contains(e.target)) {
         return
       }
+
       setShowContent(false)
-    }
+      setSearchText('')
 
-    document.addEventListener('mousedown', (e: MouseEvent) => {
-      handleClickAway(e)
-    })
-
-    setSearchText('')
-    setShowContent(false)
-    setValid(true)
-
-    if (touched && isRequired && !selectedItem) {
-      setValid(false)
+      if (isRequired && !selectedItem) {
+        setValid(false)
+      } else {
+        setValid(true)
+      }
 
       if (onBlur) {
         onBlur(null, false)
       }
     }
+
+    document.addEventListener('mousedown', (e: MouseEvent) => {
+      handleClickAway(e)
+    })
 
     return () => {
       document.removeEventListener('mousedown', handleClickAway)
