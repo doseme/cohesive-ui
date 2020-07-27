@@ -68,7 +68,7 @@ const useClickAway = (ref: RefObject<HTMLDivElement>, isRequired?: boolean, onBl
   }
 }
 
-const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultValue, onSelect, onBlur, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<IProps> = (props) => {
   const node = useRef<HTMLDivElement>(null)
   const searchRef = useRef<HTMLInputElement>(null)
 
@@ -78,13 +78,13 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     showContent, setShowContent,
     searchText, setSearchText,
     touched, setTouched
-  } = useClickAway(node, isRequired, onBlur)
+  } = useClickAway(node, props.isRequired, props.onBlur)
 
   useEffect(() => {
-    if (defaultValue && data) {
-      setSelectedItem(data.find(x => x.value === defaultValue))
+    if (props.defaultValue && props.data) {
+      setSelectedItem(props.data.find(x => x.value === props.defaultValue))
     }
-  }, [defaultValue, data, setSelectedItem])
+  }, [props.defaultValue, props.data, setSelectedItem])
 
   useEffect(() => {
     if (showContent && searchRef?.current) {
@@ -115,12 +115,12 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
   const update = (item: IDropdownItem): void => {
     setValid(true)
 
-    if (onBlur) {
-      onBlur(item, true)
+    if (props.onBlur) {
+      props.onBlur(item, true)
     }
 
-    if (onSelect) {
-      onSelect(item)
+    if (props.onSelect) {
+      props.onSelect(item)
     }
   }
 
@@ -129,9 +129,9 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
       <div 
         className='co-dropdown-placeholder'
         data-testid='placeholder'
-      >{selectedItem ? selectedItem.label || selectedItem.value : placeholder}</div>
+      >{selectedItem ? selectedItem.label || selectedItem.value : props.placeholder}</div>
 
-      {data && data.length > showSearchThreshold && searchInput}
+      {props.data && props.showSearchThreshold && props.data.length > props.showSearchThreshold && searchInput}
 
       <ul className='co-dropdown-list'>
         {
@@ -159,16 +159,16 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     </>
   )
 
-  let filteredData = data;
+  let filteredData = props.data;
 
-  if (data && searchText) {
-    filteredData = data.filter(x => (x.label || x.value).toLowerCase().includes(searchText))
+  if (props.data && searchText) {
+    filteredData = props.data.filter(x => (x.label || x.value).toLowerCase().includes(searchText))
   }
 
   let defaultLabel: string | undefined
 
-  if (defaultValue && data && data.length) {
-    const defaultItem = data.find(x => x.value === defaultValue)
+  if (props.defaultValue && props.data && props.data.length) {
+    const defaultItem = props.data.find(x => x.value === props.defaultValue)
     if (defaultItem) {
       defaultLabel = defaultItem.label || defaultItem.value
     }
@@ -179,9 +179,9 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     (
       <div className='co-dropdown'>
         {
-          filteredData && onSelect
+          filteredData && props.onSelect
             ? listItems(filteredData)
-            : children
+            : props.children
         }
       </div>
     ) 
@@ -194,16 +194,16 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
   )
 
   return (
-    <div className={className}>
+    <div className={props.className}>
       <div className='d-flex justify-content-between co-dropdown-label'>
         <div className='co-form-field-label'>
-          {label}
+          {props.label}
         </div>
         {errorMessage}
       </div>
 
       <div
-        id={id ? id : undefined}
+        id={props.id ? props.id : undefined}
         className='co-dropdown-wrapper' 
         ref={node}
       >
@@ -215,7 +215,7 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
             setShowContent(!showContent)}
           }
         >
-          {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || placeholder}
+          {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || props.placeholder}
         </div>
         {content}
       </div>
