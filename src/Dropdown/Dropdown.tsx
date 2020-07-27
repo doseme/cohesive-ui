@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, Ref, RefObject } from 'react'
 import classnames from 'classnames'
 
 import { SearchInput } from '../SearchInput'
@@ -23,19 +23,24 @@ interface IProps {
   defaultValue?: string
 }
 
-const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultValue, onSelect, onBlur, showSearchThreshold = 10 }) => {
+const useClickAway = (ref: RefObject<HTMLDivElement>, isRequired?: boolean, onBlur?: Function) => {
+  const [selectedItem, setSelectedItem] = useState<IDropdownItem>()
   const [valid, setValid] = useState(true)
   const [showContent, setShowContent] = useState(false)
-  const [touched, setTouched] = useState(false)
   const [searchText, setSearchText] = useState('')
-  const [selectedItem, setSelectedItem] = useState<IDropdownItem>()
-  const node = useRef<HTMLDivElement>(null)
+  const [touched, setTouched] = useState(false)
 
-  const handleClickAway = (e: MouseEvent) => {
-    // @ts-ignore - I dunno how to type this, whatever
-    if (node && node.current && node.current.contains(e.target)) {
-      return
+  useEffect(() => {
+    const handleClickAway = (e: any) => {
+      if (ref && ref.current && ref.current.contains(e.target)) {
+        return
+      }
+      setShowContent(false)
     }
+
+    document.addEventListener('mousedown', (e: MouseEvent) => {
+      handleClickAway(e)
+    })
 
     setSearchText('')
     setShowContent(false)
@@ -48,23 +53,44 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
         onBlur(null, false)
       }
     }
-  }
-
-  useEffect(() => {
-    document.addEventListener('mousedown', (e: MouseEvent) => {
-      handleClickAway(e)
-    })
 
     return () => {
       document.removeEventListener('mousedown', handleClickAway)
     }
-  }, [handleClickAway])
+  }, [ref])
+
+  return {
+    selectedItem, setSelectedItem,
+    valid, setValid,
+    showContent, setShowContent,
+    searchText, setSearchText,
+    touched, setTouched
+  }
+}
+
+const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultValue, onSelect, onBlur, showSearchThreshold = 10 }) => {
+  const node = useRef<HTMLDivElement>(null)
+  const searchRef = useRef<HTMLInputElement>(null)
+
+  const{
+    selectedItem, setSelectedItem,
+    valid, setValid,
+    showContent, setShowContent,
+    searchText, setSearchText,
+    touched, setTouched
+  } = useClickAway(node, isRequired, onBlur)
 
   useEffect(() => {
     if (defaultValue && data) {
       setSelectedItem(data.find(x => x.value === defaultValue))
     }
   }, [defaultValue, data, setSelectedItem])
+
+  useEffect(() => {
+    if (showContent && searchRef?.current) {
+      searchRef.current.focus()
+    }
+  }, [showContent, searchRef.current])
 
   const handleChange = (value: string) => {
     if (value) {
@@ -81,6 +107,7 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
         aria-label='Search'
         onChange={handleChange}
         value={searchText}
+        childRef={searchRef}
       />
     </div>
   )
