@@ -68,6 +68,42 @@ const DropdownIsRequired = () => {
   )
 }
 
+const DropdownNoOptions = () => {
+  const [value, setValue] = useState<string>()
+
+  return (
+    <React.Fragment>
+      <Dropdown
+        data={[]}
+        label='Dropdown no options'
+        value={value}
+        isRequired
+        onSelect={item => setValue(item.value)}
+        placeholder='Select an item'
+      />
+      <br />
+    </React.Fragment>
+  )
+}
+
+const DropdownDisabled = () => {
+  const [value, setValue] = useState<string>()
+
+  return (
+    <React.Fragment>
+      <Dropdown
+        data={[]}
+        label='Dropdown disabled'
+        value={value}
+        disabled={true}
+        isRequired
+        onSelect={item => setValue(item.value)}
+        placeholder='Select an item'
+      />
+      <br />
+    </React.Fragment>
+  )
+}
 
 stories.add('Components.Dropdown', () => {
   return (
@@ -96,6 +132,8 @@ stories.add('Components.Dropdown', () => {
       <br />
       <DropdownIsRequired />
       <DropdownWithDefaultValue />
+      <DropdownNoOptions />
+      <DropdownDisabled />
     </div>
   )
 })

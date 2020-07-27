@@ -17,6 +17,7 @@ interface IProps {
   className?: string
   isRequired?: boolean
   data: IDropdownItem[]
+  disabled?: boolean
   placeholder: string
   showSearchThreshold?: number
   value?: string
@@ -159,9 +160,16 @@ const Dropdown: React.FC<IProps> = (props) => {
         ref={node}
       >
         <div
-          className={classnames('co-dropdown-closed', { 'co-dropdown-invalid': !valid })}
+          className={classnames('co-dropdown-closed', { 
+            'co-dropdown-invalid': !valid, 
+            'co-dropdown-no-options': props.data.length === 0,
+            'co-dropdown-disabled': props.disabled
+          })}
           data-testid='current-item'
           onClick={() => {
+            if (props.data.length === 0) {
+              return
+            }
             setShowContent(!showContent)
             setTouched(true)
           }}
