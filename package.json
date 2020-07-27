@@ -1,6 +1,6 @@
 {
   "name": "cohesive-ui",
-  "version": "2.8.6",
+  "version": "3.0.0",
   "main": "dist/cohesive-ui.cjs.js",
   "module": "dist/cohesive-ui.esm.js",
   "files": [
@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.6",
-    "react-portal-tooltip": "^2.4.7"
+    "react-portal-tooltip": "^2.4.7",
+    "use-onclickoutside": "^0.3.1"
   },
   "scripts": {
     "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp -r src/style/colors.scss dist/style/colors.scss && cp src/style/global.css dist/style/global.css",

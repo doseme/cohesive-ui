@@ -37,7 +37,7 @@ describe('Dropdown', () => {
           {label: 'Item 3', value: '3'}
         ]}
         onSelect={noop}
-        defaultValue='2'
+        value='2'
       />
     )
 
