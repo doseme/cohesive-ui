@@ -30,6 +30,7 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
   const [searchText, setSearchText] = useState('')
   const [selectedItem, setSelectedItem] = useState<IDropdownItem>()
   const node = useRef<HTMLDivElement>(null)
+  const searchRef = useRef<HTMLInputElement>(null)
 
   const handleClickAway = (e: MouseEvent) => {
     // @ts-ignore - I dunno how to type this, whatever
@@ -66,6 +67,12 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     }
   }, [defaultValue, data, setSelectedItem])
 
+  useEffect(() => {
+    if (showContent && searchRef?.current) {
+      searchRef.current.focus()
+    }
+  }, [showContent, searchRef.current])
+
   const handleChange = (value: string) => {
     if (value) {
       setSearchText(value.toString().toLowerCase())
@@ -81,6 +88,7 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
         aria-label='Search'
         onChange={handleChange}
         value={searchText}
+        childRef={searchRef}
       />
     </div>
   )

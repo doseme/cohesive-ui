@@ -10,6 +10,7 @@ interface IProps {
   onChange: (value: string) => any
   customSearchIcon?: any
   placeholder?: string
+  childRef?: React.RefObject<HTMLInputElement>
 }
 
 const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element => {
@@ -45,6 +46,7 @@ const SearchInput: React.FC<TExtendsHTMLElement<IProps>> = (props): JSX.Element 
           type='search'
           value={props.value}
           onChange={handleChange}
+          ref={props.childRef}
         />
         <div className='co-search-icon'>
           {icon}
