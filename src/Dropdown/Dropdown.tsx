@@ -29,6 +29,7 @@ const useClickAway = (ref: RefObject<HTMLDivElement>, isRequired?: boolean, onBl
   const [showContent, setShowContent] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [touched, setTouched] = useState(false)
+  const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     const handleClickAway = (e: any) => {
