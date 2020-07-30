@@ -24,12 +24,14 @@ const Skeleton: React.FC = () => {
         <Col width={1} className='co-skeleton' />
         <Col width={4} className='co-skeleton-white' />
         <Col width={2} className='co-skeleton co-skeleton-rounded' />
-        <Col width={6} className='co-skeleton-white' />
+        <Col width={4} className='co-skeleton-white' />
       </Row>
 
       <Row>
-        <Col width={7} className='co-skeleton' />
-        <Col width={5} className='co-skeleton' />
+        <Col width={3} className='co-skeleton' />
+        <Col width={1} className='co-skeleton-white' />
+        <Col width={2} className='co-skeleton' />
+        <Col width={6} className='co-skeleton' />
       </Row>
     </>
   )
