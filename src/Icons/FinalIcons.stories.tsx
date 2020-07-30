@@ -10,6 +10,7 @@ import './index.scss'
 import { HollowCircle } from './HollowCircle'
 import { Schedule } from './Schedule'
 import { ChevronIconButton } from './Final/Chevron'
+import { SolidCircle } from './SolidCircle'
 
 const stories = storiesOf('Icon Buttons', module)
 
@@ -76,6 +77,14 @@ stories.add('Icons buttons', () => {
           <tr>
             <td>
               <HollowCircle stroke='red' />
+            </td>
+            <td>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <SolidCircle stroke='green' />
             </td>
             <td>
             </td>
