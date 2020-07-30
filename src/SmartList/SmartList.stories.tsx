@@ -163,6 +163,7 @@ stories.add(
     const colsSortable: IHeaderItem[] = [
       {
         name: 'ID',
+        handleSort,
       },
       {
         name: 'Email',
@@ -300,6 +301,8 @@ stories.add(
         <SmartList
           cols={colsSortable}
           data={sortedContent(content)}
+          defaultSortColumn='Email'
+          defaultSortDirection='asc'
           selectedRows={selected}
           onRowSelect={setSelected}
           activeRow={activeRow}

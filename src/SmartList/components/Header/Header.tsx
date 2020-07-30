@@ -13,10 +13,10 @@ import './index.scss'
  * `defaultSort` is only used to set the icon. It's only for the UI.
  * It does not actually sort the list - you need to do that yourself
  */
-const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, defaultSort }) => {
+const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, defaultSortDirection, defaultSortColumn }) => {
   const [allChecked, toggleAllChecked] = useState(false)
-  const [sortColumn, setSortColumn] = useState<string>(cols[0].name)
-  const [sortAscending, setSortAscending] = useState(true)
+  const [sortColumn, setSortColumn] = useState<string>(defaultSortColumn || cols[0].name)
+  const [sortAscending, setSortAscending] = useState(defaultSortDirection === 'asc')
 
   // If IHeaderItem.displayName is falsy, name will be used for the column title
   // EXCEPT in the case of an empty string, which will show a blank column.
@@ -45,7 +45,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, 
     }
   }
 
-  const sortButton = (item: IHeaderItem): JSX.Element => {
+  const sortButton = (item: IHeaderItem, colIndex: number): JSX.Element => {
     const sortAscendingIcon = (
       <div className='fa-layers ml-1'>
         <FontAwesomeIcon
@@ -66,19 +66,11 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, 
       </div>
     )
 
-    if (item.name === sortColumn) {
-      if (sortAscending) {
-        return sortAscendingIcon
-      }
-
-      return sortDescendingIcon
-    }
-
-    if (defaultSort === 'asc') {
+    if (sortAscending && item.name === sortColumn) {
       return sortAscendingIcon
     }
 
-    if (defaultSort === 'desc') {
+    if (!sortAscending && item.name === sortColumn) {
       return sortDescendingIcon
     }
 
@@ -132,7 +124,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, 
           className={sortable(x) ? `cursor-pointer ${x.className}` : x.className}
         >
           {nameDisplay(x)}
-          {sortable(x) && sortButton(x)}
+          {sortable(x) && sortButton(x, idx)}
         </Col>
       )}
     </Row>
