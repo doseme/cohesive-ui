@@ -115,3 +115,13 @@ ul.co-dropdown-list {
   background-image: none;
   word-break: normal;
 }
+
+.co-dropdown-no-options {
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+.co-dropdown-disabled {
+  opacity: 0.5;
+}

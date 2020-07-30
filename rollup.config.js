@@ -17,6 +17,7 @@ const createEntry = ({ format, file }) => {
       '@fortawesome/react-fontawesome',
       '@fortawesome/free-solid-svg-icons',
       'moment',
+      'use-onclickoutside'
     ],
     plugins: [
       commonjs(),

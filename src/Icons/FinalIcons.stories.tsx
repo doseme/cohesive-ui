@@ -9,6 +9,7 @@ import { UnarchiveIconButton } from './Final/Unarchive'
 import './index.scss'
 import { HollowCircle } from './HollowCircle'
 import { Schedule } from './Schedule'
+import { ChevronIconButton } from './Final/Chevron'
 
 const stories = storiesOf('Icon Buttons', module)
 
@@ -59,6 +60,16 @@ stories.add('Icons buttons', () => {
             </td>
             <td>
               <UnarchiveIconButton />
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              <ChevronIconButton disabled={true} />
+            </td>
+            <td>
+              <ChevronIconButton />
             </td>
           </tr>
 

@@ -16,7 +16,8 @@ export interface IProps {
   headerClass?: string
   onRowSelect?: (selected: ISelectedRows) => void
   activeRow?: string
-  defaultSort?: 'asc' | 'desc'
+  defaultSortDirection?: 'asc' | 'desc'
+  defaultSortColumn?: string
   onActivate?: (id: string) => void
   textIfEmpty?: string
   header?: boolean
@@ -26,7 +27,7 @@ export interface IProps {
 
 const SmartList: React.FC<IProps> = ({ 
   data,
-  defaultSort,
+  defaultSortDirection,
   cols,
   selectedRows,
   onRowSelect,
@@ -36,6 +37,7 @@ const SmartList: React.FC<IProps> = ({
   headerClass,
   textIfEmpty,
   loading,
+  defaultSortColumn,
   minRowsToShow,
   header = true 
 }) => {
@@ -81,7 +83,8 @@ const SmartList: React.FC<IProps> = ({
     <Header
       selectAllCol={!!selectedRows}
       onSelectAll={handleSelectAll}
-      defaultSort={defaultSort}
+      defaultSortDirection={defaultSortDirection}
+      defaultSortColumn={defaultSortColumn}
       className={headerClass}
       cols={cols}
     />

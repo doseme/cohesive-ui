@@ -49,6 +49,11 @@ const NumberInput: React.FC<IProps> = (props) => {
       type
     }, str)
 
+    if (!isRequired && str === '') {
+      setError('')
+      return true
+    }
+
     if (!status.valid && status.message) {
       setError(status.message)
       return false
