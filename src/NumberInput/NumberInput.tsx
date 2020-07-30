@@ -17,6 +17,8 @@ interface IProps {
   disabled?: boolean
   isRequired?: boolean
   readOnly?: boolean
+  min?: number
+  max?: number
   handleChange?: (value: string) => void
   handleBlur?: (value: string, isValid: boolean) => void
   handleFocus?: () => void
@@ -29,6 +31,8 @@ const NumberInput: React.FC<IProps> = (props) => {
     label,
     handleBlur,
     handleChange,
+    min,
+    max,
     handleFocus,
     disabled,
     readOnly,
@@ -46,7 +50,9 @@ const NumberInput: React.FC<IProps> = (props) => {
 
   const handleValidate = (str: string): boolean => {
     const status = validate({
-      type
+      type,
+      min,
+      max
     }, str)
 
     if (!isRequired && str === '') {
