@@ -17,6 +17,8 @@ interface IProps {
   disabled?: boolean
   isRequired?: boolean
   readOnly?: boolean
+  min?: number
+  max?: number
   handleChange?: (value: string) => void
   handleBlur?: (value: string, isValid: boolean) => void
   handleFocus?: () => void

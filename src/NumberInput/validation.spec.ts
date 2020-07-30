@@ -85,4 +85,14 @@ describe('validate', () => {
     const actual = validate({ type: 'positiveFloat' }, '-1.2')
     expect(actual).toEqual({ valid: false, message: 'Positive numbers only' })
   })
+
+  test('min', () => {
+    const actual = validate({ type: 'positiveFloat', min: 2 }, '1')
+    expect(actual).toEqual({ valid: false, message: 'Must be greater than 2' })
+  })
+
+  test('max', () => {
+    const actual = validate({ type: 'positiveFloat', max: 10 }, '11')
+    expect(actual).toEqual({ valid: false, message: 'Must be less than 10' })
+  })
 })
