@@ -9,8 +9,10 @@ import { UnarchiveIconButton } from './Final/Unarchive'
 import './index.scss'
 import { HollowCircle } from './HollowCircle'
 import { Schedule } from './Schedule'
+import { Archive } from './Archive'
 import { ChevronIconButton } from './Final/Chevron'
 import { SolidCircle } from './SolidCircle'
+import { Unarchive } from './Unarchive'
 
 const stories = storiesOf('Icon Buttons', module)
 
@@ -81,6 +83,23 @@ stories.add('Icons buttons', () => {
             <td>
             </td>
           </tr>
+
+          <tr>
+            <td>
+              <Unarchive background='red' />
+            </td>
+            <td>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <Archive background='red' />
+            </td>
+            <td>
+            </td>
+          </tr>
+
 
           <tr>
             <td>
