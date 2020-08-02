@@ -156,7 +156,7 @@ const SmartList: React.FC<IProps> = ({
           <div>
             <Row className='list-row align-items-center'>
               <Col>
-                {textIfEmpty}
+                <span className='co-smart-list-empty'>{textIfEmpty}</span>
               </Col>
             </Row>
             {emptyRows}
@@ -168,7 +168,7 @@ const SmartList: React.FC<IProps> = ({
         <div>
           <Row className='list-row align-items-center'>
             <Col>
-              {textIfEmpty}
+              <span className='co-smart-list-empty'>{textIfEmpty}</span>
             </Col>
           </Row>
         </div>

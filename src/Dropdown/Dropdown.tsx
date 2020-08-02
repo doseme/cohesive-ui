@@ -71,7 +71,7 @@ const Dropdown: React.FC<IProps> = (props) => {
     }
   }
 
-  const searchInput = props.showSearchThreshold && props.data.length > props.showSearchThreshold ? (
+  const searchInput = props.showSearchThreshold !== undefined && props.data.length >= props.showSearchThreshold ? (
     <div className='co-dropdown-search'>
       <SearchInput
         placeholder='Search...'

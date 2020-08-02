@@ -99,7 +99,7 @@ describe('SmartList', () => {
 
     expect(postOrder.length).toBe(2)
 
-    expect(postOrder[0].id).toBe('row-id-2')
-    expect(postOrder[1].id).toBe('row-id-1')
+    expect(postOrder[1].id).toBe('row-id-2')
+    expect(postOrder[0].id).toBe('row-id-1')
   })
 })

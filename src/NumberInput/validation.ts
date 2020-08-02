@@ -18,6 +18,11 @@ const isWhole = (str: string): boolean => {
   return n !== Infinity && String(n) === str && n >= 0
 }
 
+const isPositiveFraction = (str: string): boolean => {
+  const n = Number(str)
+  return n !== Infinity && n >= 0 && n < 1
+}
+
 const isInteger = (str: string): boolean => {
   const n = Math.floor(Number(str))
   return n !== Infinity && String(n) === str
@@ -32,7 +37,7 @@ const isPositiveFloat = (str: string): boolean => {
   
   if (afterDecimal) {
     // contains floating values
-    return isWhole(beforeDecimal) && isWhole(afterDecimal)
+    return isWhole(beforeDecimal) && isPositiveFraction('.' + afterDecimal)
   }
 
   return isWhole(beforeDecimal)

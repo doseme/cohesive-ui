@@ -1,13 +1,11 @@
 import {
   validate,
-  IValidators,
   IValidationResult,
 } from './validation'
 
 describe('validate', () => {
-  const rules: IValidators = {
-    type: 'whole',
-    isRequired: true
+  const valid: IValidationResult = {
+    valid: true,
   }
 
   const invalid: IValidationResult = {
@@ -28,6 +26,16 @@ describe('validate', () => {
   test('isWhole invalid', () => {
     const actual = validate({ type: 'whole' }, '-123')
     expect(actual).toEqual(invalid)
+  })
+
+  test('isWhole invalid', () => {
+    const actual = validate({ type: 'whole' }, '09')
+    expect(actual).toEqual(invalid)
+  })
+
+  test('isPositiveFloat valid', () => {
+    const actual = validate({ type: 'positiveFloat' }, '0.09')
+    expect(actual).toEqual(valid)
   })
 
   test('isRequired invalid', () => {

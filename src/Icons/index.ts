@@ -5,6 +5,7 @@ export interface IconProps {
 export * from './ThinSpinner'
 export * from './Final/Archive'
 export * from './Archive'
+export * from './Unarchive'
 export * from './Final/Unarchive'
 export * from './Final/Edit'
 export * from './Final/Delete'
