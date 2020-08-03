@@ -9,6 +9,6 @@ export const Active: React.FC<{ className?: string, disabled?: boolean }> = (pro
       L 17, 22
       M15, 22
       L 24, 14
-    " stroke="#AEAEAE" stroke-width="3"/>
+    " stroke="#AEAEAE" strokeWidth="3"/>
   </svg>
 )
