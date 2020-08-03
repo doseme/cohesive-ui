@@ -67,7 +67,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
         </Col>
       }
       {
-        columns.map((x, idx) =>
+        columns.map((x, idx) => !x.hidden &&
           <Col 
             key={x.name}
             data-test={x.name}
