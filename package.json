@@ -1,6 +1,6 @@
 {
   "name": "cohesive-ui",
-  "version": "3.2.2",
+  "version": "3.3.0",
   "main": "dist/cohesive-ui.cjs.js",
   "module": "dist/cohesive-ui.esm.js",
   "files": [
@@ -14,7 +14,7 @@
     "use-onclickoutside": "^0.3.1"
   },
   "scripts": {
-    "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp -r src/style/colors.scss dist/style/colors.scss && cp src/style/global.css dist/style/global.css",
+    "build": "rm -rf dist && yarn rollup -c rollup.config.js && cp -r src/style/colors.scss dist/style/colors.scss && cp src/style/global.css dist/style/global.css && cp src/style/media.scss dist/style/media.scss",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "test": "jest",
     "storybook": "start-storybook -p 6006  -s ./src"

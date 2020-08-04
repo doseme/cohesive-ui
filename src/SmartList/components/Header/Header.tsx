@@ -115,7 +115,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, 
            onClick={handleAllChecked}
          />
       </Col>}
-      {cols.map((x, idx) => 
+      {cols.map((x, idx) => !x.hidden && 
         <Col 
           data-testid={`header-column-${x.name}`}
           width={x.width}

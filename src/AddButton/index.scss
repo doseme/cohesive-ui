@@ -1,4 +1,5 @@
 @import '../style/colors.scss';
+@import '../style/media.scss';
 
 .co-add-button {
   color: $doseme-blue;
@@ -10,6 +11,11 @@
   padding: 7px 16px 7px 10px;
 
   &:hover {
+    cursor: pointer;
+    box-shadow: 0px 2px 12px rgba(18, 50, 120, 0.18);
+  }
+
+  @include mobile-only {
     cursor: pointer;
     box-shadow: 0px 2px 12px rgba(18, 50, 120, 0.18);
   }

@@ -128,6 +128,39 @@ const colsBlankActions: IHeaderItem[] = [
   }
 ]
 
+const WithHiddenColumns = () => {
+  return (
+    <React.Fragment>
+      <div className='m-5'></div>
+      <SmartList
+        cols={[
+          { name: 'Visible', hidden: false },
+          { name: 'Hidden', hidden: true },
+        ]}
+        data={[
+          {
+            id: 1,
+            onClick: () => console.log('Clicked on 2'),
+            columns: [
+              {
+                name: 'Visible',
+                element: <div>Visible</div>,
+                text: 'This is visible',
+              },
+              {
+                name: 'Hidden',
+                hidden: true,
+                text: 'cc@dd.com',
+              }
+            ]
+          }
+        ]}
+      />
+      <br /><br />
+    </React.Fragment>
+  )
+}
+
 stories.add(
   'JSX',
   () => {
@@ -177,6 +210,8 @@ stories.add(
 
     return (
       <div className='m-5'>
+        <WithHiddenColumns />
+
         <h3>Show Search Hint</h3>
         <SmartList
           cols={colsBlankActions}

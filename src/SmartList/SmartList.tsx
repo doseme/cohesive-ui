@@ -90,7 +90,7 @@ const SmartList: React.FC<IProps> = ({
     />
   )
 
-  const listContent = data.reduce<JSX.Element[]>((acc, row) => {
+  const listContent = data.reduce<JSX.Element[]>((acc, row, index) => {
     acc = acc.concat(
       <ListItem
         onClick={(e) => handleClick(row, e)}
