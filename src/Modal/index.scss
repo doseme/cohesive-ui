@@ -1,4 +1,5 @@
 @import '../style/colors.scss';
+@import '../style/media.scss';
 
 .overlay {
   position: fixed;
@@ -16,5 +17,11 @@
 
   #modal-body {
     position: absolute;
+  }
+  
+  @include mobile-only {
+    #modal-body {
+      width: 100%;
+    }
   }
 }

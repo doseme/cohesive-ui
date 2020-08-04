@@ -31,6 +31,7 @@ export * from './DateTextInput'
 export * from './Spinner'
 export * from './Toggle'
 export * from './style/colors'
+export * from './media'
 
 import * as Nav from './Nav'
 export { Nav }
