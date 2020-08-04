@@ -28,7 +28,7 @@ export const paginateDesktop = (
     }
   }
 
-  // The total pages are less than 7 so no need to show '...'.
+  // The total pages are less than 6 so no need to show '...'.
   // Just render all pages.
   if (pageCount <= 7) {
     const nodes: TNode[] = [previous]
@@ -88,7 +88,7 @@ export const paginateMobile = (
     }
   }
 
-  // The total pages are less than 7 so no need to show '...'.
+  // The total pages are less than 6 so no need to show '...'.
   // Just render all pages.
   if (pageCount <= 5) {
     const nodes: TNode[] = [previous]
