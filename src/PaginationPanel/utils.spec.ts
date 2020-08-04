@@ -1,9 +1,9 @@
-import { paginate } from './utils'
+import { paginateDesktop } from './utils'
 
 test('shows all pages when less than 5 pages', () => {
   // Show all pages, and navigation buttons regardless of current page
   // << | < | 1 | 2 | 3 | 4 | 5 | > | >>
-  const actual = paginate(1, 5)
+  const actual = paginateDesktop(1, 5)
 
   expect([actual[0], actual[1]]).toEqual([
     { type: 'navigation', symbol: '<<', action: 'gotoFirst' },
@@ -24,7 +24,7 @@ test('shows all pages when less than 5 pages', () => {
 
 test('shows all pages when exactly 7 pages', () => {
   // << | < | 1 | 2 | 3 | 4 | 5 | 6 | 7 | > | >>
-  const actual = paginate(1, 7)
+  const actual = paginateDesktop(1, 7)
 
   expect([actual[0], actual[1]]).toEqual([
     { type: 'navigation', symbol: '<<', action: 'gotoFirst' },
@@ -74,7 +74,7 @@ test('shows all pages when exactly 7 pages', () => {
 })
 
 test('more than 7 pages, current page is first page', () => {
-  const actual = paginate(1, 100)
+  const actual = paginateDesktop(1, 100)
 
   // Current page is 1
   // << | < | 1 | 2 | 3 | ... | 98 | 99 | 100 | > | >>
@@ -104,7 +104,7 @@ test('more than 7 pages, current page is first page', () => {
 })
 
 test('more than 7 pages, current page is in the middle', () => {
-  const actual = paginate(50, 100)
+  const actual = paginateDesktop(50, 100)
 
   // Current page is 50
   // << | < | 1 | ... | 49 | 50 | 51 | ... | 100 | > | >>
@@ -143,7 +143,7 @@ test('more than 7 pages, current page is in the middle', () => {
 })
 
 it('more than 7 pages, current page is at the end', () => {
-  const actual = paginate(97, 100)
+  const actual = paginateDesktop(97, 100)
 
   // Current page is 97
   // << | < | 1 | ... | 96 | 97 | 98 | 99 | 100 | > | >>

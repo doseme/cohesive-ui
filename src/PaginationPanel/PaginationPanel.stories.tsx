@@ -17,6 +17,15 @@ storiesOf('Components.PaginationPanel', module)
           totalPages={totalPages}
           onPageChange={updateCurrentPage}
         />
+
+        <h4>Pagination panel mobile version</h4>
+        <span>{`on page ${currentPage} of ${totalPages}`}</span>
+        <PaginationPanel
+          isMobile={true}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={updateCurrentPage}
+        />
       </div>
     )
   })

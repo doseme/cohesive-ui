@@ -2,32 +2,31 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
-import { paginate } from './utils'
+import { paginateDesktop, paginateMobile } from './utils'
 import { TNode } from './types'
 import './index.scss'
 
 interface IProps {
   currentPage: number
   totalPages: number
+  isMobile?: boolean
   onPageChange: (pageNumber: number) => void
 }
 
-const PaginationPanel: React.FC<IProps> = ({
-  currentPage,
-  totalPages,
-  onPageChange
-}) => {
-  const currentNodes: TNode[] = paginate(currentPage, totalPages)
+const PaginationPanel: React.FC<IProps> = (props) => {
+  const currentNodes: TNode[] = props.isMobile 
+    ? paginateMobile(props.currentPage, props.totalPages)
+    : paginateDesktop(props.currentPage, props.totalPages)
   
   const activeButtonClassName = 'co-pagination-btn co-pagination-active'
   const inactiveButtonClassName = 'co-pagination-btn co-pagination-inactive'
 
   const goToPage = (pageNumber: number) => {
-    if (pageNumber < 1 || pageNumber > totalPages) {
+    if (pageNumber < 1 || pageNumber > props.totalPages) {
       return
     }
 
-    onPageChange(pageNumber)
+    props.onPageChange(pageNumber)
   }
 
   const prevButton: JSX.Element = (
@@ -36,9 +35,9 @@ const PaginationPanel: React.FC<IProps> = ({
       key='prevButton'
       className={inactiveButtonClassName}
       onClick={() => {
-        goToPage(currentPage - 1)
+        goToPage(props.currentPage - 1)
       }}
-      disabled={currentPage <= 1}
+      disabled={props.currentPage <= 1}
     >
       <FontAwesomeIcon
         icon={faAngleLeft}
@@ -52,9 +51,9 @@ const PaginationPanel: React.FC<IProps> = ({
       data-testid='nextButton'
       key='nextButton'
       onClick={() => {
-        goToPage(currentPage + 1)
+        goToPage(props.currentPage + 1)
       }}
-      disabled={currentPage >= totalPages}
+      disabled={props.currentPage >= props.totalPages}
     >
       <FontAwesomeIcon
         icon={faAngleRight}
@@ -71,7 +70,7 @@ const PaginationPanel: React.FC<IProps> = ({
           goToPage(pageNumber)
         }}
         key={`page-button-${pageNumber}`}
-        disabled={totalPages === 0}
+        disabled={props.totalPages === 0}
       >
         {pageNumber}
       </button>
