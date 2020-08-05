@@ -106,14 +106,17 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, 
       {selectAllCol && <Col
         key='select-all-col'
         width='checkbox-only'
-       >
-         <input
-           type='checkbox'
-           id='check-select-all'
-           checked={allChecked}
-           onChange={() => {}}
-           onClick={handleAllChecked}
-         />
+        className='d-flex align-items-center justify-content-center h-100'
+      >
+        <label className='d-flex align-items-center justify-content-center h-100 w-100'>
+          <input
+            type='checkbox'
+            id='check-select-all'
+            checked={allChecked}
+            onChange={() => {}}
+            onClick={handleAllChecked}
+          />
+        </label>
       </Col>}
       {cols.map((x, idx) => !x.hidden && 
         <Col 

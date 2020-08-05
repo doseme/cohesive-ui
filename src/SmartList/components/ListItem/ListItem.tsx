@@ -55,15 +55,18 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
           width='checkbox-only'
           key={`list-select-${rowId}`}
           data-testid={`check-col-${rowId}`}
+          className='d-flex align-items-center justify-content-center h-100'
         >
-          <input
-            type='checkbox'
-            id={`list-check-${rowId}`}
-            disabled={disabled}
-            checked={selected || false}
-            onChange={handleSelected}
-            onClick={e => { e.stopPropagation(); }}
-          />
+          <label className='d-flex align-items-center justify-content-center h-100 w-100'>
+            <input
+              type='checkbox'
+              id={`list-check-${rowId}`}
+              disabled={disabled}
+              checked={selected || false}
+              onChange={handleSelected}
+              onClick={e => { e.stopPropagation(); }}
+            />
+          </label>
         </Col>
       }
       {
