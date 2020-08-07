@@ -1,14 +1,25 @@
 @import '../style/colors.scss';
 
-.co-list-button {
+@mixin list-button {
   background: #FFFFFF;
   border-radius: 18px;
   border: none;
-  padding: 7px 14px;
   outline: none;
   box-sizing: border-box;
   border: 1px solid white;
+  display: flex;
+  align-items: center;
+}
+
+.co-list-button {
+  @include list-button;
+}
+
+.co-list-button-md {
+  @include list-button;
+  padding: 7px 14px;
   color: $doseme-blue;
+  height: 32px;
 }
 
 .co-list-button:not([disabled]) {
@@ -21,6 +32,8 @@
 }
 
 .co-list-button-sm {
+  @include list-button;
+
   height: 24px;
   font-size: 12px;
   line-height: 14px;

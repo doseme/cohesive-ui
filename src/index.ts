@@ -1,4 +1,5 @@
 export * from './style/colors'
+export * from './ActionButton'
 export * from './AddButton'
 export * from './AdminLogo'
 export * from './BackArrowButton'
