@@ -4,6 +4,7 @@ export interface IconProps {
 
 export * from './ThinSpinner'
 export * from './Final/Archive'
+export * from './Edit'
 export * from './Archive'
 export * from './Unarchive'
 export * from './Final/Unarchive'
