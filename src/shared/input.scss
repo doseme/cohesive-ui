@@ -10,6 +10,16 @@
   background: white;
 }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .co-input-units {
+    line-height: 15px;
+  }
+
+  .co-input {
+    line-height: 9px;
+  }
+}
+
 .co-input {
   outline: none;
   border: none;
