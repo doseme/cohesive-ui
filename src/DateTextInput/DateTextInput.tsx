@@ -34,7 +34,10 @@ export const validate = (value: IDateState, customValidator?: (value: IDateState
 
   // do not allow invalid days, like 31st of Feb.
   if (new Date(`${yyyy}-${mm}-${dd}`).getDate() !== dd) {
-    return { valid: false, message: 'Invalid date' }
+    // IE uses yyyy/mm/dd, try that
+    if (new Date(`${yyyy}/${mm}/${dd}`).getDate() !== dd) {
+      return { valid: false, message: 'Invalid date' }
+    }
   }
 
   if (customValidator) {

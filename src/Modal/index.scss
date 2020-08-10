@@ -15,10 +15,6 @@
 .regular-overlay {
   z-index: 1050;
 
-  #modal-body {
-    position: absolute;
-  }
-  
   @include mobile-only {
     #modal-body {
       width: 100%;
