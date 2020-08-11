@@ -58,6 +58,7 @@ const RadioGroup: React.FC<TRadioGroupProps> = (props) => {
     <div>
       <Label
         label={props.label}
+        showOptional={props.showOptional}
       />
       <div className={className}>
         {options}

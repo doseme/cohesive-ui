@@ -9,7 +9,7 @@ interface IconProps {
 
 export const EditIconButton: React.FC<IconProps & React.HTMLAttributes<HTMLButtonElement>> = (props) => {
   return (
-    <button {...props} className='co-icon-button'>
+    <button {...props} className='co-icon-button co-icon-button-edit'>
       <Active disabled={props.disabled} />
     </button>
   )

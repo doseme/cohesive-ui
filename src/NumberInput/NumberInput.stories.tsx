@@ -29,6 +29,7 @@ storiesOf('Components.Form.NumberInput', module)
           <NumberInput
             label='This is an optional label describing a number field'
             type='whole'
+            showOptional={true}
             isRequired={true}
             handleChange={noop}
             handleBlur={noop}

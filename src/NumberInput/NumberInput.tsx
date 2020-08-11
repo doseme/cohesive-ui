@@ -1,14 +1,14 @@
 import React, { useState, } from 'react'
 
 import { validate } from './validation'
-import { Label } from '../Label'
+import { Label, ILabelProps } from '../Label'
 import { Input } from '../Input'
 import '../shared/input.scss'
 
 
 export type TNumberType = 'whole' | 'integer' | 'positiveFloat'
 
-interface IProps {
+interface IProps extends ILabelProps {
   label?: string
   type: TNumberType
   placeholder?: string
@@ -93,6 +93,7 @@ const NumberInput: React.FC<IProps> = (props) => {
       <Label 
         label={label}
         error={error}
+        showOptional={props.showOptional}
       />
       <Input
         {...rest}

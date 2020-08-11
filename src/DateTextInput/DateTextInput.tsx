@@ -1,9 +1,9 @@
 import React, { createRef, useState } from 'react'
 
-import { Label } from '../Label'
+import { Label, ILabelProps } from '../Label'
 import './index.scss'
 
-export interface IDateProps extends React.HTMLAttributes<HTMLInputElement>{
+export interface IDateProps extends React.HTMLAttributes<HTMLInputElement>, ILabelProps {
   label?: string
   initialValue?: IDateState
   onDateChange?: (event: React.FormEvent<HTMLInputElement>, value: IDateState, valid: boolean) => any
@@ -224,6 +224,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
       <Label
         label={props.label}
         error={validity.message}
+        showOptional={props.showOptional}
       />
       <div className={fieldClass}>
         {fields}

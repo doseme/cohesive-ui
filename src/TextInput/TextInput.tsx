@@ -81,6 +81,7 @@ const TextInput: React.FC<IProps & ILabelProps> = (props) => {
       <Label 
         label={label}
         error={error}
+        showOptional={props.showOptional}
       />
       <Input 
         {...rest}
