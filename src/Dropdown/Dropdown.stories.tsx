@@ -78,6 +78,7 @@ const DropdownNoOptions = () => {
         label='Dropdown no options'
         value={value}
         isRequired
+        showOptional={true}
         onSelect={item => setValue(item.value)}
         placeholder='Select an item'
       />
