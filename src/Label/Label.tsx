@@ -13,8 +13,10 @@ export interface ILabelProps {
 const Label: React.FC<IProps & ILabelProps> = (props) => {
   return (
     <div className='d-flex'>
-      <div className='co-form-field-label'>{props.label}</div>
-      {props.showOptional && <div className='co-form-field-optional-label'>(Optional)</div>}
+      <div className='co-form-field-label'>
+        {props.label}
+        {props.showOptional && <span className='co-form-field-optional-label'>(Optional)</span>}
+      </div>
       <small className='validation-error-text ml-auto'>{props.error}</small>
     </div>
   )
