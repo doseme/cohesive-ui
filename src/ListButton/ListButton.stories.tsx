@@ -71,10 +71,10 @@ storiesOf('Components.ListButton', module)
         <ListButton
           disabled={false}
         >
-          <span className='d-flex'>
-            <Trash className='px-2' background='red' />
+          <div className='d-flex align-items-center' style={{ color: 'red' }}>
+            {/* <Trash className='px-2' background='red' /> */}
             <span>Delete (5) Items</span>
-          </span>
+          </div>
         </ListButton>
 
         <br /><br />

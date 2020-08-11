@@ -19,6 +19,7 @@ export * from './Grid'
 export * from './SmartList'
 import { SearchHint as SmartListSearcHint } from './SmartList'
 export { SmartListSearcHint }
+import { Label } from  './Label'
 export * from './TooltipMenu'
 export * from './BasicList'
 export * from './Button'
@@ -34,5 +35,6 @@ export * from './Toggle'
 export * from './style/colors'
 export * from './media'
 
+export { Label }
 import * as Nav from './Nav'
 export { Nav }

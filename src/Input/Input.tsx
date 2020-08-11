@@ -1,9 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import { ILabelProps } from '../Label'
 import '../shared/input.scss'
 
-interface IInputProps {
+interface IInputProps extends ILabelProps {
   label?: string
   placeholder?: string
   name?: string

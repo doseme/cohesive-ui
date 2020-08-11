@@ -9,7 +9,7 @@ interface IconProps {
 
 export const UnarchiveIconButton: React.FC<IconProps & React.HTMLAttributes<HTMLButtonElement>> = (props) => {
   return (
-    <button {...props} className='co-icon-button'>
+    <button {...props} className='co-icon-button co-icon-button-unarchive'>
       <Active disabled={props.disabled} />
     </button>
   )

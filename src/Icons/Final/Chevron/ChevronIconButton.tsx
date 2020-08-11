@@ -9,7 +9,7 @@ interface IconProps {
 
 export const ChevronIconButton: React.FC<IconProps & React.HTMLAttributes<HTMLButtonElement>> = (props) => {
   return (
-    <button {...props} className='co-icon-button'>
+    <button {...props} className='co-icon-button co-icon-button-chevron'>
       <Active disabled={props.disabled} />
     </button>
   )

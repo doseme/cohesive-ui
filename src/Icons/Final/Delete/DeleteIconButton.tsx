@@ -9,7 +9,7 @@ interface IconProps {
 
 export const DeleteIconButton: React.FC<IconProps & React.HTMLAttributes<HTMLButtonElement>> = (props) => {
   return (
-    <button {...props} className='co-icon-button'>
+    <button {...props} className='co-icon-button co-icon-button-delete'>
       <Active disabled={props.disabled} />
     </button>
   )

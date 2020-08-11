@@ -1,11 +1,11 @@
 import React, { useState, } from 'react'
 
 import { validate } from './validation'
-import { Label } from '../Label'
+import { Label, ILabelProps } from '../Label'
 import './index.scss'
 
 
-interface IProps {
+interface IProps extends ILabelProps {
   label?: string
   name?: string
   defaultValue?: string
@@ -76,6 +76,7 @@ const DateInput: React.FC<IProps> = (props) => {
       <Label
         label={label}
         error={error}
+        showOptional={props.showOptional}
       />
       <input
         {...rest}

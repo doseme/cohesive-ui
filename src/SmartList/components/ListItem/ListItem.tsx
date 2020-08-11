@@ -3,6 +3,7 @@ import { Row, Col } from '../../../Grid'
 
 import { IColumnElement, IHeaderItem } from '../../../types'
 import '../../index.scss'
+import { isMobile } from '../../../media'
 
 interface IProps {
   columns: IColumnElement[]
@@ -39,7 +40,7 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
     className += 'active-row '
   }
 
-  if (onClick || selectable) {
+  if (!isMobile && (onClick || selectable)) {
     className += 'hover-cursor'
   }
 
@@ -57,14 +58,17 @@ const ListItem: React.FC<IProps> = (props: IProps) => {
           data-testid={`check-col-${rowId}`}
           className='d-flex align-items-center justify-content-center h-100'
         >
-          <label className='d-flex align-items-center justify-content-center h-100 w-100'>
+          <label 
+            htmlFor={`list-check-${rowId}`} 
+            className='d-flex align-items-center justify-content-center h-100 w-100'
+            onClick={e => e.stopPropagation() }
+          >
             <input
               type='checkbox'
               id={`list-check-${rowId}`}
               disabled={disabled}
               checked={selected || false}
               onChange={handleSelected}
-              onClick={e => { e.stopPropagation(); }}
             />
           </label>
         </Col>

@@ -7,6 +7,7 @@ import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
 import { ThinSpinner } from '../Icons/ThinSpinner'
 import { LOADING_GREY } from '../style/colors'
 import './index.scss'
+import { isMobile } from '../media'
 
 export interface IProps {
   data: IRowElement[]
@@ -100,7 +101,7 @@ const SmartList: React.FC<IProps> = ({
         columns={row.columns}
         disabled={row.disabled}
         className={row.className}
-        isActive={row.id.toString() === activeRow}
+        isActive={isMobile ? undefined : row.id.toString() === activeRow}
         selectable={!!selectedRows}
         selected={selectedRows && selectedRows[row.id]}
         onSelect={handleSelect}

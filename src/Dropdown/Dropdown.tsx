@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 import { SearchInput } from '../SearchInput'
 import './index.scss'
+import { ILabelProps } from '../Label'
 
 export interface IDropdownItem {
   label?: string
@@ -11,7 +12,7 @@ export interface IDropdownItem {
   value: string
 }
 
-interface IProps {
+interface IProps extends ILabelProps {
   id?: string
   label?: string
   className?: string
@@ -149,7 +150,8 @@ const Dropdown: React.FC<IProps> = (props) => {
     <div className={props.className}>
       <div className='d-flex justify-content-between co-dropdown-label'>
         <div className='co-form-field-label'>
-          {props.label}
+          {props.label} 
+          {props.showOptional && <span className='co-form-field-optional-label'>(Optional)</span>}
         </div>
         {errorMessage}
       </div>
