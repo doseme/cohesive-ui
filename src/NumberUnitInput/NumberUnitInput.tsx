@@ -71,6 +71,8 @@ export const NumberUnitInput: React.FC<INumberUnitInputProps> = (props) => {
     validateAndBlur(cachedValue, validators)
   }
 
+  const { handleChange, handleBlur, isRequired, ...otherNumberInputProps } = props.numberInputProps
+
   return (
     <div>
       <Label
@@ -80,7 +82,7 @@ export const NumberUnitInput: React.FC<INumberUnitInputProps> = (props) => {
       />
       <div className='co-number-unit-input'>
         <Input
-          {...props.numberInputProps}
+          {...otherNumberInputProps}
           valid={isValid}
           type='text'
           onBlur={update}
