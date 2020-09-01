@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react'
 import { NumberUnitInput, INumberUnitMinMax } from './NumberUnitInput'
 import { Row, Col } from '../Grid'
 import { IRadioOption } from '../RadioGroup'
-import { ProgressPlugin } from 'webpack'
 
 const Story = ({ required }: { required: boolean }) => {
   const [selected, setSelected] = useState('kg')
