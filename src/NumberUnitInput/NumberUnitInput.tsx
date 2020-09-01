@@ -4,10 +4,11 @@ import { Input } from '../Input'
 import { INumberInputProps, TNumberType } from '../NumberInput/NumberInput'
 import { useValidation } from '../hooks/useValidation'
 import { Label } from '../Label'
-import './index.scss'
 import { IValidators } from '../NumberInput/validation'
+import './index.scss'
 
 interface INumberUnitInputProps {
+  dataTestId?: string // good for testing
   numberInputProps: INumberInputProps 
   radioInputProps: Omit<TRadioGroupProps, 'onSelect'> & {
     onSelectWithValidation: (option: IRadioOption) => INumberUnitMinMax
