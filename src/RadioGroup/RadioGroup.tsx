@@ -56,10 +56,12 @@ const RadioGroup: React.FC<TRadioGroupProps> = (props) => {
 
   return (
     <div>
-      <Label
-        label={props.label}
-        showOptional={props.showOptional}
-      />
+      {props.label && (
+        <Label
+          label={props.label}
+          showOptional={props.showOptional}
+        />
+      )}
       <div className={className}>
         {options}
       </div>

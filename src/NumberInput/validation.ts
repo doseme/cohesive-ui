@@ -74,14 +74,14 @@ const validate = (rules: IValidators, text: string): IValidationResult => {
 
   if (rules.min && parseFloat(text) < rules.min) {
     return {
-      message: `Must be greater than ${rules.min}`,
+      message: `Must be above ${rules.min}`,
       valid: false,
     }
   }
 
   if (rules.max && parseFloat(text) > rules.max) {
     return {
-      message: `Must be less than ${rules.max}`,
+      message: `Must be below ${rules.max}`,
       valid: false,
     }
   }

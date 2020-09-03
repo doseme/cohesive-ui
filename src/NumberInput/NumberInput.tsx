@@ -1,14 +1,12 @@
-import React, { useState, } from 'react'
+import React from 'react'
 
-import { validate } from './validation'
 import { Label, ILabelProps } from '../Label'
 import { Input } from '../Input'
-import '../shared/input.scss'
-
+import { useValidation } from '../hooks/useValidation'
 
 export type TNumberType = 'whole' | 'integer' | 'positiveFloat'
 
-interface IProps extends ILabelProps {
+export interface INumberInputProps extends ILabelProps {
   label?: string
   type: TNumberType
   placeholder?: string
@@ -26,56 +24,32 @@ interface IProps extends ILabelProps {
   units?: string
 }
 
-const NumberInput: React.FC<IProps> = (props) => {
+const NumberInput: React.FC<INumberInputProps> = (props) => {
   const {
-    label,
-    handleBlur,
-    handleChange,
-    min,
-    max,
-    handleFocus,
-    disabled,
-    readOnly,
-    type,
-    placeholder,
-    isRequired,
-    name,
-    defaultValue,
-    units,
-    ...rest
-  } = props
-
-  const [error, setError] = useState<string>('')
-  const [isValid, setValid] = useState<boolean>(true)
-
-  const handleValidate = (str: string): boolean => {
-    const status = validate({
-      type,
-      min,
-      max
-    }, str)
-
-    if (!isRequired && str === '') {
-      setError('')
-      return true
-    }
-
-    if (!status.valid && status.message) {
-      setError(status.message)
-      return false
-    }
-
-    setError('')
-    return true
-  }
+    error,
+    setError,
+    isValid,
+    setValid,
+    handleValidate
+   } = useValidation()
 
   const fieldClass = isValid ? 'ui-form co-input' : 'ui-form form-field-invalid co-input'
 
   const update = (e: React.FormEvent<HTMLInputElement>): void => {
-    const valid = handleValidate(e.currentTarget.value)
+    const valid = handleValidate(
+      e.currentTarget.value, 
+      {
+        min: props.min,
+        max: props.max,
+        type: props.type,
+      },
+      !!props.isRequired,
+      setError
+    )
+
     setValid(valid)
-    if (handleBlur) {
-      handleBlur(e.currentTarget.value, valid)
+    if (props.handleBlur) {
+      props.handleBlur(e.currentTarget.value, valid)
     }
   }
 
@@ -88,6 +62,16 @@ const NumberInput: React.FC<IProps> = (props) => {
     }
   }
 
+  const {
+    label,
+    handleChange,
+    handleFocus,
+    isRequired,
+    showOptional,
+    handleBlur,
+    ...rest
+  } = props
+
   return (
     <div className={props.className}>
       <Label 
@@ -98,17 +82,12 @@ const NumberInput: React.FC<IProps> = (props) => {
       <Input
         {...rest}
         className={fieldClass}
-        defaultValue={defaultValue}
         type='text'
-        placeholder={placeholder || ''}
         valid={isValid}
         name={name}
         onBlur={update}
         onChange={(e) => clearAndHandleChange(e.currentTarget.value)}
         onFocus={handleFocus}
-        disabled={disabled}
-        readOnly={readOnly}
-        units={units}
       />
     </div>
   )
