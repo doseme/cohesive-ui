@@ -13,6 +13,7 @@ interface IInputProps extends ILabelProps {
   valid: boolean
   disabled?: boolean
   readOnly?: boolean
+  icon?: JSX.Element
   onChange?: (event: React.FormEvent<HTMLInputElement>) => any
   onBlur?: (event: React.FormEvent<HTMLInputElement>) => void
   onFocus?: () => void
@@ -60,6 +61,7 @@ export const Input: React.FC<IInputProps> = (props) => {
         disabled={disabled}
         readOnly={readOnly}
       />
+      <span className='co-async-validation-icon'>{props.icon}</span>
       {units && <div className='co-input-units'>{units}</div>}
     </div>
   )

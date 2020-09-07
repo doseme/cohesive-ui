@@ -3,6 +3,8 @@ import './index.scss'
 
 export interface IProps {
   error?: string
+  info?: string
+  success?: string
 }
 
 export interface ILabelProps {
@@ -17,7 +19,9 @@ const Label: React.FC<IProps & ILabelProps> = (props) => {
         {props.label}
         {props.showOptional && <span className='co-form-field-optional-label'>(Optional)</span>}
       </div>
-      <small className='validation-error-text ml-auto'>{props.error}</small>
+      <small className='co-label-text validation-error-text ml-auto'>{props.error}</small>
+      {props.info && <small className='co-label-text ml-auto co-async-input-loading'>{props.info}</small>}
+      {props.success && <small className='co-label-text ml-auto co-async-input-success'>{props.success}</small>}
     </div>
   )
 }
