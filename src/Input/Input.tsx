@@ -14,7 +14,7 @@ interface IInputProps extends ILabelProps {
   disabled?: boolean
   readOnly?: boolean
   icon?: JSX.Element
-  onChange?: (event: any) => any
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => any
   onBlur?: (event: React.FormEvent<HTMLInputElement>) => void
   onFocus?: () => void
   className?: string
