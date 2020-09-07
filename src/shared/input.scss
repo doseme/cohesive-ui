@@ -3,6 +3,7 @@
 .co-input-wrapper {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .co-input, .co-input-units {
@@ -65,4 +66,10 @@
     box-shadow: none;
     border-color: $panelblue;
   }
+}
+
+.co-async-validation-icon {
+  position: absolute;
+  top: 12px;
+  right: 10px;
 }
