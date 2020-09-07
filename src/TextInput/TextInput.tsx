@@ -25,6 +25,7 @@ interface IProps {
   readOnly?: boolean
   className?: string
   units?: string
+  info?: string
   asyncValidator?: (value: string) => Promise<IAsyncValidationResult>
   onChange?: (value: string) => void
   onBlur?: (value: string, isValid: boolean) => void
@@ -120,7 +121,7 @@ const TextInput: React.FC<IProps & ILabelProps> = (props) => {
       <Label 
         label={label}
         error={error}
-        info={loading ? 'checking system...' : undefined}
+        info={loading ? props.info : undefined}
         success={success}
         showOptional={props.showOptional}
       />
