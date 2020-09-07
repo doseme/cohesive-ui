@@ -48,6 +48,7 @@ describe('TextInput', () => {
     const wrapper = render(
       <TextInput
         label='Async validation'
+        info='checking existing'
         name='my-input'
         onChange={noop}
         onBlur={noop}
@@ -60,7 +61,7 @@ describe('TextInput', () => {
       fireEvent.blur(screen.getByTestId('my-input'))
     })
 
-    expect(await wrapper.findByText(/checking system/)).toBeTruthy()
+    expect(await wrapper.findByText(/checking existing/)).toBeTruthy()
     expect(await wrapper.findByText(/All good/)).toBeTruthy()
 
     valid = false
@@ -70,7 +71,7 @@ describe('TextInput', () => {
       fireEvent.blur(screen.getByTestId('my-input'))
     })
 
-    expect(await wrapper.findByText(/checking system/)).toBeTruthy()
+    expect(await wrapper.findByText(/checking existing/)).toBeTruthy()
     expect(await wrapper.findByText(/No good/)).toBeTruthy()
   })
 })
