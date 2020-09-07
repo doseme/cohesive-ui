@@ -27,6 +27,7 @@ const AsyncValidationStory = () => {
       <TextInput
         label='Async validation'
         onChange={noop}
+        info='checking'
         onBlur={noop}
         asyncValidator={asyncValidator}
       />
