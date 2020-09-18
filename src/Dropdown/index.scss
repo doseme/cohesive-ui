@@ -17,6 +17,15 @@ $padding-all: 5px 10px;
   padding: $padding-all;
 }
 
+.co-dropdown-outer {
+  display: flex;
+  align-items: center;
+}
+
+.co-dropdown-main {
+  flex-grow: 1;
+}
+
 .co-dropdown-search {
   padding: 5px $side 5px $side;
   width: 100%;

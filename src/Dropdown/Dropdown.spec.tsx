@@ -68,4 +68,29 @@ describe('Dropdown', () => {
 
     expect(screen.getByText(/Required/)).toBeInTheDocument()
   })
+
+  it('clears a selected valued', () => {
+    const onClear = jest.fn()
+
+    render(
+      <Dropdown 
+        placeholder='DEV'
+        onClear={onClear}
+        isRequired={false}
+        showOptional
+        data={[
+          {label: 'Item 1', value: '1'},
+          {label: 'Item 2', value: '2'},
+          {label: 'Item 3', value: '3'}
+        ]}
+        onSelect={noop}
+      />
+    )
+
+    fireEvent.click(screen.getByTestId('current-item'))
+    fireEvent.click(screen.getByTestId('Item 1'))
+    fireEvent.click(screen.getByTestId('clear-dropdown'))
+
+    expect(onClear).toHaveBeenCalled()
+  })
 })
