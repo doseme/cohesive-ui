@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect, Ref, RefObject, isValidElement } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import useOnClickOutside from 'use-onclickoutside'
 import classnames from 'classnames'
 
 import { SearchInput } from '../SearchInput'
-import './index.scss'
 import { ILabelProps } from '../Label'
+import { ClearDropdownIcon } from './components/ClearDropdownIcon'
+import './index.scss'
 
 export interface IDropdownItem {
   label?: string
@@ -23,6 +24,7 @@ interface IProps extends ILabelProps {
   showSearchThreshold?: number
   value?: string
   onBlur?: (item: IDropdownItem | null, isValid: boolean) => any
+  onClear?: () => void
   onSelect: (item: IDropdownItem) => void
 }
 
@@ -146,40 +148,54 @@ const Dropdown: React.FC<IProps> = (props) => {
     </div>
   )
 
-  return (
-    <div className={props.className}>
-      <div className='d-flex justify-content-between co-dropdown-label'>
-        <div className='co-form-field-label'>
-          {props.label} 
-          {props.showOptional && <span className='co-form-field-optional-label'>(Optional)</span>}
-        </div>
-        {errorMessage}
-      </div>
+  const clearIcon = props.onClear && !props.isRequired && props.value && (
+    <div
+      className='co-dropdown-clear-icon cursor-pointer'
+      onClick={props.onClear}
+      data-testid='clear-dropdown'
+    >
+      <ClearDropdownIcon />
+    </div>
+  )
+ 
 
-      <div
-        id={props.id ? props.id : undefined}
-        className='co-dropdown-wrapper' 
-        ref={node}
-      >
-        <div
-          className={classnames('co-dropdown-closed', { 
-            'co-dropdown-invalid': !valid, 
-            'co-dropdown-no-options': props.data.length === 0,
-            'co-dropdown-disabled': props.disabled
-          })}
-          data-testid='current-item'
-          onClick={() => {
-            if (props.data.length === 0) {
-              return
-            }
-            setShowContent(!showContent)
-            setTouched(true)
-          }}
-        >
-          {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || props.placeholder}
+  return (
+    <div className={classnames(props.className, 'co-dropdown-outer')}>
+      <div className='co-dropdown-main'>
+        <div className='d-flex justify-content-between co-dropdown-label'>
+          <div className='co-form-field-label'>
+            {props.label}
+            {props.showOptional && <span className='co-form-field-optional-label'>(Optional)</span>}
+          </div>
+          {errorMessage}
         </div>
-        {content}
+
+        <div
+          id={props.id ? props.id : undefined}
+          className='co-dropdown-wrapper'
+          ref={node}
+        >
+          <div
+            className={classnames('co-dropdown-closed', {
+              'co-dropdown-invalid': !valid,
+              'co-dropdown-no-options': props.data.length === 0,
+              'co-dropdown-disabled': props.disabled
+            })}
+            data-testid='current-item'
+            onClick={() => {
+              if (props.data.length === 0) {
+                return
+              }
+              setShowContent(!showContent)
+              setTouched(true)
+            }}
+          >
+            {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || props.placeholder}
+          </div>
+          {content}
+        </div>
       </div>
+      {clearIcon}
     </div>
   )
 }

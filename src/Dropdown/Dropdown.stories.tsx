@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import noop from 'lodash/noop'
 import { storiesOf } from '@storybook/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import '../style/global.css'
 
 import { Dropdown } from '.'
 import { IDropdownItem } from './Dropdown'
@@ -68,18 +67,18 @@ const DropdownIsRequired = () => {
   )
 }
 
-const DropdownNoOptions = () => {
+const DropdownWithOptions = () => {
   const [value, setValue] = useState<string>()
 
   return (
     <React.Fragment>
       <Dropdown
-        data={[]}
-        label='Dropdown no options'
+        data={items}
+        label='Optional Dropdown with Clear Icon'
         value={value}
-        isRequired
         showOptional={true}
         onSelect={item => setValue(item.value)}
+        onClear={() => setValue(undefined)}
         placeholder='Select an item'
       />
       <br />
@@ -133,9 +132,8 @@ stories.add('Components.Dropdown', () => {
       <br />
       <DropdownIsRequired />
       <DropdownWithDefaultValue />
-      <DropdownNoOptions />
+      <DropdownWithOptions />
       <DropdownDisabled />
     </div>
   )
 })
-
