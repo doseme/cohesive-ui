@@ -20,6 +20,13 @@ $padding-all: 5px 10px;
 .co-dropdown-outer {
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.co-dropdown-clear-icon {
+  position: absolute;
+  right: 30px;
+  bottom: 3px;
 }
 
 .co-dropdown-main {

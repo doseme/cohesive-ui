@@ -148,9 +148,9 @@ const Dropdown: React.FC<IProps> = (props) => {
     </div>
   )
 
-  const clearIcon = props.onClear && !props.isRequired && (
+  const clearIcon = props.onClear && !props.isRequired && props.value && (
     <div
-      className='pt-4 cursor-pointer'
+      className='co-dropdown-clear-icon cursor-pointer'
       onClick={props.onClear}
       data-testid='clear-dropdown'
     >
