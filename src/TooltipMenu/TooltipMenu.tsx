@@ -68,6 +68,7 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
   const items = props.data.map(x => (
     <li 
       key={x.id} 
+      data-testid={`tooltip-item-${x.id}`}
       className='d-flex align-items-center' 
       onClick={() => handleSelect(x)}
     >
