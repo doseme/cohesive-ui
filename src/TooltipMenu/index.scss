@@ -2,6 +2,7 @@
 
 $li-height: 50px;
 $z-index: 50;
+$padding: 0 20px;
 
 .arrow-up {
   width: 0; 
@@ -28,6 +29,15 @@ $z-index: 50;
   position: relative;
 }
 
+.co-tooltip-menu-search {
+  border: none;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  border-bottom: 1px solid $toggle-grey;
+  padding: $padding;
+}
+
 ul.co-tooltip-wrapper-list {
   padding: 5px 0;
   margin: 0;
@@ -36,7 +46,7 @@ ul.co-tooltip-wrapper-list {
 
   li {
     height: $li-height;
-    padding: 0 20px;
+    padding: $padding;
     margin: 0;
 
     &:hover {

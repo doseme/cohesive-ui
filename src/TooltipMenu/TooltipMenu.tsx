@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
 import './index.scss'
+
 
 export interface ITooltipMenuData { 
   id: string | number
@@ -8,20 +9,30 @@ export interface ITooltipMenuData {
   element?: JSX.Element
 }
 
-export interface IProps {
+export interface ITooltipMenuProps {
   data: ITooltipMenuData[]
   onSelect?: (item: ITooltipMenuData) => any
   style?: object
   open: boolean 
   onClickaway: () => any
+  search?: boolean
+  onSearch?: (term: string) => void 
+  placeholder?: string
 }
 
 const Triangle = () => (
   <div className='arrow-up'></div>
 )
 
-const TooltipMenu: React.FC<IProps> = (props) => {
+const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
   const node = useRef<HTMLDivElement>(null)
+  const [searchValue, setSearchValue] = useState('')
+
+  useEffect(() => {
+    if (props.onSearch) {
+      props.onSearch(searchValue)
+    }
+  }, [searchValue])
 
   const handleClickAway = (e: MouseEvent) => {
     // @ts-ignore - I dunno how to type this, whatever
@@ -57,6 +68,7 @@ const TooltipMenu: React.FC<IProps> = (props) => {
   const items = props.data.map(x => (
     <li 
       key={x.id} 
+      data-testid={`tooltip-item-${x.id}`}
       className='d-flex align-items-center' 
       onClick={() => handleSelect(x)}
     >
@@ -69,6 +81,12 @@ const TooltipMenu: React.FC<IProps> = (props) => {
       <Triangle />
       <div className='co-tooltip-outer w-100'>
         <div className='co-tooltip-wrapper'>
+          <input 
+            placeholder={props.placeholder} 
+            className='co-tooltip-menu-search' 
+            value={searchValue}
+            onChange={e => setSearchValue(e.currentTarget.value)}
+          />
           <ul className='co-tooltip-wrapper-list'>
             {items}
           </ul>
