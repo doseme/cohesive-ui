@@ -29,6 +29,8 @@ storiesOf('Components.TooltipMenu', module)
               open={open}
               onClickaway={() => setOpen(false)}
               onSelect={_ => {}}
+              search={true}
+              placeholder='Search...'
             />
           </div>
         </div>
