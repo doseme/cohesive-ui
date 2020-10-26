@@ -11,13 +11,14 @@ export interface ITooltipMenuData {
 
 export interface ITooltipMenuProps {
   data: ITooltipMenuData[]
-  onSelect?: (item: ITooltipMenuData) => any
+  emptySearchText?: string
   style?: object
   open: boolean 
-  onClickaway: () => any
   search?: boolean
-  onSearch?: (term: string) => void 
   placeholder?: string
+  onSelect?: (item: ITooltipMenuData) => any
+  onClickaway: () => any
+  onSearch?: (term: string) => void 
 }
 
 const Triangle = () => (
@@ -39,6 +40,7 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
     if (node && node.current && node.current.contains(e.target)) {
       return
     }
+    setSearchValue('')
     props.onClickaway()
   }
 
@@ -76,6 +78,15 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
     </li>
   ))
 
+  const noResultsFound = props.search && items.length === 0 && (
+    <li 
+      key='no-items'
+      className='d-flex align-items-center' 
+    >
+      {props.emptySearchText}
+    </li>
+  )
+
   return (
     <div className='co-wrapper w-100' ref={node}>
       <Triangle />
@@ -89,6 +100,7 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
           />
           <ul className='co-tooltip-wrapper-list'>
             {items}
+            {noResultsFound}
           </ul>
         </div>
       </div>
