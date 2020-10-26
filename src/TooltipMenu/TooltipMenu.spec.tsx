@@ -36,6 +36,7 @@ describe('TooltipMenu', () => {
         open={true}
         search={true}
         placeholder='Search...'
+        emptySearchText='No data...'
         onSearch={onSearch}
       />
     )
@@ -44,5 +45,6 @@ describe('TooltipMenu', () => {
     fireEvent.change($search, { target: { value: 'Some search term' } })
 
     expect(onSearch).toHaveBeenCalledWith('Some search term')
+    expect(screen.getByTestId('co-tooltip-menu-no-data')).toBeInTheDocument()
   })
 })
