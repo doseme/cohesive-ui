@@ -84,7 +84,7 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
       className='d-flex align-items-center' 
       data-testid='co-tooltip-menu-no-data'
     >
-      {props.emptySearchText}
+      {props.emptySearchText || 'No results found.'}
     </li>
   )
 
