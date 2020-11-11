@@ -17,7 +17,8 @@ export interface IValidity {
 }
 
 export const validate = (value: IDateState, customValidator?: (value: IDateState) => IValidity): IValidity => {
-  const isNumber = (val: string) => !(isNaN(parseInt(val)))
+  const isNumber = (val: string) => 
+    !(isNaN(parseInt(val))) && !val.includes('.')
 
   if (!isNumber(value.dd) || !isNumber(value.mm) || !isNumber(value.yyyy)) {
     return { valid: false, message: 'Invalid date' }
@@ -67,6 +68,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
     mm: '',
     yyyy: ''
   })
+  //
 
   const finalizeChange = (event: React.FormEvent<HTMLInputElement>, newValue: IDateState) => {
     setValue(newValue)
