@@ -17,7 +17,7 @@ export interface IValidity {
 }
 
 export const validate = (value: IDateState, customValidator?: (value: IDateState) => IValidity): IValidity => {
-  const isNumber = (val: string) => !(isNaN(parseInt(val)))
+  const isNumber = (val: string) => /^\+?\d+$/.test(val)
 
   if (!isNumber(value.dd) || !isNumber(value.mm) || !isNumber(value.yyyy)) {
     return { valid: false, message: 'Invalid date' }
@@ -30,7 +30,6 @@ export const validate = (value: IDateState, customValidator?: (value: IDateState
   if (dd < 1 || dd > 31 || mm < 1 || mm > 12 || yyyy < 0) {
     return { valid: false, message: 'Invalid date' }
   }
-
 
   // do not allow invalid days, like 31st of Feb.
   if (new Date(`${yyyy}-${mm}-${dd}`).getDate() !== dd) {
