@@ -69,6 +69,9 @@
   color: black;
 }
 
+.btn-action {
+  @include button($actionyellow);
+}
 
 .co-btn-sm {
   padding: .25rem .5rem;
