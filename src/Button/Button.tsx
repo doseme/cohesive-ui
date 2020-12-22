@@ -14,7 +14,7 @@ export type TVariant = 'primary'
   | 'light'
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
   variant: TVariant
   className?: string
   size?: 'sm'
