@@ -12,9 +12,10 @@ export type TVariant = 'primary'
   | 'info'
   | 'dark'
   | 'light'
+  | 'action'
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
   variant: TVariant
   className?: string
   size?: 'sm'
@@ -38,15 +39,13 @@ const Button: React.FC<IProps> = ({ onClick, children, shape, className, loading
   const sizeClass = size ? `co-btn-${size}` : ''
 
   return (
-    <div>
-      <button
-        onClick={onClick}
-        className={`${shape} ${className} ${sizeClass} btn-${variant}`}
-        {...rest}
-      >
-        {content}
-      </button>
-    </div>
+    <button
+      onClick={onClick}
+      className={`${shape} ${className} ${sizeClass} btn-${variant}`}
+      {...rest}
+    >
+      {content}
+    </button>
   )
 }
 
