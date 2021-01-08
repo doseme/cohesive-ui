@@ -47,7 +47,7 @@ To see changes made to `cohesive-ui` reflected in `your-project` in this way, yo
 
 # Public storybook
 
-A public version of the storybuild (interface to interact with the component library) has been configured using [Github Pages](https://pages.github.com/).
+A public version of the storybook (interface to interact with the component library) has been configured using [Github Pages](https://pages.github.com/).
 
 ## Deployment settings
 
