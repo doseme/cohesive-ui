@@ -33,7 +33,7 @@ import 'cohesive-ui/dist/cohesive-ui.esm.css';
 @import 'cohesive-ui/style/colors.scss';
 ```
 
-# Development 
+# Development
 
 ### With Storybook
 
@@ -44,3 +44,20 @@ This repository has `storybook` set up and can be viewed using `yarn storybook`.
 The easiest way to work on this library alongside developing and inspecting the changes in `your-project` is to remove the `cohesive-ui/` directory from `your-project/node_modules` after installing, and creating a symlink to the `dist` folder of your locally cloned `cohesive-ui` project (run `yarn build` if the dist folder does not exist).
 
 To see changes made to `cohesive-ui` reflected in `your-project` in this way, you will need to run `yarn build` after every change to the UI (although is a major improvement from releasing minor versions just to be able to inspect changes). Developing new components with Storybook primarily is best practice, however.
+
+# Public storybook
+
+A public version of the storybook (interface to interact with the component library) has been configured using [Github Pages](https://pages.github.com/).
+
+## Deployment settings
+
+Deployment settings can be updated via the Github interface, under the "Settings" section. The current process deploys all changes released to `master` and points the root page to the `docs` folder.
+
+## Push a new version of the storybook
+
+To push a new version of the storybook:
+
+1. Create a new release branch (e.g. "release/3.7.0") forked from the latest version of `develop`
+2. Update the release version in `package.json`
+3. Build the storybook by running `yarn build-storybook`
+4. Create a PR against `master`, get the changes reviewed and merge the release
