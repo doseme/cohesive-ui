@@ -37,7 +37,7 @@ const ConfirmModal: React.FC<IProps> = (props) => {
   }
   const message = props.message || (
     <React.Fragment>
-      The selected {props.entityType}(s) will be permanently deleted from the system.<br />
+      The selected {props.entityType}(s) will be permanently deleted.<br />
       This action cannot be undone.
     </React.Fragment>
   )

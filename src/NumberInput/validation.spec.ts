@@ -1,13 +1,11 @@
 import {
   validate,
-  IValidators,
   IValidationResult,
 } from './validation'
 
 describe('validate', () => {
-  const rules: IValidators = {
-    type: 'whole',
-    isRequired: true
+  const valid: IValidationResult = {
+    valid: true,
   }
 
   const invalid: IValidationResult = {
@@ -28,6 +26,16 @@ describe('validate', () => {
   test('isWhole invalid', () => {
     const actual = validate({ type: 'whole' }, '-123')
     expect(actual).toEqual(invalid)
+  })
+
+  test('isWhole invalid', () => {
+    const actual = validate({ type: 'whole' }, '09')
+    expect(actual).toEqual(invalid)
+  })
+
+  test('isPositiveFloat valid', () => {
+    const actual = validate({ type: 'positiveFloat' }, '0.09')
+    expect(actual).toEqual(valid)
   })
 
   test('isRequired invalid', () => {
@@ -84,5 +92,15 @@ describe('validate', () => {
   test('isFloat valid', () => {
     const actual = validate({ type: 'positiveFloat' }, '-1.2')
     expect(actual).toEqual({ valid: false, message: 'Positive numbers only' })
+  })
+
+  test('min', () => {
+    const actual = validate({ type: 'positiveFloat', min: 2 }, '1')
+    expect(actual).toEqual({ valid: false, message: 'Must be above 2' })
+  })
+
+  test('max', () => {
+    const actual = validate({ type: 'positiveFloat', max: 10 }, '11')
+    expect(actual).toEqual({ valid: false, message: 'Must be below 10' })
   })
 })

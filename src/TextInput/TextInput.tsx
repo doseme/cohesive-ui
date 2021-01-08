@@ -3,7 +3,16 @@ import React, { useState } from 'react'
 import { validate } from './validation'
 import { Input } from '../Input/Input'
 import { Label, ILabelProps } from '../Label'
+import { Spinner } from '../Spinner'
 import '../shared/input.scss'
+import { PANELBLUE } from '../style/colors'
+import { Checkmark } from '../Icons/Checkmark'
+import { Cross } from '../Icons/Cross'
+
+export interface IAsyncValidationResult {
+  valid: boolean
+  message: string
+}
 
 interface IProps {
   placeholder?: string
@@ -14,11 +23,13 @@ interface IProps {
   disabled?: boolean
   isRequired?: boolean
   readOnly?: boolean
+  className?: string
+  units?: string
+  info?: string
+  asyncValidator?: (value: string) => Promise<IAsyncValidationResult>
   onChange?: (value: string) => void
   onBlur?: (value: string, isValid: boolean) => void
   onFocus?: () => void
-  className?: string
-  units?: string
 }
 
 const TextInput: React.FC<IProps & ILabelProps> = (props) => {
@@ -36,13 +47,17 @@ const TextInput: React.FC<IProps & ILabelProps> = (props) => {
     type,
     defaultValue,
     units,
+    asyncValidator,
     ...rest
   } = props
 
   const [error, setError] = useState<string>('')
-  const [isValid, setValid] = useState<boolean>(true)
+  const [loading, setLoading] = useState(false)
+  const [validityIcon, setValidityIcon] = useState<JSX.Element | undefined>()
+  const [success, setSuccess] = useState('')
+  const [isValid, setValid] = useState(true)
 
-  const onValidate = (str: string): boolean => {
+  const onValidate = async (str: string): Promise<boolean> => {
     const status = validate({
       maxInputLength,
       isRequired,
@@ -53,34 +68,62 @@ const TextInput: React.FC<IProps & ILabelProps> = (props) => {
       return false
     }
 
+    if (props.asyncValidator) {
+      setLoading(true)
+      setError('')
+      setValidityIcon(<Spinner size='1x' color={PANELBLUE} />)
+
+      // it is possible in input value is valid on the client side but async validation could fail.
+      // eg: duplicate longid/mrn.
+      const asyncResult = await props.asyncValidator(str)
+      setLoading(false)
+
+      if (!asyncResult.valid) {
+        setError(asyncResult.message)
+        setValidityIcon(<Cross />)
+        setSuccess('')
+        return false
+      } else {
+        setSuccess(asyncResult.message)
+        setValidityIcon(<Checkmark />)
+      }
+    }
+
     setError('')
     return true
   }
 
   const fieldClass = isValid ? 'ui-form co-input' : 'ui-form form-field-invalid co-input'
 
-  const update = (e: React.FormEvent<HTMLInputElement>): void => {
-    const valid = onValidate(e.currentTarget.value)
+  const update = async (e: React.FormEvent<HTMLInputElement>): Promise<void> => {
+    const value = e.currentTarget.value
+    const valid = await onValidate(value)
     setValid(valid)
+
     if (onBlur) {
-      onBlur(e.currentTarget.value, valid)
+      onBlur(value, valid)
     }
   }
 
   const clearAndHandleChange = (value: string) => {
     setError('')
+    setSuccess('')
+    setValidityIcon(undefined)
     setValid(true)
 
     if (onChange) {
       onChange(value)
     }
   }
-
+  
   return (
     <div className={props.className}>
       <Label 
         label={label}
         error={error}
+        info={loading ? props.info : undefined}
+        success={success}
+        showOptional={props.showOptional}
       />
       <Input 
         {...rest}
@@ -92,6 +135,7 @@ const TextInput: React.FC<IProps & ILabelProps> = (props) => {
         valid={isValid}
         onBlur={update}
         onChange={(e) => clearAndHandleChange(e.currentTarget.value)}
+        icon={validityIcon}
         onFocus={onFocus}
         disabled={disabled}
         readOnly={readOnly}

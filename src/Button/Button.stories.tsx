@@ -12,6 +12,7 @@ const colors: TVariant[] = [
   'info',
   'dark',
   'light',
+  'action',
 ]
 
 storiesOf('Components.Buttons', module)

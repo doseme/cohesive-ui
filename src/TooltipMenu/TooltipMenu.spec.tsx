@@ -25,4 +25,26 @@ describe('TooltipMenu', () => {
 
     expect(onSelect).toHaveBeenCalledWith(item)
   })
+
+  it('renders a search input and calls onSearch prop when changed', () => {
+    const onSearch = jest.fn()
+
+    render(
+      <TooltipMenu 
+        data={[]} 
+        onClickaway={() => {}}
+        open={true}
+        search={true}
+        placeholder='Search...'
+        emptySearchText='No data...'
+        onSearch={onSearch}
+      />
+    )
+
+    const $search = screen.getByPlaceholderText('Search...')
+    fireEvent.change($search, { target: { value: 'Some search term' } })
+
+    expect(onSearch).toHaveBeenCalledWith('Some search term')
+    expect(screen.getByTestId('co-tooltip-menu-no-data')).toBeInTheDocument()
+  })
 })

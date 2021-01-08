@@ -21,22 +21,6 @@ const PaginationTestWrapper: React.FC<IProps> = ({startPage, totalPages}) => {
 }
 
 describe('PaginationPanel', () => {
-  it('navigates to the last page', async () => {
-    render(
-      <PaginationTestWrapper
-        startPage={1}
-        totalPages={20}
-      />
-    )
-    expect(screen.queryByTestId('page-button-1')).toBeTruthy()
-    expect(screen.queryByTestId('page-button-2')).toBeTruthy()
-
-    fireEvent.click(screen.getByTestId('lastButton'))
-
-    expect(screen.queryByTestId('page-button-2')).toBeFalsy()
-    expect(screen.queryByTestId('page-button-20')).toBeTruthy()
-  })
-
   it('navigates to the first page', async () => {
     render(
       <PaginationTestWrapper
@@ -45,13 +29,7 @@ describe('PaginationPanel', () => {
       />
     )
     expect(screen.queryByTestId('page-button-1')).toBeTruthy()
-    expect(screen.queryByTestId('page-button-17')).toBeTruthy()
     expect(screen.queryByTestId('page-button-20')).toBeTruthy()
-
-    fireEvent.click(screen.getByTestId('firstButton'))
-
-    expect(screen.queryByTestId('page-button-17')).toBeFalsy()
-    expect(screen.queryByTestId('page-button-2')).toBeTruthy()
   })
 
   it('displays page 5 and navigates to page 6 using page number button', async () => {

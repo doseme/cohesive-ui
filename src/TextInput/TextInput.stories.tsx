@@ -1,9 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import noop from 'lodash/noop'
 import { storiesOf } from '@storybook/react'
 
-import { TextInput } from './TextInput'
+import { TextInput, IAsyncValidationResult } from './TextInput'
 
+const AsyncValidationStory = () => {
+  const [returnValid, setReturnValid] = useState(false)
+
+  const asyncValidator = async (): Promise<IAsyncValidationResult> => {
+    return new Promise(res => {
+      setTimeout(() => res({ 
+        valid: returnValid, 
+        message: returnValid ? 'available' : 'already exists'
+      }), 500)
+    })
+  }
+
+  return (
+    <div className='m-4'>
+      <h3 className='co-h3'>Async Validation</h3>
+      <div className='my-2'>
+        <input id='valid' type='checkbox' checked={returnValid} onChange={() => setReturnValid(!returnValid)} />
+        <label htmlFor='valid'>Return valid response?</label>
+      </div>
+
+      <TextInput
+        label='Async validation'
+        onChange={noop}
+        info='checking'
+        onBlur={noop}
+        asyncValidator={asyncValidator}
+      />
+    </div>
+  )
+}
 
 storiesOf('Components.Form.TextInput', module)
   .add('Required input, 20 max length', () => {
@@ -67,6 +97,8 @@ storiesOf('Components.Form.TextInput', module)
             units='mg'
           />
         </div>
+
+        <AsyncValidationStory />
       </>
     )
   })

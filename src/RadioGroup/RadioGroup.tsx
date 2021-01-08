@@ -24,7 +24,6 @@ const RadioGroup: React.FC<TRadioGroupProps> = (props) => {
   const options = props.options.map(opt => {
     const className = classnames('co-radio-input-wrapper', { 
       'co-radio-input-wrapper-selected': opt.value === props.selected,
-      'co-radio-input-wrapper-unselected': props.selected && opt.value !== props.selected,
       'co-radio-input-wrapper-error': props.errorState && props.isRequired
     })
 
@@ -57,9 +56,12 @@ const RadioGroup: React.FC<TRadioGroupProps> = (props) => {
 
   return (
     <div>
-      <Label
-        label={props.label}
-      />
+      {props.label && (
+        <Label
+          label={props.label}
+          showOptional={props.showOptional}
+        />
+      )}
       <div className={className}>
         {options}
       </div>

@@ -1,4 +1,9 @@
-@import '../../style/colors.scss';
+@import '../style/colors.scss';
+
+.co-label-text {
+  text-transform: uppercase;
+  font-size: 10px;
+}
 
 .validation-error-text {
   color: $invalidRed;
@@ -7,4 +12,20 @@
 .co-form-field-label {
   font-size: 14px;
   padding: 0 0 5px 0;
+}
+
+.co-form-field-optional-label {
+  text-transform: uppercase;
+  font-size: 8px;
+  color: $darkgrey;
+  font-weight: bold;
+  margin: 0 0 0 5px;
+}
+
+.co-async-input-loading {
+  color: $panelblue;
+}
+
+.co-async-input-success {
+  color: $validgreen;
 }

@@ -7,6 +7,7 @@ export interface IToggleOption {
   value: string
   label: string
   testid?: string
+  element?: JSX.Element
 }
 
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
@@ -31,7 +32,7 @@ const Toggle: React.FC<TToggleProps> = (props): JSX.Element => {
       key={x.id}
       className={x.id === props.selected ? 'co-toggle-label co-toggle-label-selected' : 'co-toggle-label'}
     >
-      {x.label}
+      {x.element || x.label}
       <input 
         type='radio' 
         onChange={handleChange}

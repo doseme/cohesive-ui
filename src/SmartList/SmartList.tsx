@@ -7,30 +7,39 @@ import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
 import { ThinSpinner } from '../Icons/ThinSpinner'
 import { LOADING_GREY } from '../style/colors'
 import './index.scss'
+import { isMobile } from '../media'
 
 export interface IProps {
   data: IRowElement[]
+  searchHint?: JSX.Element
   cols: IHeaderItem[]
   selectedRows?: ISelectedRows
   headerClass?: string
   onRowSelect?: (selected: ISelectedRows) => void
   activeRow?: string
+  defaultSortDirection?: 'asc' | 'desc'
+  defaultSortColumn?: string
   onActivate?: (id: string) => void
   textIfEmpty?: string
   header?: boolean
   loading?: boolean
+  minRowsToShow?: number
 }
 
 const SmartList: React.FC<IProps> = ({ 
   data,
+  defaultSortDirection,
   cols,
   selectedRows,
   onRowSelect,
   activeRow,
+  searchHint,
   onActivate,
   headerClass,
   textIfEmpty,
   loading,
+  defaultSortColumn,
+  minRowsToShow,
   header = true 
 }) => {
 
@@ -75,12 +84,14 @@ const SmartList: React.FC<IProps> = ({
     <Header
       selectAllCol={!!selectedRows}
       onSelectAll={handleSelectAll}
+      defaultSortDirection={defaultSortDirection}
+      defaultSortColumn={defaultSortColumn}
       className={headerClass}
       cols={cols}
     />
   )
 
-  const listContent = data.reduce<JSX.Element[]>((acc, row) => {
+  const listContent = data.reduce<JSX.Element[]>((acc, row, index) => {
     acc = acc.concat(
       <ListItem
         onClick={(e) => handleClick(row, e)}
@@ -90,7 +101,7 @@ const SmartList: React.FC<IProps> = ({
         columns={row.columns}
         disabled={row.disabled}
         className={row.className}
-        isActive={row.id.toString() === activeRow}
+        isActive={isMobile ? undefined : row.id.toString() === activeRow}
         selectable={!!selectedRows}
         selected={selectedRows && selectedRows[row.id]}
         onSelect={handleSelect}
@@ -100,11 +111,24 @@ const SmartList: React.FC<IProps> = ({
     return acc
   }, [])
 
+  if (searchHint) {
+    listContent.push(searchHint)
+  }
+
+  if (minRowsToShow && listContent.length < minRowsToShow) {
+    const filler = minRowsToShow - listContent.length
+    for (let i = 0; i < filler; i++) {
+      listContent.push(
+        <Row className='list-row co-empty-list-row' key={`empty-${i}`} />
+      )
+    }
+  }
+
   const displayContent = (): JSX.Element | null => {
     if (loading) {
       return (
-        <div data-testid='smart-list-loading'>
-          <Col className='list-placeholder d-flex align-items-center'>
+        <div data-testid='smart-list-loading' className='justify-content-center'>
+          <Col className='list-placeholder justify-content-center d-flex align-items-center'>
             <ThinSpinner
               strokeWidth={12}
               r={30}
@@ -121,13 +145,35 @@ const SmartList: React.FC<IProps> = ({
     }
 
     if (textIfEmpty) {
-      return <div>
-        <Row className='list-row align-items-center'>
-          <Col>
-            {textIfEmpty} 
-          </Col>
-        </Row>
-      </div>
+      if (minRowsToShow) {
+        const emptyRows: JSX.Element[] = searchHint ? [searchHint] : []
+        for (let i = 0; i < minRowsToShow - 1 - (searchHint ? 1 : 0); i++) {
+          emptyRows.push(
+            <Row className='list-row co-empty-list-row' key={`empty-${i}`} />
+          )
+        }
+
+        return (
+          <div>
+            <Row className='list-row align-items-center'>
+              <Col>
+                <span className='co-smart-list-empty'>{textIfEmpty}</span>
+              </Col>
+            </Row>
+            {emptyRows}
+          </div>
+        )
+      }
+
+      return (
+        <div>
+          <Row className='list-row align-items-center'>
+            <Col>
+              <span className='co-smart-list-empty'>{textIfEmpty}</span>
+            </Col>
+          </Row>
+        </div>
+      )
     }
 
     return null

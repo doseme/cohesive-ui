@@ -20,15 +20,20 @@ storiesOf('Components.TooltipMenu', module)
   .add('Various', () => {
     const ButtonWithMenu = (data: ITooltipMenuData[]) => {
       const [open, setOpen] = useState(true)
+      const [search, setSearch] = useState('')
 
       const tooltip = 
         <div style={{ position: 'relative' }}>
           <div style={{ position: 'absolute', top: '15px', left: '20px', minWidth: '250px' }}>
             <TooltipMenu
-              data={data}
+              data={data.filter(x =>  x.value.toLowerCase().includes(search.toLowerCase()))}
               open={open}
               onClickaway={() => setOpen(false)}
               onSelect={_ => {}}
+              emptySearchText='No hospitals found...'
+              onSearch={val => setSearch(val)}
+              search={true}
+              placeholder='Search...'
             />
           </div>
         </div>

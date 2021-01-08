@@ -4,6 +4,8 @@ import { storiesOf } from '@storybook/react'
 import { SmartList } from './SmartList'
 import { Button } from '../Button'
 import { IRowElement, IHeaderItem, ISelectedRows } from '../types'
+import { SearchHint } from './components/SearchHint'
+import { DOSEME_BLUE, PANELBLUE } from '../style/colors'
 
 const stories = storiesOf('Components.SmartList', module)
 
@@ -126,6 +128,39 @@ const colsBlankActions: IHeaderItem[] = [
   }
 ]
 
+const WithHiddenColumns = () => {
+  return (
+    <React.Fragment>
+      <div className='m-5'></div>
+      <SmartList
+        cols={[
+          { name: 'Visible', hidden: false },
+          { name: 'Hidden', hidden: true },
+        ]}
+        data={[
+          {
+            id: 1,
+            onClick: () => console.log('Clicked on 2'),
+            columns: [
+              {
+                name: 'Visible',
+                element: <div>Visible</div>,
+                text: 'This is visible',
+              },
+              {
+                name: 'Hidden',
+                hidden: true,
+                text: 'cc@dd.com',
+              }
+            ]
+          }
+        ]}
+      />
+      <br /><br />
+    </React.Fragment>
+  )
+}
+
 stories.add(
   'JSX',
   () => {
@@ -161,6 +196,7 @@ stories.add(
     const colsSortable: IHeaderItem[] = [
       {
         name: 'ID',
+        handleSort,
       },
       {
         name: 'Email',
@@ -174,6 +210,32 @@ stories.add(
 
     return (
       <div className='m-5'>
+        <WithHiddenColumns />
+
+        <h3>Show Search Hint</h3>
+        <SmartList
+          cols={colsBlankActions}
+          data={content}
+          searchHint={
+            <SearchHint style={{ background: PANELBLUE, color: 'white' }}>
+              <div>This is the preview</div>
+            </SearchHint>
+          }
+        />
+
+        <br />
+        <br />
+
+        <h3>Minimum of 10 rows</h3>
+        <SmartList
+          cols={colsBlankActions}
+          data={content}
+          minRowsToShow={10}
+        />
+
+        <br />
+        <br />
+
         <h3>Plain list with items</h3>
         <SmartList
           cols={cols}
@@ -187,6 +249,16 @@ stories.add(
           cols={cols}
           data={[]}
           textIfEmpty='No data in table.'
+        />
+        <br />
+        <br />
+
+        <h3>Custom empty table message with 10 rows always showing</h3>
+        <SmartList
+          cols={cols}
+          data={[]}
+          textIfEmpty='No data in table.'
+          minRowsToShow={10}
         />
         <br />
         <br />
@@ -264,6 +336,8 @@ stories.add(
         <SmartList
           cols={colsSortable}
           data={sortedContent(content)}
+          defaultSortColumn='Email'
+          defaultSortDirection='asc'
           selectedRows={selected}
           onRowSelect={setSelected}
           activeRow={activeRow}

@@ -10,6 +10,7 @@
   height: 60px;
   background: white;
   border-bottom: 2px solid $lightgrey;
+  border-right: 3px solid white;
 
   .co-col {
     display: -webkit-box;
@@ -19,10 +20,17 @@
     text-overflow: ellipsis;
   }
 
-
   button:nth-of-type(2n) {
     margin: 0 0 0 4px;
   }
+}
+
+.co-empty-list-row {
+  border-bottom: none;
+}
+
+.co-smart-list-empty {
+  font-style: italic;
 }
 
 .list-placeholder {
@@ -33,6 +41,7 @@
 .hover-cursor {
   &:hover {
     background: lighten($lightgrey, 10%);
+    border-right: 3px solid lighten($lightgrey, 10%);
     cursor: pointer;
   }
 }
@@ -45,6 +54,32 @@
 
 .active-row {
   background: $list-selected;
+  border-right: 3px solid $doseme-blue;
+
+  &:hover { 
+    border-right: 3px solid $doseme-blue;
+  }
+}
+
+.active-row:after,
+.active-row:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 100%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.active-row:after {
+    border-color: transparent transparent transparent $doseme-blue;
+}
+
+.active-row:before {
+    top: 23px;
+    border-color: transparent transparent transparent $doseme-blue;
+    border-width: 7px;
 }
 
 a { 

@@ -1,19 +1,47 @@
-.co-list-button {
+@import '../style/colors.scss';
+
+@mixin list-button {
   background: #FFFFFF;
   border-radius: 18px;
   border: none;
-  padding: 7px 14px;
   outline: none;
+  box-sizing: border-box;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+}
+
+.co-list-button {
+  @include list-button;
+}
+
+.co-list-button-md {
+  @include list-button;
+  padding: 0px 10px;
+  color: $doseme-blue;
+  height: 32px;
 }
 
 .co-list-button:not([disabled]) {
-  box-shadow: 0px 2px 12px rgba(18, 50, 120, 0.18);
+  box-shadow: 0px 2px 12px rgba(18, 50, 120, 0.1);
 }
 
 .co-list-button:disabled {
   opacity: 0.7;
+  color: grey;
 }
 
-.co-list-button:hover {
+.co-list-button-sm {
+  @include list-button;
+
+  height: 24px;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 4px 10px;
+}
+
+.co-list-button:not([disabled]):hover {
   cursor: pointer;
+  box-shadow: 0px 3px 6px rgba(18, 50, 120, 0.20);
+  border: 1px solid $toggle-grey;
 }

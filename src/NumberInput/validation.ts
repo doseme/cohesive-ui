@@ -3,6 +3,8 @@ import { TNumberType } from './NumberInput'
 export interface IValidators {
   type: TNumberType
   isRequired?: boolean
+  min?: number
+  max?: number
 }
 
 export interface IValidationResult {
@@ -14,6 +16,11 @@ export interface IValidationResult {
 const isWhole = (str: string): boolean => {
   const n = Math.floor(Number(str))
   return n !== Infinity && String(n) === str && n >= 0
+}
+
+const isPositiveFraction = (str: string): boolean => {
+  const n = Number(str)
+  return n !== Infinity && n >= 0 && n < 1
 }
 
 const isInteger = (str: string): boolean => {
@@ -30,7 +37,7 @@ const isPositiveFloat = (str: string): boolean => {
   
   if (afterDecimal) {
     // contains floating values
-    return isWhole(beforeDecimal) && isWhole(afterDecimal)
+    return isWhole(beforeDecimal) && isPositiveFraction('.' + afterDecimal)
   }
 
   return isWhole(beforeDecimal)
@@ -61,6 +68,20 @@ const validate = (rules: IValidators, text: string): IValidationResult => {
   if (rules.type === 'positiveFloat' && !isPositiveFloat(text)) {
     return {
       message: 'Positive numbers only',
+      valid: false,
+    }
+  }
+
+  if (rules.min && parseFloat(text) < rules.min) {
+    return {
+      message: `Must be above ${rules.min}`,
+      valid: false,
+    }
+  }
+
+  if (rules.max && parseFloat(text) > rules.max) {
+    return {
+      message: `Must be below ${rules.max}`,
       valid: false,
     }
   }

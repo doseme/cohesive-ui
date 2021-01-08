@@ -1,12 +1,11 @@
 import React from 'react'
+import { IconProps } from './'
 
-const Edit: React.FC = () => {
+const Edit: React.FC<IconProps & React.HTMLAttributes<HTMLOrSVGElement>> = (props) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g id="Edit/MASTER-edit-default">
-        <path id="Path" fillRule="evenodd" clipRule="evenodd" d="M11.549 15.4151L8.95097 13.9151L7.71972 18.2722C7.60685 18.6716 8.10185 18.9573 8.39131 18.6599L11.549 15.4151Z" fill="#AEAEAE" />
-        <path id="Subtract" fillRule="evenodd" clipRule="evenodd" d="M16.299 7.18782C16.7132 6.47038 16.4674 5.55299 15.75 5.13878C15.0326 4.72457 14.1152 4.97038 13.701 5.68782L13.5155 6.00897L16.1136 7.50897L16.299 7.18782ZM15.6136 8.375L13.0155 6.875L8.95096 13.9151L11.549 15.4151L15.6136 8.375Z" fill="#AEAEAE" />
-      </g>
+    <svg {...props} width="15" height="22" viewBox="0 0 15 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path className='is-outline' fillRule="evenodd" clipRule="evenodd" d="M8.39868 14.5534L4.93458 12.5534L3.14984 18.8692C3.03698 19.2686 3.53198 19.5544 3.82143 19.2569L8.39868 14.5534Z" fill="#AEAEAE" />
+      <path className='is-outline' fillRule="evenodd" clipRule="evenodd" d="M14.732 3.58377C15.2843 2.62718 14.9565 1.404 14 0.851718C13.0434 0.299433 11.8202 0.627185 11.2679 1.58377L11.0207 2.01197L14.4848 4.01197L14.732 3.58377ZM13.8181 5.16668L10.354 3.16668L4.93457 12.5534L8.39867 14.5534L13.8181 5.16668Z" fill="#AEAEAE" />
     </svg>
   )
 }
@@ -14,3 +13,4 @@ const Edit: React.FC = () => {
 export {
   Edit
 }
+

@@ -2483,3 +2483,7 @@ div, input, button {
 body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

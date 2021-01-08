@@ -3,11 +3,23 @@
 .co-input-wrapper {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .co-input, .co-input-units {
   padding: 10px;
   background: white;
+  height: 42px;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .co-input-units {
+    line-height: 15px;
+  }
+
+  .co-input {
+    line-height: 9px;
+  }
 }
 
 .co-input {
@@ -54,4 +66,10 @@
     box-shadow: none;
     border-color: $panelblue;
   }
+}
+
+.co-async-validation-icon {
+  position: absolute;
+  top: 12px;
+  right: 10px;
 }

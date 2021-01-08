@@ -1,13 +1,14 @@
 import React, { createRef, useState } from 'react'
 
-import { Label } from '../Label'
+import { Label, ILabelProps } from '../Label'
 import './index.scss'
 
-export interface IDateProps extends React.HTMLAttributes<HTMLInputElement>{
+export interface IDateProps extends React.HTMLAttributes<HTMLInputElement>, ILabelProps {
   label?: string
   initialValue?: IDateState
   onDateChange?: (event: React.FormEvent<HTMLInputElement>, value: IDateState, valid: boolean) => any
   format: 'DD/MM/YYYY' | 'MM/DD/YYYY'
+  customValidator?: (value: IDateState) => IValidity
 }
 
 export interface IValidity {
@@ -16,7 +17,7 @@ export interface IValidity {
 }
 
 export const validate = (value: IDateState, customValidator?: (value: IDateState) => IValidity): IValidity => {
-  const isNumber = (val: string) => !(isNaN(parseInt(val)))
+  const isNumber = (val: string) => /^\+?\d+$/.test(val)
 
   if (!isNumber(value.dd) || !isNumber(value.mm) || !isNumber(value.yyyy)) {
     return { valid: false, message: 'Invalid date' }
@@ -30,10 +31,12 @@ export const validate = (value: IDateState, customValidator?: (value: IDateState
     return { valid: false, message: 'Invalid date' }
   }
 
-
   // do not allow invalid days, like 31st of Feb.
   if (new Date(`${yyyy}-${mm}-${dd}`).getDate() !== dd) {
-    return { valid: false, message: 'Invalid date' }
+    // IE uses yyyy/mm/dd, try that
+    if (new Date(`${yyyy}/${mm}/${dd}`).getDate() !== dd) {
+      return { valid: false, message: 'Invalid date' }
+    }
   }
 
   if (customValidator) {
@@ -66,7 +69,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
 
   const finalizeChange = (event: React.FormEvent<HTMLInputElement>, newValue: IDateState) => {
     setValue(newValue)
-    const status = validate(newValue)
+    const status = validate(newValue, props.customValidator)
     setValidity(status)
     props.onDateChange?.(event, newValue, status.valid)
   }
@@ -220,6 +223,7 @@ export const DateTextInput: React.FC<IDateProps> = props => {
       <Label
         label={props.label}
         error={validity.message}
+        showOptional={props.showOptional}
       />
       <div className={fieldClass}>
         {fields}

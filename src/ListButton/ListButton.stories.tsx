@@ -10,6 +10,26 @@ storiesOf('Components.ListButton', module)
     return (
       <div>
         <ListButton
+          size='sm'
+        >
+          <span className='d-flex'>
+            <Archive className='px-2' />
+            <span>sm</span>
+          </span>
+        </ListButton>
+        <br /><br />
+
+        <ListButton
+          size='md'
+        >
+          <span className='d-flex'>
+            <Archive className='px-2' />
+            <span>md</span>
+          </span>
+        </ListButton>
+        <br /><br />
+
+        <ListButton
           disabled={true}
         >
           <span className='d-flex'>
@@ -17,7 +37,6 @@ storiesOf('Components.ListButton', module)
             <span>Disabled State</span>
           </span>
         </ListButton>
-
         <br /><br />
 
         <ListButton
@@ -26,6 +45,15 @@ storiesOf('Components.ListButton', module)
           <span className='d-flex'>
             <Archive className='px-2' />
             <span>Enabled (5) State</span>
+          </span>
+        </ListButton>
+
+        <br /><br />
+
+        <ListButton id='archive'>
+          <span className='d-flex'>
+            <Archive className='px-2' />
+            <span>Color on Hover</span>
           </span>
         </ListButton>
 
@@ -43,9 +71,17 @@ storiesOf('Components.ListButton', module)
         <ListButton
           disabled={false}
         >
-          <span className='d-flex'>
-            <Trash className='px-2' background='red' />
+          <div className='d-flex align-items-center' style={{ color: 'red' }}>
+            {/* <Trash className='px-2' background='red' /> */}
             <span>Delete (5) Items</span>
+          </div>
+        </ListButton>
+
+        <br /><br />
+
+        <ListButton size='sm'>
+          <span className='d-flex align-items-center'>
+            props.size = 'sm'
           </span>
         </ListButton>
       </div>

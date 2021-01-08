@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
+import useOnClickOutside from 'use-onclickoutside'
 import classnames from 'classnames'
 
 import { SearchInput } from '../SearchInput'
+import { ILabelProps } from '../Label'
+import { ClearDropdownIcon } from './components/ClearDropdownIcon'
 import './index.scss'
 
 export interface IDropdownItem {
@@ -10,61 +13,36 @@ export interface IDropdownItem {
   value: string
 }
 
-interface IProps {
+interface IProps extends ILabelProps {
   id?: string
   label?: string
   className?: string
   isRequired?: boolean
-  data?: IDropdownItem[]
+  data: IDropdownItem[]
+  disabled?: boolean
   placeholder: string
-  onSelect?: (item: IDropdownItem) => void
-  onBlur?: (item: IDropdownItem | null, isValid: boolean) => any
   showSearchThreshold?: number
-  defaultValue?: string
+  value?: string
+  onBlur?: (item: IDropdownItem | null, isValid: boolean) => any
+  onClear?: () => void
+  onSelect: (item: IDropdownItem) => void
 }
 
-const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired, data, placeholder, defaultValue, onSelect, onBlur, showSearchThreshold = 10 }) => {
+const Dropdown: React.FC<IProps> = (props) => {
+  const node = useRef<HTMLDivElement>(null)
+  const searchRef = useRef<HTMLInputElement>(null)
   const [valid, setValid] = useState(true)
   const [showContent, setShowContent] = useState(false)
-  const [touched, setTouched] = useState(false)
   const [searchText, setSearchText] = useState('')
-  const [selectedItem, setSelectedItem] = useState<IDropdownItem>()
-  const node = useRef<HTMLDivElement>(null)
+  const [touched, setTouched] = useState(false)
 
-  const handleClickAway = (e: MouseEvent) => {
-    // @ts-ignore - I dunno how to type this, whatever
-    if (node && node.current && node.current.contains(e.target)) {
-      return
-    }
-
-    setSearchText('')
-    setShowContent(false)
-    setValid(true)
-
-    if (touched && isRequired && !selectedItem) {
-      setValid(false)
-
-      if (onBlur) {
-        onBlur(null, false)
-      }
-    }
-  }
+  const selectedItem = props.data.find(x => x.value === props.value)
 
   useEffect(() => {
-    document.addEventListener('mousedown', (e: MouseEvent) => {
-      handleClickAway(e)
-    })
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickAway)
+    if (showContent && searchRef?.current) {
+      searchRef.current.focus()
     }
-  }, [handleClickAway])
-
-  useEffect(() => {
-    if (defaultValue && data) {
-      setSelectedItem(data.find(x => x.value === defaultValue))
-    }
-  }, [defaultValue, data, setSelectedItem])
+  }, [showContent, searchRef.current])
 
   const handleChange = (value: string) => {
     if (value) {
@@ -74,38 +52,48 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     setSearchText('')
   }
 
-  const searchInput = (
+  const onClose = () => {
+    if (touched && props.isRequired && !selectedItem) {
+      setValid(false)
+    }
+    setShowContent(false)
+    setSearchText('')
+  }
+
+  useOnClickOutside(node, onClose)
+
+  const update = (item: IDropdownItem): void => {
+    setValid(true)
+
+    if (props.onBlur) {
+      props.onBlur(item, true)
+    }
+
+    if (props.onSelect) {
+      props.onSelect(item)
+    }
+  }
+
+  const searchInput = props.showSearchThreshold !== undefined && props.data.length >= props.showSearchThreshold ? (
     <div className='co-dropdown-search'>
       <SearchInput
         placeholder='Search...'
         aria-label='Search'
         onChange={handleChange}
         value={searchText}
+        childRef={searchRef}
       />
     </div>
-  )
-
-  const update = (item: IDropdownItem): void => {
-    setValid(true)
-
-    if (onBlur) {
-      onBlur(item, true)
-    }
-
-    if (onSelect) {
-      onSelect(item)
-    }
-  }
+  ) : null
 
   const listItems = (items: IDropdownItem[]) => (
     <>
       <div 
         className='co-dropdown-placeholder'
         data-testid='placeholder'
-      >{selectedItem ? selectedItem.label || selectedItem.value : placeholder}</div>
+      >{selectedItem ? selectedItem.label || selectedItem.value : props.placeholder}</div>
 
-      {data && data.length > showSearchThreshold && searchInput}
-
+      {searchInput}
       <ul className='co-dropdown-list'>
         {
           items.map(item =>
@@ -117,7 +105,7 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
                   if (item.disabled) {
                     return
                   }
-                  setSelectedItem(item)
+                  props.onSelect(item)
                   update(item)
                   setSearchText('')
                   setShowContent(false)
@@ -132,33 +120,27 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     </>
   )
 
-  let filteredData = data;
+  let filteredData = props.data;
 
-  if (data && searchText) {
-    filteredData = data.filter(x => (x.label || x.value).toLowerCase().includes(searchText))
+  if (props.data && searchText) {
+    filteredData = props.data.filter(x => (x.label || x.value).toLowerCase().includes(searchText))
   }
 
   let defaultLabel: string | undefined
 
-  if (defaultValue && data && data.length) {
-    const defaultItem = data.find(x => x.value === defaultValue)
-    if (defaultItem) {
-      defaultLabel = defaultItem.label || defaultItem.value
-    }
+  if (selectedItem) {
+    defaultLabel = selectedItem.label || selectedItem.value
   }
 
-  const content = showContent 
-    ? 
-    (
-      <div className='co-dropdown'>
-        {
-          filteredData && onSelect
-            ? listItems(filteredData)
-            : children
-        }
-      </div>
-    ) 
-    : null
+  const content = showContent && (
+    <div className='co-dropdown'>
+      {
+        filteredData && props.onSelect
+          ? listItems(filteredData)
+          : props.children
+      }
+    </div>
+  ) 
 
   const errorMessage = !valid && (
     <div className={classnames('co-form-field-label', { 'co-form-field-label-invalid': !valid })}>
@@ -166,32 +148,54 @@ const Dropdown: React.FC<IProps> = ({ id, className, children, label, isRequired
     </div>
   )
 
-  return (
-    <div className={className}>
-      <div className='d-flex justify-content-between co-dropdown-label'>
-        <div className='co-form-field-label'>
-          {label}
-        </div>
-        {errorMessage}
-      </div>
+  const clearIcon = props.onClear && !props.isRequired && props.value && (
+    <div
+      className='co-dropdown-clear-icon cursor-pointer'
+      onClick={props.onClear}
+      data-testid='clear-dropdown'
+    >
+      <ClearDropdownIcon />
+    </div>
+  )
+ 
 
-      <div
-        id={id ? id : undefined}
-        className='co-dropdown-wrapper' 
-        ref={node}
-      >
-        <div
-          className={classnames('co-dropdown-closed', { 'co-dropdown-invalid': !valid })}
-          data-testid='current-item'
-          onClick={() => {
-            setTouched(true)
-            setShowContent(!showContent)}
-          }
-        >
-          {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || placeholder}
+  return (
+    <div className={classnames(props.className, 'co-dropdown-outer')}>
+      <div className='co-dropdown-main'>
+        <div className='d-flex justify-content-between co-dropdown-label'>
+          <div className='co-form-field-label'>
+            {props.label}
+            {props.showOptional && <span className='co-form-field-optional-label'>(Optional)</span>}
+          </div>
+          {errorMessage}
         </div>
-        {content}
+
+        <div
+          id={props.id ? props.id : undefined}
+          className='co-dropdown-wrapper'
+          ref={node}
+        >
+          <div
+            className={classnames('co-dropdown-closed', {
+              'co-dropdown-invalid': !valid,
+              'co-dropdown-no-options': props.data.length === 0,
+              'co-dropdown-disabled': props.disabled
+            })}
+            data-testid='current-item'
+            onClick={() => {
+              if (props.data.length === 0) {
+                return
+              }
+              setShowContent(!showContent)
+              setTouched(true)
+            }}
+          >
+            {selectedItem && (selectedItem.label || selectedItem.value) || defaultLabel || props.placeholder}
+          </div>
+          {content}
+        </div>
       </div>
+      {clearIcon}
     </div>
   )
 }

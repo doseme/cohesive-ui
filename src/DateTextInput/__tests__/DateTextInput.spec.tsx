@@ -16,6 +16,11 @@ describe('validate', () => {
     expect(actual).toEqual({ valid: false, message: 'Invalid date' }) 
   })
 
+  it('validates day', () => {
+    const actual = validate({ dd: '1.', mm: '10', yyyy: '1990' })
+    expect(actual).toEqual({ valid: false, message: 'Invalid date' }) 
+  })
+
   it('validates month', () => {
     const actual = validate({ dd: '11', mm: 'dddd', yyyy: '1990' })
     expect(actual).toEqual({ valid: false, message: 'Invalid date' }) 
@@ -39,6 +44,11 @@ describe('validate', () => {
   it('validates year', () => {
     const actual = validate({ dd: '11', mm: '11', yyyy: '-1' })
     expect(actual).toEqual({ valid: false, message: 'Invalid date' }) 
+  })
+
+  it('validates year', () => {
+    const actual = validate({ dd: '11', mm: '11', yyyy: '0' })
+    expect(actual).toEqual({ valid: true })
   })
 
   it('validates year', () => {

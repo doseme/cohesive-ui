@@ -1,14 +1,13 @@
-import React, { HTMLProps } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 
 import './index.scss'
 
-type TProps = HTMLProps<HTMLDivElement> & { fluid?: boolean }
+const Container: React.FC<React.HTMLAttributes<HTMLDivElement> & { fluid?: boolean }> = (props) => {
+  let className = classnames(props.className, 'co-container', { 'co-container-fluid': props.fluid })
 
-const Container: React.FC<TProps> = (props) => {
-  let className = classnames('co-container', { 'co-container-fluid': props.fluid })
-
-  return <div className={className}>{props.children}</div>
+  const { fluid, ...rest } = props
+  return <div {...rest} className={className}>{props.children}</div>
 }
 
 export {

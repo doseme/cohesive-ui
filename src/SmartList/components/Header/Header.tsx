@@ -9,10 +9,14 @@ import { IHeaderItem } from '../../../types'
 import { NAVY } from '../../../style/colors'
 import './index.scss'
 
-const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className }) => {
+/**
+ * `defaultSort` is only used to set the icon. It's only for the UI.
+ * It does not actually sort the list - you need to do that yourself
+ */
+const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className, defaultSortDirection, defaultSortColumn }) => {
   const [allChecked, toggleAllChecked] = useState(false)
-  const [sortColumn, setSortColumn] = useState<string>(cols[0].name)
-  const [sortAscending, setSortAscending] = useState(true)
+  const [sortColumn, setSortColumn] = useState<string>(defaultSortColumn || cols[0].name)
+  const [sortAscending, setSortAscending] = useState(defaultSortDirection === 'asc')
 
   // If IHeaderItem.displayName is falsy, name will be used for the column title
   // EXCEPT in the case of an empty string, which will show a blank column.
@@ -41,29 +45,33 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className }
     }
   }
 
-  const sortButton = (item: IHeaderItem): JSX.Element => {
-    if (item.name === sortColumn) {
-      if (sortAscending) {
-        return (
-          <div className='fa-layers ml-1'>
-            <FontAwesomeIcon
-              className='fa-stack pb-2'
-              color={NAVY}
-              icon={faCaretUp}
-            />
-          </div>
-        )
-      }
+  const sortButton = (item: IHeaderItem, colIndex: number): JSX.Element => {
+    const sortAscendingIcon = (
+      <div className='fa-layers ml-1'>
+        <FontAwesomeIcon
+          className='fa-stack pb-2'
+          color={NAVY}
+          icon={faCaretUp}
+        />
+      </div>
+    )
 
-      return (
-        <div className='fa-layers ml-1'>
-          <FontAwesomeIcon
-            className='fa-stack pt-2'
-            color={NAVY}
-            icon={faCaretDown}
-          />
-        </div>
-      )
+    const sortDescendingIcon = (
+      <div className='fa-layers ml-1'>
+        <FontAwesomeIcon
+          className='fa-stack pt-2'
+          color={NAVY}
+          icon={faCaretDown}
+        />
+      </div>
+    )
+
+    if (sortAscending && item.name === sortColumn) {
+      return sortAscendingIcon
+    }
+
+    if (!sortAscending && item.name === sortColumn) {
+      return sortDescendingIcon
     }
 
     return (
@@ -98,16 +106,19 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className }
       {selectAllCol && <Col
         key='select-all-col'
         width='checkbox-only'
-       >
-         <input
-           type='checkbox'
-           id='check-select-all'
-           checked={allChecked}
-           onChange={() => {}}
-           onClick={handleAllChecked}
-         />
+        className='d-flex align-items-center justify-content-center h-100'
+      >
+        <label className='d-flex align-items-center justify-content-center h-100 w-100'>
+          <input
+            type='checkbox'
+            id='check-select-all'
+            checked={allChecked}
+            onChange={() => {}}
+            onClick={handleAllChecked}
+          />
+        </label>
       </Col>}
-      {cols.map((x, idx) => 
+      {cols.map((x, idx) => !x.hidden && 
         <Col 
           data-testid={`header-column-${x.name}`}
           width={x.width}
@@ -116,7 +127,7 @@ const Header: React.FC<IProps> = ({ cols, selectAllCol, onSelectAll, className }
           className={sortable(x) ? `cursor-pointer ${x.className}` : x.className}
         >
           {nameDisplay(x)}
-          {sortable(x) && sortButton(x)}
+          {sortable(x) && sortButton(x, idx)}
         </Col>
       )}
     </Row>
