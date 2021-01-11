@@ -38,10 +38,13 @@ $padding: 0 20px;
   padding: $padding;
 }
 
+ul.co-tooltip-list-scroll {
+  overflow-y: scroll;
+}
+
 ul.co-tooltip-wrapper-list {
   padding: 5px 0;
   margin: 0;
-  overflow-y: scroll;
   max-height: $li-height * 6;
 
   li {

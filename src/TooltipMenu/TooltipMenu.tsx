@@ -99,13 +99,13 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
       <Triangle />
       <div className='co-tooltip-outer w-100'>
         <div className='co-tooltip-wrapper'>
-          <input 
+          {props.search && <input 
             placeholder={props.placeholder} 
             className='co-tooltip-menu-search' 
             value={searchValue}
             onChange={e => setSearchValue(e.currentTarget.value)}
-          />
-          <ul className='co-tooltip-wrapper-list'>
+          />}
+          <ul className={`co-tooltip-wrapper-list ${props.search ? 'co-tooltip-list-scroll' : ''}`}>
             {items}
             {noResultsFound}
           </ul>
