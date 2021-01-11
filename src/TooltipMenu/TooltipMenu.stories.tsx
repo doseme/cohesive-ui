@@ -14,6 +14,7 @@ const data: ITooltipMenuData[] = [
   { id: 6, value: 'Hospital 6' },
   { id: 7, value: 'Hospital 7' },
   { id: 8, value: 'Hospital 8' },
+  { id: 9, value: 'Extra item that does something', onSelect: () => console.log('Clicked extra item')}
 ]
 
 storiesOf('Components.TooltipMenu', module)

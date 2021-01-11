@@ -1,5 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { Archive } from '../Icons/Archive'
 import { ListButton } from './ListButton'
@@ -83,6 +85,14 @@ storiesOf('Components.ListButton', module)
           <span className='d-flex align-items-center'>
             props.size = 'sm'
           </span>
+        </ListButton>
+
+        <br /><br />
+
+        <ListButton>
+          <FontAwesomeIcon
+            icon={faEllipsisH}
+          />
         </ListButton>
       </div>
     )
