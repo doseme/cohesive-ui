@@ -12,16 +12,7 @@ $padding: 0 20px;
   border-bottom: 10px solid white;
   position: absolute;
   z-index: $z-index + 1;
-}
-
-.arrow-up-left {
   top: -10px;
-  left: 25px;
-}
-
-.arrow-up-right {
-  top: -10px;
-  right: 25px;
 }
 
 .co-tooltip-outer {
@@ -29,7 +20,7 @@ $padding: 0 20px;
   overflow: hidden;
   z-index: $z-index;
   background: white;
-  border-radius: 18px;
+  border-radius: 15px;
   box-shadow: 0px 0px 12px 4px $shadow;
 }
 
