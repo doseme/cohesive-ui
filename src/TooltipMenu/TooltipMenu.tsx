@@ -60,7 +60,7 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
   }
 
   const handleSelect = (item: ITooltipMenuData) => {
-    // Override list behaviour if item level callback specified.
+    // Override menu onSelect callback if item level callback specified.
     if (item.onSelect) {
       item.onSelect()
       props.onClickaway()
