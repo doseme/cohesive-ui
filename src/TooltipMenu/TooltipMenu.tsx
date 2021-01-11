@@ -15,7 +15,7 @@ export interface ITooltipMenuProps {
   emptySearchText?: string
   style?: object
   alignRight?: boolean
-  chevronOffset?: number // This is the offset of the menu arrowtip. Min recommended 12px, defaults to 25px.
+  chevronOffset?: number // This is the offset of the menu arrowtip. Min recommended 10px, defaults to 25px.
   open: boolean 
   search?: boolean
   placeholder?: string

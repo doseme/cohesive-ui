@@ -52,7 +52,7 @@ storiesOf('Components.TooltipMenu', module)
               onClickaway={() => setUtilityOpen(false)}
               onSelect={_ => {}}
               alignRight={true}
-              chevronOffset={12}
+              chevronOffset={10}
             />
           </div>
         </div>
