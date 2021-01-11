@@ -7,6 +7,7 @@ export interface ITooltipMenuData {
   id: string | number
   value: string
   element?: JSX.Element
+  onSelect?: () => void
 }
 
 export interface ITooltipMenuProps {
@@ -59,12 +60,17 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
   }
 
   const handleSelect = (item: ITooltipMenuData) => {
-    if (!props.onSelect) {
+    // Override list behaviour if item level callback specified.
+    if (item.onSelect) {
+      item.onSelect()
+      props.onClickaway()
       return
     }
 
-    props.onSelect(item) 
-    props.onClickaway()
+    if (props.onSelect) {
+      props.onSelect(item)
+      props.onClickaway()
+    }
   }
 
   const items = props.data.map(x => (
