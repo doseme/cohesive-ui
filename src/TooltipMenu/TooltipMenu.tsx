@@ -14,6 +14,7 @@ export interface ITooltipMenuProps {
   data: ITooltipMenuData[]
   emptySearchText?: string
   style?: object
+  alignRight?: boolean
   open: boolean 
   search?: boolean
   placeholder?: string
@@ -22,8 +23,8 @@ export interface ITooltipMenuProps {
   onSearch?: (term: string) => void 
 }
 
-const Triangle = () => (
-  <div className='arrow-up'></div>
+const Triangle = (props: { alignRight?: boolean } ) => (
+  <div className={`arrow-up ${props.alignRight ? 'arrow-up-right' : 'arrow-up-left'}`}></div>
 )
 
 const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
@@ -96,7 +97,7 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
 
   return (
     <div className='co-wrapper w-100' ref={node}>
-      <Triangle />
+      <Triangle alignRight={props.alignRight} />
       <div className='co-tooltip-outer w-100'>
         <div className='co-tooltip-wrapper'>
           {props.search && <input 

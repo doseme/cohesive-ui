@@ -45,28 +45,28 @@ storiesOf('Components.TooltipMenu', module)
 
       const utilityTooltip = 
         <div style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '15px', left: '20px', minWidth: '250px' }}>
+          <div style={{ position: 'absolute', top: '15px', right: '0px', minWidth: '250px' }}>
             <TooltipMenu
               data={actionData}
               open={utilityOpen}
               onClickaway={() => setUtilityOpen(false)}
               onSelect={_ => {}}
+              alignRight={true}
             />
           </div>
         </div>
 
       return (
-        <React.Fragment>
+        <div className='d-flex justify-content-between w-50'>
           <div style={{ position: 'relative' }}>
             <Button variant='primary' onClick={() => setOpen(!open)}>Show Hospitals</Button>
             {tooltip}
           </div>
-          <br></br>
           <div style={{ position: 'relative' }}>
             <Button variant='primary' onClick={() => setUtilityOpen(!utilityOpen)}>Options</Button>
             {utilityTooltip}
           </div>
-        </React.Fragment>
+        </div>
       )
     }
 
