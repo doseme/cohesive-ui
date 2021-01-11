@@ -1,12 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { Archive } from '../Icons/Archive'
 import { ListButton } from './ListButton'
 import { Trash } from '../Icons'
-import { icon } from '@fortawesome/fontawesome-svg-core'
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 storiesOf('Components.ListButton', module)
   .add('Various Colors and Shapes', () => {
