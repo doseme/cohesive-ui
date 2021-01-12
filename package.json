@@ -1,6 +1,6 @@
 {
   "name": "cohesive-ui",
-  "version": "3.8.6",
+  "version": "3.8.7",
   "main": "dist/cohesive-ui.cjs.js",
   "module": "dist/cohesive-ui.esm.js",
   "files": [
