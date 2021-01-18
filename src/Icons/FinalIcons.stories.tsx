@@ -14,6 +14,8 @@ import { ChevronIconButton } from './Final/Chevron'
 import { SolidCircle } from './SolidCircle'
 import { Unarchive } from './Unarchive'
 import { Export } from './Export'
+import { Import } from './Import'
+import { FileDrop } from './FileDrop'
 
 const stories = storiesOf('Icon Buttons', module)
 
@@ -122,7 +124,15 @@ stories.add('Icons buttons', () => {
             <td>
               <Export />
             </td>
+          </tr>
+          <tr>
             <td>
+              <Import />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <FileDrop />
             </td>
           </tr>
         </tbody>
