@@ -14,6 +14,8 @@ export interface ITooltipMenuProps {
   data: ITooltipMenuData[]
   emptySearchText?: string
   style?: object
+  alignRight?: boolean
+  chevronOffset?: number // This is the offset of the menu arrowtip. Min recommended 10px, defaults to 25px.
   open: boolean 
   search?: boolean
   placeholder?: string
@@ -22,8 +24,18 @@ export interface ITooltipMenuProps {
   onSearch?: (term: string) => void 
 }
 
-const Triangle = () => (
-  <div className='arrow-up'></div>
+const Triangle = (props: { alignRight?: boolean, chevronOffset?: number } ) => (
+  <div
+    className='arrow-up'
+    style={props.alignRight
+      ? {
+        right: props.chevronOffset === undefined ? '25px' : `${props.chevronOffset}px`
+      }
+      : {
+        left: props.chevronOffset === undefined ? '25px' : `${props.chevronOffset}px`
+      }
+    }
+  ></div>
 )
 
 const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
@@ -96,16 +108,19 @@ const TooltipMenu: React.FC<ITooltipMenuProps> = (props) => {
 
   return (
     <div className='co-wrapper w-100' ref={node}>
-      <Triangle />
+      <Triangle
+        alignRight={props.alignRight}
+        chevronOffset={props.chevronOffset}
+      />
       <div className='co-tooltip-outer w-100'>
         <div className='co-tooltip-wrapper'>
-          <input 
+          {props.search && <input 
             placeholder={props.placeholder} 
             className='co-tooltip-menu-search' 
             value={searchValue}
             onChange={e => setSearchValue(e.currentTarget.value)}
-          />
-          <ul className='co-tooltip-wrapper-list'>
+          />}
+          <ul className={`co-tooltip-wrapper-list ${props.search ? 'co-tooltip-list-scroll' : ''}`}>
             {items}
             {noResultsFound}
           </ul>

@@ -13,6 +13,7 @@ import { Archive } from './Archive'
 import { ChevronIconButton } from './Final/Chevron'
 import { SolidCircle } from './SolidCircle'
 import { Unarchive } from './Unarchive'
+import { Export } from './Export'
 
 const stories = storiesOf('Icon Buttons', module)
 
@@ -112,6 +113,14 @@ stories.add('Icons buttons', () => {
           <tr>
             <td>
               <Schedule stroke='blue' />
+            </td>
+            <td>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <Export />
             </td>
             <td>
             </td>

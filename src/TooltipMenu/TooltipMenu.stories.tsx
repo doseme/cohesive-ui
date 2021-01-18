@@ -14,13 +14,17 @@ const data: ITooltipMenuData[] = [
   { id: 6, value: 'Hospital 6' },
   { id: 7, value: 'Hospital 7' },
   { id: 8, value: 'Hospital 8' },
-  { id: 9, value: 'Extra item that does something', onSelect: () => console.log('Clicked extra item')}
+]
+
+const actionData: ITooltipMenuData[] = [
+  { id: 1, value: 'Item that does something', onSelect: () => console.log('Clicked action item')}
 ]
 
 storiesOf('Components.TooltipMenu', module)
   .add('Various', () => {
     const ButtonWithMenu = (data: ITooltipMenuData[]) => {
       const [open, setOpen] = useState(true)
+      const [utilityOpen, setUtilityOpen] = useState(false)
       const [search, setSearch] = useState('')
 
       const tooltip = 
@@ -39,10 +43,30 @@ storiesOf('Components.TooltipMenu', module)
           </div>
         </div>
 
-      return (
+      const utilityTooltip = 
         <div style={{ position: 'relative' }}>
-          <Button variant='primary' onClick={() => setOpen(!open)}>Show Hospitals</Button>
-          {tooltip}
+          <div style={{ position: 'absolute', top: '15px', right: '0px', minWidth: '250px' }}>
+            <TooltipMenu
+              data={actionData}
+              open={utilityOpen}
+              onClickaway={() => setUtilityOpen(false)}
+              onSelect={_ => {}}
+              alignRight={true}
+              chevronOffset={10}
+            />
+          </div>
+        </div>
+
+      return (
+        <div className='d-flex justify-content-between w-50'>
+          <div style={{ position: 'relative' }}>
+            <Button variant='primary' onClick={() => setOpen(!open)}>Show Hospitals</Button>
+            {tooltip}
+          </div>
+          <div style={{ position: 'relative' }}>
+            <Button variant='primary' onClick={() => setUtilityOpen(!utilityOpen)}>Options</Button>
+            {utilityTooltip}
+          </div>
         </div>
       )
     }
