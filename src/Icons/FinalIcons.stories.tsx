@@ -15,6 +15,8 @@ import { SolidCircle } from './SolidCircle'
 import { Unarchive } from './Unarchive'
 import { Export } from './Export'
 import { Import } from './Import'
+import { FileDrop } from './FileDrop'
+import { FileDropHover } from './FileDropHover'
 
 const stories = storiesOf('Icon Buttons', module)
 
@@ -127,6 +129,16 @@ stories.add('Icons buttons', () => {
           <tr>
             <td>
               <Import />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <FileDrop />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <FileDropHover />
             </td>
           </tr>
         </tbody>
