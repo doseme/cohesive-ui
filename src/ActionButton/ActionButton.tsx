@@ -10,7 +10,7 @@ export type TActionButtonType = 'archive' | 'unarchive' | 'delete' | 'edit' | 'i
 interface IActionButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   actionType: TActionButtonType
   disabled?: boolean
-  customText?: string
+  customLabel?: string
 }
 
 const capitalize = (str: string) => {
@@ -49,7 +49,7 @@ export const ActionButton: React.FC<IActionButtonProps> = props => {
       <div className='d-flex align-items-center'>
         {icon!}
         <div className={`co-action-${props.actionType}-text`}>
-          {props.customText || capitalize(props.actionType)}
+          {props.customLabel || capitalize(props.actionType)}
         </div>
       </div>
     </ListButton>
