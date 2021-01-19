@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 
 import { IconButton } from '../IconButton'
-import { BackArrow } from '../Icons/BackArrow'
-import { BackArrowHover } from '../Icons/BackArrowHover'
 
 interface IProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon: JSX.Element
