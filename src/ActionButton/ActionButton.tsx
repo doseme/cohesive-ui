@@ -2,14 +2,15 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { ListButton } from '../ListButton'
-import { Unarchive, Archive, Trash, Edit } from '../Icons'
+import { Unarchive, Archive, Trash, Edit, Import } from '../Icons'
 import './index.scss'
 
-export type TActionButtonType = 'archive' | 'unarchive' | 'delete' | 'edit'
+export type TActionButtonType = 'archive' | 'unarchive' | 'delete' | 'edit' | 'import'
 
 interface IActionButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   actionType: TActionButtonType
   disabled?: boolean
+  customLabel?: string
 }
 
 const capitalize = (str: string) => {
@@ -30,6 +31,9 @@ export const ActionButton: React.FC<IActionButtonProps> = props => {
   if (props.actionType === 'edit') {
     icon = <Edit />
   }
+  if (props.actionType === 'import') {
+    icon = <Import />
+  }
 
   const { actionType, ...rest } = props
   return (
@@ -45,7 +49,7 @@ export const ActionButton: React.FC<IActionButtonProps> = props => {
       <div className='d-flex align-items-center'>
         {icon!}
         <div className={`co-action-${props.actionType}-text`}>
-          {capitalize(props.actionType)}
+          {props.customLabel || capitalize(props.actionType)}
         </div>
       </div>
     </ListButton>

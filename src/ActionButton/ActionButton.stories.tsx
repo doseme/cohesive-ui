@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 
 import { ActionButton, TActionButtonType } from './ActionButton'
 
-const types: TActionButtonType[] = ['archive', 'edit', 'unarchive', 'delete']
+const types: TActionButtonType[] = ['archive', 'edit', 'unarchive', 'delete', 'import']
 
 const createActionButton = (type: TActionButtonType, options?: { disabled: boolean }) => {
   return (
