@@ -4,8 +4,9 @@ import classnames from 'classnames'
 import { ListButton } from '../ListButton'
 import { Unarchive, Archive, Trash, Edit, Import } from '../Icons'
 import './index.scss'
+import { Open } from '../Icons/Open'
 
-export type TActionButtonType = 'archive' | 'unarchive' | 'delete' | 'edit' | 'import'
+export type TActionButtonType = 'archive' | 'unarchive' | 'delete' | 'edit' | 'import' | 'open'
 
 interface IActionButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   actionType: TActionButtonType
@@ -33,6 +34,9 @@ export const ActionButton: React.FC<IActionButtonProps> = props => {
   }
   if (props.actionType === 'import') {
     icon = <Import />
+  }
+  if (props.actionType === 'open') {
+    icon = <Open />
   }
 
   const { actionType, ...rest } = props
