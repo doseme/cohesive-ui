@@ -18,6 +18,7 @@ import { Import } from './Import'
 import { FileDrop } from './FileDrop'
 import { FileDropHover } from './FileDropHover'
 import { Success } from './Success'
+import { Open } from './Open'
 
 const stories = storiesOf('Icon Buttons', module)
 
@@ -145,6 +146,11 @@ stories.add('Icons buttons', () => {
           <tr>
             <td>
               <Success />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Open />
             </td>
           </tr>
         </tbody>
