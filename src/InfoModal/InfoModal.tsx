@@ -12,7 +12,6 @@ interface IProps {
   message: string | JSX.Element
   linkComponent?: JSX.Element
   linkHref?: string
-  linkDisabled?: boolean
   linkLabel?: string
   onDismiss?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any
 }
@@ -27,9 +26,8 @@ const InfoModal: React.FC<IProps> = (props) => {
       return (
         <a className='info-link' href={props.linkHref} target='_blank'>
           <Button
-            variant='info'
-            className='info-button'
-            disabled={!!props.linkDisabled}
+              variant='info'
+              className='info-button'
           >
             {props.linkLabel}
           </Button>
