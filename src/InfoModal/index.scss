@@ -50,4 +50,9 @@
       background-color: rgb(237, 237, 237);
     }
   }
+
+  // overrides IE user agent stylesheet
+  button.dismiss-button {
+    background-color: transparent;
+  }
 }

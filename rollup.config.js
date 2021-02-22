@@ -16,7 +16,7 @@ const createEntry = ({ format, file }) => {
       'prop-types',
       '@fortawesome/react-fontawesome',
       '@fortawesome/free-solid-svg-icons',
-      'moment',
+      'moment-timezone',
       'use-onclickoutside'
     ],
     plugins: [
