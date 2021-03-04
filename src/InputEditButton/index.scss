@@ -1,0 +1,8 @@
+@import '../style/colors.scss';
+
+.inputedit-btn {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 3px;
+  border: 1px solid $teal;
+}
