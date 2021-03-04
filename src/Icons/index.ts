@@ -1,5 +1,7 @@
 export interface IconProps {
   background?: string
+  width?: number
+  height?: number
 }
 
 export * from './ThinSpinner'

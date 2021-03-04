@@ -11,6 +11,14 @@ storiesOf('Components.InputEditButton', module)
         <InputEditButton
           displayText='2 hours'
         />
+
+        <br/>
+        <br/>
+        <h3>Edited value</h3>
+        <InputEditButton
+          displayText='2 hours'
+          edited
+        />
       </React.Fragment>
     )
   })
