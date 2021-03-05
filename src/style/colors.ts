@@ -32,7 +32,7 @@ export const PAGINATION_GREY = 'rgb(235, 239, 244)'
 export const TOGGLE_SELECTED = 'rgb(249, 239, 244)'
 export const TOGGLE_UNSELECTED = 'rgb(248, 248, 248)'
 export const ACTION_YELLOW = 'rgb(212, 185, 47)'
-export const INPUT_GREY = 'rgb(232, 232, 232)'
+export const INPUT_GREY = 'rgb(234, 234, 234)'
 
 interface IColor {
   name: string
