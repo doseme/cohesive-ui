@@ -1,5 +1,6 @@
 export const PANELBLUE = 'rgb(98, 127, 162)'
 export const TEAL = 'rgb(0, 171, 176)'
+export const TEAL_SHADOW = 'rgb(0, 171, 176)'
 export const DARKTEAL = 'rgb(4, 156, 165)'
 export const LIGHTGREY = 'rgb(218, 218, 218)'
 export const DARKGREY = 'rgb(107, 107, 107)'
@@ -41,6 +42,7 @@ interface IColor {
 export const colors: IColor[] = [
   { name: 'PANELBLUE', color: PANELBLUE },
   { name: 'TEAL', color: TEAL },
+  { name: 'TEAL_SHADOW', color: TEAL_SHADOW },
   { name: 'DARKTEAL', color: DARKTEAL },
   { name: 'LIGHTGREY', color: LIGHTGREY },
   { name: 'DARKGREY', color: DARKGREY },
