@@ -1,5 +1,6 @@
 export const PANELBLUE = 'rgb(98, 127, 162)'
 export const TEAL = 'rgb(0, 171, 176)'
+export const TEAL_SHADOW = 'rgb(0, 171, 176)'
 export const DARKTEAL = 'rgb(4, 156, 165)'
 export const LIGHTGREY = 'rgb(218, 218, 218)'
 export const DARKGREY = 'rgb(107, 107, 107)'
@@ -13,7 +14,7 @@ export const FOOTER_BLACK = 'rgb(32, 32, 32)'
 export const FOOTER_LINK = 'rgb(2, 169, 220)'
 export const FOOTER_HOVER = 'rgb(52, 152, 219)'
 export const BG_WHITE = 'rgb(246, 247, 251)'
-export const VALID_GREEN = 'rgb(220, 53, 69)'
+export const VALID_GREEN = 'rgb(40, 167, 69)'
 export const INVALID_RED = 'rgb(220, 56, 69)'
 export const SHADOW = 'rgba(180, 180, 180, 0.3)'
 export const NAVY = 'rgb(14, 78, 149)'
@@ -22,19 +23,26 @@ export const LIGHTEST_GREY = 'rgb(252, 252, 252)'
 export const CIRCLE_BUTTON_BLUE = 'rgb(43, 82, 136)'
 export const MENU_GREY = 'rgb(244, 244, 244)'
 export const LINK_TEXT = 'rgb(224, 135, 120)'
-export const LIST_SELECTED = 'rgb(240, 246, 253)'
 export const SKYBLUE = 'rgb(241, 246, 253)'
+export const TOGGLE_BLUE = 'rgb(81, 116, 155)'
+export const TOGGLE_GREY = 'rgb(224, 224, 224)'
 export const DOSEME_BLUE = 'rgb(9, 50, 95)'
 export const LOADING_GREY = 'rgb(174, 174, 174)'
+export const PAGINATION_GREY = 'rgb(235, 239, 244)'
+export const TOGGLE_SELECTED = 'rgb(249, 239, 244)'
+export const TOGGLE_UNSELECTED = 'rgb(248, 248, 248)'
+export const ACTION_YELLOW = 'rgb(212, 185, 47)'
+export const INPUT_GREY = 'rgb(234, 234, 234)'
 
 interface IColor {
   name: string
   color: string
 }
+
 export const colors: IColor[] = [
-  { name: 'LOADING_GREY', color: LOADING_GREY },
   { name: 'PANELBLUE', color: PANELBLUE },
   { name: 'TEAL', color: TEAL },
+  { name: 'TEAL_SHADOW', color: TEAL_SHADOW },
   { name: 'DARKTEAL', color: DARKTEAL },
   { name: 'LIGHTGREY', color: LIGHTGREY },
   { name: 'DARKGREY', color: DARKGREY },
@@ -56,8 +64,15 @@ export const colors: IColor[] = [
   { name: 'LIGHTEST_GREY', color: LIGHTEST_GREY },
   { name: 'CIRCLE_BUTTON_BLUE', color: CIRCLE_BUTTON_BLUE },
   { name: 'MENU_GREY', color: MENU_GREY },
-  { name: 'LIST_SELECTED', color: LIST_SELECTED },
   { name: 'LINK_TEXT', color: LINK_TEXT },
   { name: 'SKYBLUE', color: SKYBLUE },
+  { name: 'TOGGLE_BLUE', color: TOGGLE_BLUE },
+  { name: 'TOGGLE_GREY', color: TOGGLE_GREY },
   { name: 'DOSEME_BLUE', color: DOSEME_BLUE },
+  { name: 'LOADING_GREY', color: LOADING_GREY },
+  { name: 'PAGINATION_GREY', color: PAGINATION_GREY },
+  { name: 'TOGGLE_SELECTED', color: TOGGLE_SELECTED },
+  { name: 'TOGGLE_UNSELECTED', color: TOGGLE_UNSELECTED },
+  { name: 'ACTION_YELLOW', color: ACTION_YELLOW },
+  { name: 'INPUT_GREY', color: INPUT_GREY },
 ]
